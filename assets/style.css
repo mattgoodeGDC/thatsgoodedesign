@@ -152,6 +152,38 @@ a { color: var(--ink); }
 .hero h1 .hl { display: block; }
 @media (min-width: 760px) { .hero h1 .hl { white-space: nowrap; } }
 
+/* ---------- provenance row ----------
+   A badge plus four typographic marks. Set in the site's own type on purpose:
+   see the comment on the markup. */
+
+.cred-marks {
+  margin: 26px 0 0; padding-top: 22px;
+  border-top: 1px solid var(--rule);
+  display: flex; align-items: center;
+  gap: clamp(16px, 2.4vw, 28px); flex-wrap: wrap;
+}
+.cred-marks > img {
+  flex: 0 0 auto; width: 62px; height: 62px;
+}
+.cred-marks .cm-rule {
+  flex: 0 0 auto; width: 1px; align-self: stretch;
+  min-height: 34px; background: var(--rule);
+}
+.cred-marks .cm { margin: 0; min-width: 0; }
+.cred-marks .cm b {
+  display: block;
+  font-size: 12px; font-weight: 800; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink); line-height: 1.3;
+}
+.cred-marks .cm span {
+  display: block; margin-top: 5px;
+  font-size: 12px; line-height: 1.4; color: var(--muted);
+}
+@media (max-width: 620px) {
+  .cred-marks { gap: 14px 20px; }
+  .cred-marks .cm-rule { display: none; }
+}
+
 /* ---------- the book, in the hero ---------- */
 
 .hero-book {
