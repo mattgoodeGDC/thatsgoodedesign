@@ -1110,6 +1110,28 @@ button.signal[aria-checked="true"] .signal-pick::before {
 /* --- Engagements list ------------------------------------------------------
    Dated, association-first. The proof that carries in this market.
 --------------------------------------------------------------------------- */
+/* ---------- the lived-experience list ----------
+   A claim per line, each one a job actually held, with the concrete detail
+   carrying the weight rather than an adjective. */
+.lived {
+  list-style: none; margin: clamp(32px,4vw,44px) 0; padding: 0;
+  display: grid; gap: 0; max-width: 86ch;
+  border-top: 1px solid var(--rule);
+}
+.lived li {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--rule);
+  display: grid; grid-template-columns: minmax(0, 22ch) minmax(0, 1fr);
+  gap: 6px clamp(20px, 3vw, 40px); align-items: baseline;
+}
+.lived strong {
+  font-size: 17px; font-weight: 800; color: var(--ink); line-height: 1.35;
+}
+.lived span { font-size: 16px; line-height: 1.6; color: var(--body); }
+@media (max-width: 700px) {
+  .lived li { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+}
+
 .engagements{list-style:none;margin:32px 0 0;padding:0;max-width:80ch}
 .engagements li{
   display:grid;grid-template-columns:130px 1fr;gap:8px 24px;
