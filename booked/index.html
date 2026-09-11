@@ -53,10 +53,9 @@
 <main id="main">
 
   <!-- Calendly redirects here after a booking is confirmed. The scheduling is
-       already done by the time anyone sees this page, so the form is the only
-       ask and it is explicitly optional. Order matters: booking first, then
-       qualification, because a form in front of a calendar loses people who
-       were ready to talk. -->
+       already done by the time anyone sees this page, so this page only
+       confirms and points at something useful. Qualification happens by email
+       after the booking, not on the site. -->
   <section class="hero hero-sub">
     <p class="eyebrow">Confirmed</p>
     <h1>You&rsquo;re on the <span class="accent">calendar</span>.</h1>
@@ -64,25 +63,6 @@
       The invitation is in your inbox with the joining details. Nothing else is
       required from you before we speak.
     </p>
-    <p class="lede">
-      If you have five minutes, the questions below make the call materially
-      better. They take the first ten minutes of a conversation, the part where
-      I ask what you do and what is going wrong, and get them out of the way so
-      we can spend the whole half hour on the thing that actually brought you.
-    </p>
-  </section>
-
-  <section class="band alt">
-    <p class="eyebrow">Optional, five minutes</p>
-    <h2 class="section-h">Before we talk</h2>
-    <div class="embed-wrap">
-      <iframe id="preMeeting"
-              src="https://form.jotform.com/252967496315066"
-              title="Pre-meeting questionnaire"
-              loading="lazy"></iframe>
-    </div>
-    <p class="fineprint">Rather not? That is genuinely fine. Turn up and we will
-      cover it on the call.</p>
   </section>
 
   <section class="band book-call">
@@ -145,29 +125,6 @@
     interpretations of CliftonStrengths&reg;, Clifton Youth StrengthsExplorer or
     BP10 results are solely the beliefs of Goode Design &amp; Consulting.</p>
 </footer>
-
-<!-- Calendly appends the invitee's details to this URL when "Pass event details
-     to your redirect page" is on. We forward them into the form so nobody types
-     their name and email twice. The two tokens below are the Jotform field
-     Unique Names: swap them for the real ones and this starts working. Until
-     then the form simply loads empty, which is harmless. -->
-<script>
-(function () {
-  var NAME_FIELD  = '__JF_NAME_FIELD__';
-  var EMAIL_FIELD = '__JF_EMAIL_FIELD__';
-  if (NAME_FIELD.indexOf('__') === 0) return;   // not configured yet
-  var q = new URLSearchParams(window.location.search);
-  var name = q.get('invitee_full_name') || q.get('name') || '';
-  var mail = q.get('invitee_email') || q.get('email') || '';
-  if (!name && !mail) return;
-  var f = document.getElementById('preMeeting');
-  if (!f) return;
-  var u = new URL(f.src);
-  if (name) u.searchParams.set(NAME_FIELD, name);
-  if (mail) u.searchParams.set(EMAIL_FIELD, mail);
-  f.src = u.toString();
-})();
-</script>
 
 </body>
 </html>
