@@ -298,18 +298,41 @@ a { color: var(--ink); }
 }
 .attrib { font-size: 13px; color: var(--muted); margin: 14px 0 0; letter-spacing: .04em; }
 
+/* The shelf. A panel tone inside the alt band so the three titles read as one
+   object rather than as three more columns of the section above them. */
 .titles {
-  list-style: none; padding: 0;
+  list-style: none;
   margin: clamp(44px, 6vw, 72px) auto 0;
-  display: grid; gap: 28px;
-  grid-template-columns: repeat(auto-fit, minmax(248px, 1fr));
+  padding: clamp(26px, 3.4vw, 40px) clamp(22px, 3vw, 34px);
+  background: var(--paper-3);
+  border-top: 2px solid var(--rule-2);
+  display: grid; gap: clamp(24px, 3vw, 34px);
+  grid-template-columns: repeat(auto-fit, minmax(258px, 1fr));
 }
-.titles li { border-top: 1px solid var(--rule-2); padding-top: 20px; }
+.titles li {
+  display: grid; grid-template-columns: auto minmax(0, 1fr);
+  gap: 18px; align-items: start;
+}
+.title-cover {
+  display: block; line-height: 0; flex: 0 0 auto;
+  border: 1px solid var(--rule-2);
+  transition: transform .18s, box-shadow .18s;
+}
+.title-cover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(36,36,39,.16);
+}
+.title-cover img { display: block; width: 78px; height: auto; }
+.title-text { min-width: 0; }
 .titles h3 {
   font-size: 19px; font-weight: 800; letter-spacing: .04em;
   text-transform: uppercase; color: var(--ink); margin: 0 0 10px;
 }
 .titles p { font-size: 15px; margin: 0; }
+.titles .title-link { margin-top: 12px; }
+@media (max-width: 520px) {
+  .title-cover img { width: 64px; }
+}
 .status {
   font-size: 11px; font-weight: 700; letter-spacing: .18em;
   text-transform: uppercase; color: var(--muted); margin: 0 0 8px;
