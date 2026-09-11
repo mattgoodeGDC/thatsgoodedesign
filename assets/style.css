@@ -1137,7 +1137,8 @@ button.signal[aria-checked="true"] .signal-pick::before {
   font-size: 12px; font-weight: 700; letter-spacing: .08em;
   text-transform: uppercase; color: var(--green);
 }
-.ladder p:last-child { margin: 0; font-size: 16px; max-width: 76ch; }
+.lad-body > p:not(.lad-meta) { font-size: 16px; max-width: 76ch; margin: 0 0 12px; }
+.lad-body > p:last-child { margin-bottom: 0; }
 
 /* ---------- the lived-experience list ----------
    A claim per line, each one a job actually held, with the concrete detail
