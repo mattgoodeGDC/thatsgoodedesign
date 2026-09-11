@@ -55,8 +55,8 @@
        color carries the claim and everything else stays neutral. -->
   <section class="hero">
     <p class="eyebrow">Leadership is infrastructure</p>
-    <h1>Your company runs on you.<br>
-        That was never <span class="accent">the plan</span>.</h1>
+    <h1><span class="hl">Your company runs on you.</span><span class="hl">That was
+        never <span class="accent">the plan</span>.</span></h1>
     <p class="lede">
       Somewhere between the first hire and the fortieth, every decision started
       routing through one desk. Not because anyone designed it that way.
@@ -66,32 +66,73 @@
       <a class="btn" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt">Book a call</a>
       <a class="link-arrow" href="clutch/">Read the book instead</a>
     </p>
+
+    <!-- The cover is the second door. It is a link in its own right as well as
+         sitting next to the button, because a book cover is the thing people
+         instinctively click. -->
+    <aside class="hero-book">
+      <a class="hero-book-cover"
+         href="https://www.amazon.com/dp/B0HHFGV2MT" target="_blank" rel="noopener"
+         aria-label="Buy CLUTCH on Amazon">
+        <img src="assets/clutch_cover.jpg"
+             alt="CLUTCH, the leadership operating system, front cover"
+             width="800" height="1200" loading="lazy" decoding="async">
+      </a>
+      <div class="hero-book-text">
+        <p class="hero-book-kicker">The book</p>
+        <p class="hero-book-line"><strong>CLUTCH</strong>. The whole operating
+          system in one volume, in paperback and on Kindle.</p>
+        <p class="hero-book-links">
+          <a class="btn btn-sm" href="https://www.amazon.com/dp/B0HHFGV2MT"
+             target="_blank" rel="noopener">Buy on Amazon</a>
+          <a class="link-arrow" href="clutch/">What is in it</a>
+        </p>
+      </div>
+    </aside>
   </section>
 
-  <!-- The problem, in the reader's own vocabulary. Three signals, not six,
-       because six is a list and three is a diagnosis. -->
+  <!-- The problem, in the reader's own vocabulary. Four signals, one per
+       framework, and exactly one choice, because a diagnosis that lets you tick
+       everything is not a diagnosis. The card carries only the symptom; the
+       verdict names the framework. That way the reveal is the payoff rather
+       than four pieces of jargon the reader has to wade through first. -->
   <section class="band">
     <h2 class="section-h">You already know which one is yours</h2>
-    <div class="grid-3 signals" id="signals">
-      <button class="signal" type="button" aria-pressed="false">
+    <p class="signals-lede">Pick the one that sounds most like the last three
+      months. One only, and the closest fit rather than the complete picture.
+      What you choose names the part of the system to look at first.</p>
+    <div class="grid-3 signals" id="signals" role="radiogroup"
+         aria-label="Which of these sounds most like the last three months">
+      <button class="signal" type="button" role="radio" aria-checked="false"
+              tabindex="0" data-fw="create">
         <p class="num">01</p>
-        <h3>The week you took off didn&rsquo;t go well</h3>
-        <p>Not a long weekend with the laptop in the bag. The real thing. If you
-          can&rsquo;t find one in the last year, that&rsquo;s the diagnosis.</p>
+        <h3>Winning still feels like a near miss</h3>
+        <p>The team delivers, and it costs more every quarter. A company that
+          runs on heroics is a company with no system underneath it.</p>
         <span class="signal-pick">That one&rsquo;s mine</span>
       </button>
-      <button class="signal" type="button" aria-pressed="false">
+      <button class="signal" type="button" role="radio" aria-checked="false"
+              tabindex="-1" data-fw="voices">
         <p class="num">02</p>
+        <h3>Every hard conversation sounds the same</h3>
+        <p>Same tone, same posture, same you, whether it is a missed number or a
+          resignation. One setting is not a range. It is a habit.</p>
+        <span class="signal-pick">That one&rsquo;s mine</span>
+      </button>
+      <button class="signal" type="button" role="radio" aria-checked="false"
+              tabindex="-1" data-fw="sixc">
+        <p class="num">03</p>
         <h3>Three people, three different maps</h3>
         <p>Ask where the project stands and you get three answers. That isn&rsquo;t
           a communication problem. It&rsquo;s a system routing everything through you.</p>
         <span class="signal-pick">That one&rsquo;s mine</span>
       </button>
-      <button class="signal" type="button" aria-pressed="false">
-        <p class="num">03</p>
-        <h3>Winning still feels like a near miss</h3>
-        <p>The team delivers, and it costs more every quarter. A company that runs
-          on heroics is a company with no system underneath it.</p>
+      <button class="signal" type="button" role="radio" aria-checked="false"
+              tabindex="-1" data-fw="delegate">
+        <p class="num">04</p>
+        <h3>The week you took off didn&rsquo;t go well</h3>
+        <p>Not a long weekend with the laptop in the bag. The real thing. If you
+          can&rsquo;t find one in the last year, that&rsquo;s the diagnosis.</p>
         <span class="signal-pick">That one&rsquo;s mine</span>
       </button>
     </div>
@@ -102,7 +143,7 @@
         <p class="sv-next" id="signalVerdictNext"></p>
       </div>
       <p class="sv-actions">
-        <a class="btn" href="diagnostic/">Run the ten-minute diagnostic</a>
+        <a class="btn" id="signalVerdictCta" href="diagnostic/">Run the ten-minute diagnostic</a>
         <a class="link-arrow" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt">Or book a call</a>
       </p>
     </div>
@@ -406,46 +447,86 @@
 </script>
 
 <script>
-/* Signals as a self-diagnostic. Three engine lights; the page answers with the
-   count, because "two of three" is a more persuasive prompt than a static list
-   and it puts the booking CTA at the moment of recognition rather than at the
-   bottom of the page. */
-(function () {
-  const picks = [...document.querySelectorAll('#signals .signal')];
-  const box   = document.getElementById('signalVerdict');
-  const out   = document.getElementById('signalVerdictText');
-  if (!picks.length || !box || !out) return;
+/* Signals as a self-diagnostic. Four engine lights, one per framework, and a
+   forced single choice. A radiogroup rather than four toggles, because "pick
+   the closest" is the question being asked and toggles invite ticking all four,
+   which produces no diagnosis at all. The card shows only the symptom; this
+   script supplies the framework name, so the reveal is the payoff.
 
-  const cnt  = document.getElementById('signalVerdictCount');
-  const next = document.getElementById('signalVerdictNext');
+   ASSESSMENTS maps a framework to its own Jotform. Leave an entry empty and
+   that framework falls back to the six-cylinder diagnostic, so the module is
+   never broken while the four instruments are being written. */
+(function () {
+  const ASSESSMENTS = {
+    create:   '',   /* paste the CREATE assessment URL here   */
+    voices:   '',   /* paste the VOICES assessment URL here   */
+    sixc:     '',   /* paste the 6C assessment URL here       */
+    delegate: ''    /* paste the DELEGATE assessment URL here */
+  };
+  const FALLBACK = { href: 'diagnostic/', label: 'Run the ten-minute diagnostic' };
 
   const lines = {
-    1: {
-      head: 'One of three. A single warning light.',
-      body: 'One is enough to be worth half an hour, and it is usually the cheapest one to fix. Left alone it rarely stays at one, because all three share a cause.',
+    create: {
+      label: 'CREATE',
+      head: 'CREATE. The engine is running rough.',
+      body: 'Output is holding because people are pushing, not because the system is producing. CREATE is six cylinders of capacity, and when one stops firing everything downstream costs more to do. The useful question is which one.',
       next: 'Next: find out which of the six cylinders it is coming from.'
     },
-    2: {
-      head: 'Two of three. That is a pattern, not a bad quarter.',
-      body: 'Two lights at once almost never means two separate problems. It means the work is being routed through one place, and two different things are backing up behind it.',
-      next: 'Next: find out where the routing actually breaks.'
+    voices: {
+      label: 'VOICES',
+      head: 'VOICES. The gearbox is stuck in third.',
+      body: 'One stance, used everywhere, is the most common reason a capable leader stalls on hard ground. VOICES is six gears and the conditions each one is built for. Third will get you along a motorway and nowhere up a hill.',
+      next: 'Next: find out which gears you never use.'
     },
-    3: {
-      head: 'Three of three. This is a system, not a people problem.',
-      body: 'Nobody here is underperforming. The design is doing exactly what it was built to do, which is send everything through you. That is fixable, and it is not fixable by working harder.',
-      next: 'Next: the diagnostic takes ten minutes and names the part.'
+    sixc: {
+      label: 'the 6C Compass',
+      head: 'The 6C Compass. This is architecture, not trust.',
+      body: 'Three answers to one question is not a communication failure. It is an undecided decision, and undecided decisions route themselves back through you. The 6C Compass is six modes and the discipline of naming which one is in play before the conversation starts.',
+      next: 'Next: map who actually decides what.'
+    },
+    delegate: {
+      label: 'DELEGATE',
+      head: 'DELEGATE. Nothing is actually transferring.',
+      body: 'If a week away breaks things, the handoffs were loans rather than transfers. DELEGATE is eight steps for moving ownership so it stays moved, and the step people skip is almost always the same one.',
+      next: 'Next: find the step you are skipping.'
     }
   };
 
+  const group = document.getElementById('signals');
+  const box   = document.getElementById('signalVerdict');
+  const out   = document.getElementById('signalVerdictText');
+  if (!group || !box || !out) return;
+
+  const picks = [...group.querySelectorAll('.signal')];
+  const cnt   = document.getElementById('signalVerdictCount');
+  const next  = document.getElementById('signalVerdictNext');
+  const cta   = document.getElementById('signalVerdictCta');
+  if (!picks.length) return;
+
   let shown = false;
-  function update() {
-    const n = picks.filter(b => b.getAttribute('aria-pressed') === 'true').length;
-    if (!n) { box.hidden = true; shown = false; return; }
-    cnt.textContent  = lines[n].head;
-    out.textContent  = lines[n].body;
-    next.textContent = lines[n].next;
+
+  function select(btn, focus) {
+    picks.forEach(b => {
+      const on = b === btn;
+      b.setAttribute('aria-checked', on ? 'true' : 'false');
+      b.tabIndex = on ? 0 : -1;
+    });
+    if (focus) btn.focus();
+
+    const v = lines[btn.dataset.fw];
+    if (!v) return;
+    cnt.textContent  = v.head;
+    out.textContent  = v.body;
+    next.textContent = v.next;
+
+    const url = ASSESSMENTS[btn.dataset.fw];
+    if (cta) {
+      cta.href = url || FALLBACK.href;
+      cta.textContent = url ? ('Run the ' + v.label + ' assessment') : FALLBACK.label;
+    }
     box.hidden = false;
-    /* The payoff sits below three tall cards, so on a first pick it can be off
+
+    /* The payoff sits below four tall cards, so on a first pick it can be off
        screen entirely and the interaction reads as "the colour changed". */
     if (!shown) {
       shown = true;
@@ -455,53 +536,17 @@
     }
   }
 
-  picks.forEach(b => b.addEventListener('click', () => {
-    b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
-    update();
-  }));
-})();
-
-/* Practice lanes. Tabs rather than a third three-up grid, so the section reads
-   differently from the signals above it and the services get real estate. */
-(function () {
-  const tabs = [...document.querySelectorAll('.lane-tab')];
-  if (!tabs.length) return;
-  const panels = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
-
-  function show(i) {
-    tabs.forEach((t, n) => {
-      t.setAttribute('aria-selected', n === i ? 'true' : 'false');
-      t.tabIndex = n === i ? 0 : -1;
-      if (panels[n]) panels[n].hidden = n !== i;
-    });
-  }
-  tabs.forEach((t, i) => {
-    t.addEventListener('click', () => show(i));
-    t.addEventListener('keydown', e => {
-      const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
-      if (!d) return;
+  picks.forEach((b, i) => {
+    b.addEventListener('click', () => select(b, false));
+    b.addEventListener('keydown', e => {
+      const fwd  = e.key === 'ArrowRight' || e.key === 'ArrowDown';
+      const back = e.key === 'ArrowLeft'  || e.key === 'ArrowUp';
+      if (!fwd && !back) return;
       e.preventDefault();
-      const n = (i + d + tabs.length) % tabs.length;
-      show(n); tabs[n].focus();
+      const n = (i + (fwd ? 1 : -1) + picks.length) % picks.length;
+      select(picks[n], true);
     });
   });
-  show(0);
-})();
-
-/* The nav gains a shadow once it is actually floating over content. */
-(function () {
-  const nav = document.querySelector('.nav');
-  if (!nav) return;
-  /* A sticky element pinned at top:0 is always fully visible, so it cannot
-     observe itself. Watch a sentinel above it instead. */
-  const probe = document.createElement('div');
-  probe.setAttribute('aria-hidden', 'true');
-  probe.style.cssText = 'height:1px;width:1px;';
-  nav.parentNode.insertBefore(probe, nav);
-  new IntersectionObserver(
-    ([e]) => nav.classList.toggle('is-stuck', !e.isIntersecting),
-    { threshold: [0] }
-  ).observe(probe);
 })();
 </script>
 </body>

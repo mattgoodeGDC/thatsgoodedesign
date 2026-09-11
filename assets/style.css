@@ -140,9 +140,52 @@ a { color: var(--ink); }
   padding: clamp(64px, 10vw, 128px) var(--gut) clamp(56px, 8vw, 104px);
 }
 .hero h1 {
-  font-size: clamp(38px, 6.6vw, 76px);
+  /* Sized so each sentence clears the content width on its own line. The cap
+     is 64px rather than 76px because at 76px the first line is wider than the
+     1120px measure and wraps to three. */
+  font-size: clamp(32px, 5.8vw, 64px);
   font-weight: 800; line-height: 1.05; letter-spacing: -.028em;
-  color: var(--ink); margin: 0 0 28px; text-wrap: balance;
+  color: var(--ink); margin: 0 0 28px;
+}
+/* Two lines, one sentence each. Below tablet the type would have to be too
+   small to hold a sentence per line, so wrapping is allowed again there. */
+.hero h1 .hl { display: block; }
+@media (min-width: 760px) { .hero h1 .hl { white-space: nowrap; } }
+
+/* ---------- the book, in the hero ---------- */
+
+.hero-book {
+  margin-top: clamp(34px, 5vw, 52px);
+  padding-top: clamp(26px, 3.5vw, 36px);
+  border-top: 1px solid var(--rule);
+  display: flex; align-items: center; gap: clamp(20px, 3vw, 32px);
+  flex-wrap: wrap;
+}
+.hero-book-cover {
+  flex: 0 0 auto; display: block; line-height: 0;
+  border: 1px solid var(--rule-2);
+  transition: transform .18s, box-shadow .18s;
+}
+.hero-book-cover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px rgba(36,36,39,.14);
+}
+.hero-book-cover img {
+  display: block; width: clamp(88px, 11vw, 124px); height: auto;
+}
+.hero-book-text { min-width: 0; }
+.hero-book-kicker {
+  margin: 0 0 8px;
+  font-size: 12px; font-weight: 700; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--green);
+}
+.hero-book-line {
+  margin: 0 0 16px; max-width: 44ch;
+  font-size: 17px; line-height: 1.55; color: var(--body);
+}
+.hero-book-line strong { font-weight: 800; color: var(--ink); }
+.hero-book-links {
+  margin: 0; display: flex; align-items: center; gap: 22px; flex-wrap: wrap;
 }
 
 /* ---------- bands ---------- */
@@ -766,8 +809,15 @@ a { color: var(--ink); }
    Three engine lights. The reader picks the ones that are theirs and the page
    answers, which is a shorter route to the call than scrolling to the bottom. */
 
-.signals { grid-template-columns: repeat(3, 1fr); }
-@media (max-width: 860px) { .signals { grid-template-columns: 1fr; } }
+.signals-lede {
+  max-width: 62ch; margin: 0 0 6px;
+  font-size: 17px; line-height: 1.6; color: var(--body);
+}
+/* Four across, so the gap tightens and the cards are allowed to be narrower
+   than the .grid-3 minimum they would otherwise inherit. */
+.signals { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; }
+@media (max-width: 1080px) { .signals { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 620px)  { .signals { grid-template-columns: minmax(0, 1fr); } }
 
 button.signal {
   appearance: none; -webkit-appearance: none;
@@ -786,12 +836,12 @@ button.signal:hover {
   box-shadow: 0 6px 18px rgba(36,36,39,.06); transform: translateY(-2px);
 }
 button.signal:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 3px; }
-button.signal[aria-pressed="true"] {
+button.signal[aria-checked="true"] {
   border-color: var(--gold); border-top-color: var(--gold);
   background: rgba(196,162,106,.09);
 }
 button.signal .num { transition: color .18s; }
-button.signal[aria-pressed="true"] .num { color: var(--gold-ink); }
+button.signal[aria-checked="true"] .num { color: var(--gold-ink); }
 
 .signal-pick {
   margin-top: auto; padding-top: 18px;
@@ -804,8 +854,8 @@ button.signal[aria-pressed="true"] .num { color: var(--gold-ink); }
   border: 1px solid var(--rule-2); transform: rotate(45deg);
   flex: 0 0 auto; transition: background .18s, border-color .18s;
 }
-button.signal[aria-pressed="true"] .signal-pick { color: var(--gold-ink); }
-button.signal[aria-pressed="true"] .signal-pick::before {
+button.signal[aria-checked="true"] .signal-pick { color: var(--gold-ink); }
+button.signal[aria-checked="true"] .signal-pick::before {
   background: var(--gold); border-color: var(--gold);
 }
 
