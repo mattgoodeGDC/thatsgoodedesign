@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Goode Design &amp; Consulting – leadership infrastructure for founders and school leaders</title>
+<meta name="description" content="Matt Goode builds neuroinclusive leadership systems that keep working when you leave the room. Executive coaching, fractional operations, and leadership infrastructure for growth-stage founders, independent schools, and mission-driven teams.">
+<link rel="canonical" href="https://thatsgoodedesign.com/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap">
+<link rel="stylesheet" href="assets/style.css?v=4">
+<link rel="stylesheet" href="assets/gdc-nav.css?v=1">
+<script src="assets/gdc-analytics.js?v=1"></script>
+<script src="assets/gdc-nav.js?v=1" defer></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <a class="brand" href="/">
+    <img src="assets/mark.png" alt="" width="40" height="40">
+    <span>Goode Design<em> &amp; Consulting</em></span>
+  </a>
+  <nav aria-label="Primary">
+    <a href="system/">The system</a>
+    <div class="navmenu">
+      <button type="button" aria-expanded="false" aria-controls="menu-who">Who I help</button>
+      <ul class="navmenu-panel" id="menu-who" hidden>
+        <li><a href="#lanes">Founders and scaling firms<span>Coaching and fractional operations</span></a></li>
+        <li><a href="schools/">Independent schools<span>Coaching, cohorts, in-service, advisory</span></a></li>
+        <li><a href="#lanes">Nonprofit and public sector<span>Team development and facilitation</span></a></li>
+      </ul>
+    </div>
+    <div class="navmenu">
+      <button type="button" aria-expanded="false" aria-controls="menu-services">Services</button>
+      <ul class="navmenu-panel" id="menu-services" hidden>
+        <li><a href="products/#obd">The On-Board Diagnostic<span>Two instruments, one written read</span></a></li>
+        <li><a href="products/#coaching">Coaching and facilitated work<span>Six sessions, workshops, seminars</span></a></li>
+        <li><a href="products/#keynotes">Keynotes<span>Conferences, all-staff, institutes</span></a></li>
+        <li><a href="schools/#rates">Published rates<span>Schools, nonprofits, public sector</span></a></li>
+        <li><a href="diagnostic/">The free diagnostic<span>Six cylinders, ten minutes, no email wall</span></a></li>
+      </ul>
+    </div>
+    <a href="books/">Books</a>
+    <a href="about/">About</a>
+    <a class="btn btn-sm" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt">Book a call</a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <!-- Hero. The house move: eyebrow, then a statement where the accent
+       color carries the claim and everything else stays neutral. -->
+  <section class="hero">
+    <p class="eyebrow">Leadership is infrastructure</p>
+    <h1>Your company runs on you.<br>
+        That was never <span class="accent">the plan</span>.</h1>
+    <p class="lede">
+      Somewhere between the first hire and the fortieth, every decision started
+      routing through one desk. Not because anyone designed it that way.
+      Because nobody designed it at all.
+    </p>
+    <p class="cta-row">
+      <a class="btn" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt">Book a call</a>
+      <a class="link-arrow" href="clutch/">Read the book instead</a>
+    </p>
+  </section>
+
+  <!-- The problem, in the reader's own vocabulary. Three signals, not six,
+       because six is a list and three is a diagnosis. -->
+  <section class="band">
+    <h2 class="section-h">You already know which one is yours</h2>
+    <div class="grid-3 signals" id="signals">
+      <button class="signal" type="button" aria-pressed="false">
+        <p class="num">01</p>
+        <h3>The week you took off didn&rsquo;t go well</h3>
+        <p>Not a long weekend with the laptop in the bag. The real thing. If you
+          can&rsquo;t find one in the last year, that&rsquo;s the diagnosis.</p>
+        <span class="signal-pick">That one&rsquo;s mine</span>
+      </button>
+      <button class="signal" type="button" aria-pressed="false">
+        <p class="num">02</p>
+        <h3>Three people, three different maps</h3>
+        <p>Ask where the project stands and you get three answers. That isn&rsquo;t
+          a communication problem. It&rsquo;s a system routing everything through you.</p>
+        <span class="signal-pick">That one&rsquo;s mine</span>
+      </button>
+      <button class="signal" type="button" aria-pressed="false">
+        <p class="num">03</p>
+        <h3>Winning still feels like a near miss</h3>
+        <p>The team delivers, and it costs more every quarter. A company that runs
+          on heroics is a company with no system underneath it.</p>
+        <span class="signal-pick">That one&rsquo;s mine</span>
+      </button>
+    </div>
+    <div class="signal-verdict" id="signalVerdict" hidden aria-live="polite">
+      <div class="sv-text">
+        <p class="sv-count" id="signalVerdictCount"></p>
+        <p class="sv-line" id="signalVerdictText"></p>
+        <p class="sv-next" id="signalVerdictNext"></p>
+      </div>
+      <p class="sv-actions">
+        <a class="btn" href="diagnostic/">Run the ten-minute diagnostic</a>
+        <a class="link-arrow" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt">Or book a call</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- What GDC actually does. Three tracks, named by who they serve, because
+       the buyer identifies by role before they identify by problem. -->
+  <section class="band alt" id="lanes">
+    <p class="eyebrow">What I do</p>
+    <h2 class="section-h">Three kinds of room, one argument</h2>
+    <div class="lane-picker" role="tablist" aria-label="Practice lanes">
+      <button class="lane-tab" type="button" role="tab" id="lane-t-1" aria-controls="lane-p-1" aria-selected="true">Growth-stage founders</button>
+      <button class="lane-tab" type="button" role="tab" id="lane-t-2" aria-controls="lane-p-2" aria-selected="false">Independent schools</button>
+      <button class="lane-tab" type="button" role="tab" id="lane-t-3" aria-controls="lane-p-3" aria-selected="false">Mission-driven teams</button>
+    </div>
+
+    <div class="lane-panel" role="tabpanel" id="lane-p-1" aria-labelledby="lane-t-1">
+      <div class="lane-body">
+        <div>
+          <p>Executive coaching and fractional operations for the founder who has
+            become the bottleneck. We build the decision architecture, the handoff
+            system and the operating cadence that let the company keep moving when
+            you are not in the room.</p>
+        </div>
+        <ul class="lane-services">
+          <li>Coaching engagements</li>
+          <li>Fractional COO</li>
+          <li>Leadership team design</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="lane-panel" role="tabpanel" id="lane-p-2" aria-labelledby="lane-t-2" hidden>
+      <div class="lane-body">
+        <div>
+          <p>Twenty years in schools, seventeen of them at McDonogh, as teacher,
+            coach, dean of students and administrator. Leadership development for the adults in
+            the building: heads and senior teams, division directors and
+            department chairs, and the people leading from the middle who were
+            handed a program and no training. Shaped like a school year and
+            priced like a budget line.</p>
+          <p><a class="link-arrow" href="schools/">The school practice</a></p>
+        </div>
+        <ul class="lane-services">
+          <li>Coaching and cohorts</li>
+          <li>Decision rights and delegation</li>
+          <li>Retreats, in-service and institutes</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="lane-panel" role="tabpanel" id="lane-p-3" aria-labelledby="lane-t-3" hidden>
+      <div class="lane-body">
+        <div>
+          <p>Leadership development under real consequence, built in humanitarian
+            assistance at USAID. For nonprofit and public-sector teams where the work
+            matters, the resources do not stretch, and nobody was trained to lead
+            before they were asked to.</p>
+        </div>
+        <ul class="lane-services">
+          <li>Team development</li>
+          <li>Facilitation</li>
+          <li>Program design</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Credibility. Facts and instruments, not adjectives. -->
+  <section class="band credibility">
+    <div class="cred-wrap">
+      <div class="cred-text">
+        <p class="eyebrow">Who you&rsquo;d be working with</p>
+        <h2 class="section-h">Twenty years inside the problem before I sold anyone a solution</h2>
+        <p>Teacher, coach, dean of students and administrator across nearly two
+          decades at an independent school. Then leadership and team development in
+          humanitarian assistance at USAID. Now growth-stage founders, where honest
+          feedback is the only kind on offer.</p>
+        <ul class="creds">
+          <li>Gallup-Certified Strengths Coach</li>
+          <li>EQ-i 2.0 Certified Practitioner</li>
+          <li>MSc in Sociology, London School of Economics</li>
+          <li>MA in Education, Johns Hopkins University</li>
+          <li>Working toward ICF credentials</li>
+        </ul>
+        <div class="badge-row">
+          <img src="assets/gallup-badge.png" alt="Gallup Certified Strengths Coach" width="360" height="360">
+        </div>
+        <p class="cta-row"><a class="link-arrow" href="about/">The longer version, and who shaped it</a></p>
+      </div>
+      <figure class="cred-photo">
+        <img src="assets/matt.jpg" alt="Matt Goode, founder of Goode Design &amp; Consulting" width="390" height="520">
+      </figure>
+    </div>
+  </section>
+
+
+  <!-- Client testimonials. Practice proof, kept separate from book reviews:
+       a school buyer needs to hear from another school, not from a reader.
+       All three are placeholders. Replace the text and the cite; add or remove
+       <figure> blocks freely, the script counts them. -->
+  <section class="band dark quotes" aria-labelledby="quotes-h">
+    <p class="eyebrow">Client work</p>
+    <h2 class="section-h" id="quotes-h">Not praise. Changed behavior.</h2>
+
+    <div class="quote-stage" data-carousel>
+      <figure class="q is-live">
+        <blockquote>I participated in a delegation workshop sponsored by my
+          employer, and used the framework in a 1:1 the next day. That
+          doesn&rsquo;t happen with most workshops.</blockquote>
+        <figcaption><span class="q-name">VP of Operations</span>
+          <span class="q-role">Fintech</span></figcaption>
+      </figure>
+
+      <figure class="q">
+        <blockquote>I run a real dashboard for a living. I came in skeptical of
+          the metaphor &ndash; I left with a usable distinction between what&rsquo;s
+          actually a leading indicator and what&rsquo;s just a soft signal I&rsquo;d
+          have noticed anyway.</blockquote>
+        <figcaption><span class="q-name">Technical Founder</span>
+          <span class="q-role">Technology</span></figcaption>
+      </figure>
+
+      <figure class="q">
+        <blockquote>Most people assume you can hire fast and fire decisively. My
+          world can&rsquo;t. What I appreciated is that the core framework still
+          held up once I did the translation myself, and Matt&rsquo;s workshop does
+          that translation for you.</blockquote>
+        <figcaption><span class="q-name">CEO</span>
+          <span class="q-role">Professional Services</span></figcaption>
+      </figure>
+
+      <div class="q-nav">
+        <button type="button" class="q-arrow" data-prev aria-label="Previous testimonial">&larr;</button>
+        <div class="q-dots" role="tablist" aria-label="Choose a testimonial"></div>
+        <button type="button" class="q-arrow" data-next aria-label="Next testimonial">&rarr;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- The books, as evidence rather than merchandise. One argument, three
+       instruments. GDC nonfiction only. -->
+  <section class="band alt book">
+    <p class="eyebrow">The long version</p>
+    <h2 class="section-h">One argument, written down three ways</h2>
+    <div class="book-wrap">
+      <div>
+        <p>A clutch is the only part of a car engineered to slip. Everything else
+          is built to grip. It exists so two things spinning at completely different
+          speeds can meet without shattering each other.</p>
+        <p>That is the part most organizations never build. The engine gets louder,
+          the senior hire arrives, the offsite happens, and nothing reaches the
+          wheels.</p>
+        <p class="cta-row">
+          <a class="btn btn-ghost" href="clutch/">About CLUTCH</a>
+          <a class="link-arrow" href="clutch/#bulk">Bulk orders for teams and schools</a>
+        </p>
+      </div>
+      <div class="reader-quotes">
+        <figure>
+          <blockquote>&ldquo;My board chair handed this to me. I didn&rsquo;t ask
+            for it. Twenty pages in I decided to keep going, and that&rsquo;s rare
+            for me with this genre.&rdquo;</blockquote>
+          <figcaption>Second-generation CEO &middot; family-owned business</figcaption>
+        </figure>
+        <figure>
+          <blockquote>&ldquo;As a People leader, I notice when a framework&rsquo;s
+            language holds up under real HR scrutiny. The Coaching Prompts are the
+            first thing from a leadership book I&rsquo;ve actually used verbatim in
+            a hard conversation.&rdquo;</blockquote>
+          <figcaption>VP of People &middot; creative technology</figcaption>
+        </figure>
+        <figure>
+          <blockquote>&ldquo;Matt is the first I&rsquo;ve seen who tried to bring
+            it all together in one tome.&rdquo;</blockquote>
+          <figcaption>Richard B Naylor &middot; Amazon review, September 2026</figcaption>
+        </figure>
+      </div>
+    </div>
+    <ul class="titles">
+      <li>
+        <p class="status out">Out now</p>
+        <h3>CLUTCH</h3>
+        <p>How Leaders Build Systems That Run Without Them. The operating system,
+          in full, with a diagnostic for every part of it.</p>
+        <p style="margin-top:12px;"><a class="link-arrow" href="clutch/">About CLUTCH</a></p>
+      </li>
+      <li>
+        <p class="status out">Out now</p>
+        <h3>Field Tested</h3>
+        <p>Seventy facilitation methods across seven categories, each one used in
+          a real room under real consequence before it earned a page.</p>
+        <p style="margin-top:12px;"><a class="link-arrow" href="field-tested/">About Field Tested</a></p>
+      </li>
+      <li>
+        <p class="status">Coming 2027</p>
+        <h3>No Average Brain</h3>
+        <p>Neuroinclusive leadership. Why the systems we build assume one kind of
+          mind, and what changes when they stop.</p>
+        <p style="margin-top:12px;"><a class="link-arrow" href="no-average-brain/">About the book</a></p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Single conversion point. -->
+  <section class="band book-call" id="book">
+    <p class="eyebrow">Next step</p>
+    <h2 class="section-h big">Thirty minutes, and you&rsquo;ll know whether this is worth continuing</h2>
+    <p class="lede center">No deck, no pitch. Bring the thing that keeps landing
+      back on your desk, and we will work out together whether it is a people
+      problem or a design problem. It is almost always a design problem.</p>
+    <p class="cta-row center">
+      <a class="btn btn-lg" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt">Book a call</a>
+    </p>
+    <p class="fineprint">Prefer email? <a href="mailto:matt@thatsgoodedesign.com">matt@thatsgoodedesign.com</a></p>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot-in">
+    <div>
+      <img src="assets/mark.png" alt="" width="34" height="34">
+      <p class="foot-name">Goode Design &amp; Consulting</p>
+      <p class="foot-meta">Ellicott City, Maryland &middot; Washington DC &ndash; Baltimore</p>
+    <ul class="socials" aria-label="Elsewhere">
+      <li><a href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt" title="Book a time"><img src="assets/icon-calendly.png" alt="Book a time with Matt Goode"></a></li>
+      <li><a href="https://www.linkedin.com/in/goodematt/" title="LinkedIn"><img src="assets/icon-linkedin.png" alt="Matt Goode on LinkedIn"></a></li>
+      <li><a href="https://thatsgoodedesign.substack.com/" title="The Leadership Lab on Substack"><img src="assets/icon-substack.png" alt="The Leadership Lab on Substack"></a></li>
+      <li><a href="mailto:matt@thatsgoodedesign.com" title="Email"><img src="assets/icon-email.png" alt="Email Matt Goode"></a></li>
+    </ul>
+    </div>
+    <nav aria-label="Footer">
+      <a href="system/">The system</a>
+    <a href="products/">Products</a>
+    <a href="schools/">Schools</a>
+    <a href="diagnostic/">Diagnostic</a>
+      <a href="books/">Books</a>
+      <a href="about/">About</a>
+      <a href="writing/">Writing</a>
+      <a href="mailto:matt@thatsgoodedesign.com">Contact</a>
+    </nav>
+  </div>
+  <p class="foot-legal">&copy; 2026 Goode Design &amp; Consulting. CliftonStrengths&reg;
+    and the 34 theme names are trademarks of Gallup, Inc. Matt Goode is a
+    Gallup-Certified Strengths Coach. This practice is independently developed and
+    is not affiliated with or endorsed by Gallup.
+    <br><br>
+    The non-Gallup information you are receiving has not been approved and is not
+    sanctioned or endorsed by Gallup in any way. Opinions, views and
+    interpretations of CliftonStrengths&reg;, Clifton Youth StrengthsExplorer or
+    BP10 results are solely the beliefs of Goode Design &amp; Consulting.</p>
+</footer>
+
+
+<script>
+/* Testimonial rotator. The first slide is rendered live in the HTML, so the
+   section reads correctly with no JS and in a screenshot. Auto-advance is off
+   when the visitor has asked for reduced motion. */
+(function () {
+  var stage = document.querySelector('[data-carousel]');
+  if (!stage) return;
+  var slides = Array.prototype.slice.call(stage.querySelectorAll('.q'));
+  if (slides.length < 2) { var n = stage.querySelector('.q-nav'); if (n) n.hidden = true; return; }
+
+  var dotWrap = stage.querySelector('.q-dots');
+  var i = 0, timer = null;
+  var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var dots = slides.map(function (_, n) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'q-dot';
+    b.setAttribute('aria-label', 'Testimonial ' + (n + 1) + ' of ' + slides.length);
+    b.addEventListener('click', function () { go(n); restart(); });
+    dotWrap.appendChild(b);
+    return b;
+  });
+
+  function go(n) {
+    i = (n + slides.length) % slides.length;
+    slides.forEach(function (s, k) { s.classList.toggle('is-live', k === i); });
+    dots.forEach(function (d, k) {
+      d.classList.toggle('on', k === i);
+      d.setAttribute('aria-current', k === i ? 'true' : 'false');
+    });
+  }
+  function restart() { stop(); if (!still) timer = setInterval(function () { go(i + 1); }, 7000); }
+  function stop() { if (timer) { clearInterval(timer); timer = null; } }
+
+  stage.querySelector('[data-next]').addEventListener('click', function () { go(i + 1); restart(); });
+  stage.querySelector('[data-prev]').addEventListener('click', function () { go(i - 1); restart(); });
+  stage.addEventListener('mouseenter', stop);
+  stage.addEventListener('mouseleave', restart);
+  stage.addEventListener('focusin', stop);
+  stage.addEventListener('focusout', restart);
+
+  go(0);
+  restart();
+})();
+</script>
+
+<script>
+/* Signals as a self-diagnostic. Three engine lights; the page answers with the
+   count, because "two of three" is a more persuasive prompt than a static list
+   and it puts the booking CTA at the moment of recognition rather than at the
+   bottom of the page. */
+(function () {
+  const picks = [...document.querySelectorAll('#signals .signal')];
+  const box   = document.getElementById('signalVerdict');
+  const out   = document.getElementById('signalVerdictText');
+  if (!picks.length || !box || !out) return;
+
+  const cnt  = document.getElementById('signalVerdictCount');
+  const next = document.getElementById('signalVerdictNext');
+
+  const lines = {
+    1: {
+      head: 'One of three. A single warning light.',
+      body: 'One is enough to be worth half an hour, and it is usually the cheapest one to fix. Left alone it rarely stays at one, because all three share a cause.',
+      next: 'Next: find out which of the six cylinders it is coming from.'
+    },
+    2: {
+      head: 'Two of three. That is a pattern, not a bad quarter.',
+      body: 'Two lights at once almost never means two separate problems. It means the work is being routed through one place, and two different things are backing up behind it.',
+      next: 'Next: find out where the routing actually breaks.'
+    },
+    3: {
+      head: 'Three of three. This is a system, not a people problem.',
+      body: 'Nobody here is underperforming. The design is doing exactly what it was built to do, which is send everything through you. That is fixable, and it is not fixable by working harder.',
+      next: 'Next: the diagnostic takes ten minutes and names the part.'
+    }
+  };
+
+  let shown = false;
+  function update() {
+    const n = picks.filter(b => b.getAttribute('aria-pressed') === 'true').length;
+    if (!n) { box.hidden = true; shown = false; return; }
+    cnt.textContent  = lines[n].head;
+    out.textContent  = lines[n].body;
+    next.textContent = lines[n].next;
+    box.hidden = false;
+    /* The payoff sits below three tall cards, so on a first pick it can be off
+       screen entirely and the interaction reads as "the colour changed". */
+    if (!shown) {
+      shown = true;
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  }
+
+  picks.forEach(b => b.addEventListener('click', () => {
+    b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+    update();
+  }));
+})();
+
+/* Practice lanes. Tabs rather than a third three-up grid, so the section reads
+   differently from the signals above it and the services get real estate. */
+(function () {
+  const tabs = [...document.querySelectorAll('.lane-tab')];
+  if (!tabs.length) return;
+  const panels = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
+
+  function show(i) {
+    tabs.forEach((t, n) => {
+      t.setAttribute('aria-selected', n === i ? 'true' : 'false');
+      t.tabIndex = n === i ? 0 : -1;
+      if (panels[n]) panels[n].hidden = n !== i;
+    });
+  }
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => show(i));
+    t.addEventListener('keydown', e => {
+      const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!d) return;
+      e.preventDefault();
+      const n = (i + d + tabs.length) % tabs.length;
+      show(n); tabs[n].focus();
+    });
+  });
+  show(0);
+})();
+
+/* The nav gains a shadow once it is actually floating over content. */
+(function () {
+  const nav = document.querySelector('.nav');
+  if (!nav) return;
+  /* A sticky element pinned at top:0 is always fully visible, so it cannot
+     observe itself. Watch a sentinel above it instead. */
+  const probe = document.createElement('div');
+  probe.setAttribute('aria-hidden', 'true');
+  probe.style.cssText = 'height:1px;width:1px;';
+  nav.parentNode.insertBefore(probe, nav);
+  new IntersectionObserver(
+    ([e]) => nav.classList.toggle('is-stuck', !e.isIntersecting),
+    { threshold: [0] }
+  ).observe(probe);
+})();
+</script>
+</body>
+</html>

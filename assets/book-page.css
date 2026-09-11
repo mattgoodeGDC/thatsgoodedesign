@@ -1,0 +1,291 @@
+/* ============================================================
+   Book page styles, carried across from the author site.
+   Extracted from mkirk-style.css: only the rules the Field Tested
+   and No Average Brain pages actually reference, plus the root
+   variables they depend on. The CLUTCH page carries its own
+   inline design and uses clutch-page.css instead.
+   ============================================================ */
+
+:root {
+  /* ---- m kirk core palette ---- */
+  --ink:#14181C; --ink2:#0E1216; --warm:#EDE9E2; --parch:#EAE0D0;
+  --sage:#5BA67C; --sage-d:#3D8A62; --terra:#B85638; --terra-h:#D4704A; --taupe:#8A7060;
+  --gold:#C9A85C; --denim:#3D6E8A; --denim-d:#2E5570; --cream:#F2EDE3;
+
+  /* ---- GDC / Matt Goode palette ---- */
+  --gdc-charcoal:#3A3835; --gdc-cream:#EDE5D6; --gdc-gold:#B88F46;
+  --gdc-blue:#3766A2; --gdc-burgundy:#8D3E40; --gdc-teal:#3E9B75;
+
+  /* ---- per-book card palettes ---- */
+  --balance-bg:#0D1B2A;   --balance-accent:#C9A85C;
+  --wrath-bg:#1A1714;     --wrath-accent:#8B6B3D;  --wrath-title:#F2F0EC;
+  /* Seven – REAL, from Matt's uploaded cover style guide: "SEVEN: A Biography" (nonfiction – the secret
+     life of the number 7, not a person). Midnight Violet gradient ground, Hot Pink is a single-use accent
+     (never repeated on a composition), Nebula Purple for supporting marks, Signature Gold for the m kirk
+     byline set in Cormorant Garamond Italic. Title face is Lora Bold; subtitle/labels are Poppins Light. */
+  /* 2026-07-30: bg flipped to light lavender per Matt's note (many book pages are already dark) –
+     was --seven-bg:#241A45 / --seven-bg2:#0B0C1F (Midnight Violet gradient). Kept here for reference
+     in case Matt wants the dark version back. Hot Pink / Nebula Purple / Signature Gold accents kept
+     as-is – they read fine on the new light ground too. */
+  --seven-bg:#EDE4F8;     --seven-bg2:#F6F1FB;    --seven-accent:#FF2F8F;
+  --seven-label:#9637C3;  --seven-gold:#B8863E;   --seven-ink:#2E2340;
+  --clutch-bg:#000000;    --clutch-accent:#B88F46;
+
+  /* Field Tested – REAL, from Matt's uploaded Field Tested style guide. Design system is GDC's own base
+     palette (cream/charcoal/gold – matches --gdc-cream/--gdc-charcoal/--gdc-gold exactly), plus a 7-colour
+     category system for the method cards. Display type Montserrat 800, body Mulish, data/labels JetBrains Mono. */
+  --ft-bg:#3A3835;   --ft-accent:#B88F46;   --ft-cream:#EDE5D6;
+  --ft-cat-goal:#3E9B75; --ft-cat-idea:#B88F46; --ft-cat-problem:#8B2C3A; --ft-cat-strategy:#3766A2;
+  --ft-cat-decision:#3A3835; --ft-cat-reflect:#7A9E9F; --ft-cat-perspective:#C2AED1;
+
+  /* No Average Brain – REAL, from Matt's uploaded NAB style guide (working draft, sampled from one
+     confirmed carousel slide + author brief). Purple is the identity colour (same family as CLUTCH's 6C
+     purple); cream ground; the four-band "Spectrum Bar" (green/cyan/magenta/coral) is the book's signature
+     device. Headline face still open between Baloo 2 and Poppins ExtraBold – Baloo 2 used here as the lead
+     candidate per the guide's own recommendation (rounder, more consistent with the sampled slide, and
+     more on-thesis for a book about neuroinclusive design). */
+  /* 2026-07-30: bg flipped light per Matt's note ("many of my book pages already are dark") – was
+     --nab-bg:#28271F (dark) with cream text; now a light cream ground with dark ink text. Kept the
+     old dark value in a comment in case Matt wants it back: dark #28271F / text #F3EDE2. */
+  --nab-bg:#F6F0E4;  --nab-accent:#7B2D74;  --nab-ink:#2A241F;
+  --nab-spec-green:#00FF86; --nab-spec-cyan:#00DAF9; --nab-spec-magenta:#FF46C7; --nab-spec-coral:#FF6358;
+
+  /* Noble Island – placeholder, muted sage-adjacent. Still no style guide uploaded. 2026-07-30:
+     bg flipped to sand per Matt's note – was --ni-bg:#121915 (near-black). Kept for reference. */
+  --ni-bg:#E4D4B0;   --ni-accent:#5C7A66;   --ni-ink:#2B2318;
+}
+
+/* =====================================================================
+   mkirk2.0 – SINGLE-DOCUMENT PROTOTYPE
+   Every site page lives here as its own <section class="page">, in the
+   order listed in the jump-nav panel at right. This is a REVIEW DOCUMENT,
+   not final production markup – once approved page by page, each
+   .page section gets split into its own standalone HTML file per the
+   existing one-file-per-page deploy pattern.
+
+   COVER ART / ASSET FILENAMES: every image falls back to a visible
+   placeholder box (see .cover-placeholder below, and the matching
+   .wr-pov-photo-ph / .wr-slide pattern on the Wrath page) per the agreed
+   Cover Art Policy whenever its real file 404s. 2026-07-30: Matt did a
+   full rename pass across every image asset to a consistent scheme
+   (cover_x.png, char_book_name.jpg/png, card_wrath_x.png, author_x.jpg)
+   and every <img src="assets/..."> sitewide was repointed to match –
+   superseding two earlier passes this same day that used older filenames
+   (some of which were themselves mid-rename at the time). Current mapping,
+   for reference: Balance→cover_balance.png is primary as of 2026-07-30 (the
+   red redesign – the original blue, cover_balance2.png, landed Matt in
+   Amazon trouble; still kept, now shown via hover-reveal on Balance's own
+   hero – see the comment by Balance's .bal-cover-swap block. Home/Books
+   catalog thumbnails still point at the blue cover_balance2.png per Matt's
+   earlier "back as primary everywhere" note – flag if those should switch
+   to red too), Clutch→clutch-cover.png,
+   Wrath→cover-wrath.png (2026-07-30: corrected to match Matt's real uploaded
+   filename, which uses a hyphen and the standard spelling – the earlier
+   cover_wrath.png/dual-spelling-fallback guess was wrong on both counts;
+   used for both the main cover and the ARC-page cover, same file), Seven→cover-seven.png,
+   Field Tested→cover-fieldtested.png, No Average Brain→cover-noaveragebrain.png,
+   Noble Island→cover-nobleisland.png, "Couldn't Have Been an Email"→cover-couldnthavebeen.png,
+   the CLUTCH framework guides→create_cover.png/cover_voices.png/
+   cover_6c.png/cover_delegate.png, Balance's Four Voices→char_balance_
+   alex/ellie/jane/mark.jpg, Wrath's Ellis/Eck→char_wrath_ellis.png/
+   char_wrath_eck.png, the "m kirk" author photos→author_goode.jpg/
+   author_goode2.jpg, and Wrath's 10-image review carousel→card_wrath_*.png
+   (iliadOpening, andromache, achilles, shawstewart, sorley, dulce, gas,
+   leaves, owen) plus card_warth_eastWinds.png (was card_warth_owen.png –
+   Matt renamed it in a spelling-cleanup pass; note the "warth" spelling on
+   that one specifically is intentional, a different file from
+   card_wrath_owen.png, both real and distinct).
+
+   COPY: Balance's Q&A content is real, taken from Matt's reference
+   screenshot. Every other book's Q&A / descriptive copy is placeholder
+   text in [brackets] – per the no-fabrication rule, nothing here should
+   be mistaken for approved marketing copy.
+
+   PALETTES: Balance, Clutch, Wrath, and Seven use their existing
+   documented palettes. Field Tested, No Average Brain, and Noble Island
+   have NO approved style guide yet – the colors used for them below are
+   placeholder assignments within their brand family (GDC for the two
+   Matt Goode titles, muted m kirk-adjacent for Noble Island), flagged
+   inline and awaiting Matt's real style guide.
+
+   TYPE SCALE: 2026-07-31, sitewide – Matt said fonts read small/hard to
+   read even on desktop. Every font-size declaration across the whole
+   document (head styles + every page's own scoped <style> block, ~531
+   declarations including clamp()/calc() responsive titles) was scaled up
+   programmatically: values ≤24px scaled ×1.15 (bigger relative boost for
+   small/label/body text, the actual complaint), values >24px scaled
+   ×1.08 (milder boost so large display titles don't blow out). clamp()
+   min/max px values and their vw/cqw coefficients were scaled together so
+   the responsive curve between breakpoints stays consistent – this keeps
+   mobile sizing appropriately smaller than desktop, per Matt's own "adjust
+   for mobile" instruction, it's just proportionally bigger throughout.
+   One regression this surfaced and fixed: Wrath's hero title
+   (.wr-hero-title) used white-space:nowrap and started overflowing at
+   375px once its mobile-breakpoint font-size grew – added
+   white-space:normal inside its existing max-width:900px media query so
+   it wraps instead of overflowing. Full site re-verified after: html5lib
+   baseline unchanged, zero JS errors, zero mobile overflow across all 28
+   pages.
+   ===================================================================== */
+
+* { margin:0; padding:0; box-sizing:border-box; }
+/* 2026-07-30: bracketed internal placeholder/editorial notes ("[Placeholder – ...]" etc.), hidden
+   sitewide per Matt. A couple of individual .ph spots had their class removed instead, where the
+   text itself is reader-appropriate copy rather than a note-to-self (see wr-aside-stat ISBN/ASIN
+   and No Average Brain's "No ARC yet" line) – those stay visible without this rule touching them. */
+em.ph, .ph { display:none !important; }
+/* ---------- Shared: nav ---------- */
+.site-nav { background:var(--ink2); border-bottom:1px solid rgba(220,220,230,.25); position:sticky; top:0; z-index:100; }
+.nav-inner { max-width:1200px; margin:0 auto; padding:12px 40px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+.logo { font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:400; font-size:43px; color:var(--gold); text-decoration:none; }
+.nav-links { display:flex; gap:26px; list-style:none; flex-wrap:wrap; }
+.nav-links a { font-family:'Source Serif 4',serif; font-size:18.5px; color:var(--terra); text-decoration:none; }
+.nav-links a:hover { color:var(--terra-h); }
+/* ---------- Shared: footer ---------- */
+.site-footer { background:var(--ink2); border-top:1px solid rgba(91,166,124,.12); padding:40px; }
+.footer-inner { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; flex-wrap:wrap; align-items:center; gap:20px; }
+.footer-copy { font-family:'Source Serif 4'; font-size:18.5px; color:var(--terra); }
+/* ---------- Shared: email/newsletter section ---------- */
+.email-section { background:var(--parch); padding:64px 40px; text-align:center; }
+.email-heading { font-family:'Fraunces',serif; font-weight:300; font-size:34.5px; color:var(--ink); margin-bottom:14px; }
+.email-form { max-width:400px; margin:0 auto; display:flex; gap:0; }
+.email-form input { flex:1; padding:13px 16px; border:1px solid rgba(0,0,0,.15); font-family:'Source Serif 4'; font-size:16px; }
+.btn-follow { background:var(--sage); color:var(--ink); font-family:'Source Serif 4'; font-size:14px; text-transform:uppercase; letter-spacing:.08em; padding:14px 26px; border:none; white-space:nowrap; }
+.email-form { flex-direction:column; gap:10px; max-width:100%; }
+.email-form input { width:100%; }
+.btn-follow { width:100%; white-space:normal; }
+/* ---------- Buttons (general) ---------- */
+.btn { display:inline-block; padding:12px 26px; font-family:'Source Serif 4'; font-size:14px; text-transform:uppercase; letter-spacing:.08em; text-decoration:none; border:1px solid transparent; }
+.btn-outline { background:transparent; border-color:currentColor; color:var(--warm); }
+.btn-gdc-blue { background:var(--gdc-blue); color:#fff; }
+.btn-gdc-burgundy { background:var(--gdc-burgundy); color:#fff; }
+/* Real cover art – shared treatment for any book-detail cover slot, added 2026-07-29 once Matt
+   started sending real cover files. Falls back visibly if a path 404s, same pattern as the
+   front-page feat-cover-lg fallback. */
+img.real-cover { width:100%; aspect-ratio:2/3; object-fit:cover; display:block; border-radius:2px; box-shadow:0 20px 50px rgba(0,0,0,.5); background:rgba(0,0,0,.06); }
+/* opacity, not display:none – the latter pulls the <img> out of grid/flex flow entirely and can shift
+   sibling columns (found this the hard way on the Books catalog cards: a 404'd cover collapsed the
+   200px/1fr grid down to one column). Same fix pattern as .feat-cover-lg img.img-missing elsewhere. */
+img.real-cover.img-missing { opacity:0; }
+/* ---------- Book detail page: sticky cover col + Q&A ---------- */
+.book-hero-status { max-width:1200px; margin:0 auto; padding:36px 40px 0; }
+.status-tag { font-family:'Source Serif 4'; font-size:12.5px; text-transform:uppercase; letter-spacing:.14em; color:var(--sage); }
+.book-detail { display:grid; grid-template-columns:260px 1fr; gap:60px; max-width:1200px; margin:0 auto; padding:16px 40px 60px; }
+.book-cover-col { position:sticky; top:88px; align-self:start; }
+.book-cover-col .btn { display:block; text-align:center; margin-top:16px; }
+.book-cover-col .pub-line { font-family:'Source Serif 4'; font-size:14px; color:rgba(255,255,255,.45); margin-top:10px; text-align:center; }
+.book-title { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:47.5px; letter-spacing:.02em; margin:6px 0 6px; }
+.book-kicker { font-family:'Source Serif 4'; font-size:14px; text-transform:uppercase; letter-spacing:.14em; color:rgba(255,255,255,.5); margin-bottom:24px; }
+.qa-a em.ph { font-style:normal; color:#b98; }
+.book-detail { grid-template-columns:1fr; }
+.book-cover-col { position:static; max-width:220px; }
+/* ---------- SHARED BOOK-PAGE STRUCTURE: About/POV/Author-note/Companion-callout ----------
+   Added 2026-07-30. Used by Field Tested, No Average Brain, Seven, Noble Island so all four
+   share one real structure/style per Matt's "general rule" note, instead of each page repeating
+   its own bespoke CSS block (Wrath got a bespoke wr- version earlier and is left as-is – this
+   is the shared system for the four that come after it). Each page sets --book-accent /
+   --book-panel / --book-border via a tiny scoped rule so the same classes adapt to that book's
+   palette (dark charcoal for Field Tested, light backgrounds for NAB/Seven/Noble Island). */
+.book-about { max-width:1200px; margin:0 auto; padding:8px 40px 40px; }
+.book-about-label { font-family:'Source Serif 4',serif; font-size:12.5px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; opacity:.6; margin-bottom:14px; }
+.book-about-inner { display:grid; grid-template-columns:1fr 300px; gap:48px; align-items:start; }
+.book-prose p { font-family:'Source Serif 4',serif; font-size:18.5px; line-height:1.8; margin-bottom:20px; opacity:.85; }
+.book-prose p:last-of-type { margin-bottom:0; }
+.book-prose em { font-style:italic; opacity:1; }
+.book-pullquote { margin:26px 0; padding:20px 26px; background:var(--book-panel, rgba(255,255,255,.05)); border-left:2px solid var(--book-accent, currentColor); }
+.book-pullquote p { font-style:italic; font-size:22px !important; line-height:1.6 !important; margin:0 !important; opacity:1 !important; }
+.book-comp-line { font-style:italic; font-size:15px; opacity:.6; margin-top:18px; }
+.book-aside { background:var(--book-panel, rgba(255,255,255,.04)); border:1px solid var(--book-border, rgba(255,255,255,.14)); padding:24px 22px; }
+.book-aside-head { font-family:'Source Serif 4',serif; font-size:11.5px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--book-accent, currentColor); margin-bottom:14px; }
+.book-tags { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
+.book-tag { font-family:'Source Serif 4',serif; font-size:12.5px; opacity:.75; border:1px solid var(--book-border, rgba(255,255,255,.18)); padding:4px 10px; border-radius:1px; }
+.book-aside-rule { height:1px; background:var(--book-border, rgba(255,255,255,.14)); margin:14px 0; }
+.book-aside-stat { margin-bottom:10px; }
+.book-aside-stat-label { font-family:'Source Serif 4',serif; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; opacity:.45; margin-bottom:2px; }
+.book-aside-stat-val { font-family:'Source Serif 4',serif; font-size:15px; opacity:.9; }
+.book-aside-btn { display:block; text-align:center; font-family:'Source Serif 4',serif; font-size:14px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; border:1px solid var(--book-accent, currentColor); padding:11px 16px; text-decoration:none; margin-top:10px; color:inherit; transition:opacity .2s; }
+.book-aside-btn:hover { opacity:.7; }
+.book-about-inner { grid-template-columns:1fr; }
+.book-note { padding:56px 40px; border-top:1px solid var(--book-border, rgba(255,255,255,.1)); border-bottom:1px solid var(--book-border, rgba(255,255,255,.1)); background:var(--book-panel, rgba(255,255,255,.02)); }
+.book-note-inner { max-width:1100px; margin:0 auto; display:grid; grid-template-columns:110px 1fr; gap:48px; align-items:start; }
+.book-note-avatar { width:88px; height:88px; border-radius:50%; background:var(--book-panel2, rgba(255,255,255,.06)); border:1px solid var(--book-border, rgba(255,255,255,.18)); display:flex; align-items:center; justify-content:center; font-family:'Source Serif 4',serif; font-style:italic; font-size:25.5px; color:var(--book-accent, currentColor); overflow:hidden; }
+/* Real author photo, added 2026-07-30 per Matt: m-kirk-branded books use his beach photo,
+   Matt-Goode-branded books use the same professional portrait already wired on CLUTCH's real
+   author note (assets/author_goode.jpg). Falls back to the original "mk" mark if the file 404s. */
+.book-note-avatar img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
+.book-note-body p { font-family:'Source Serif 4',serif; font-size:17px; line-height:1.8; opacity:.82; margin-bottom:18px; }
+.book-note-body ul { font-family:'Source Serif 4',serif; font-size:17px; line-height:1.7; opacity:.82; margin:-6px 0 18px 20px; padding:0; }
+.book-note-body li { margin-bottom:7px; }
+.book-note-inner { grid-template-columns:1fr; }
+.book-note-avatar { margin:0 auto; }
+/* Companion/teacher-guide callout – raised-profile card, replaces the plain .daughter-banner
+   line when Matt asked to raise a companion product's visual profile (e.g. Field Tested's
+   Teacher Companion, "Couldn't Have Been an Email"). */
+.book-companion-wrap { max-width:1200px; margin:0 auto 40px; padding:0 40px; }
+.book-companion-card { display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; background:var(--book-panel, rgba(255,255,255,.05)); border:1px solid var(--book-border, rgba(255,255,255,.16)); border-left:4px solid var(--book-accent, currentColor); padding:26px 30px; text-decoration:none; color:inherit; transition:transform .2s; }
+.book-companion-card:hover { transform:translateY(-2px); }
+.book-companion-card h3 { font-family:'Source Serif 4',serif; font-weight:700; font-size:20.5px; margin-bottom:6px; }
+.book-companion-card p { font-family:'Source Serif 4',serif; font-size:15px; opacity:.7; max-width:44ch; margin:0; }
+.book-companion-link { font-family:'Source Serif 4',serif; font-size:14px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--book-accent, currentColor); white-space:nowrap; }
+/* Optional cover thumbnail + eyebrow, for companion cards that should read as their own product
+   rather than a plain text banner (e.g. Field Tested's "Couldn't Have Been an Email"). */
+.book-companion-cover { width:64px; height:96px; object-fit:cover; border-radius:3px; flex-shrink:0; box-shadow:0 10px 24px rgba(0,0,0,.4); }
+.book-companion-cover.img-missing { background:rgba(255,255,255,.08); border:1px dashed rgba(255,255,255,.3); }
+.book-companion-card-body { flex:1; min-width:180px; }
+.book-companion-eyebrow { display:block; font-family:'Source Serif 4',serif; font-size:12.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--book-accent, currentColor); opacity:.9; margin-bottom:6px; }
+.catalog-card .book-title { color:#1a1a1a; }
+/* ---------- Dynamic content: carousel ---------- */
+.carousel-section { padding:56px 40px; max-width:1200px; margin:0 auto; }
+.carousel-heading { font-family:'Fraunces',serif; font-weight:300; font-style:italic; font-size:28px; margin-bottom:22px; }
+/* ---------- Reveal-on-scroll ---------- */
+.reveal { opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease; }
+.reveal.is-visible { opacity:1; transform:none; }
+.reveal { opacity:1; transform:none; transition:none; }
+.pal-balance .status-tag,.pal-balance .book-title,.pal-balance .qa-q { color:var(--balance-accent); }
+.pal-balance .book-title { text-transform:uppercase; letter-spacing:.06em; }
+.pal-wrath .status-tag,.pal-wrath .qa-q { color:var(--wrath-accent); }
+.pal-wrath .book-title { font-family:'GFS Didot',serif; font-weight:700; color:var(--wrath-title); text-transform:uppercase; letter-spacing:.02em; }
+.pal-wrath .book-kicker { font-family:'GFS Didot',serif; font-weight:400; color:#C49A52; }
+.pal-seven .status-tag,.pal-seven .qa-q { color:var(--seven-label); }
+.pal-seven .book-title { font-family:'Lora',serif; font-weight:700; letter-spacing:.03em; color:var(--seven-ink); }
+.pal-seven .book-kicker { font-family:'Poppins',sans-serif; font-weight:300; letter-spacing:.14em; text-transform:uppercase; color:var(--seven-label); }
+/* Light-bg overrides for globally-dark-assuming classes reused on this page – added with the
+   2026-07-30 background flip above (same pattern as .pal-nab). */
+.pal-seven .lede,.pal-seven .h1,.pal-seven .qa-a { color:var(--seven-ink); }
+.pal-seven .pub-line { color:rgba(46,35,64,.5) !important; }
+.pal-clutch .status-tag,.pal-clutch .qa-q { color:var(--clutch-accent); }
+.pal-clutch .book-title { font-family:'Exo 2',sans-serif; font-weight:800; letter-spacing:.06em; color:var(--clutch-accent); }
+.pal-ft { background:var(--ft-bg); color:var(--ft-cream); }
+.pal-ft .status-tag,.pal-ft .qa-q { color:var(--ft-accent); }
+.pal-ft .book-title { font-family:'Montserrat',sans-serif; font-weight:800; color:#fff; }
+.pal-ft .book-kicker { font-family:'Mulish',sans-serif; font-weight:600; color:var(--ft-accent); }
+.pal-nab { background:var(--nab-bg); color:var(--nab-ink); }
+.pal-nab .status-tag,.pal-nab .qa-q { color:var(--nab-accent); }
+.pal-nab .book-title { font-family:'Baloo 2',sans-serif; font-weight:800; color:var(--nab-ink); }
+.pal-nab .book-title em,.pal-nab .book-title .emph { font-style:normal; color:var(--nab-accent); }
+/* Light-bg overrides for globally-dark-assuming classes reused on this page – added with the
+   2026-07-30 background flip above. */
+.pal-nab .lede,.pal-nab .h1,.pal-nab .qa-a { color:var(--nab-ink); }
+.pal-nab .pub-line { color:rgba(42,36,31,.5) !important; }
+.pal-nab .carousel-empty { color:rgba(42,36,31,.45); border-color:rgba(42,36,31,.2); }
+.pal-nab .carousel-card { background:rgba(0,0,0,.03); border-color:rgba(0,0,0,.1); }
+.pal-nab .carousel-card .attribution { color:rgba(42,36,31,.5); }
+.pal-nab .daughter-banner { color:var(--nab-ink); border-color:rgba(0,0,0,.15); }
+.pal-nab .book-kicker { font-family:'Montserrat',sans-serif; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--nab-accent); }
+.pal-nab .spectrum-bar { height:5px; background:linear-gradient(90deg,var(--nab-spec-green),var(--nab-spec-cyan),var(--nab-spec-magenta),var(--nab-spec-coral)); }
+.pal-ni .status-tag,.pal-ni .qa-q { color:var(--ni-accent); }
+.pal-ni .book-title { font-family:'Cormorant Garamond',serif; font-weight:700; font-style:italic; color:var(--ni-ink); }
+.pal-ni .book-kicker { color:var(--ni-accent); }
+/* Light-bg overrides for globally-dark-assuming classes reused on this page – added with the
+   2026-07-30 background flip above (same pattern as .pal-nab / .pal-seven). */
+.pal-ni .lede,.pal-ni .h1,.pal-ni .qa-a { color:var(--ni-ink); }
+.pal-ni .pub-line { color:rgba(43,35,24,.5) !important; }
+/* "Under construction" button treatment – added 2026-07-30 per Matt: every button that currently
+   routes to #page-comingsoon (because the real destination – Amazon ASIN, Kit product, etc. –
+   isn't ready yet) gets this same pure-black/white look sitewide, overriding whatever book-accent
+   color it would otherwise use. Signals "not live yet" consistently no matter which book's page
+   it's on. Applied via a .btn-coming-soon class added alongside each button's existing class(es);
+   !important is needed because several of these buttons also carry an inline style="" with a
+   book-specific color that would otherwise win. */
+.btn-coming-soon { background:#000 !important; border-color:#000 !important; color:#fff !important; }
+.btn-coming-soon:hover { background:#000 !important; border-color:#000 !important; color:#fff !important; opacity:.82; }

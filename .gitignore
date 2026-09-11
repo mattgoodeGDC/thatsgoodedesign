@@ -1,0 +1,13 @@
+# /clients/ is NOT published. GitHub Pages has no server-side authentication, so
+# anything in the repo is world-readable at a guessable URL. The folder stays
+# here locally and goes live only once Cloudflare Access is in front of it.
+# See DEPLOY.md, "Gating /clients/".
+clients/
+
+# DEPLOY.md stays local. It names which claims elsewhere are not yet true, that
+# /clients/ exists but is withheld, the Kit form registry, the LegalZoom/Wix
+# situation, and which copy has not been signed off. None of that belongs in a
+# public repo.
+DEPLOY.md
+
+.DS_Store

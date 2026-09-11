@@ -1,0 +1,1689 @@
+.real-clutch {
+  --gold:       #B88F46;
+  --gold-lt:    #D4AA60;
+  --charcoal:   #2D2C2E;
+  --ink:        #14181C;
+  --cream:      #EDE5D6;
+  --cream-lt:   #F5F0E8;
+  --blue:       #3766A2;
+  --burgundy:   #8D3E40;
+  --teal:       #3E9B75;
+  --violet:     #7A4E96;
+  --violet-lt:  #A98BCB;
+  --dim:        rgba(237,229,214,0.55);
+  --border:     rgba(184,143,70,0.25);
+}
+
+.real-clutch *, .real-clutch *::before, .real-clutch *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+
+.real-clutch {
+  background: var(--ink);
+  color: var(--cream);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── NAV (mkirkwrites brand standard) ─── */
+.real-clutch .nav {
+  background: #0E1216;
+  border-bottom: 1px solid rgba(220,220,230,0.25);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.real-clutch .nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.real-clutch .logo { display: flex; align-items: center; text-decoration: none; }
+.real-clutch .logo-text {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size:52px;
+  color: #C9A85C;
+  letter-spacing: 0.04em;
+  word-spacing: -0.1em;
+}
+.real-clutch .nav-links { display: flex; gap: 28px; }
+.real-clutch .nav-link {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size:20.5px;
+  color: #B85638;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.real-clutch .nav-link:hover { color: #D4704A; }
+
+/* ─── ANNOUNCE STRIP ─── */
+.real-clutch .announce-strip {
+  background: var(--charcoal);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 32px;
+  text-align: center;
+  margin-top: 0;
+}
+.real-clutch .announce-strip p {
+  font-size:14px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--dim);
+}
+.real-clutch .strip-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  margin-right: 8px;
+  vertical-align: middle;
+  animation: pulse-gold__real-clutch 2s ease-in-out infinite;
+}
+.real-clutch .announce-strip a {
+  color: var(--gold);
+  text-decoration: none;
+  font-style: italic;
+}
+.real-clutch .announce-strip a:hover { text-decoration: underline; }
+
+@keyframes pulse-gold__real-clutch {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(184,143,70,0.6); }
+  50% { opacity: 0.75; box-shadow: 0 0 0 5px rgba(184,143,70,0); }
+}
+
+/* ─── HERO ─── */
+.real-clutch .hero {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  background: var(--ink);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.real-clutch .hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 65% 50%, rgba(55,102,162,0.08) 0%, transparent 60%),
+              radial-gradient(ellipse at 20% 80%, rgba(184,143,70,0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+.real-clutch .hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 32px;
+  display: flex;
+  align-items: center;
+  gap: 64px;
+  position: relative;
+  width: 100%;
+}
+.real-clutch .hero-text { flex: 1; min-width: 0; }
+.real-clutch .hero-eyebrow {
+  font-size:12.5px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-style: italic;
+  margin-bottom: 16px;
+}
+.real-clutch .hero-title {
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 900;
+  font-size:clamp(78px,11.2vw,119px);
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+  color: #fff;
+  margin-bottom: 12px;
+}
+.real-clutch .hero-title span {
+  color: var(--gold);
+  display: block;
+  font-size: 0.3em;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1;
+  margin-bottom: 4px;
+  text-transform: none;
+  color: var(--gold-lt);
+}
+.real-clutch .hero-subtitle {
+  font-family: 'Source Serif 4', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size:20.5px;
+  color: var(--dim);
+  margin-bottom: 6px;
+  letter-spacing: 0.01em;
+}
+.real-clutch .hero-byline {
+  font-size:12.5px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(237,229,214,0.4);
+  margin-bottom: 28px;
+}
+.real-clutch .hero-accent {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 32px;
+}
+.real-clutch .hero-accent span { width: 22px; height: 3px; border-radius: 2px; }
+.real-clutch .hero-accent span:nth-child(1) { background: var(--teal); }
+.real-clutch .hero-accent span:nth-child(2) { background: var(--blue); }
+.real-clutch .hero-accent span:nth-child(3) { background: var(--violet); }
+.real-clutch .hero-accent span:nth-child(4) { background: var(--burgundy); }
+
+.real-clutch .hero-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size:11.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 36px;
+}
+
+.real-clutch .hero-hook {
+  border-left: 3px solid var(--gold);
+  padding-left: 20px;
+  margin-bottom: 36px;
+}
+.real-clutch .hero-hook p {
+  font-family: 'Source Serif 4', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size:23px;
+  line-height: 1.55;
+  color: var(--cream);
+}
+
+.real-clutch .hero-ctas {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.real-clutch .btn-primary {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--charcoal);
+  font-family: 'Montserrat', sans-serif;
+  font-size:14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 14px 28px;
+  transition: background 0.2s, transform 0.15s;
+}
+.real-clutch .btn-primary:hover { background: var(--gold-lt); transform: translateY(-1px); }
+.real-clutch .btn-outline {
+  display: inline-block;
+  background: transparent;
+  color: var(--cream);
+  border: 1px solid rgba(237,229,214,0.35);
+  font-family: 'Montserrat', sans-serif;
+  font-size:14px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 13px 24px;
+  transition: border-color 0.2s, color 0.2s, transform 0.15s;
+}
+.real-clutch .btn-outline:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-1px);
+}
+
+/* cover image */
+.real-clutch .cover-img {
+  width: 100%;
+  display: block;
+  transform: rotate(-3deg);
+  box-shadow: 16px 20px 48px rgba(0,0,0,0.55), -4px -4px 20px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
+}
+.real-clutch .hero-cover:hover .cover-img {
+  transform: rotate(-1.5deg) scale(1.02);
+}
+
+/* cover placeholder */
+.real-clutch .hero-cover {
+  flex-shrink: 0;
+  width: 280px;
+}
+.real-clutch .cover-placeholder {
+  width: 100%;
+  aspect-ratio: 2/3;
+  background: linear-gradient(160deg, #1a2a3a 0%, #0d1520 50%, #0a0d1a 100%);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transform: rotate(-3deg);
+  box-shadow: 16px 20px 48px rgba(0,0,0,0.55), -4px -4px 20px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
+}
+.real-clutch .cover-placeholder:hover { transform: rotate(-1.5deg) scale(1.02); }
+.real-clutch .cover-placeholder::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  background: var(--gold);
+}
+.real-clutch .cover-mark {
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 900;
+  font-size:56px;
+  letter-spacing: -0.02em;
+  color: var(--gold);
+  opacity: 0.9;
+  text-align: center;
+  line-height: 1;
+}
+.real-clutch .cover-sub {
+  font-family: 'Montserrat', sans-serif;
+  font-size:9px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(184,143,70,0.6);
+  text-align: center;
+  margin-top: 10px;
+  padding: 0 20px;
+}
+.real-clutch .cover-caption {
+  margin-top: 16px;
+  text-align: center;
+  font-size:11.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(237,229,214,0.3);
+  font-weight: 500;
+}
+
+/* ─── META BAR ─── */
+.real-clutch .meta-bar {
+  background: var(--charcoal);
+  border-bottom: 1px solid var(--border);
+  padding: 18px 32px;
+}
+.real-clutch .meta-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+.real-clutch .meta-item {
+  padding: 0 24px;
+  border-right: 1px solid var(--border);
+  text-align: center;
+}
+.real-clutch .meta-item:first-child { padding-left: 0; }
+.real-clutch .meta-item:last-child { border-right: none; padding-right: 0; }
+.real-clutch .meta-label {
+  font-size:10.5px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 3px;
+}
+.real-clutch .meta-value {
+  font-size:15px;
+  font-weight: 500;
+  color: var(--cream);
+  letter-spacing: 0.02em;
+}
+.real-clutch .meta-link {
+  font-size:15px;
+  font-weight: 500;
+  color: var(--gold);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+.real-clutch .meta-link:hover { text-decoration: underline; }
+
+/* ─── SECTION FRAMEWORK ─── */
+.real-clutch .section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 32px;
+}
+.real-clutch .section-label {
+  font-size:11.5px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.real-clutch .section-title {
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 700;
+  font-size:39px;
+  letter-spacing: -0.01em;
+  color: #fff;
+  margin-bottom: 40px;
+  line-height: 1.15;
+}
+
+/* ─── ABOUT THE BOOK ─── */
+.real-clutch .about-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 56px;
+  align-items: start;
+}
+.real-clutch .about-blurb p {
+  font-family: 'Source Serif 4', serif;
+  font-size:18.5px;
+  line-height: 1.8;
+  color: rgba(237,229,214,0.85);
+  margin-bottom: 20px;
+}
+.real-clutch .about-blurb .hook-line {
+  font-family: 'Source Serif 4', serif;
+  font-style: italic;
+  font-size:23px;
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 24px;
+}
+.real-clutch .inline-quote {
+  border-left: 3px solid var(--gold);
+  padding: 14px 0 14px 22px;
+  margin: 32px 0;
+}
+.real-clutch .inline-quote p {
+  font-family: 'Source Serif 4', serif;
+  font-style: italic;
+  font-size:22px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--cream) !important;
+  margin: 0 0 6px !important;
+}
+.real-clutch .inline-quote cite {
+  font-size:12.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+/* newsletter inline box */
+.real-clutch .newsletter-box {
+  background: rgba(55,102,162,0.08);
+  border: 1px solid rgba(55,102,162,0.3);
+  border-left: 3px solid var(--blue);
+  padding: 28px;
+  margin-top: 36px;
+}
+.real-clutch .newsletter-box .box-label {
+  font-size:10.5px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.real-clutch .newsletter-box h4 {
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 700;
+  font-size:19.5px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+.real-clutch .newsletter-box p {
+  font-size:15px !important;
+  line-height: 1.65 !important;
+  color: var(--dim) !important;
+  margin-bottom: 14px !important;
+}
+.real-clutch .newsletter-box ul {
+  list-style: none;
+  margin-bottom: 18px;
+}
+.real-clutch .newsletter-box ul li {
+  font-size:14px;
+  color: var(--dim);
+  padding: 3px 0 3px 16px;
+  position: relative;
+}
+.real-clutch .newsletter-box ul li::before {
+  content: '–';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-size:11.5px;
+}
+.real-clutch .newsletter-box .fine-print {
+  font-size:11.5px !important;
+  color: rgba(237,229,214,0.3) !important;
+  margin-top: 10px !important;
+  margin-bottom: 0 !important;
+  font-style: italic;
+}
+
+/* sidebar */
+
+.real-clutch .sidebar-card {
+  background: var(--charcoal);
+  border-top: 3px solid var(--gold);
+  padding: 24px;
+  margin-bottom: 16px;
+}
+.real-clutch .sidebar-section-label {
+  font-size:10.5px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.real-clutch .tag-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.real-clutch .genre-tag {
+  font-size:11.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--cream);
+  background: rgba(237,229,214,0.07);
+  border: 1px solid rgba(237,229,214,0.15);
+  padding: 4px 10px;
+}
+.real-clutch .book-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.real-clutch .detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid rgba(237,229,214,0.07);
+  padding-bottom: 8px;
+}
+.real-clutch .detail-row:last-child { border-bottom: none; padding-bottom: 0; }
+.real-clutch .detail-key {
+  font-size:11.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.real-clutch .detail-val {
+  font-size:14px;
+  color: var(--cream);
+  text-align: right;
+  opacity: 0.8;
+}
+.real-clutch .buy-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.buy-buttons .btn-primary,
+.real-clutch .buy-buttons .btn-outline {
+  text-align: center;
+  width: 100%;
+}
+
+/* ─── FOUR SYSTEMS ─── */
+.real-clutch .four-systems-wrap {
+  background: rgba(45,44,46,0.4);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.real-clutch .systems-intro {
+  font-family: 'Source Serif 4', serif;
+  font-style: italic;
+  font-size:18.5px;
+  color: var(--dim);
+  margin-bottom: 40px;
+  max-width: 640px;
+}
+.real-clutch .systems-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin-bottom: 32px;
+}
+.real-clutch .system-card {
+  background: var(--charcoal);
+  padding: 32px 24px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+.real-clutch .system-card:hover { transform: translateY(-3px); }
+.real-clutch .system-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.real-clutch .system-card.create::before { background: var(--teal); }
+.real-clutch .system-card.voices::before { background: var(--blue); }
+.real-clutch .system-card.sixc::before { background: var(--violet); }
+.real-clutch .system-card.delegate::before { background: var(--burgundy); }
+
+.real-clutch .system-icon {
+  width: 42px;
+  height: 42px;
+  margin-bottom: 20px;
+}
+.real-clutch .system-icon img { width: 100%; height: 100%; display: block; }
+
+.real-clutch .system-num {
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 900;
+  font-size:12.5px;
+  letter-spacing: 0.2em;
+  color: rgba(237,229,214,0.3);
+  margin-bottom: 14px;
+}
+.real-clutch .system-metaphor {
+  font-size:10.5px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.real-clutch .system-card.create .system-metaphor { color: var(--teal); }
+.real-clutch .system-card.voices .system-metaphor { color: var(--blue); }
+.real-clutch .system-card.sixc .system-metaphor { color: var(--violet-lt); }
+.real-clutch .system-card.delegate .system-metaphor { color: var(--burgundy); }
+
+.real-clutch .system-name {
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 800;
+  font-size:25.5px;
+  letter-spacing: 0.05em;
+  color: #fff;
+  margin-bottom: 12px;
+  line-height: 1.1;
+}
+.real-clutch .system-desc {
+  font-size:14px;
+  line-height: 1.7;
+  color: var(--dim);
+}
+
+.real-clutch .eq-callout {
+  background: rgba(184,143,70,0.06);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.real-clutch .eq-label {
+  width: 48px;
+  height: 48px;
+  opacity: 0.7;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.real-clutch .eq-label img { width: 100%; height: 100%; display: block; }
+
+.real-clutch .eq-text strong {
+  display: block;
+  font-size:12.5px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+.real-clutch .eq-text p {
+  font-size:15px;
+  color: var(--dim);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.real-clutch .payoff-wrap {
+  background: rgba(184,143,70,0.05);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.real-clutch .payoff-inner {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 88px 32px;
+  text-align: center;
+}
+.real-clutch .payoff-lead {
+  font-family: 'Source Serif 4', serif;
+  font-style: italic;
+  font-size:20.5px;
+  color: var(--dim);
+  margin-bottom: 22px;
+}
+.real-clutch .payoff-line {
+  font-family: 'Source Serif 4', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size:clamp(25.5px,4.7vw,33.5px);
+  line-height: 1.45;
+  color: var(--cream);
+  margin: 0;
+}
+.real-clutch .payoff-line em { color: var(--gold-lt); font-style: italic; }
+
+/* ─── QUOTES CAROUSEL (Balance structure, CLUTCH palette) ─── */
+.real-clutch .quotes-wrap {
+  background: var(--charcoal);
+}
+.real-clutch .quotes-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 72px 48px 64px;
+}
+.real-clutch .quotes-eyebrow {
+  font-family: 'Montserrat', sans-serif;
+  font-style: italic;
+  font-size:12.5px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(184,143,70,0.7);
+  margin-bottom: 36px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.real-clutch .quotes-eyebrow::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.real-clutch .quotes-carousel {
+  position: relative;
+  min-height: 220px;
+}
+.real-clutch .quote-slide {
+  display: none;
+  animation: qFadeIn__real-clutch 0.5s ease;
+}
+.real-clutch .quote-slide.active { display: block; }
+@keyframes qFadeIn__real-clutch {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.real-clutch .quote-card {
+  border-top: 1px solid var(--gold);
+  background: rgba(45,44,46,0.5);
+  padding: 36px 48px 36px 40px;
+}
+.real-clutch .quote-mark {
+  display: block;
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 900;
+  font-size:103.5px;
+  line-height: 0.7;
+  color: rgba(184,143,70,0.2);
+  margin-bottom: 16px;
+  user-select: none;
+}
+.real-clutch .quote-text {
+  font-family: 'Exo 2', sans-serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size:clamp(25.5px,2.69vw,32.5px);
+  line-height: 1.55;
+  color: var(--cream);
+  margin-bottom: 24px;
+}
+.real-clutch .quote-attr {
+  font-family: 'Montserrat', sans-serif;
+  font-size:11.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.real-clutch .quotes-nav {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 40px;
+}
+.real-clutch .quote-arrow {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(184,143,70,0.5);
+  background: transparent;
+  color: var(--gold);
+  font-size:15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, border-color 0.2s;
+}
+.real-clutch .quote-arrow:hover {
+  background: rgba(184,143,70,0.1);
+  border-color: var(--gold);
+}
+
+/* MARKETING-MATERIAL / REVIEW CAROUSEL – structure ready for either 4x5 marketing
+   images (now) or reader reviews (once they exist). Reuses the quote-carousel's
+   dot/arrow interaction pattern. */
+.real-clutch .mm-carousel-track { position: relative; max-width: 420px; margin: 0 auto; aspect-ratio: 4/5; }
+.real-clutch .mm-slide { position:absolute; inset:0; display:none; }
+.real-clutch .mm-slide.active { display:block; }
+.real-clutch .mm-slot {
+  width:100%; height:100%; border:2px dashed rgba(184,143,70,.5);
+  display:flex; align-items:center; justify-content:center; text-align:center;
+  font-family:'Exo 2',sans-serif; font-size:15px; letter-spacing:.04em;
+  color: var(--gold); background: rgba(184,143,70,.05); border-radius:4px;
+}
+/* 2026-07-30: Matt's card_clutch1–7.png marketing images dropped in as a stand-in for the
+   review carousel until real reader reviews come in (same "marketing material now, reviews
+   later" pattern as the .mm-carousel-track structure was built for). Same object-fit:contain
+   + graceful img-missing fallback treatment as Wrath's .wr-slide-img. */
+.real-clutch .mm-slide-img { width:100%; height:100%; object-fit:contain; display:block; border-radius:4px; }
+.real-clutch .mm-slide-img.img-missing { display:none; }
+.real-clutch .mm-slide:has(.mm-slide-img.img-missing)::after{ content:'Image not found – check assets/ path'; font-family:'Exo 2',sans-serif; font-size:15px; color:rgba(184,143,70,.7); text-align:center; padding:20px; display:block; }
+.real-clutch .mm-carousel-nav { display:flex; justify-content:center; gap:16px; margin-top:24px; }
+
+/* STOREFRONT – echoes front-page book-card gateway styling */
+.real-clutch .mm-storefront-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; max-width:820px; }
+.real-clutch .mm-storefront-card {
+  display:flex; flex-direction:column; padding:26px 24px; text-decoration:none;
+  background: var(--ink); border-top:4px solid var(--gold); box-shadow:0 8px 28px rgba(0,0,0,.25);
+  transition: transform .2s, box-shadow .2s;
+}
+.real-clutch .mm-storefront-card:hover { transform: translateY(-2px); box-shadow:0 14px 40px rgba(0,0,0,.35); }
+.real-clutch .mm-storefront-tag { font-family:'Exo 2',sans-serif; font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
+.real-clutch .mm-storefront-title { font-family:'Exo 2',sans-serif; font-weight:800; font-size:25.5px; color:#fff; margin-bottom:8px; }
+.real-clutch .mm-storefront-desc { font-size:15px; line-height:1.6; color:rgba(255,255,255,.72); flex:1; margin-bottom:16px; }
+.real-clutch .mm-storefront-link { font-family:'Exo 2',sans-serif; font-size:14px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--gold); }
+@media (max-width:700px) { .real-clutch .mm-storefront-grid { grid-template-columns:1fr; } }
+
+/* FREE CHAPTER banner + EBOOK MINI-GRID – added 2026-07-30 per Matt's note to raise the profile of
+   the 4 separate framework eBooks and the free chapter, beyond the small storefront card each had. */
+.real-clutch .mm-freechapter-banner {
+  display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+  background:linear-gradient(120deg,var(--ink) 0%,#20242b 100%); border:1px solid var(--border);
+  border-left:4px solid var(--gold); padding:28px 32px; max-width:820px; margin-bottom:32px;
+  text-decoration:none;
+}
+.real-clutch .mm-freechapter-banner h3 { font-family:'Exo 2',sans-serif; font-weight:800; font-size:23px; color:#fff; margin-bottom:6px; }
+.real-clutch .mm-freechapter-banner p { font-size:15px; color:rgba(255,255,255,.65); max-width:44ch; }
+.real-clutch .mm-ebook-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; max-width:820px; margin-bottom:20px; }
+.real-clutch .mm-ebook-card { display:flex; flex-direction:column; text-decoration:none; background:var(--ink); border-top:3px solid var(--gold); box-shadow:0 6px 20px rgba(0,0,0,.25); transition:transform .2s; }
+.real-clutch .mm-ebook-card:hover { transform:translateY(-2px); }
+.real-clutch .mm-ebook-card .mm-ebook-cover { width:100%; aspect-ratio:2/3; object-fit:cover; display:block; background:rgba(255,255,255,.04); }
+.real-clutch .mm-ebook-card .mm-ebook-cover.img-missing { opacity:0; }
+.real-clutch .mm-ebook-card .mm-ebook-name { font-family:'Exo 2',sans-serif; font-weight:700; font-size:14px; color:#fff; padding:10px 10px 2px; overflow-wrap:anywhere; }
+.real-clutch .mm-ebook-card .mm-ebook-price { font-family:'Exo 2',sans-serif; font-size:12.5px; color:var(--gold); padding:0 10px 12px; }
+@media (max-width:700px) { .real-clutch .mm-ebook-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+
+/* --- EPUB FORMAT NOTICE + HOW-TO-READ PANEL --- added 2026-08-28. Tells buyers the files are
+   EPUB (not PDF) and shows how to open one on PC, Mac, iOS, Android and Kindle. Class names are
+   page-neutral so the same block can be dropped on any ebook-selling page; .mm-epub--dark flips
+   it for charcoal backgrounds. Built on the native disclosure element, no JS. */
+.mm-epub {
+  --epub-gold:#B88F46;
+  --epub-strong:#2D2C2E;
+  --epub-text:rgba(45,44,46,.78);
+  --epub-line:rgba(45,44,46,.16);
+  --epub-bg:rgba(45,44,46,.035);
+  max-width:820px; margin:0 0 26px;
+  background:var(--epub-bg);
+  border:1px solid var(--epub-line); border-left:3px solid var(--epub-gold);
+}
+.mm-epub--dark {
+  --epub-strong:#EDE5D6;
+  --epub-text:rgba(237,229,214,.66);
+  --epub-line:rgba(237,229,214,.18);
+  --epub-bg:rgba(237,229,214,.04);
+  margin:36px auto 0;
+}
+.mm-epub-head { display:flex; align-items:flex-start; gap:14px; padding:18px 20px; }
+.mm-epub-badge {
+  flex-shrink:0; font-family:'Exo 2',sans-serif; font-weight:800; font-size:11px;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--epub-gold);
+  border:1px solid var(--epub-gold); padding:6px 9px; line-height:1;
+}
+.mm-epub-head p { margin:0; font-size:14.5px; line-height:1.62; color:var(--epub-text); }
+.mm-epub-head strong { color:var(--epub-strong); font-weight:700; }
+.mm-epub details { border-top:1px solid var(--epub-line); }
+.mm-epub summary {
+  list-style:none; cursor:pointer; padding:14px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  font-family:'Exo 2',sans-serif; font-weight:700; font-size:12.5px;
+  letter-spacing:.1em; text-transform:uppercase; color:var(--epub-gold);
+}
+.mm-epub summary::-webkit-details-marker { display:none; }
+.mm-epub summary::after { content:"+"; font-size:19px; line-height:1; font-weight:400; }
+.mm-epub details[open] summary::after { content:"\2013"; }
+.mm-epub summary:focus-visible { outline:2px solid var(--epub-gold); outline-offset:-2px; }
+.mm-epub-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px 26px; padding:2px 20px 22px; }
+.mm-epub-step h4 {
+  font-family:'Exo 2',sans-serif; font-weight:800; font-size:13px; letter-spacing:.05em;
+  text-transform:uppercase; color:var(--epub-strong);
+  margin:0 0 7px; padding-top:10px; border-top:2px solid var(--epub-gold);
+}
+.mm-epub-step p { margin:0; font-size:13.5px; line-height:1.6; color:var(--epub-text); }
+.mm-epub a { color:var(--epub-gold); text-decoration:underline; text-underline-offset:2px; }
+.mm-epub-foot { padding:0 20px 20px; margin:0; font-size:12.5px; line-height:1.6; color:var(--epub-text); }
+@media (max-width:860px) { .mm-epub-grid { grid-template-columns:repeat(2,1fr); } }
+@media (max-width:560px) {
+  .mm-epub-grid { grid-template-columns:1fr; }
+  .mm-epub-head { flex-direction:column; gap:10px; }
+}
+
+
+/* ─── REVIEWS ─── */
+.real-clutch .reviews-wrap {
+  background: var(--cream-lt);
+}
+.real-clutch .reviews-wrap .section-label { color: var(--gold); }
+.real-clutch .reviews-wrap .section-title { color: var(--charcoal); }
+.real-clutch .arc-callout {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 60px 0;
+}
+.real-clutch .arc-callout h3 {
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 700;
+  font-size:28px;
+  color: var(--charcoal);
+  margin-bottom: 16px;
+}
+.real-clutch .arc-callout p {
+  font-family: 'Source Serif 4', serif;
+  font-style: italic;
+  font-size:18.5px;
+  color: rgba(45,44,46,0.7);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+.real-clutch .btn-dark {
+  display: inline-block;
+  background: var(--charcoal);
+  color: var(--cream);
+  font-family: 'Montserrat', sans-serif;
+  font-size:12.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 14px 28px;
+  transition: background 0.2s;
+}
+.real-clutch .btn-dark:hover { background: var(--ink); }
+
+/* ─── LEAVE A REVIEW CTA (2026-08-09) ───────────────────────────────────────
+   Added per Matt: mkirk-clutch-review.html was previously orphaned – linked only
+   from a deactivated button on the front page and nowhere on this page.
+   2026-08-09 revision: moved up from below the carousel to directly above it, inside
+   the reviews section, so it clears the marketing-card carousel that was burying it
+   while keeping the "What Readers Are Saying" context that makes the ask legible.
+   Restyled from a full-bleed band to a contained charcoal card, since it now sits
+   inside the .section container rather than between sections. */
+.real-clutch .review-cta-wrap {
+  background: var(--charcoal);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--gold);
+  margin-bottom: 40px;
+}
+.real-clutch .review-cta-inner {
+  padding: 38px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.real-clutch .review-cta-text { max-width: 62ch; }
+.real-clutch .review-cta-eyebrow {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.real-clutch .review-cta-text h3 {
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 800;
+  font-size: 30px;
+  line-height: 1.2;
+  color: #fff;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+.real-clutch .review-cta-text p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--dim);
+}
+.real-clutch .review-cta-action { flex-shrink: 0; }
+@media (max-width: 860px) {
+  .real-clutch .review-cta-inner { padding: 40px 24px; flex-direction: column; align-items: flex-start; gap: 24px; }
+  .real-clutch .review-cta-text h3 { font-size: 25px; }
+}
+
+/* Review cards grid (post-launch) – hidden initially */
+.real-clutch .reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.real-clutch .review-card {
+  background: #fff;
+  border-top: 3px solid var(--gold);
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(45,44,46,0.08);
+}
+.real-clutch .review-stars {
+  color: var(--gold);
+  font-size:16px;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+.real-clutch .review-card h4 {
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 700;
+  font-size:16px;
+  color: var(--charcoal);
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(45,44,46,0.1);
+  padding-bottom: 10px;
+}
+.real-clutch .review-card blockquote {
+  font-family: 'Source Serif 4', serif;
+  font-style: italic;
+  font-size:16px;
+  line-height: 1.7;
+  color: rgba(45,44,46,0.75);
+  margin-bottom: 14px;
+}
+.real-clutch .review-footer {
+  font-size:11.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(45,44,46,0.35);
+}
+
+/* ─── AUTHOR NOTE (Balance book page format) ─── */
+.real-clutch .author-note-wrap {
+  background: #3D6E8A;
+}
+.real-clutch .author-note-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 72px 32px 80px;
+}
+.real-clutch .author-note-eyebrow {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-style: italic;
+  font-size:12.5px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(242,237,227,0.6);
+  margin-bottom: 48px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.real-clutch .author-note-eyebrow::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(242,237,227,0.2);
+}
+.real-clutch .author-note-grid {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 56px;
+  align-items: start;
+}
+.real-clutch .author-avatar-col {
+  display: flex;
+  justify-content: center;
+  padding-top: 6px;
+}
+.real-clutch .author-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 15%;
+  border: 2px solid rgba(201,168,92,0.3);
+  flex-shrink: 0;
+}
+.real-clutch .author-note-text p {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size:19.5px;
+  line-height: 1.85;
+  color: #F2EDE3;
+  margin-bottom: 22px;
+}
+.real-clutch .author-essay-link {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size:14px !important;
+  font-weight: 600;
+  margin-top: 4px !important;
+  margin-bottom: 22px !important;
+}
+.real-clutch .author-essay-link a {
+  display: inline-block;
+  background: #C2AED1;
+  color: #2D2C2E;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 12px 22px;
+  border: none;
+  transition: background 0.2s, transform 0.15s;
+}
+.real-clutch .author-essay-link a:hover {
+  background: #D4C0E0;
+  transform: translateY(-1px);
+}
+
+.real-clutch .highlight-org {
+  color: #F2EDE3;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(242,237,227,0.35);
+}
+.real-clutch .highlight-stakes {
+  color: #F2EDE3;
+  font-style: italic;
+  font-weight: 600;
+}
+
+/* ─── NEWSLETTER STRIP ─── */
+.real-clutch .newsletter-strip-wrap {
+  background: var(--charcoal);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.real-clutch .newsletter-strip-inner {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 72px 32px;
+}
+.real-clutch .newsletter-strip-inner .section-label { display: block; margin-bottom: 10px; }
+.real-clutch .newsletter-strip-inner h2 {
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 700;
+  font-size:30px;
+  color: #fff;
+  margin-bottom: 14px;
+  letter-spacing: -0.01em;
+}
+.real-clutch .newsletter-strip-inner p {
+  font-family: 'Source Serif 4', serif;
+  font-style: italic;
+  font-size:17px;
+  color: var(--dim);
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+.real-clutch .email-form {
+  display: flex;
+  gap: 0;
+  max-width: 420px;
+  margin: 0 auto 12px;
+}
+.real-clutch .email-form input {
+  flex: 1;
+  background: rgba(237,229,214,0.07);
+  border: 1px solid var(--border);
+  border-right: none;
+  color: var(--cream);
+  font-family: 'Montserrat', sans-serif;
+  font-size:15px;
+  padding: 13px 16px;
+  outline: none;
+}
+.real-clutch .email-form input::placeholder { color: rgba(237,229,214,0.3); }
+.real-clutch .email-form button {
+  background: var(--gold);
+  color: var(--charcoal);
+  border: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size:12.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 13px 20px;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.real-clutch .email-form button:hover { background: var(--gold-lt); }
+.real-clutch .email-fine-print {
+  font-size:11.5px;
+  color: rgba(237,229,214,0.28);
+  font-style: italic;
+}
+
+/* ─── FOOTER (mkirkwrites brand standard) ─── */
+.real-clutch .footer {
+  background: #0E1216;
+  border-top: 1px solid rgba(91,166,124,0.12);
+  padding: 40px 40px;
+}
+.real-clutch .footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.real-clutch .footer-logo {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size:52px;
+  color: #C9A85C;
+  letter-spacing: 0.04em;
+  word-spacing: -0.1em;
+  margin-bottom: 8px;
+}
+.real-clutch .footer-social {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size:18.5px;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.real-clutch .footer-copy {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size:20.5px;
+  color: #B85638;
+}
+
+/* ─── ARC GRID ─── */
+.real-clutch .arc-grid {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 48px;
+  align-items: stretch;
+}
+.real-clutch .arc-checklist {
+  background: rgba(45,44,46,0.05);
+  border-left: 3px solid var(--gold);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+.real-clutch .arc-body p {
+  font-family: 'Source Serif 4', serif;
+  font-size:18.5px;
+  line-height: 1.8;
+  color: rgba(45,44,46,0.8);
+  margin-bottom: 18px;
+}
+.real-clutch .arc-ctas {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 28px 0 14px;
+}
+.real-clutch .arc-review-link {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size:15px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--burgundy);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(141,62,64,0.35);
+  padding-bottom: 1px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.real-clutch .arc-review-link:hover { color: var(--charcoal); border-color: var(--charcoal); }
+.real-clutch .btn-outline-dark {
+  display: inline-block;
+  background: transparent;
+  color: var(--charcoal);
+  border: 1px solid rgba(45,44,46,0.3);
+  font-family: 'Montserrat', sans-serif;
+  font-size:14px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 13px 24px;
+  transition: border-color 0.2s, color 0.2s;
+}
+.real-clutch .btn-outline-dark:hover { border-color: var(--charcoal); color: var(--ink); }
+.real-clutch .arc-fine {
+  font-size:12.5px !important;
+  color: rgba(45,44,46,0.4) !important;
+  font-style: italic;
+  margin-bottom: 0 !important;
+}
+.real-clutch .arc-check-label {
+  font-size:11.5px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold) !important;
+  margin-bottom: 14px !important;
+  font-family: 'Montserrat', sans-serif !important;
+  font-style: normal !important;
+}
+.real-clutch .arc-checklist ul {
+  list-style: none;
+}
+.real-clutch .arc-checklist ul li {
+  font-family: 'Montserrat', sans-serif;
+  font-size:17px;
+  color: rgba(45,44,46,0.75);
+  padding: 10px 0 10px 22px;
+  position: relative;
+  border-bottom: 1px solid rgba(45,44,46,0.08);
+  line-height: 1.5;
+}
+.real-clutch .arc-checklist ul li:last-child { border-bottom: none; }
+.real-clutch .arc-checklist ul li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--teal);
+  font-weight: 700;
+  font-size:15px;
+  top: 12px;
+}
+
+/* ─── FOLLOW SECTION ─── */
+.real-clutch .follow-wrap {
+  background: var(--charcoal);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.real-clutch .follow-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+}
+.real-clutch .email-list-card {
+  background: rgba(184,143,70,0.06);
+  border: 1px solid rgba(184,143,70,0.25);
+  border-top: 3px solid var(--gold);
+}
+.real-clutch .email-list-card .seva-form.formkit-form { max-width:100%; }
+.real-clutch .email-list-card .formkit-fields { display:flex!important; gap:0!important; }
+.real-clutch .email-list-card .formkit-field { flex:1 1 auto!important; margin:0!important; }
+.real-clutch .email-list-card .formkit-input { width:100%; height:44px; padding:10px 12px; border:1px solid rgba(237,229,214,.25)!important; border-right:none!important; background:var(--ink)!important; color:var(--cream)!important; }
+.real-clutch .email-list-card .formkit-submit { height:44px; padding:0 18px!important; background:var(--gold)!important; color:var(--ink)!important; border:none!important; font-family:'Exo 2',sans-serif!important; font-size:12.5px!important; letter-spacing:.08em!important; text-transform:uppercase!important; }
+.real-clutch .follow-card {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 280px;
+}
+.real-clutch .substack-card {
+  background: rgba(237,229,214,0.04);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--gold);
+}
+.real-clutch .linkedin-card {
+  background: rgba(55,102,162,0.06);
+  border: 1px solid rgba(55,102,162,0.25);
+  border-top: 3px solid var(--blue);
+}
+.real-clutch .follow-card-top { margin-bottom: 24px; }
+/* platform icons – 2026-08-09: were <img> tags with no src, so browsers fell back to
+   rendering alt text clipped inside the 28px box ("SUB", "LINI"). Replaced with inline
+   SVG that inherits the badge color via currentColor. Sized down to 14px to sit properly
+   against the 10.5px badge label. */
+.real-clutch .platform-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  display: block;
+}
+.real-clutch .follow-platform-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size:10.5px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 3px 10px 3px 6px;
+  margin-bottom: 14px;
+}
+.real-clutch .substack-badge {
+  background: rgba(184,143,70,0.15);
+  color: var(--gold);
+  border: 1px solid var(--border);
+}
+.real-clutch .linkedin-badge {
+  background: rgba(55,102,162,0.15);
+  color: #6BA3D8;
+  border: 1px solid rgba(55,102,162,0.35);
+}
+/* 2026-08-09: email badge previously had no color class at all – plain white text, no box,
+   while the other two were boxed. Given gold treatment to match the Substack badge. */
+.real-clutch .email-badge {
+  background: rgba(184,143,70,0.15);
+  color: var(--gold);
+  border: 1px solid var(--border);
+}
+.real-clutch .follow-card h3 {
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 700;
+  font-size:25.5px;
+  color: #fff;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+.real-clutch .follow-desc {
+  font-size:16px;
+  line-height: 1.75;
+  color: var(--dim);
+}
+.real-clutch .follow-meta {
+  font-size:11.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(237,229,214,0.3);
+  margin-bottom: 14px;
+}
+.real-clutch .follow-btn {
+  display: inline-block;
+  text-align: center;
+}
+.real-clutch .linkedin-btn {
+  border-color: rgba(55,102,162,0.5);
+  color: #6BA3D8;
+}
+.real-clutch .linkedin-btn:hover {
+  border-color: var(--blue);
+  color: #fff;
+  background: rgba(55,102,162,0.15);
+}
+
+@media (max-width: 768px) {
+.real-clutch .hero-inner { flex-direction: column-reverse; gap: 40px; padding: 60px 24px; }
+.real-clutch .hero-cover { width: 200px; }
+.real-clutch .hero-title { font-size:78px; }
+.real-clutch .meta-inner { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.real-clutch .meta-item { border-right: none; text-align: left; }
+.real-clutch .about-grid { grid-template-columns: 1fr; }
+.real-clutch .systems-grid { grid-template-columns: repeat(2, 1fr); }
+.real-clutch .author-grid { grid-template-columns: 1fr; }
+.real-clutch .reviews-grid { grid-template-columns: 1fr; }
+.real-clutch .arc-grid { grid-template-columns: 1fr; }
+.real-clutch .follow-grid { grid-template-columns: 1fr; }
+.real-clutch .nav-links { display: none; }
+.real-clutch .nav-inner { padding-left: 24px; padding-right: 24px; }
+.real-clutch .footer { padding: 40px 24px; }
+.real-clutch .footer-inner { flex-direction: column; align-items: flex-start; }
+.real-clutch .footer-bottom { flex-direction: column; gap: 6px; }
+.real-clutch .email-form { flex-direction: column; }
+.real-clutch .email-form input { border-right: 1px solid var(--border); border-bottom: none; }
+}
+
+@media (max-width: 500px) {
+.real-clutch .systems-grid { grid-template-columns: 1fr; }
+}
+
+
+/* ============================================================
+   GDC chrome for the book pages.
+   The page itself is the author-site design, carried across whole.
+   Only the nav and footer are rebuilt in GDC identity, in the same
+   dark register so they do not fight the page they sit on.
+   ============================================================ */
+
+body.book-page { margin: 0; background: var(--charcoal, #2D2C2E); }
+
+.bp-skip {
+  position: absolute; left: -9999px;
+  background: #B88F46; color: #14181C;
+  padding: 10px 16px; font-weight: 700;
+  font-family: Montserrat, "Helvetica Neue", Arial, sans-serif;
+}
+.bp-skip:focus { left: 12px; top: 12px; z-index: 60; }
+
+.real-clutch .bp-nav {
+  background: #14181C;
+  border-bottom: 1px solid rgba(184,143,70,.25);
+}
+.real-clutch .bp-nav-inner {
+  max-width: 1120px; margin: 0 auto;
+  padding: 18px 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 22px; flex-wrap: wrap;
+}
+.real-clutch .bp-brand {
+  display: flex; align-items: center; gap: 11px;
+  text-decoration: none; color: #EDE5D6;
+  font-family: Montserrat, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 800; font-size: 13px; letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.real-clutch .bp-brand img { display: block; width: 34px; height: auto; }
+.real-clutch .bp-brand em {
+  font-style: normal; font-weight: 500; color: rgba(237,229,214,.55);
+}
+.real-clutch .bp-links {
+  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+  font-family: Montserrat, "Helvetica Neue", Arial, sans-serif;
+}
+.real-clutch .bp-links a {
+  text-decoration: none; color: rgba(237,229,214,.72);
+  font-size: 13px; font-weight: 600; letter-spacing: .04em;
+}
+.real-clutch .bp-links a:hover { color: #EDE5D6; }
+.real-clutch .bp-links a[aria-current="page"] {
+  color: #EDE5D6; border-bottom: 2px solid #B88F46; padding-bottom: 3px;
+}
+.real-clutch .bp-cta {
+  background: #B88F46; color: #14181C !important;
+  padding: 10px 18px; font-size: 12px; font-weight: 800;
+  letter-spacing: .08em; text-transform: uppercase;
+  border: 1px solid #B88F46;
+}
+.real-clutch .bp-cta:hover { background: #D4AA60; border-color: #D4AA60; }
+.real-clutch .bp-cta[aria-current="page"] { border-bottom-width: 1px; padding-bottom: 10px; }
+
+/* ---------- bulk orders ---------- */
+
+.real-clutch .bulk-wrap { background: var(--charcoal, #2D2C2E); padding: clamp(56px, 8vw, 96px) 28px; }
+.real-clutch .bulk-inner {
+  max-width: 1120px; margin: 0 auto;
+  border: 1px solid rgba(184,143,70,.25);
+  padding: clamp(28px, 4vw, 46px);
+}
+.real-clutch .bulk-title {
+  font-family: "Exo 2", Montserrat, sans-serif;
+  font-size: clamp(26px, 3.4vw, 38px); font-weight: 800;
+  color: #EDE5D6; margin: 0 0 18px; letter-spacing: -.01em;
+}
+.real-clutch .bulk-lead {
+  font-size: 19px; line-height: 1.55; color: #EDE5D6;
+  max-width: 62ch; margin: 0 0 16px;
+}
+.real-clutch .bulk-body {
+  font-size: 16px; line-height: 1.7; color: rgba(237,229,214,.75);
+  max-width: 62ch; margin: 0;
+}
+.real-clutch .bulk-ctas {
+  display: flex; align-items: center; gap: 26px; flex-wrap: wrap;
+  margin-top: 30px;
+}
+.real-clutch .bulk-link {
+  color: rgba(237,229,214,.75); font-size: 15px; font-weight: 600;
+  border-bottom: 1px solid rgba(184,143,70,.4); padding-bottom: 2px;
+  text-decoration: none;
+}
+.real-clutch .bulk-link:hover { color: #EDE5D6; border-color: #B88F46; }
+
+/* ---------- book a call ---------- */
+
+.real-clutch .bookcall-wrap {
+  background: #14181C; padding: clamp(64px, 9vw, 110px) 28px;
+  text-align: center;
+}
+.real-clutch .bookcall-inner { max-width: 720px; margin: 0 auto; }
+.real-clutch .bookcall-lead {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(27px, 3.8vw, 42px); line-height: 1.25;
+  color: #EDE5D6; margin: 0 0 22px;
+}
+.real-clutch .bookcall-body {
+  font-size: 17px; line-height: 1.7; color: rgba(237,229,214,.75);
+  max-width: 56ch; margin: 0 auto 34px;
+}
+.real-clutch .bookcall-fine {
+  margin: 26px 0 0; font-size: 14px; color: rgba(237,229,214,.55);
+}
+.real-clutch .bookcall-fine a { color: rgba(237,229,214,.8); }
+.real-clutch .btn-lg { padding: 18px 38px; font-size: 15px; }
+
+/* ---------- footer ---------- */
+
+.real-clutch .bp-foot {
+  background: #14181C;
+  border-top: 1px solid rgba(184,143,70,.25);
+  padding: 52px 28px 38px;
+  font-family: Montserrat, "Helvetica Neue", Arial, sans-serif;
+}
+.real-clutch .bp-foot-inner {
+  max-width: 1120px; margin: 0 auto;
+  display: flex; justify-content: space-between; gap: 36px; flex-wrap: wrap;
+}
+.real-clutch .bp-foot img { display: block; }
+.real-clutch .bp-foot-name {
+  font-weight: 800; font-size: 13px; letter-spacing: .1em;
+  text-transform: uppercase; color: #EDE5D6; margin: 14px 0 6px;
+}
+.real-clutch .bp-foot-meta { font-size: 13px; color: rgba(237,229,214,.55); margin: 0; }
+.real-clutch .bp-socials {
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  margin: 22px 0 0; padding: 0; list-style: none;
+}
+.real-clutch .bp-socials a { display: block; line-height: 0; }
+.real-clutch .bp-socials img { height: 32px; width: auto; }
+.real-clutch .bp-socials a:hover img { opacity: .78; }
+.real-clutch .bp-foot-nav { display: grid; gap: 10px; }
+.real-clutch .bp-foot-nav a {
+  text-decoration: none; color: rgba(237,229,214,.72);
+  font-size: 14px; font-weight: 600;
+}
+.real-clutch .bp-foot-nav a:hover { color: #B88F46; }
+.real-clutch .bp-foot-legal {
+  max-width: 1120px; margin: 38px auto 0;
+  padding-top: 22px; border-top: 1px solid rgba(184,143,70,.18);
+  font-size: 12px; line-height: 1.7; color: rgba(237,229,214,.45);
+}
+
+/* ---------- quote carousel dots ---------- */
+
+.real-clutch .quote-dots { display: inline-flex; gap: 9px; margin: 0 4px; }
+.real-clutch .quote-dot {
+  width: 9px; height: 9px; padding: 0; cursor: pointer;
+  background: rgba(237,229,214,.28); border: 0; transform: rotate(45deg);
+}
+.real-clutch .quote-dot.on { background: #B88F46; }
+.real-clutch .quote-dot:hover { background: rgba(237,229,214,.55); }
+
+@media (max-width: 720px) {
+  .real-clutch .bp-nav-inner { padding: 16px 20px; }
+  .real-clutch .bp-links { gap: 16px; }
+  .real-clutch .bp-links a { font-size: 12px; }
+}
+
+/* ---------- advance-reader quote slides ----------
+   Replaces the marketing-card stand-in the carousel shipped with. The track was
+   sized 420px / 4:5 for card images, so it is widened here and given a fixed
+   height instead of an aspect ratio, since the slides are absolutely positioned
+   and the quotes vary in length. This band sits on the dark ground, so the
+   typography follows the reader cards: cream lead, gold punchline. */
+
+.real-clutch #mmCarouselTrack {
+  max-width: 860px;
+  aspect-ratio: auto;
+  min-height: 340px;
+}
+@media (max-width: 700px) { .real-clutch #mmCarouselTrack { min-height: 440px; } }
+
+.real-clutch #mmCarouselTrack .mm-slide { display: none; }
+.real-clutch #mmCarouselTrack .mm-slide.active { display: block; }
+
+.real-clutch .arc-quote {
+  margin: 0;
+  height: 100%;
+  background: rgba(237,229,214,.035);
+  border: 1px solid rgba(184,143,70,.28);
+  border-left: 3px solid #B88F46;
+  padding: clamp(26px, 3.6vw, 40px);
+  display: flex; flex-direction: column;
+}
+.real-clutch .arc-eyebrow {
+  margin: 0 0 20px;
+  font-family: Montserrat, "Helvetica Neue", Arial, sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: .24em;
+  text-transform: uppercase; color: #B88F46;
+}
+.real-clutch .arc-quote blockquote {
+  margin: 0;
+  font-family: "Source Serif 4", Georgia, serif;
+  font-style: italic;
+  font-size: clamp(19px, 2.2vw, 27px);
+  line-height: 1.4;
+  text-wrap: pretty;
+}
+.real-clutch .arc-lead  { display: block; color: #EDE5D6; }
+.real-clutch .arc-punch { display: block; margin-top: .5em; color: #D4AA60; }
+.real-clutch .arc-quote figcaption {
+  margin-top: auto; padding-top: 26px;
+  font-family: Montserrat, "Helvetica Neue", Arial, sans-serif;
+  font-size: 11px; font-weight: 600; letter-spacing: .2em;
+  text-transform: uppercase; color: rgba(237,229,214,.45);
+}

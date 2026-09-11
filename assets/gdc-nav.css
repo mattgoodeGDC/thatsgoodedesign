@@ -1,0 +1,80 @@
+/* ---------------------------------------------------------------------------
+   Primary nav menus. Deliberately self-contained: the three ported book pages
+   (clutch, field-tested, no-average-brain) load their own stylesheet and not
+   style.css, so this file is linked by every page and owes nothing to either
+   design system. The panel is always on paper, light or dark chrome above it.
+   Click to open rather than hover: hover menus are unusable on touch and
+   unpredictable on trackpads.
+--------------------------------------------------------------------------- */
+.navmenu{position:relative;display:inline-block}
+.navmenu > button{
+  font-family:inherit;background:none;border:0;padding:0;margin:0;cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px;color:inherit;
+}
+/* Match the siblings in each chrome rather than inventing a third size. */
+.nav nav .navmenu > button{
+  font-size:14px;font-weight:600;letter-spacing:.04em;color:#4B4B50;
+}
+.nav nav .navmenu > button:hover{color:#242427}
+.bp-links .navmenu > button{
+  font-size:13px;font-weight:600;letter-spacing:.04em;color:rgba(237,229,214,.72);
+}
+.bp-links .navmenu > button:hover{color:#EDE5D6}
+@media (max-width:760px){
+  .bp-links .navmenu > button{font-size:12px}
+}
+/* The bar is full at laptop width. Tighten before it wraps to two rows. */
+@media (max-width:1200px){
+  .nav nav{gap:20px}
+  .bp-links{gap:18px}
+}
+.navmenu > button::after{
+  content:"";width:7px;height:7px;flex:0 0 auto;margin-top:-2px;
+  border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+  transform:rotate(45deg);transition:transform .16s ease;
+}
+.navmenu > button[aria-expanded="true"]::after{transform:rotate(-135deg);margin-top:2px}
+.navmenu > button:focus-visible{outline:2px solid #C4A26A;outline-offset:4px}
+
+.navmenu-panel{
+  position:absolute;top:calc(100% + 14px);left:50%;transform:translateX(-50%);
+  min-width:232px;z-index:60;
+  background:#FBFAF7;border:1px solid #DDDAD1;border-radius:4px;
+  box-shadow:0 14px 34px rgba(36,36,39,.14);
+  padding:8px;margin:0;list-style:none;
+}
+.navmenu-panel[hidden]{display:none}
+.navmenu-panel li{margin:0}
+/* Specificity is deliberate. The three book pages colour every link inside
+   .bp-links for a dark bar, and the panel sits inside that nav, so these need
+   to outrank `.real-clutch .bp-links a` without resorting to !important. */
+.navmenu ul.navmenu-panel li a{
+  display:block;padding:9px 12px;border-radius:3px;border-bottom:0;
+  font-size:14px;font-weight:500;line-height:1.35;letter-spacing:0;
+  color:#242427;text-decoration:none;white-space:nowrap;text-transform:none;
+}
+.navmenu ul.navmenu-panel li a span{
+  display:block;font-size:12px;font-weight:400;color:#71706C;
+  margin-top:2px;letter-spacing:0;
+}
+.navmenu ul.navmenu-panel li a:hover,
+.navmenu ul.navmenu-panel li a:focus-visible{background:#F1EFE9;color:#856521;outline:none}
+.navmenu ul.navmenu-panel li a:hover span,
+.navmenu ul.navmenu-panel li a:focus-visible span{color:#71706C}
+/* The bar marks the current page with a gold underline. Inside the panel that
+   reads as a stray rule, so it is colour only. */
+.navmenu ul.navmenu-panel li a[aria-current="page"]{
+  color:#856521;border-bottom:0;padding-bottom:9px;
+}
+
+/* Narrow: the bar already wraps, so let the panel sit in the flow instead of
+   floating off the side of a 390px screen. */
+@media (max-width:760px){
+  .navmenu{display:block;width:100%}
+  .navmenu > button{width:100%;justify-content:flex-start}
+  .navmenu-panel{
+    position:static;transform:none;min-width:0;width:100%;
+    box-shadow:none;margin:8px 0 4px;
+  }
+  .navmenu-panel a{white-space:normal}
+}
