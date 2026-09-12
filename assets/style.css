@@ -171,7 +171,16 @@ a { color: var(--ink); }
   flex: 0 0 auto; width: 1px; align-self: stretch;
   min-height: 34px; background: var(--rule);
 }
-.cred-marks .cm { margin: 0; min-width: 0; }
+/* Icon beside each mark, so the row reads as one set with the Gallup badge.
+   The two new glyphs are house-drawn in the same black-disc style as the
+   framework icons, deliberately generic: they say "a degree" and "field work",
+   not "this university endorses me". */
+.cred-marks .cm {
+  margin: 0; min-width: 0;
+  display: grid; grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 10px; align-items: center;
+}
+.cred-marks .cm img { grid-row: 1 / span 2; width: 34px; height: 34px; display: block; }
 .cred-marks .cm b {
   display: block;
   font-size: 12px; font-weight: 800; letter-spacing: .1em;
@@ -1046,13 +1055,31 @@ button.signal[aria-checked="true"] .signal-fw { display: flex; }
   font-size: 19px; line-height: 1.6; color: var(--body); max-width: 56ch; margin: 0;
 }
 .lane-services { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
-.lane-services li {
+.lane-services li { display: block; }
+/* These were plain text sitting in boxes that looked clickable. They are links
+   now, each one pointing at the thing it names. */
+.lane-services a {
+  display: block; text-decoration: none;
   font-size: 16px; font-weight: 600; color: var(--ink);
   padding: 12px 16px;
   background: var(--paper);
   border: 1px solid var(--rule);
   border-left: 3px solid var(--gold);
+  transition: border-color .16s, background .16s, transform .16s, box-shadow .16s;
 }
+.lane-services a span {
+  display: block; margin-top: 3px;
+  font-size: 13px; font-weight: 500; color: var(--muted);
+}
+.lane-services a::after {
+  content: " \2192"; color: var(--gold-ink); font-weight: 700;
+}
+.lane-services a:hover {
+  border-color: var(--rule-2); border-left-color: var(--gold-ink);
+  background: #fff; transform: translateX(2px);
+  box-shadow: 0 4px 14px rgba(36,36,39,.07);
+}
+.lane-services a:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 2px; }
 
 /* ---------- dark band ----------
    The page ran eight sections across two grounds four hex points apart, which
