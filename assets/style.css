@@ -136,7 +136,11 @@ a { color: var(--ink); }
 /* ---------- hero ---------- */
 
 .hero {
-  max-width: var(--maxw); margin: 0 auto;
+  /* The gutter has to live OUTSIDE the measure, or the hero's text sits one
+     gutter inboard of every band below it. .band pads the band and caps its
+     child at --maxw; the hero pads itself, so it needs the padding added back
+     to its max-width to land on the same left edge. */
+  max-width: calc(var(--maxw) + var(--gut) * 2); margin: 0 auto;
   /* The book banner follows immediately, so the hero no longer needs deep
      bottom padding; the two paddings together were leaving a dead screen. */
   padding: clamp(64px, 10vw, 128px) var(--gut) clamp(34px, 4.5vw, 58px);
@@ -875,8 +879,15 @@ a { color: var(--ink); }
   margin: 0 0 10px; font-size: 21px; font-weight: 800;
   letter-spacing: .03em; text-transform: uppercase; color: var(--ink);
 }
-.shelf p { margin: 0 0 14px; font-size: 15px; }
-.shelf .cta-row { margin-top: auto; padding-top: 8px; gap: 18px; }
+.shelf p { margin: 0 0 18px; font-size: 15px; }
+/* Actions stack full width instead of sitting inline. Inline, a pair that
+   fitted on one line in one card and wrapped in the next put the buttons at
+   two different heights; stacked, every card's buttons land on the same line. */
+.shelf .cta-row {
+  margin-top: auto; padding-top: 4px;
+  display: grid; gap: 10px; justify-items: stretch;
+}
+.shelf .cta-row .btn { text-align: center; }
 
 /* ---------- sticky nav ----------
    The booking CTA is the page's one job, so it travels with the reader instead
@@ -1101,8 +1112,8 @@ button.signal[aria-checked="true"] .signal-fw { display: flex; }
 }
 /* The gold fill needs dark text. On a dark band --ink inverts to near-white,
    which would put white on gold and fail contrast outright. */
-.band.dark .btn { color: #242427; border-color: var(--gold); }
-.band.dark .btn:hover { background: var(--gold-hi); border-color: var(--gold-hi); }
+.band.dark .btn:not(.btn-ghost) { color: #242427; border-color: var(--gold); }
+.band.dark .btn:not(.btn-ghost):hover { background: var(--gold-hi); border-color: var(--gold-hi); }
 
 /* ---------- reader quotes ----------
    Sits with the books, because these are readers rather than clients and the
