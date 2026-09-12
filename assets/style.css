@@ -570,8 +570,15 @@ a { color: var(--ink); }
 }
 .embed-wrap iframe {
   display: block; width: 100%;
-  min-height: 620px; border: 0;
+  border: 0;
+  /* Jotform's embed handler sets the real height. This is the floor if that
+     script is blocked: tall enough that the form is usable rather than a
+     letterbox, and the handler overrides it the moment it runs. */
+  min-height: min(1400px, 160vh);
 }
+/* A questionnaire is the one place on this site where a frame adds nothing:
+   the form has its own card. */
+.embed-wrap { padding: 0; border: 0; background: transparent; }
 
 .signup-wrap {
   display: grid; gap: clamp(28px, 4vw, 56px);
