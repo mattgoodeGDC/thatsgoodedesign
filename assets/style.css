@@ -137,7 +137,9 @@ a { color: var(--ink); }
 
 .hero {
   max-width: var(--maxw); margin: 0 auto;
-  padding: clamp(64px, 10vw, 128px) var(--gut) clamp(56px, 8vw, 104px);
+  /* The book banner follows immediately, so the hero no longer needs deep
+     bottom padding; the two paddings together were leaving a dead screen. */
+  padding: clamp(64px, 10vw, 128px) var(--gut) clamp(34px, 4.5vw, 58px);
 }
 .hero h1 {
   /* Sized so each sentence clears the content width on its own line. The cap
@@ -184,40 +186,52 @@ a { color: var(--ink); }
   .cred-marks .cm-rule { display: none; }
 }
 
-/* ---------- the book, in the hero ---------- */
+/* ---------- the book banner ----------
+   Its own band on charcoal, directly under the hero. The cover is dark, so the
+   dark ground reads as a bookshop display rather than a second hero. Compact on
+   purpose: three columns at desktop, stacked below. */
 
-.hero-book {
-  margin-top: clamp(34px, 5vw, 52px);
-  padding-top: clamp(26px, 3.5vw, 36px);
-  border-top: 1px solid var(--rule);
-  display: flex; align-items: center; gap: clamp(20px, 3vw, 32px);
-  flex-wrap: wrap;
+.book-banner {
+  padding-block: clamp(30px, 4vw, 48px);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: clamp(20px, 3.4vw, 44px);
+  align-items: center;
 }
-.hero-book-cover {
+.book-banner-cover {
   flex: 0 0 auto; display: block; line-height: 0;
   border: 1px solid var(--rule-2);
   transition: transform .18s, box-shadow .18s;
 }
-.hero-book-cover:hover {
+.book-banner-cover:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 26px rgba(36,36,39,.14);
+  box-shadow: 0 12px 30px rgba(0,0,0,.45);
 }
-.hero-book-cover img {
-  display: block; width: clamp(88px, 11vw, 124px); height: auto;
+.book-banner-cover img {
+  display: block; width: clamp(84px, 9vw, 116px); height: auto;
 }
-.hero-book-text { min-width: 0; }
-.hero-book-kicker {
-  margin: 0 0 8px;
-  font-size: 12px; font-weight: 700; letter-spacing: .16em;
-  text-transform: uppercase; color: var(--green);
+.book-banner-text { min-width: 0; }
+.book-banner-text .eyebrow { margin: 0 0 8px; }
+.book-banner-text h2 {
+  margin: 0 0 8px; max-width: 34ch;
+  font-size: clamp(20px, 2.2vw, 27px); font-weight: 700; line-height: 1.25;
+  letter-spacing: -.012em; color: var(--ink);
 }
-.hero-book-line {
-  margin: 0 0 16px; max-width: 44ch;
-  font-size: 17px; line-height: 1.55; color: var(--body);
+.book-banner-text h2 strong { font-weight: 800; }
+.book-banner-text p {
+  margin: 0; max-width: 52ch; font-size: 16px; color: var(--body);
 }
-.hero-book-line strong { font-weight: 800; color: var(--ink); }
-.hero-book-links {
-  margin: 0; display: flex; align-items: center; gap: 22px; flex-wrap: wrap;
+.book-banner-links {
+  margin: 0; display: flex; flex-direction: column;
+  align-items: flex-start; gap: 12px;
+}
+@media (max-width: 900px) {
+  .book-banner { grid-template-columns: auto minmax(0, 1fr); }
+  .book-banner-links { grid-column: 1 / -1; flex-direction: row; align-items: center; gap: 22px; }
+}
+@media (max-width: 520px) {
+  .book-banner { grid-template-columns: minmax(0, 1fr); }
+  .book-banner-links { grid-column: auto; }
 }
 
 /* ---------- bands ---------- */
@@ -908,12 +922,18 @@ button.signal:hover {
   box-shadow: 0 6px 18px rgba(36,36,39,.06); transform: translateY(-2px);
 }
 button.signal:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 3px; }
+/* Chosen state carries the framework, not the house gold. Each card inherits
+   --fw from its .fw-* class, so the border, the numeral, the marker and the
+   revealed name all come from one token. */
 button.signal[aria-checked="true"] {
-  border-color: var(--gold); border-top-color: var(--gold);
-  background: rgba(196,162,106,.09);
+  border-color: var(--fw, var(--gold));
+  border-top-color: var(--fw, var(--gold));
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--fw, var(--gold));
 }
 button.signal .num { transition: color .18s; }
-button.signal[aria-checked="true"] .num { color: var(--gold-ink); }
+button.signal[aria-checked="true"] .num { color: var(--fw, var(--gold-ink)); }
+button.signal[aria-checked="true"] h3 { color: var(--ink); }
 
 .signal-pick {
   margin-top: auto; padding-top: 18px;
@@ -926,10 +946,32 @@ button.signal[aria-checked="true"] .num { color: var(--gold-ink); }
   border: 1px solid var(--rule-2); transform: rotate(45deg);
   flex: 0 0 auto; transition: background .18s, border-color .18s;
 }
-button.signal[aria-checked="true"] .signal-pick { color: var(--gold-ink); }
+button.signal[aria-checked="true"] .signal-pick { color: var(--fw, var(--gold-ink)); }
 button.signal[aria-checked="true"] .signal-pick::before {
-  background: var(--gold); border-color: var(--gold);
+  background: var(--fw, var(--gold)); border-color: var(--fw, var(--gold));
 }
+
+/* The framework reveal. Hidden until chosen, then it replaces the prompt: the
+   card stops asking and starts naming. */
+.signal-foot { margin-top: auto; display: block; }
+.signal-foot .signal-pick { margin-top: 0; }
+.signal-fw {
+  display: none; padding-top: 18px;
+  align-items: center; gap: 10px;
+}
+.signal-fw img { flex: 0 0 auto; display: block; }
+.signal-fw b {
+  font-size: 13px; font-weight: 800; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--fw, var(--gold-ink));
+  line-height: 1.2;
+}
+.signal-fw i {
+  display: block; font-style: normal; margin-top: 2px;
+  font-size: 11px; letter-spacing: .04em; color: var(--muted);
+}
+.signal-fw > span { min-width: 0; }
+button.signal[aria-checked="true"] .signal-pick { display: none; }
+button.signal[aria-checked="true"] .signal-fw { display: flex; }
 
 /* display:flex would otherwise beat the browser's own [hidden] rule, so the
    box renders empty before anything is picked. */
@@ -937,7 +979,7 @@ button.signal[aria-checked="true"] .signal-pick::before {
 .signal-verdict {
   margin: 34px 0 0; padding: clamp(24px,3vw,34px);
   border: 1px solid var(--rule-2);
-  border-left: 4px solid var(--green-rule);
+  border-left: 4px solid var(--fw, var(--green-rule));
   background: var(--paper-alt);
   display: grid; grid-template-columns: minmax(0,1fr) auto;
   gap: 26px clamp(26px,4vw,52px); align-items: center;
@@ -956,8 +998,10 @@ button.signal[aria-checked="true"] .signal-pick::before {
 }
 .signal-verdict .sv-next {
   margin-top: 12px; font-size: 13px; font-weight: 700; letter-spacing: .06em;
-  color: var(--green);
+  color: var(--fw, var(--green));
 }
+.signal-verdict .sv-icon { display: block; margin: 0 0 12px; }
+.signal-verdict .sv-icon[hidden] { display: none; }
 .signal-verdict .sv-actions {
   display: flex; flex-direction: column; align-items: flex-start; gap: 12px;
 }
@@ -1032,6 +1076,10 @@ button.signal[aria-checked="true"] .signal-pick::before {
   background: #242427;
   color: var(--body);
 }
+/* The gold fill needs dark text. On a dark band --ink inverts to near-white,
+   which would put white on gold and fail contrast outright. */
+.band.dark .btn { color: #242427; border-color: var(--gold); }
+.band.dark .btn:hover { background: var(--gold-hi); border-color: var(--gold-hi); }
 
 /* ---------- reader quotes ----------
    Sits with the books, because these are readers rather than clients and the
