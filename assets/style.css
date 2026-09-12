@@ -155,44 +155,40 @@ a { color: var(--ink); }
 @media (min-width: 760px) { .hero h1 .hl { white-space: nowrap; } }
 
 /* ---------- provenance row ----------
-   A badge plus four typographic marks. Set in the site's own type on purpose:
-   see the comment on the markup. */
+   Five marks of wildly different shapes: a black disc, a red square, a navy
+   shield, a wide wordmark, a circular seal. Each is pre-tiled on white at a
+   uniform height so the row reads as one set, and the tile is what the CSS
+   sizes rather than the artwork inside it. Every mark is labelled, because a
+   shield on its own is a puzzle. */
 
-.cred-marks {
-  margin: 26px 0 0; padding-top: 22px;
-  border-top: 1px solid var(--rule);
-  display: flex; align-items: center;
-  gap: clamp(16px, 2.4vw, 28px); flex-wrap: wrap;
+.logo-row {
+  list-style: none; margin: clamp(38px, 5vw, 56px) 0 0; padding: 0;
+  display: flex; flex-wrap: wrap;
+  gap: clamp(24px, 3vw, 40px) clamp(26px, 3.2vw, 46px);
+  align-items: flex-start;
+  border-top: 1px solid var(--rule); padding-top: clamp(28px, 3.4vw, 40px);
 }
-.cred-marks > img {
-  flex: 0 0 auto; width: 62px; height: 62px;
+.logo-row li {
+  display: flex; flex-direction: column; align-items: flex-start;
+  max-width: 230px;
 }
-.cred-marks .cm-rule {
-  flex: 0 0 auto; width: 1px; align-self: stretch;
-  min-height: 34px; background: var(--rule);
+.logo-row img {
+  display: block; height: 58px; width: auto;
+  border: 1px solid var(--rule);
+  margin-bottom: 12px;
 }
-/* Icon beside each mark, so the row reads as one set with the Gallup badge.
-   The two new glyphs are house-drawn in the same black-disc style as the
-   framework icons, deliberately generic: they say "a degree" and "field work",
-   not "this university endorses me". */
-.cred-marks .cm {
-  margin: 0; min-width: 0;
-  display: grid; grid-template-columns: auto minmax(0, 1fr);
-  column-gap: 10px; align-items: center;
+.logo-row b {
+  font-size: 13px; font-weight: 800; letter-spacing: .05em;
+  color: var(--ink); line-height: 1.3;
 }
-.cred-marks .cm img { grid-row: 1 / span 2; width: 34px; height: 34px; display: block; }
-.cred-marks .cm b {
-  display: block;
-  font-size: 12px; font-weight: 800; letter-spacing: .1em;
-  text-transform: uppercase; color: var(--ink); line-height: 1.3;
+.logo-row span {
+  display: block; margin-top: 3px;
+  font-size: 13px; line-height: 1.4; color: var(--muted);
 }
-.cred-marks .cm span {
-  display: block; margin-top: 5px;
-  font-size: 12px; line-height: 1.4; color: var(--muted);
-}
-@media (max-width: 620px) {
-  .cred-marks { gap: 14px 20px; }
-  .cred-marks .cm-rule { display: none; }
+@media (max-width: 560px) {
+  .logo-row { gap: 22px 26px; }
+  .logo-row img { height: 48px; }
+  .logo-row li { max-width: 44%; }
 }
 
 /* ---------- the book banner ----------
