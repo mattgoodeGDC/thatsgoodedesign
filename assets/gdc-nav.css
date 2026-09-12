@@ -85,10 +85,15 @@
    markets on two different buying cycles. Two columns say it in one glance,
    with the one no-commitment entry point across the foot. */
 
-.navmenu-panel.navmenu-wide{
+/* :not([hidden]) is load-bearing. `.navmenu-panel[hidden]{display:none}` and
+   `.navmenu-panel.navmenu-wide{display:grid}` are both (0,2,0), and this file
+   is appended later, so a bare display:grid here wins over display:none and
+   the panel never closes. Scoped, the hidden state keeps its own rule. */
+.navmenu-panel.navmenu-wide:not([hidden]){
   min-width:0;width:max-content;max-width:min(92vw,620px);
   display:grid;grid-template-columns:1fr 1fr;gap:4px 10px;padding:12px;
 }
+.navmenu-panel.navmenu-wide{min-width:0}
 .navmenu-panel.navmenu-wide .nmp-group{min-width:0}
 .navmenu-panel.navmenu-wide .nmp-group > ul{
   list-style:none;margin:0;padding:0;
@@ -111,9 +116,17 @@
 .navmenu ul.navmenu-panel.navmenu-wide li a{white-space:normal}
 
 @media (max-width:760px){
-  .navmenu-panel.navmenu-wide{
+  .navmenu-panel.navmenu-wide:not([hidden]){
     width:100%;max-width:none;grid-template-columns:1fr;gap:0;
   }
   .navmenu-panel.navmenu-wide .nmp-head{margin-top:10px}
   .navmenu-panel.navmenu-wide .nmp-foot{grid-column:auto}
 }
+
+
+/* ─── the hidden state, asserted last ───
+   Five times on this build a later rule has out-specified an earlier one and
+   broken something quietly. A panel that will not close is the worst of those,
+   so the hidden state is restated here at (0,3,0), after everything, where no
+   component rule can reach past it. */
+.navmenu .navmenu-panel[hidden]{display:none}
