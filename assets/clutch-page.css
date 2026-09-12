@@ -1687,3 +1687,106 @@ body.book-page { margin: 0; background: var(--charcoal, #2D2C2E); }
   font-size: 11px; font-weight: 600; letter-spacing: .2em;
   text-transform: uppercase; color: rgba(237,229,214,.45);
 }
+
+/* ─── PUBLISHED REVIEWS ───
+   Two real Amazon reviews, on the ink ground so the cream advance-reader block
+   below reads as a different kind of proof. Two columns for two reviews: no
+   six-slot grid with holes in it. Stars are drawn as SVG paths rather than a
+   text glyph, so a missing typeface cannot turn a rating into tofu. */
+
+.real-clutch .pubrev-wrap { background: var(--ink); }
+.real-clutch .pubrev-intro {
+  max-width: 62ch; color: var(--cream); opacity: .7;
+  margin-bottom: 34px; font-size: 16px;
+}
+
+.real-clutch .pubrev-grid {
+  display: grid; gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+.real-clutch .pubrev {
+  background: rgba(237,229,214,0.045);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--gold);
+  padding: 28px 26px 24px;
+  display: flex; flex-direction: column;
+}
+.real-clutch .pubrev-stars { display: flex; gap: 4px; margin-bottom: 16px; }
+.real-clutch .pubrev-star { width: 17px; height: 17px; flex: 0 0 auto; }
+.real-clutch .pubrev-star.is-on  { fill: var(--gold); }
+.real-clutch .pubrev-star.is-off { fill: rgba(237,229,214,0.18); }
+.real-clutch .pubrev h3 {
+  font-family: 'Exo 2', sans-serif; font-weight: 700;
+  font-size: 21px; line-height: 1.3; color: #fff;
+  margin-bottom: 14px;
+}
+.real-clutch .pubrev blockquote { margin-bottom: 20px; }
+.real-clutch .pubrev blockquote p {
+  font-family: 'Lora', serif; font-size: 16px; line-height: 1.65;
+  color: var(--cream); opacity: .82;
+}
+.real-clutch .pubrev-who {
+  margin-top: auto;
+  font-size: 13px; font-weight: 700; letter-spacing: .06em;
+  color: var(--gold);
+}
+.real-clutch .pubrev-meta {
+  font-size: 12px; letter-spacing: .04em; color: var(--dim); margin-top: 4px;
+}
+
+/* The disagreement, stated rather than hidden. */
+.real-clutch .pubrev-split {
+  margin-top: 44px; padding-top: 30px;
+  border-top: 1px solid var(--border);
+}
+.real-clutch .pubrev-split-grid {
+  display: grid; gap: 22px;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+}
+.real-clutch .pubrev-split-grid p {
+  font-family: 'Lora', serif; font-size: 16px; line-height: 1.65;
+  color: var(--cream); opacity: .85;
+  border-left: 2px solid var(--border); padding-left: 18px;
+}
+.real-clutch .pubrev-split-grid b {
+  display: block; margin-bottom: 7px;
+  font-family: 'Montserrat', sans-serif; font-size: 11.5px; font-weight: 700;
+  letter-spacing: .2em; text-transform: uppercase; color: var(--gold);
+  opacity: 1;
+}
+.real-clutch .pubrev-note {
+  margin-top: 22px; max-width: 74ch; font-size: 16px;
+  color: var(--cream); opacity: .7;
+}
+
+/* Where to start. The book routes by symptom; so does this. */
+.real-clutch .pubrev-start {
+  margin-top: 44px; padding-top: 30px;
+  border-top: 1px solid var(--border);
+}
+.real-clutch .pubrev-start > p {
+  max-width: 68ch; color: var(--cream); opacity: .7;
+  font-size: 16px; margin-bottom: 22px;
+}
+.real-clutch .pubrev-start ul {
+  list-style: none; display: grid; gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+}
+.real-clutch .pubrev-start li {
+  border-left: 3px solid var(--gold); padding: 4px 0 4px 16px;
+}
+.real-clutch .pubrev-start li b {
+  display: block; font-size: 12px; font-weight: 700; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 4px;
+}
+.real-clutch .pubrev-start li span {
+  display: block; font-size: 15.5px; line-height: 1.45; color: var(--cream);
+  opacity: .9;
+}
+
+.real-clutch .pubrev-link { margin-top: 38px; }
+
+@media (max-width: 640px) {
+  .real-clutch .pubrev { padding: 24px 20px 20px; }
+  .real-clutch .pubrev h3 { font-size: 19px; }
+}
