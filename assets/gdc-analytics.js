@@ -14,9 +14,11 @@
  * Currently wired for: Cloudflare Web Analytics (free, cookieless, no consent
  * banner required, no DNS change needed).
  *
- * TO ACTIVATE: add thatsgoodedesign.com as a site in Cloudflare Web Analytics,
- * then paste its token into TOKEN below. Until TOKEN is filled in this file
- * does nothing at all, which is the intended resting state.
+ * Live since 12 September 2026. Setting TOKEN back to an empty string turns
+ * all tracking off site-wide in one edit, which is the point of this file.
+ * The property is thatsgoodedesign.com in Cloudflare Web Analytics; the
+ * author site is a separate property with its own token, so the two report
+ * separately.
  */
 (function () {
   "use strict";
@@ -24,7 +26,7 @@
   /* Cloudflare Web Analytics site token. Cloudflare dashboard:
      Analytics & Logs > Web Analytics > Manage site > the token in the JS snippet.
      Empty string means tracking is off. */
-  var TOKEN = "";
+  var TOKEN = "f75527e4c68b4094a603e6850d4d8e71";
 
   if (!TOKEN) return;
 
