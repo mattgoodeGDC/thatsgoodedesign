@@ -73,6 +73,7 @@
        its own ground, so the second door is a beat in the page instead of
        something tacked to the bottom of the first section. -->
   <section class="band dark book-banner">
+    <div class="book-banner-inner">
     <a class="book-banner-cover"
        href="https://www.amazon.com/dp/B0HHFGV2MT" target="_blank" rel="noopener"
        aria-label="Buy CLUTCH on Amazon">
@@ -91,6 +92,7 @@
          target="_blank" rel="noopener">Buy on Amazon</a>
       <a class="link-arrow" href="clutch/">What is in it</a>
     </p>
+    </div>
   </section>
 
   <!-- The problem, in the reader's own vocabulary. Four signals, one per
@@ -166,6 +168,49 @@
         <a class="btn" id="signalVerdictCta" href="diagnostic/">Run the ten-minute diagnostic</a>
         <a class="link-arrow" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt">Or book a call</a>
       </p>
+    </div>
+  </section>
+
+  <!-- Client testimonials. Practice proof, kept separate from book reviews:
+       a school buyer needs to hear from another school, not from a reader.
+       All three are placeholders. Replace the text and the cite; add or remove
+       <figure> blocks freely, the script counts them. -->
+  <section class="band dark quotes" aria-labelledby="quotes-h">
+    <p class="eyebrow">Client work</p>
+    <h2 class="section-h" id="quotes-h">Not praise. Changed behavior.</h2>
+
+    <div class="quote-stage" data-carousel>
+      <figure class="q is-live">
+        <blockquote>I participated in a delegation workshop sponsored by my
+          employer, and used the framework in a 1:1 the next day. That
+          doesn&rsquo;t happen with most workshops.</blockquote>
+        <figcaption><span class="q-name">VP of Operations</span>
+          <span class="q-role">Fintech</span></figcaption>
+      </figure>
+
+      <figure class="q">
+        <blockquote>I run a real dashboard for a living. I came in skeptical of
+          the metaphor &ndash; I left with a usable distinction between what&rsquo;s
+          actually a leading indicator and what&rsquo;s just a soft signal I&rsquo;d
+          have noticed anyway.</blockquote>
+        <figcaption><span class="q-name">Technical Founder</span>
+          <span class="q-role">Technology</span></figcaption>
+      </figure>
+
+      <figure class="q">
+        <blockquote>Most people assume you can hire fast and fire decisively. My
+          world can&rsquo;t. What I appreciated is that the core framework still
+          held up once I did the translation myself, and Matt&rsquo;s workshop does
+          that translation for you.</blockquote>
+        <figcaption><span class="q-name">CEO</span>
+          <span class="q-role">Professional Services</span></figcaption>
+      </figure>
+
+      <div class="q-nav">
+        <button type="button" class="q-arrow" data-prev aria-label="Previous testimonial">&larr;</button>
+        <div class="q-dots" role="tablist" aria-label="Choose a testimonial"></div>
+        <button type="button" class="q-arrow" data-next aria-label="Next testimonial">&rarr;</button>
+      </div>
     </div>
   </section>
 
@@ -270,7 +315,7 @@
       </li>
       <li>
         <img src="assets/logo_eqi.png" alt="EQ-i 2.0"
-             width="468" height="133" loading="lazy">
+             width="200" height="203" loading="lazy">
         <b>EQ-i 2.0</b><span>Certified practitioner</span>
       </li>
       <li>
@@ -291,49 +336,6 @@
     </ul>
   </section>
 
-
-  <!-- Client testimonials. Practice proof, kept separate from book reviews:
-       a school buyer needs to hear from another school, not from a reader.
-       All three are placeholders. Replace the text and the cite; add or remove
-       <figure> blocks freely, the script counts them. -->
-  <section class="band dark quotes" aria-labelledby="quotes-h">
-    <p class="eyebrow">Client work</p>
-    <h2 class="section-h" id="quotes-h">Not praise. Changed behavior.</h2>
-
-    <div class="quote-stage" data-carousel>
-      <figure class="q is-live">
-        <blockquote>I participated in a delegation workshop sponsored by my
-          employer, and used the framework in a 1:1 the next day. That
-          doesn&rsquo;t happen with most workshops.</blockquote>
-        <figcaption><span class="q-name">VP of Operations</span>
-          <span class="q-role">Fintech</span></figcaption>
-      </figure>
-
-      <figure class="q">
-        <blockquote>I run a real dashboard for a living. I came in skeptical of
-          the metaphor &ndash; I left with a usable distinction between what&rsquo;s
-          actually a leading indicator and what&rsquo;s just a soft signal I&rsquo;d
-          have noticed anyway.</blockquote>
-        <figcaption><span class="q-name">Technical Founder</span>
-          <span class="q-role">Technology</span></figcaption>
-      </figure>
-
-      <figure class="q">
-        <blockquote>Most people assume you can hire fast and fire decisively. My
-          world can&rsquo;t. What I appreciated is that the core framework still
-          held up once I did the translation myself, and Matt&rsquo;s workshop does
-          that translation for you.</blockquote>
-        <figcaption><span class="q-name">CEO</span>
-          <span class="q-role">Professional Services</span></figcaption>
-      </figure>
-
-      <div class="q-nav">
-        <button type="button" class="q-arrow" data-prev aria-label="Previous testimonial">&larr;</button>
-        <div class="q-dots" role="tablist" aria-label="Choose a testimonial"></div>
-        <button type="button" class="q-arrow" data-next aria-label="Next testimonial">&rarr;</button>
-      </div>
-    </div>
-  </section>
 
   <!-- The books, as evidence rather than merchandise. One argument, three
        instruments. GDC nonfiction only. -->
@@ -634,5 +636,50 @@
   });
 })();
 </script>
+<script>
+/* Practice lanes. The markup carried role="tablist", aria-controls and hidden
+   panels, but nothing was listening, so the second and third tabs did nothing
+   at all. Full keyboard behaviour: arrows move and select, Home and End jump,
+   roving tabindex so the tablist is one stop. */
+(function () {
+  const list = document.querySelector('.lane-picker[role="tablist"]');
+  if (!list) return;
+  const tabs = [...list.querySelectorAll('[role="tab"]')];
+  if (!tabs.length) return;
+
+  const panelFor = t => document.getElementById(t.getAttribute('aria-controls'));
+
+  function select(tab, focus) {
+    tabs.forEach(t => {
+      const on = t === tab;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      const p = panelFor(t);
+      if (p) p.hidden = !on;
+    });
+    if (focus) tab.focus();
+  }
+
+  tabs.forEach((t, i) => {
+    t.tabIndex = t.getAttribute('aria-selected') === 'true' ? 0 : -1;
+    t.addEventListener('click', () => select(t, false));
+    t.addEventListener('keydown', e => {
+      let n = null;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') n = (i + 1) % tabs.length;
+      else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') n = (i - 1 + tabs.length) % tabs.length;
+      else if (e.key === 'Home') n = 0;
+      else if (e.key === 'End') n = tabs.length - 1;
+      if (n === null) return;
+      e.preventDefault();
+      select(tabs[n], true);
+    });
+  });
+
+  /* Whatever the markup shipped with is the starting state; this just makes it
+     consistent in case two tabs claim to be selected. */
+  select(tabs.find(t => t.getAttribute('aria-selected') === 'true') || tabs[0], false);
+})();
+</script>
+
 </body>
 </html>

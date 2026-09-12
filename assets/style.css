@@ -136,14 +136,9 @@ a { color: var(--ink); }
 /* ---------- hero ---------- */
 
 .hero {
-  /* The gutter has to live OUTSIDE the measure, or the hero's text sits one
-     gutter inboard of every band below it. .band pads the band and caps its
-     child at --maxw; the hero pads itself, so it needs the padding added back
-     to its max-width to land on the same left edge. */
-  max-width: calc(var(--maxw) + var(--gut) * 2); margin: 0 auto;
-  /* The book banner follows immediately, so the hero no longer needs deep
-     bottom padding; the two paddings together were leaving a dead screen. */
-  padding: clamp(64px, 10vw, 128px) var(--gut) clamp(34px, 4.5vw, 58px);
+  /* Same measure as .band, by the same mechanism. */
+  padding-block: clamp(64px, 10vw, 128px) clamp(34px, 4.5vw, 58px);
+  padding-inline: max(var(--gut), calc((100% - var(--maxw)) / 2));
 }
 .hero h1 {
   /* Sized so each sentence clears the content width on its own line. The cap
@@ -166,7 +161,7 @@ a { color: var(--ink); }
    shield on its own is a puzzle. */
 
 .logo-row {
-  list-style: none; margin: clamp(38px, 5vw, 56px) 0 0; padding: 0;
+  list-style: none; margin-block: clamp(38px, 5vw, 56px) 0; padding: 0;
   display: flex; flex-wrap: wrap;
   gap: clamp(24px, 3vw, 40px) clamp(26px, 3.2vw, 46px);
   align-items: flex-start;
@@ -182,7 +177,7 @@ a { color: var(--ink); }
    so it does not dominate the four round ones. */
 .logo-row img {
   display: block; height: 58px; width: auto;
-  max-width: 176px; object-fit: contain; object-position: left center;
+  max-width: 84px; object-fit: contain; object-position: left center;
   margin-bottom: 14px;
 }
 .logo-row b {
@@ -195,7 +190,7 @@ a { color: var(--ink); }
 }
 @media (max-width: 560px) {
   .logo-row { gap: 22px 26px; }
-  .logo-row img { height: 48px; max-width: 142px; }
+  .logo-row img { height: 48px; max-width: 70px; }
   .logo-row li { max-width: 44%; }
 }
 
@@ -204,8 +199,11 @@ a { color: var(--ink); }
    dark ground reads as a bookshop display rather than a second hero. Compact on
    purpose: three columns at desktop, stacked below. */
 
-.book-banner {
-  padding-block: clamp(30px, 4vw, 48px);
+/* Full-bleed ground, constrained inner row. The grid lives on the inner
+   wrapper, not on the band: .band > * caps and centres each direct child, which
+   fights a grid whose children are meant to be columns. */
+.book-banner { padding-block: clamp(30px, 4vw, 48px); }
+.book-banner-inner {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   gap: clamp(20px, 3.4vw, 44px);
@@ -239,18 +237,27 @@ a { color: var(--ink); }
   align-items: flex-start; gap: 12px;
 }
 @media (max-width: 900px) {
-  .book-banner { grid-template-columns: auto minmax(0, 1fr); }
+  .book-banner-inner { grid-template-columns: auto minmax(0, 1fr); }
   .book-banner-links { grid-column: 1 / -1; flex-direction: row; align-items: center; gap: 22px; }
 }
 @media (max-width: 520px) {
-  .book-banner { grid-template-columns: minmax(0, 1fr); }
+  .book-banner-inner { grid-template-columns: minmax(0, 1fr); }
   .book-banner-links { grid-column: auto; }
 }
 
 /* ---------- bands ---------- */
 
-.band { padding: clamp(56px, 8vw, 96px) var(--gut); }
-.band > * { max-width: var(--maxw); margin-inline: auto; }
+/* The measure is established ONCE, by the band's own padding, and every child
+   inherits it. The old model capped each child at --maxw and centred it, which
+   meant a full-width child landed on the measure while a child with its own
+   narrower max-width stayed flush to the padding edge: two different left
+   edges, 104px apart at 1440. That was every misalignment on this site. Now
+   there is one edge, and nothing a component writes can move it. */
+.band {
+  padding-block: clamp(56px, 8vw, 96px);
+  padding-inline: max(var(--gut), calc((100% - var(--maxw)) / 2));
+}
+.band > * { max-width: 100%; }
 .band.alt { background: var(--paper-alt); }
 
 .grid-3 {
@@ -353,7 +360,10 @@ a { color: var(--ink); }
   display: grid; gap: clamp(24px, 3vw, 34px);
   grid-template-columns: repeat(auto-fit, minmax(258px, 1fr));
 }
-.titles li {
+/* Only the shelf form takes the two-column grid. /writing/ still uses the
+   plain form, and without this guard its rows put the text in a zero-width
+   first column and pushed the links off the viewport. */
+.titles li:has(.title-cover) {
   display: grid; grid-template-columns: auto minmax(0, 1fr);
   gap: 18px; align-items: start;
 }
@@ -869,7 +879,7 @@ a { color: var(--ink); }
 /* ---------- book index cards ---------- */
 
 .shelf {
-  list-style: none; padding: 0; margin: 44px 0 0;
+  list-style: none; padding: 0; margin-block: 44px 0;
   display: grid; gap: clamp(34px, 4vw, 56px);
   grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
 }
@@ -1397,12 +1407,14 @@ button.signal[aria-checked="true"] .signal-fw { display: flex; }
    the type rather than to the panel the way the certification badge was. */
 .spec .obd-badge{width:76px;height:76px;margin-bottom:16px}
 
+/* ---------- the measure, and how it gets broken ----------
+   .band caps each direct child at --maxw and centres it with margin-inline:
+   auto. A component that writes `margin: 32px 0 0` zeroes that auto and drops
+   flush left while the heading above it stays centred. Every misaligned
+   section on this site was that one shorthand.
 
-/* ---------- keep band children on the measure ----------
-   .band caps its children at --maxw and centres them with margin-inline:auto.
-   A component that then writes `margin: 32px 0 0` zeroes that auto, so it drops
-   flush left while the heading above it stays centred. That single shorthand is
-   what every "misaligned section" on this site turned out to be: the ladder,
-   the shelf, the logo row, the lived list. Re-asserted here at (0,2,0) so a
-   later single-class rule cannot undo it again. */
-.band > [class] { margin-inline: auto; }
+   The rule, for anything added later: a component that fills the measure sets
+   its vertical space with `margin-block`, never the `margin` shorthand. A
+   component with its own narrower max-width may use the shorthand, because
+   left-aligned is what it wants. Audited at 1440, 1280, 1024, 860, 768, 600
+   and 390 with scripts/audit-align.py. */
