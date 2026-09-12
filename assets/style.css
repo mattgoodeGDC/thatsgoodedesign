@@ -270,6 +270,42 @@ a { color: var(--ink); }
 .band > * { max-width: 100%; }
 .band.alt { background: var(--paper-alt); }
 
+/* ---------- section markers ----------
+   Where the ground changes, the tone marks the boundary. Where two bands share
+   a ground, nothing did, and the two stacked paddings read as a dead screen
+   rather than a break. Every band boundary now carries the house diamond,
+   centred, the same mark already used for the list bullets and the signal
+   pick, so the rhythm is consistent whether or not the tone changes. */
+.band { position: relative; }
+.band + .band::before {
+  content: "";
+  position: absolute;
+  top: calc(clamp(56px, 8vw, 96px) / 2 - 5px);
+  left: 50%; margin-left: -5px;
+  width: 10px; height: 10px;
+  transform: rotate(45deg);
+  background: var(--gold);
+}
+/* Same ground on both sides: the marker is doing the work on its own, so the
+   two paddings do not also need to add up to a full screen. */
+.band:not(.alt):not(.dark) + .band:not(.alt):not(.dark),
+.band.alt + .band.alt,
+.band.dark + .band.dark {
+  padding-top: clamp(40px, 4.6vw, 58px);
+}
+/* and the band above it does not need a full measure of bottom padding either,
+   since together they were stacking to 192px of nothing */
+.band:not(.alt):not(.dark):has(+ .band:not(.alt):not(.dark)),
+.band.alt:has(+ .band.alt),
+.band.dark:has(+ .band.dark) {
+  padding-bottom: clamp(40px, 4.6vw, 58px);
+}
+.band:not(.alt):not(.dark) + .band:not(.alt):not(.dark)::before,
+.band.alt + .band.alt::before,
+.band.dark + .band.dark::before {
+  top: calc(clamp(40px, 4.6vw, 58px) / 2 - 5px);
+}
+
 .grid-3 {
   display: grid; gap: 34px;
   grid-template-columns: repeat(auto-fit, minmax(258px, 1fr));
