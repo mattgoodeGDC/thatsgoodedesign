@@ -160,16 +160,25 @@ a { color: var(--ink); }
    sizes rather than the artwork inside it. Every mark is labelled, because a
    shield on its own is a puzzle. */
 
+/* Equal columns rather than a flex row. Flexed, the items bunched left and
+   the gaps read as uneven, because the labels are wildly different lengths:
+   "Gallup" against "London School of Economics". On a five-column grid each
+   mark sits at a regular interval whatever its label does. */
 .logo-row {
   list-style: none; margin-block: clamp(38px, 5vw, 56px) 0; padding: 0;
-  display: flex; flex-wrap: wrap;
-  gap: clamp(24px, 3vw, 40px) clamp(26px, 3.2vw, 46px);
-  align-items: flex-start;
+  display: grid;
+  /* Explicit steps rather than auto-fit. Five items auto-fitting hits 4 + 1 at
+     mid widths, and a single orphan on its own row looks like a mistake.
+     5, then 3 + 2, then 2 + 2 + 1. */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(26px, 3.2vw, 38px) clamp(18px, 2.2vw, 28px);
   border-top: 1px solid var(--rule); padding-top: clamp(28px, 3.4vw, 40px);
 }
+/* Fixed first row, so every label starts on the same baseline no matter how
+   tall or short its mark is. */
 .logo-row li {
-  display: flex; flex-direction: column; align-items: flex-start;
-  max-width: 230px;
+  display: grid; grid-template-rows: 58px auto; align-content: start;
+  justify-items: start; min-width: 0;
 }
 /* The marks now have transparent grounds, so they sit on the cream directly
    rather than in white boxes. Fixed height with object-fit keeps every mark on
@@ -178,7 +187,7 @@ a { color: var(--ink); }
 .logo-row img {
   display: block; height: 58px; width: auto;
   max-width: 84px; object-fit: contain; object-position: left center;
-  margin-bottom: 14px;
+  align-self: start;
 }
 .logo-row b {
   font-size: 13px; font-weight: 800; letter-spacing: .05em;
@@ -188,10 +197,11 @@ a { color: var(--ink); }
   display: block; margin-top: 3px;
   font-size: 13px; line-height: 1.4; color: var(--muted);
 }
+@media (min-width: 660px)  { .logo-row { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1060px) { .logo-row { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
 @media (max-width: 560px) {
-  .logo-row { gap: 22px 26px; }
   .logo-row img { height: 48px; max-width: 70px; }
-  .logo-row li { max-width: 44%; }
+  .logo-row li { grid-template-rows: 48px auto; }
 }
 
 /* ---------- the book banner ----------
