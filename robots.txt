@@ -4,3 +4,7 @@ Disallow: /booked/
 Disallow: /clients/
 
 Sitemap: https://thatsgoodedesign.com/sitemap.xml
+
+# A plain-language map of this site for AI crawlers and assistants.
+# https://llmstxt.org/
+LLM-Content: https://thatsgoodedesign.com/llms.txt
