@@ -1464,3 +1464,10 @@ button.signal[aria-checked="true"] .signal-fw { display: flex; }
    component with its own narrower max-width may use the shorthand, because
    left-aligned is what it wants. Audited at 1440, 1280, 1024, 860, 768, 600
    and 390 with scripts/audit-align.py. */
+
+/* A quoted line is still an answer. Set it apart from the published numbers so
+   the table does not read as though five prices are missing. */
+.rate-card .rate-tbc {
+  font-size: 14px; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--muted);
+}
