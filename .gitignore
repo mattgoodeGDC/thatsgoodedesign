@@ -11,3 +11,4 @@ clients/
 DEPLOY.md
 
 .DS_Store
+scripts/align-findings.json
