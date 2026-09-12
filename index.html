@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=6">
-<link rel="stylesheet" href="assets/gdc-nav.css?v=6">
-<script src="assets/gdc-analytics.js?v=6"></script>
-<script src="assets/gdc-nav.js?v=6" defer></script>
+<link rel="stylesheet" href="assets/style.css?v=7">
+<link rel="stylesheet" href="assets/gdc-nav.css?v=7">
+<script src="assets/gdc-analytics.js?v=7"></script>
+<script src="assets/gdc-nav.js?v=7" defer></script>
 </head>
 <body>
 
@@ -35,12 +35,26 @@
     </div>
     <div class="navmenu">
       <button type="button" aria-expanded="false" aria-controls="menu-services">Services</button>
-      <ul class="navmenu-panel" id="menu-services" hidden>
-        <li><a href="products/#obd">The On-Board Diagnostic<span>Two instruments, one written read</span></a></li>
-        <li><a href="products/#services">What a company can buy<span>One list, diagnostic to retained</span></a></li>
-        <li><a href="products/#coaching">Coaching and facilitated work<span>Six sessions, workshops, seminars</span></a></li>
-        <li><a href="products/#keynotes">Keynotes<span>Conferences, all-staff, institutes</span></a></li>
-        <li><a href="diagnostic/">The free diagnostic<span>Six cylinders, ten minutes, no email wall</span></a></li>
+      <ul class="navmenu-panel navmenu-wide" id="menu-services" hidden>
+        <li class="nmp-group">
+          <p class="nmp-head">For companies</p>
+          <ul>
+            <li><a href="products/#services">What a company can buy<span>One list, diagnostic to retained</span></a></li>
+            <li><a href="products/#obd">The On-Board Diagnostic<span>Two instruments, one written read</span></a></li>
+            <li><a href="products/#keynotes">Keynotes<span>Conferences, all-staff, institutes</span></a></li>
+          </ul>
+        </li>
+        <li class="nmp-group">
+          <p class="nmp-head">For schools and nonprofits</p>
+          <ul>
+            <li><a href="schools/#services">What a school can buy<span>Nine services, plainly named</span></a></li>
+            <li><a href="schools/rates/">Published rates<span>Real numbers for a budget line</span></a></li>
+            <li><a href="schools/#why">Why this is different<span>Twenty years inside a school</span></a></li>
+          </ul>
+        </li>
+        <li class="nmp-foot">
+          <a href="diagnostic/">Start with the free diagnostic<span>Six cylinders, ten minutes, no email wall</span></a>
+        </li>
       </ul>
     </div>
     <a href="books/">Books</a>

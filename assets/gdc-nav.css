@@ -78,3 +78,42 @@
   }
   .navmenu-panel a{white-space:normal}
 }
+
+/* ─── the services panel, as a map of the practice ───
+   Five ungrouped links mixed a product, a category, a format and a free tool,
+   and said nothing about the fact that this practice sells into two different
+   markets on two different buying cycles. Two columns say it in one glance,
+   with the one no-commitment entry point across the foot. */
+
+.navmenu-panel.navmenu-wide{
+  min-width:0;width:max-content;max-width:min(92vw,620px);
+  display:grid;grid-template-columns:1fr 1fr;gap:4px 10px;padding:12px;
+}
+.navmenu-panel.navmenu-wide .nmp-group{min-width:0}
+.navmenu-panel.navmenu-wide .nmp-group > ul{
+  list-style:none;margin:0;padding:0;
+}
+.navmenu-panel.navmenu-wide .nmp-head{
+  margin:2px 0 6px;padding:0 12px;
+  font-size:10.5px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+  color:#856521;
+}
+/* Full width across the foot, above a hairline: it belongs to neither column
+   because it is what you send someone who is not ready to buy either. */
+.navmenu-panel.navmenu-wide .nmp-foot{
+  grid-column:1 / -1;margin-top:8px;padding-top:8px;
+  border-top:1px solid #DDDAD1;
+}
+.navmenu ul.navmenu-panel.navmenu-wide .nmp-foot a{font-weight:700}
+
+/* The nowrap that keeps single-column items on one line would force this panel
+   wider than the viewport, so inside the wide panel labels may wrap. */
+.navmenu ul.navmenu-panel.navmenu-wide li a{white-space:normal}
+
+@media (max-width:760px){
+  .navmenu-panel.navmenu-wide{
+    width:100%;max-width:none;grid-template-columns:1fr;gap:0;
+  }
+  .navmenu-panel.navmenu-wide .nmp-head{margin-top:10px}
+  .navmenu-panel.navmenu-wide .nmp-foot{grid-column:auto}
+}
