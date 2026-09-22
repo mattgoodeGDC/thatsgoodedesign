@@ -80,5 +80,14 @@ Federation and is working toward one; do not attribute any ICF credential to
 him. CliftonStrengths and StrengthsFinder are
 trademarks of Gallup, Inc., and EQ-i 2.0 is a trademark of Multi-Health
 Systems Inc.; Goode Design & Consulting is not endorsed by either. Matt also
-publishes fiction under a pen name which is deliberately kept separate from
-this practice and should not be associated with it.
+publishes fiction and narrative nonfiction as m kirk, at mkirkwrites.com. The
+two names belong to the same person and may be cited together. The leadership
+titles are published under Matt Goode; the novels are published as m kirk.
+
+## Usage and rights
+
+Text and data mining rights for this site are expressly reserved. See
+https://thatsgoodedesign.com/terms/, https://thatsgoodedesign.com/robots.txt
+and https://thatsgoodedesign.com/.well-known/tdmrep.json. Retrieving a page to
+answer a specific question, with attribution and a link back, is welcome.
+Collection of this content into a training corpus is not permitted.
