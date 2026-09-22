@@ -1,10 +1,140 @@
+# robots.txt for thatsgoodedesign.com
+# Goode Design & Consulting
+# Updated 2026-09-22
+#
+# Posture: search indexing and live retrieval are welcome.
+# Bulk collection for model training is not.
+# Text and data mining rights are expressly reserved.
+# See https://thatsgoodedesign.com/terms/
+#
+# NOTE: robots.txt is advisory. Compliant operators honour it.
+# Non-compliant scrapers do not. Network-level enforcement
+# (Cloudflare) is what actually stops the latter.
+
+# ---------------------------------------------------------------
+# TIER 1 - Conventional search. Full access.
+# ---------------------------------------------------------------
+
+User-agent: Googlebot
+User-agent: Bingbot
+User-agent: DuckDuckBot
+User-agent: Applebot
+Allow: /
+Disallow: /booked/
+Disallow: /clients/
+
+# ---------------------------------------------------------------
+# TIER 2 - AI search and live retrieval. Allowed.
+# These are how you get cited in ChatGPT, Claude and Perplexity
+# answers. They index for retrieval or fetch a page on a user's
+# behalf. They are not training crawlers.
+# ---------------------------------------------------------------
+
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+Allow: /
+Disallow: /booked/
+Disallow: /clients/
+
+# ---------------------------------------------------------------
+# TIER 3 - Training corpus collection. Blocked.
+# ---------------------------------------------------------------
+
+# OpenAI model training
+User-agent: GPTBot
+Disallow: /
+
+# Anthropic model training
+User-agent: ClaudeBot
+Disallow: /
+
+# Legacy Anthropic tokens, retained for completeness
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+# Common Crawl. Feedstock for a large number of downstream
+# training corpora. Blocking this one has outsized effect.
+User-agent: CCBot
+Disallow: /
+
+# Google Gemini training and grounding.
+# Policy token only - does not crawl, and does not affect Googlebot
+# or your Google Search ranking.
+User-agent: Google-Extended
+Disallow: /
+
+# Apple foundation model training.
+# Policy token only - does not affect Applebot or Siri/Spotlight.
+User-agent: Applebot-Extended
+Disallow: /
+
+# Meta / Llama training
+User-agent: meta-externalagent
+Disallow: /
+
+User-agent: meta-externalfetcher
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+# Amazon model training
+User-agent: Amazonbot
+Disallow: /
+
+# ByteDance / TikTok. Widely documented as ignoring robots.txt.
+# Listed to establish intent on the record. Enforce at the edge.
+User-agent: Bytespider
+Disallow: /
+
+# Others
+User-agent: Diffbot
+Disallow: /
+
+User-agent: Omgilibot
+Disallow: /
+
+User-agent: Omgili
+Disallow: /
+
+User-agent: ImagesiftBot
+Disallow: /
+
+User-agent: Timpibot
+Disallow: /
+
+User-agent: Webzio-Extended
+Disallow: /
+
+User-agent: PanguBot
+Disallow: /
+
+User-agent: Kangaroo Bot
+Disallow: /
+
+User-agent: AI2Bot
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: cohere-training-data-crawler
+Disallow: /
+
+# ---------------------------------------------------------------
+# TIER 4 - Everything else
+# ---------------------------------------------------------------
+
 User-agent: *
 Allow: /
 Disallow: /booked/
 Disallow: /clients/
 
 Sitemap: https://thatsgoodedesign.com/sitemap.xml
-
-# A plain-language map of this site for AI crawlers and assistants.
-# https://llmstxt.org/
-LLM-Content: https://thatsgoodedesign.com/llms.txt
