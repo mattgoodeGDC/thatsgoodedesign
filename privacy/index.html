@@ -3,25 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>You&rsquo;re booked – Goode Design &amp; Consulting</title>
-<meta name="description" content="Confirmation page after booking a call with Matt Goode, with the short pre-meeting questionnaire.">
-<meta name="robots" content="noindex, noai, noimageai">
-<link rel="canonical" href="https://thatsgoodedesign.com/booked/">
+<title>Privacy &ndash; Goode Design &amp; Consulting</title>
+<meta name="description" content="What this site collects, what it does not, and where your data goes if you book a call or join the list. No cookies, no ad networks, no cross-site tracking.">
+<link rel="canonical" href="https://thatsgoodedesign.com/privacy/">
 <link rel="icon" href="../favicon.ico" sizes="any">
 <link rel="icon" type="image/png" href="../assets/mark.png">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <meta property="og:site_name" content="Goode Design &amp; Consulting">
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="website">
-<meta property="og:title" content="You&rsquo;re booked">
-<meta property="og:description" content="Confirmation page after booking a call with Matt Goode, with the short pre-meeting questionnaire.">
-<meta property="og:url" content="https://thatsgoodedesign.com/booked/">
+<meta property="og:title" content="Privacy">
+<meta property="og:description" content="What this site collects, what it does not, and where your data goes if you book a call or join the list. No cookies, no ad networks, no cross-site tracking.">
+<meta property="og:url" content="https://thatsgoodedesign.com/privacy/">
 <meta property="og:image" content="https://thatsgoodedesign.com/assets/og-default.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="You&rsquo;re booked">
-<meta name="twitter:description" content="Confirmation page after booking a call with Matt Goode, with the short pre-meeting questionnaire.">
+<meta name="twitter:title" content="Privacy">
+<meta name="twitter:description" content="What this site collects, what it does not, and where your data goes if you book a call or join the list. No cookies, no ad networks, no cross-site tracking.">
 <meta name="twitter:image" content="https://thatsgoodedesign.com/assets/og-default.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,6 +31,13 @@
 <script src="../assets/gdc-nav.js?v=12" defer></script>
 <meta name="tdm-reservation" content="1">
 <meta name="tdm-policy" content="https://thatsgoodedesign.com/terms/">
+<meta name="robots" content="noai, noimageai">
+<style>
+  .terms-list{margin:18px 0 0;padding-left:1.15em;}
+  .terms-list li{margin-bottom:12px;}
+  .terms-updated{margin-top:28px;font-size:.9em;opacity:.7;}
+  .cred-wrap:has(> .cred-text:only-child) .cred-text{max-width:70ch;}
+</style>
 </head>
 <body>
 
@@ -80,49 +86,108 @@
       </ul>
     </div>
     <a href="../books/">Books</a>
-    <a href="../about/">About</a>
+    <a href="../about/" aria-current="page">About</a>
     <a class="btn btn-sm" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt">Book a call</a>
   </nav>
 </header>
 
 <main id="main">
 
-  <!-- Calendly redirects here after a booking is confirmed. The scheduling is
-       already done by the time anyone sees this page, so this page only
-       confirms and points at something useful. Qualification happens by email
-       after the booking, not on the site. -->
   <section class="hero hero-sub">
-    <p class="eyebrow">Confirmed</p>
-    <h1>You&rsquo;re on the <span class="accent">calendar</span>.</h1>
-    <p class="lede">
-      The invitation is in your inbox with the joining details. Nothing else is
-      required from you before we speak.
-    </p>
+    <p class="eyebrow">Legal</p>
+    <h1>Privacy, and what this site
+      <span class="accent">does not do</span>.</h1>
   </section>
 
-  <section class="band book-call">
-    <p class="eyebrow">While you wait</p>
-    <h2 class="section-h big">Two things worth ten minutes</h2>
+  <section class="band alt">
+    <div class="cred-wrap"><div class="cred-text">
+      <p class="lede">This site sets no cookies, runs no ad networks, and does
+        no cross-site tracking. If you never type anything into it, it never
+        learns who you are.</p>
+      <p>What follows is the detail, including the places where a third party
+        is involved and your data leaves this site.</p>
+    </div></div>
+  </section>
+
+  <section class="band">
+    <p class="eyebrow">Measurement</p>
+    <h2 class="section-h">How visits are counted</h2>
+    <div class="cred-wrap"><div class="cred-text">
+      <p>Visits are measured with Cloudflare Web Analytics. It is cookieless,
+        it stores nothing on your device, and it reports aggregate figures such
+        as page views and referrers rather than anything identifying you. If
+        your browser sends a Do Not Track signal, the script does not load at
+        all.</p>
+    </div></div>
+  </section>
+
+  <section class="band alt">
+    <p class="eyebrow">Hosting</p>
+    <h2 class="section-h">Where the site lives</h2>
+    <div class="cred-wrap"><div class="cred-text">
+      <p>The site is hosted on GitHub Pages. As with any web host, its servers
+        process the ordinary request information needed to deliver a page,
+        including your IP address. That is GitHub&rsquo;s processing, under
+        GitHub&rsquo;s own privacy terms, and Goode Design &amp; Consulting
+        does not receive or retain those logs.</p>
+      <p>Typefaces are served by Google Fonts, which means your browser
+        requests them from Google and Google receives your IP address in the
+        process.</p>
+    </div></div>
+  </section>
+
+  <section class="band">
+    <p class="eyebrow">If you get in touch</p>
+    <h2 class="section-h">What happens to what you send</h2>
     <div class="grid-3 tracks">
       <article class="track">
-        <h3>Run the diagnostic</h3>
-        <p>Six cylinders, thirty questions, and an honest answer about which part
-          of your operation is actually misfiring. Bring the result to the call.</p>
-        <p class="meta"><a class="link-arrow" href="../diagnostic/">The free diagnostic</a></p>
+        <h3>The mailing list</h3>
+        <p>Email signups, including the free chapter, are handled by Kit
+          (formerly ConvertKit), which stores your address and sends the mail.
+          You can unsubscribe from any message, and unsubscribing removes you.</p>
       </article>
       <article class="track">
-        <h3>Read the relevant chapter</h3>
-        <p>Each framework is a standalone ebook at $3.99. Buy the one that
-          matches whatever is currently breaking rather than the whole system.</p>
-        <p class="meta"><a class="link-arrow" href="../clutch/ebooks/">The framework ebooks</a></p>
+        <h3>Booking a call</h3>
+        <p>Scheduling runs through Calendly. What you enter there, typically a
+          name, an email and whatever you write in the notes, is held by
+          Calendly and visible to Matt.</p>
       </article>
       <article class="track">
-        <h3>Need to move it?</h3>
-        <p>The confirmation email has reschedule and cancel links. Use them
-          freely, it costs me nothing and I would rather you were there properly.</p>
-        <p class="meta"><a class="link-arrow" href="mailto:matt@thatsgoodedesign.com">Email me</a></p>
+        <h3>Email to Matt</h3>
+        <p>Mail sent directly is kept as long as it is useful and is not added
+          to any list without you asking.</p>
       </article>
     </div>
+  </section>
+
+  <section class="band alt">
+    <p class="eyebrow">Never</p>
+    <h2 class="section-h">What is not done with any of it</h2>
+    <div class="cred-wrap"><div class="cred-text">
+      <p>Your information is not sold, rented or traded. It is not given to
+        advertising networks or data brokers. It is not used to build a profile
+        of you across other sites. There is no advertising pixel on this
+        domain.</p>
+      <p>Coaching and consulting engagements are separately governed by their
+        signed agreement, including its confidentiality clause, which is
+        stricter than this page and takes precedence for client work.</p>
+    </div></div>
+  </section>
+
+  <section class="band">
+    <p class="eyebrow">Your call</p>
+    <h2 class="section-h">Asking what is held, or asking for it back</h2>
+    <div class="cred-wrap"><div class="cred-text">
+      <p>Write to <a href="mailto:matt@thatsgoodedesign.com">matt@thatsgoodedesign.com</a>
+        and ask what is held about you, ask for a copy, ask for a correction,
+        or ask for it to be deleted. This is a small practice, not a
+        bureaucracy, and the answer is usually the same week.</p>
+      <p>This site is not directed at children under 13 and no information is
+        knowingly collected from them.</p>
+      <p>See also the <a href="../terms/">terms of use and content rights</a>,
+        which cover copyright and text and data mining.</p>
+      <p class="terms-updated">Last updated 22 September 2026.</p>
+    </div></div>
   </section>
 
 </main>
@@ -146,11 +211,10 @@
       <a href="../schools/">Schools</a>
       <a href="../coaching-engagement/">How it works</a>
       <a href="../diagnostic/">Diagnostic</a>
-      <a href="../books/">Books</a>
-      <a href="../about/">About</a>
+      <a href="./">About</a>
       <a href="mailto:matt@thatsgoodedesign.com">Contact</a>
       <a href="../terms/">Terms</a>
-      <a href="../privacy/">Privacy</a>
+      <a href="./">Privacy</a>
     </nav>
   </div>
   <p class="foot-legal">&copy; 2026 Goode Design &amp; Consulting. CliftonStrengths&reg;,
