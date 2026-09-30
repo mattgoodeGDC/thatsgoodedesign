@@ -38,14 +38,14 @@
    element; the rest stays quiet. */
 .e8-band { padding-block: clamp(36px, 6vw, 72px) clamp(48px, 7vw, 88px); }
 .e8 { max-width: 44rem; margin: 0 auto; }
-.e8-head { display: grid; grid-template-columns: auto 1fr; gap: 1.25rem; align-items: end; border-bottom: 2px solid var(--ink); padding-bottom: 1.5rem; }
-.e8-rank { font-weight: 900; font-size: clamp(6rem, 22vw, 9.5rem); line-height: .78; color: #29906D; letter-spacing: -.04em; }
-.e8 h1 { font-size: clamp(1.45rem, 4.2vw, 1.95rem); font-weight: 800; line-height: 1.2; letter-spacing: -.01em; color: var(--ink); margin: 0 0 .5rem; text-wrap: balance; }
-.e8-th { font-size: .32em; font-weight: 800; letter-spacing: 0; vertical-align: top; margin-left: .04em; position: relative; top: .05em; }
-.e8 h1 { font-size: clamp(2rem, 6vw, 2.75rem); line-height: 1.05; margin: 0 0 .6rem; }
+.e8-head { border-bottom: 2px solid var(--ink); padding-bottom: 1.5rem; }
+.e8 h1 { font-size: clamp(3rem, 11vw, 5rem); font-weight: 900; line-height: .95; letter-spacing: -.035em; color: var(--ink); margin: 0 0 .9rem; }
+.e8-num { color: #29906D; }
 .e8-question { margin: 0 0 .4rem; font-size: clamp(1.1rem, 3.4vw, 1.3rem); font-weight: 700; line-height: 1.3; color: var(--ink); text-wrap: balance; }
 .e8-lede { margin: 0; color: var(--muted); font-size: .95rem; }
 .e8-intro { margin: 1.5rem 0 1.25rem; }
+.e8-intro a { color: var(--ink); }
+.e8-pay { color: var(--muted); font-size: .88em; }
 
 .e8-tabs { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0 0 1.5rem; }
 .e8-tab { font: inherit; font-weight: 600; font-size: .9rem; line-height: 1.3; min-height: 44px; padding: .6rem 1rem; border: 2px solid var(--ink); background: transparent; color: var(--ink); border-radius: 999px; cursor: pointer; text-align: left; }
@@ -61,7 +61,9 @@
 .e8-listen { margin: 0; color: var(--body); font-size: .92rem; line-height: 1.5; }
 .e8-listen strong { color: #1F7A5A; font-weight: 700; }
 
-.e8-reply { margin: .7rem 0 0; padding: .1rem 0 .1rem .8rem; border-left: 3px solid #29906D; color: var(--body); font-size: .92rem; line-height: 1.5; scroll-margin-top: 1rem; }
+.e8-reply { margin: .7rem 0 0; padding: .6rem .8rem; border-left: 3px solid var(--gold); background: var(--paper); color: var(--body); font-size: .93rem; line-height: 1.5; }
+.e8-lede a { color: var(--ink); font-weight: 700; }
+.e8-note { font-size: .85rem; color: var(--muted); margin: .6rem 0 0 !important; }
 .e8-opts { display: flex; flex-direction: column; gap: .45rem; }
 .e8-opt { font: inherit; font-size: .92rem; font-weight: 600; line-height: 1.35; text-align: left; width: 100%; min-height: 44px; padding: .65rem .85rem; border: 1.5px solid var(--rule-2); background: #fff; color: var(--ink); border-radius: 4px; cursor: pointer; }
 .e8-opt:hover { border-color: var(--ink); }
@@ -88,7 +90,8 @@
 .e8-help li { margin: 0 0 .35rem; }
 .e8-small { font-size: .88rem; color: var(--muted); }
 .e8-small a { color: var(--ink); }
-.e8-book-lead { font-weight: 600; color: var(--ink); margin-top: 1rem !important; }
+.e8-cta { margin-top: 1.1rem; padding-top: 1rem; border-top: 1px solid var(--rule-2); }
+.e8-cta-open { font-weight: 700; color: var(--ink); }
 .e8-book { margin: .2rem 0 .8rem; text-align: center; }
 @media (max-width: 30rem) { .e8-book { display: block; } }
 
@@ -102,8 +105,6 @@
 .e8-printonly { display: none; }
 
 @media (max-width: 30rem) {
-  .e8-head { grid-template-columns: 1fr; gap: .5rem; }
-  .e8-rank { font-size: 6rem; }
   .e8-qs li { padding: .9rem .85rem .9rem 2.6rem; }
   .e8-qs li::before { left: .8rem; }
 }
@@ -114,10 +115,11 @@
 @media print {
   @page { margin: 16mm; }
   body { background: #fff; color: #000; font-size: 11pt; }
-  .skip, header.nav, footer.foot, .e8-tabs, .e8-actions, .e8-share, .e8-copied, .e8-book, .e8-book-lead, .e8-help ul, .e8-help > p:not(.e8-help-weak) { display: none !important; }
+  .skip, header.nav, footer.foot, .e8-tabs, .e8-actions, .e8-share, .e8-copied, .e8-note, .e8-book, .e8-cta, .e8-help ul, .e8-help > p:not(.e8-help-weak) { display: none !important; }
   .e8-band { padding: 0 !important; }
   .e8 { max-width: none; }
-  .e8-rank { font-size: 5rem; color: #29906D; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .e8 h1 { font-size: 2.6rem; }
+  .e8-num { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .e8-qs li { break-inside: avoid; background: none; border: 1px solid #ccc; padding-top: .6rem; padding-bottom: .6rem; }
   .e8-opt { border: none; padding: 0; min-height: 0; background: none !important; color: #000 !important; font-weight: 400; }
   .e8-opt[aria-pressed="false"] { display: none; }
@@ -196,15 +198,14 @@
     <div class="e8">
 
       <header class="e8-head">
-        <div class="e8-rank" aria-hidden="true">8</div>
         <div>
-          <h1>The 8th idea</h1>
+          <h1>The <span class="e8-num">8th</span> idea</h1>
           <p class="e8-question">Will your school's best idea still be working in February?</p>
-          <p class="e8-lede">A five-question check from The Leadership Lab</p>
+          <p class="e8-lede">From The Leadership Lab essay "The eighth idea." <a href="https://thatsgoodedesign.substack.com/" target="_blank" rel="noopener">Read it here &rarr;</a></p>
         </div>
       </header>
 
-      <p class="e8-intro">Experts ranked teacher coaching eighth of thirty ways to fix schools. It's the reason the top two work. Pick your lane. School leaders get five quick scenarios and a named result. Parents get five questions to ask anyone running for the school board.</p>
+      <p class="e8-intro"><a href="https://www.nytimes.com/2026/09/28/upshot/ideas-fixing-schools-ranked.html" target="_blank" rel="noopener">Experts ranked teacher coaching eighth of thirty ways to fix schools</a> <span class="e8-pay">(New York Times, paywalled)</span>. It's the reason the top two work. Pick your lane. School leaders get five quick scenarios and a named result. Parents get five questions to ask anyone running for the school board.</p>
 
       <div class="e8-tabs" role="tablist" aria-label="Choose your group">
         <button class="e8-tab" role="tab" type="button" id="tab-heads" data-set="heads" aria-selected="true" aria-controls="e8-panel">Heads of school and division heads</button>
@@ -228,8 +229,11 @@
             <li><strong>Executive coaching for school leaders.</strong> One to one, for the head or senior administrator carrying the change.</li>
           </ul>
           <p class="e8-small">The four areas in this check come from <a href="https://www.amazon.com/dp/B0HHFGV2MT" target="_blank" rel="noopener">CLUTCH</a>, my book on building leadership systems that run without you.</p>
-          <p class="e8-book-lead">Want to talk about bringing a coaching program to your school with the resources you already have?</p>
-          <a class="btn e8-book" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_source=eighth-idea" target="_blank" rel="noopener">Book a conversation</a>
+          <div class="e8-cta">
+            <p class="e8-cta-open" id="cta-open"></p>
+            <p>Most schools I work with are somewhere in the middle, with good people, good intentions and a system that hasn't caught up. If something in your answers stung a little, or just made you curious, let's talk. It's a free thirty-minute conversation with no obligation: a sounding board if you want to think out loud, or straight advice if you'd rather have that. Low stakes, no pitch, and you'll leave with at least one thing you can try next week, whether or not we ever work together.</p>
+            <a class="btn e8-book" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_source=eighth-idea" target="_blank" rel="noopener">Talk it through with me</a>
+          </div>
           <p class="e8-small">Rates for independent schools are published at <a href="../schools/rates/">thatsgoodedesign.com/schools/rates</a>.</p>
         </section>
 
@@ -255,57 +259,52 @@ const PAGE_URL="https://thatsgoodedesign.com/eighth-idea/";
 
 /* Colors are the site's own framework colors from style.css (.fw-*). */
 const PILLARS={
-  CREATE:{name:"The standard",line:"Culture is designed, not felt.",fix:"Building the Bench, so the standard lives in more than one person",color:"#2C7355"},
-  VOICES:{name:"How you show up",line:"Presence is a choice you make for the moment, not a fixed personality.",fix:"Executive coaching for school leaders, so how you show up is a choice, not a habit",color:"#2F5A8F"},
-  SIXC:{name:"Who decides",line:"Nobody owns what they cannot decide.",fix:"Decision rights and governance, so teachers and coaches know what is theirs",color:"#6B3F93"},
+  CREATE:{name:"The standard",line:"If the standard lives only in your head, it can't travel.",fix:"Building the Bench, so the standard lives in more than one person",color:"#2C7355"},
+  VOICES:{name:"How you show up",line:"Teachers take their cue from where you spend your time.",fix:"Executive coaching for school leaders, so where you show up is a choice, not a habit",color:"#2F5A8F"},
+  SIXC:{name:"Who decides",line:"Nobody owns what they cannot decide.",fix:"Decision rights and governance, so teachers and coaches know what's theirs",color:"#6B3F93"},
   DELEGATE:{name:"Handing it off",line:"Hand over the outcome, not just the task.",fix:"Delegation and role clarity, so the coaching role is real, protected and owned",color:"#8D3E40"}
 };
-/* Answer order is fixed and already mixed by hand, so the best answer sits in a
-   different position each time. Scores stay hidden. */
+/* Answer order is fixed and already mixed by hand. Each option is
+   [answer, hidden score, reply shown after it]. */
 const SETS={
   heads:{
-    who:"For heads of school and division heads. Five quick scenarios in four areas: the standard, how you show up, who decides, and handing it off. Pick the answer that's true most weeks, not on your best week.",
+    who:"Five quick scenarios, about three minutes, in four areas: the standard, how you show up, who decides, and handing it off. Pick the answer that's true most weeks, not on your best week.",
     scored:true,
     qs:[
-      ["CREATE","Ask three teachers what doing your newest program well looks like. You'd hear:",[["Three different answers",0],["The same answer, almost word for word",2],["Similar ideas in different words",1]]],
-      ["CREATE","When do your teachers work on their craft together?",[["During the school day, on a set schedule",2],["After school, if someone volunteers to run it",0],["In meetings that logistics usually take over",1]]],
-      ["VOICES","In the month after a big launch, where does most of your time go?",[["Meetings and email",0],["Split between classrooms and meetings",1],["Classrooms, watching and listening",2]]],
-      ["SIXC","A teacher wants to adapt part of a new program for their class. What happens?",[["They ask, and the answer depends on who they ask",1],["They know which parts they can change",2],["They either don't dare or do it quietly",0]]],
-      ["DELEGATE","The people doing coaching work in your school are:",[["Great teachers with a coaching title, some time that often gets pulled, and no training in coaching itself",1],["Veteran teachers doing it on their own time, going above and beyond",0],["Trained as coaches, with protected time, a clear goal and regular check-ins",2]]]
+      ["CREATE","Ask three teachers what doing your newest program well looks like. You'd hear:",[
+        ["Three different answers",0,"That's the answer I hear most. The program was announced, but nobody wrote down what good looks like, so every teacher filled in the gap on their own."],
+        ["The same answer, almost word for word",2,"That's rare. Someone did the hard work of describing the standard, and it traveled."],
+        ["Similar ideas in different words",1,"Close. It usually means the intent landed and the detail didn't, and the detail is where classrooms drift apart."]]],
+      ["CREATE","When do your teachers work on their craft together?",[
+        ["During the school day, on a set schedule",2,"That's the one that counts. The calendar is the final word on what a school values, and yours says craft matters. Guard it the next time someone needs a class covered."],
+        ["After school, if someone volunteers to run it",0,"Then it runs on goodwill, and goodwill runs out. The time can be found. My daughters' schools have each found it. One, a public school, has a three-quarter day every Wednesday. The other, an independent school, opens late after holidays and breaks, a soft landing for the kids that frees the morning for teachers."],
+        ["In meetings that logistics usually take over",1,"The time exists, which is the hard part. Now protect it from everything else competing for it. Too much PD time turns into a meeting that could have been an email, or leaves teachers wondering what it has to do with their job. Give the hour to craft, and make sure every teacher can see how it connects to their classroom."]]],
+      ["VOICES","In the month after a big launch, where does most of your time go?",[
+        ["Meetings and email",0,"That's where the job pulls every head. But a launch is won or lost in classrooms in those first weeks, and teachers read your absence as a sign it's already done."],
+        ["Split between classrooms and meetings",1,"Good instinct. Even a few protected hours a week in classrooms tells teachers the launch is still the priority."],
+        ["Classrooms, watching and listening",2,"That's the move, as long as the room feels safe. Nobody teaches well with the boss in the back taking notes. Keep these visits separate from evaluation, leave the notebook behind, and come often enough to be normal. A head who turns up once a term feels like an inspection. A head who's in every week, and joins in, is just part of the room."]]],
+      ["SIXC","A teacher wants to adapt part of a new program for their class. What happens?",[
+        ["They ask, and the answer depends on who they ask",1,"That's the most common version. The rules exist, but only in people's heads, so the answer changes by office."],
+        ["They know which parts they can change",2,"That's a decision right, written down. It lets teachers own the program without breaking it."],
+        ["They either don't dare or do it quietly",0,"Quiet changes are how a program slides back into old habits, one classroom at a time, with nobody noticing."]]],
+      ["DELEGATE","The people doing coaching work in your school are:",[
+        ["Great teachers with a coaching title, but no coaching training and time that often gets pulled",1,"That's the pattern the research found when coaching scaled up. The idea holds up. The role built around it doesn't."],
+        ["Veterans doing it on their own time",0,"They're the heroes of the building. But heroics don't scale. When they retire or burn out, the coaching leaves with them."],
+        ["Trained as coaches, with protected time, a clear goal and regular check-ins",2,"That's the design that works. I've done both jobs. Coaching is a different skill, mostly a different way of asking questions, and it can be learned. Anyone who can explain calculus to a bored senior can learn it."]]]
     ]
   },
   voters:{
-    who:"Five questions to ask anyone running for your school board, before you vote. None of them has a party answer. They are about whether a candidate understands how good teaching gets delivered. Listen for specifics.",
+    who:"Five nonpartisan questions to ask anyone running for your school board, before you vote. They're what I'd ask as a veteran teacher, whoever the candidate. None of them has a party answer. They're about whether a candidate understands how good teaching gets delivered. Listen for specifics.",
     scored:false,
     qs:[
       [null,"When the district adopts a new program, how will you make sure teachers get support to use it well, not just a training day?","a named role that helps teachers after the training day, and how often that person is in classrooms."],
       [null,"A year later, what would you look at to know whether it's working?","a specific thing to look at and a date to look at it. \"We'll keep an eye on it\" is not a plan."],
       [null,"If the budget gets tight, what would you protect first?","a real priority and the reason for it. \"Everything matters\" is not an answer."],
-      [null,"How would you keep good early-career teachers from leaving?","what a new teacher's first two years would look like, such as who supports them and how often."],
-      [null,"Where do you get your advice on teaching and learning?","people who work in or study classrooms, named alongside anyone else they mention."]
+      [null,"How would you keep good early-career teachers from leaving?","what a new teacher's first two years would look like, including who supports them and how often."],
+      [null,"Where do you get your advice on teaching and learning?","at least one person who works in classrooms or studies them."]
     ]
   }
 };
-/* A short reply after each answer, in Matt's voice. REPLIES[question][option],
-   in the same order as the options above. Shown under the question once it
-   is answered; it never shows a score. */
-const REPLIES=[
-  ["That's the answer I hear most. The program was announced, but nobody wrote down what good looks like, so each teacher filled in the gap.",
-   "That's rare. Someone did the hard work of describing the standard, and it traveled.",
-   "Close. Similar ideas usually mean the intent landed and the detail didn't, and the detail is where classrooms drift apart."],
-  ["That's the one that counts. A calendar is the final word on what a school values, and yours says craft matters. Guard it the next time someone needs a class covered.",
-   "Time is zero-sum. Every hour a teacher spends on recess duty or covering a class is an hour they aren't working on their craft with a coach. Carve out the time, or at least give official PD days to coaching.",
-   "The time exists, which is the hard part. Schedules are the final word on what a school values, so protect it. My daughters' schools each found a way. One, a public school, dismisses early. The other, an independent school, opens late."],
-  ["That's where the job pulls every head. But a launch is decided in classrooms in those first weeks, and nobody there can see you.",
-   "Good instinct. Even a few protected hours a week in classrooms tells teachers the launch is still the priority.",
-   "That's the move. You'll see what's really happening before it hardens into habit."],
-  ["That's the most common version. The rules exist, but only in people's heads, so the answer changes by office.",
-   "That's a decision right, written down. It lets teachers own the program without breaking it.",
-   "Quiet changes are how a program slides back into old habits, one classroom at a time, with nobody noticing."],
-  ["That's the pattern the research found when coaching scaled up. The idea holds up. The role built around it doesn't.",
-   "Those teachers are the heroes of the building, going above and beyond on their own time. But heroics don't scale. When they retire or burn out, the coaching leaves with them.",
-   "That's the design that works. I've done both jobs, and coaching is a different skill, mostly a different way of asking questions. It doesn't need a certificate, and it isn't rocket science. Explaining calculus to a bored senior, or the ancient Greeks to a checked-out seventh grader, is harder."]
-];
 let current="heads";
 const answers={heads:{},voters:{}};
 const $=id=>document.getElementById(id);
@@ -325,7 +324,7 @@ function render(){
     }
     if(s.scored){
       const reply=document.createElement("p");reply.className="e8-reply";reply.setAttribute("aria-live","polite");
-      const prev=answers[current][i];reply.hidden=!prev;if(prev)reply.textContent=REPLIES[i][prev.j];
+      const prev=answers[current][i];reply.hidden=!prev;if(prev)reply.textContent=s.qs[i][2][prev.j][2];
       const g=document.createElement("div");g.className="e8-opts";g.setAttribute("role","group");g.setAttribute("aria-labelledby","q"+i);
       s.qs[i][2].forEach(([t,v],j)=>{
         const b=document.createElement("button");b.type="button";b.className="e8-opt";b.textContent=t;
@@ -338,7 +337,7 @@ function render(){
           answers[current][i]={v:v,j:j};
           g.querySelectorAll(".e8-opt").forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false"));
           li.classList.add("answered");
-          reply.textContent=REPLIES[i][j];reply.hidden=false;
+          reply.textContent=s.qs[i][2][j][2];reply.hidden=false;
           const done=showResult();
           if(done&&before<s.qs.length){revealResult(reply);}
         });
@@ -373,12 +372,20 @@ function copyText(text){
   });
 }
 
+function wireShare(){
+  const btn=$("share");if(!btn)return;
+  btn.addEventListener("click",()=>{
+    copyText(PAGE_URL).then(()=>{btn.textContent="Link copied";},()=>{btn.textContent="Copy failed. Use your browser's share button";$("copied").textContent=PAGE_URL;});
+  });
+}
+
 function showResult(){
   const box=$("result"),rs=$("reset"),help=$("help"),pr=$("print");
   help.hidden=true;
   const s=SETS[current];
   if(!s.scored){
-    box.innerHTML="<h2>What a good answer sounds like</h2><p>It names a person, a time and a way to check. \"We'll support teachers\" is a slogan. \"Every new teacher gets a coach who watches them teach twice a month\" is a plan.</p>";
+    box.innerHTML="<h2>What a good answer sounds like</h2><p>It names a person, a time and a way to check. \"We'll support teachers\" is a slogan. \"Every new teacher gets a coach who watches them teach twice a month\" is a plan.</p><button class=\"e8-share\" id=\"share\" type=\"button\">Copy the link for another parent</button><span class=\"e8-copied\" id=\"copied\" role=\"status\"></span><p class=\"e8-note\">Nothing you click here is saved.</p>";
+    wireShare();
     rs.hidden=true;pr.hidden=false;pr.textContent="Print these questions";return false;
   }
   rs.hidden=false;pr.hidden=true;
@@ -388,16 +395,18 @@ function showResult(){
   const by={},cnt={};s.qs.forEach(([pk],i)=>{by[pk]=(by[pk]||0)+a[i].v;cnt[pk]=(cnt[pk]||0)+1;});Object.keys(by).forEach(k=>by[k]=by[k]/cnt[k]);
   let weak=null;Object.keys(PILLARS).forEach(k=>{if(by[k]!==undefined&&(weak===null||by[k]<by[weak]))weak=k;});
   let h,t;
+  let cta;
+  if(score>=8){cta="You've built something most schools haven't. The hard part now is keeping it when budgets, staff and priorities shift.";}
+  else if(score>=5){cta="You're closer than it feels. The machinery is there; it's usually one or two gaps letting good ideas drain out.";}
+  else{cta="That's the most common result, and it's not a verdict on you or your faculty. It's a design problem, and design problems can be fixed.";}
+  $("cta-open").textContent=cta;
   if(score>=8){h="Your result: the delivery engine.";t="New ideas in your school have a real path into classrooms, and it doesn't depend on you being in the room. Protect it the next time the budget gets tight, because this is usually the first thing cut.";}
   else if(score>=5){h="Your result: the leaky system.";t="Some of the machinery is in place and some of it runs on goodwill. Your best ideas reach some classrooms and fade in others, usually by October.";}
   else{h="Your result: launch and hope.";t="Your school is good at choosing ideas and announcing them. What's missing is the structure that carries them into classrooms once the launch energy fades.";}
   const w=PILLARS[weak];
   const weakLine=by[weak]<2?"<p><strong>Weakest area: "+w.name.toLowerCase()+".</strong> "+w.line+" Start there.</p>":"";
   box.innerHTML="<h2 tabindex=\"-1\">"+h+"</h2><p>"+t+"</p>"+weakLine+"<button class=\"e8-share\" id=\"share\" type=\"button\">Copy the link for your leadership team</button><span class=\"e8-copied\" id=\"copied\" role=\"status\"></span>";
-  $("share").addEventListener("click",e=>{
-    const btn=e.currentTarget;
-    copyText(PAGE_URL).then(()=>{btn.textContent="Link copied";},()=>{btn.textContent="Copy failed. Use your browser's share button";$("copied").textContent=PAGE_URL;});
-  });
+  wireShare();
   $("help-weak").textContent=by[weak]<2?"Given your answers, I'd start with "+w.fix+".":"";
   help.hidden=false;pr.hidden=false;pr.textContent="Print your result";
   return true;
