@@ -99,6 +99,8 @@
 .e8-print { font: inherit; font-weight: 700; font-size: .9rem; min-height: 44px; padding: .55rem .95rem; border: 2px solid var(--ink); background: transparent; color: var(--ink); border-radius: 4px; cursor: pointer; }
 .e8-reset { font: inherit; font-size: .88rem; min-height: 44px; background: none; border: none; color: var(--muted); text-decoration: underline; cursor: pointer; padding: 0; }
 .e8-print[hidden], .e8-reset[hidden] { display: none; }
+.e8-quiet { margin: 1rem 0 0; font-size: .9rem; color: var(--muted); }
+.e8-quiet a { color: var(--ink); font-weight: 700; }
 
 .e8-from { margin: 2.5rem 0 0; padding-top: 1.25rem; border-top: 1px solid var(--rule); font-size: .88rem; color: var(--muted); }
 .e8-from a { font-weight: 700; }
@@ -115,7 +117,7 @@
 @media print {
   @page { margin: 16mm; }
   body { background: #fff; color: #000; font-size: 11pt; }
-  .skip, header.nav, footer.foot, .e8-tabs, .e8-actions, .e8-share, .e8-copied, .e8-note, .e8-book, .e8-cta, .e8-help ul, .e8-help > p:not(.e8-help-weak) { display: none !important; }
+  .skip, header.nav, footer.foot, .e8-tabs, .e8-actions, .e8-quiet, .e8-share, .e8-copied, .e8-note, .e8-book, .e8-cta, .e8-help ul, .e8-help > p:not(.e8-help-weak) { display: none !important; }
   .e8-band { padding: 0 !important; }
   .e8 { max-width: none; }
   .e8 h1 { font-size: 2.6rem; }
@@ -201,7 +203,7 @@
         <div>
           <h1>The <span class="e8-num">8th</span> idea</h1>
           <p class="e8-question">Will your school's best idea still be working in February?</p>
-          <p class="e8-lede">From The Leadership Lab essay "The eighth idea." <a href="https://thatsgoodedesign.substack.com/" target="_blank" rel="noopener">Read it here &rarr;</a></p>
+          <p class="e8-lede">From The Leadership Lab essay "The eighth idea." <a href="https://thatsgoodedesign.substack.com/p/the-eighth-idea" target="_blank" rel="noopener">Read it here &rarr;</a></p>
         </div>
       </header>
 
@@ -234,13 +236,13 @@
             <p>Most schools I work with are somewhere in the middle, with good people, good intentions and a system that hasn't caught up. If something in your answers stung a little, or just made you curious, let's talk. It's a free thirty-minute conversation with no obligation: a sounding board if you want to think out loud, or straight advice if you'd rather have that. Low stakes, no pitch, and you'll leave with at least one thing you can try next week, whether or not we ever work together.</p>
             <a class="btn e8-book" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_source=eighth-idea" target="_blank" rel="noopener">Talk it through with me</a>
           </div>
-          <p class="e8-small">Rates for independent schools are published at <a href="../schools/rates/">thatsgoodedesign.com/schools/rates</a>.</p>
         </section>
 
         <div class="e8-actions">
           <button class="e8-print" id="print" type="button" hidden>Print your result</button>
           <button class="e8-reset" id="reset" type="button">Start this set again</button>
         </div>
+        <p class="e8-quiet" id="quiet" hidden>Rather just talk it through? <a href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_source=eighth-idea" target="_blank" rel="noopener">Book a free 30 minutes</a>.</p>
       </div>
 
       <p class="e8-from">From <a href="https://thatsgoodedesign.substack.com" target="_blank" rel="noopener">The Leadership Lab</a> by Matt Goode, Goode Design &amp; Consulting. Leadership is infrastructure, not training.</p>
@@ -282,7 +284,7 @@ const SETS={
       ["VOICES","In the month after a big launch, where does most of your time go?",[
         ["Meetings and email",0,"That's where the job pulls every head. But a launch is won or lost in classrooms in those first weeks, and teachers read your absence as a sign it's already done."],
         ["Split between classrooms and meetings",1,"Good instinct. Even a few protected hours a week in classrooms tells teachers the launch is still the priority."],
-        ["Classrooms, watching and listening",2,"That's the move, as long as the room feels safe. Nobody teaches well with the boss in the back taking notes. Keep these visits separate from evaluation, leave the notebook behind, and come often enough to be normal. A head who turns up once a term feels like an inspection. A head who's in every week, and joins in, is just part of the room."]]],
+        ["In classrooms, being part of the day",2,"That's the move, as long as the room feels safe. Nobody teaches well with the boss in the back taking notes. Keep these visits separate from evaluation, leave the notebook behind, and come often enough to be normal. A head who turns up once a term feels like an inspection. A head who's in every week, and joins in, is just part of the room."]]],
       ["SIXC","A teacher wants to adapt part of a new program for their class. What happens?",[
         ["They ask, and the answer depends on who they ask",1,"That's the most common version. The rules exist, but only in people's heads, so the answer changes by office."],
         ["They know which parts they can change",2,"That's a decision right, written down. It lets teachers own the program without breaking it."],
@@ -386,11 +388,12 @@ function showResult(){
   if(!s.scored){
     box.innerHTML="<h2>What a good answer sounds like</h2><p>It names a person, a time and a way to check. \"We'll support teachers\" is a slogan. \"Every new teacher gets a coach who watches them teach twice a month\" is a plan.</p><button class=\"e8-share\" id=\"share\" type=\"button\">Copy the link for another parent</button><span class=\"e8-copied\" id=\"copied\" role=\"status\"></span><p class=\"e8-note\">Nothing you click here is saved.</p>";
     wireShare();
-    rs.hidden=true;pr.hidden=false;pr.textContent="Print these questions";return false;
+    rs.hidden=true;pr.hidden=false;pr.textContent="Print these questions";$("quiet").hidden=true;return false;
   }
   rs.hidden=false;pr.hidden=true;
   const a=answers[current];const total=s.qs.length;const n=Object.keys(a).length;
-  if(n<total){box.innerHTML="<p>"+(total-n)+" to go.</p>";return false;}
+  if(n<total){box.innerHTML="<p>"+(total-n)+" to go.</p>";$("quiet").hidden=false;return false;}
+  $("quiet").hidden=true;
   const score=Object.values(a).reduce((x,y)=>x+y.v,0);
   const by={},cnt={};s.qs.forEach(([pk],i)=>{by[pk]=(by[pk]||0)+a[i].v;cnt[pk]=(cnt[pk]||0)+1;});Object.keys(by).forEach(k=>by[k]=by[k]/cnt[k]);
   let weak=null;Object.keys(PILLARS).forEach(k=>{if(by[k]!==undefined&&(weak===null||by[k]<by[weak]))weak=k;});
