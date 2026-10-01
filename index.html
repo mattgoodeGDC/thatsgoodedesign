@@ -107,6 +107,82 @@
 
   </section>
 
+  <!-- Pick the one = question 1 of the diagnostic (BUSINESS-176, 30 Sept).
+       Five pattern cards, symptom only; the pattern name appears in the reveal.
+       The pick carries into the quiz or straight into a booking. Nothing here
+       asks for personal details. -->
+  <style>
+    /* Compact pattern cards, so all five fit in about one phone screen. */
+    .signals.pcs { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
+    @media (max-width: 1080px) { .signals.pcs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 620px)  { .signals.pcs { grid-template-columns: minmax(0, 1fr); gap: 8px; } }
+    button.signal.pc { padding: 16px 18px; }
+    button.signal.pc h3 { font-size: 17px; margin: 0 0 6px; line-height: 1.3; }
+    button.signal.pc p { font-size: 15px; line-height: 1.45; margin: 0; }
+    button.signal.pc[aria-checked="true"] { --fw: var(--green-rule); }
+    @media (max-width: 620px) {
+      button.signal.pc { padding: 12px 14px; }
+      button.signal.pc h3 { font-size: 16px; margin-bottom: 3px; }
+      button.signal.pc p { font-size: 14px; line-height: 1.4; }
+    }
+    .pc-other { margin: 14px 0 0; font-size: 15px; }
+    .pc-other a { color: var(--body); text-decoration: underline; text-underline-offset: 3px; }
+    .signal-verdict.pcv .sv-actions { align-items: stretch; }
+    .signal-verdict.pcv .sv-actions .btn { text-align: center; }
+    .signal-verdict.pcv .btn-ghost { border-width: 2px; border-color: var(--ink); color: var(--ink); }
+    @media (max-width: 620px) {
+      .signal-verdict.pcv { margin-top: 18px; padding: 18px; gap: 16px; }
+      .signal-verdict.pcv .sv-line { font-size: 15px; }
+      .signal-verdict.pcv .btn { padding: 14px 16px; }
+    }
+  </style>
+  <section class="band" id="pick">
+    <h2 class="section-h">Pick the one that sounds most like you</h2>
+    <p class="signals-lede">Which one is loudest right now? It&rsquo;s the first
+      question of the diagnostic, so your answer carries over.</p>
+    <div class="grid-3 signals pcs" id="signals" role="radiogroup"
+         aria-label="Which one is loudest right now">
+      <button class="signal pc" type="button" role="radio" aria-checked="false"
+              tabindex="0" data-pattern="bottleneck">
+        <h3>Everything still runs through you</h3>
+        <p>Ask where a project stands and you get three answers. All three end up on your desk.</p>
+      </button>
+      <button class="signal pc" type="button" role="radio" aria-checked="false"
+              tabindex="-1" data-pattern="growth-gap">
+        <h3>Growing faster than it&rsquo;s getting clearer</h3>
+        <p>Headcount keeps climbing. The number of people who could name this quarter&rsquo;s top priorities doesn&rsquo;t.</p>
+      </button>
+      <button class="signal pc" type="button" role="radio" aria-checked="false"
+              tabindex="-1" data-pattern="drift">
+        <h3>The culture is drifting</h3>
+        <p>Nothing has broken. You just hear about problems later than you used to.</p>
+      </button>
+      <button class="signal pc" type="button" role="radio" aria-checked="false"
+              tabindex="-1" data-pattern="stall">
+        <h3>Winning still feels like a near miss</h3>
+        <p>The goals are clear and the plan is sound. It just doesn&rsquo;t run unless someone pushes.</p>
+      </button>
+      <button class="signal pc" type="button" role="radio" aria-checked="false"
+              tabindex="-1" data-pattern="new-seat">
+        <h3>Your role is changing, and nobody has said into what</h3>
+        <p>Stepping up, stepping back or redesigning the job. What&rsquo;s asked of you moved before the title did.</p>
+      </button>
+    </div>
+    <p class="pc-other"><a href="diagnostic/?src=home-cards-other">None of these, or answering about someone else? Start the diagnostic</a></p>
+    <div class="signal-verdict pcv" id="signalVerdict" hidden aria-live="polite">
+      <div class="sv-text">
+        <p class="sv-count" id="signalVerdictCount"></p>
+        <p class="sv-line" id="signalVerdictText"></p>
+        <p class="sv-line" id="signalVerdictNext">A few more short questions show where it starts and the first move I&rsquo;d make.</p>
+      </div>
+      <p class="sv-actions">
+        <a class="btn" id="signalVerdictCta" href="diagnostic/?src=home-cards">Keep going &ndash; about 2 minutes</a>
+        <a class="btn btn-ghost" id="signalVerdictBook" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt">Or book 30 minutes with Matt</a>
+      </p>
+    </div>
+  </section>
+
+
   <!-- The book, as a banner rather than a footnote to the hero. Its own band,
        its own ground, so the second door is a beat in the page instead of
        something tacked to the bottom of the first section. -->
@@ -133,81 +209,6 @@
     </div>
   </section>
 
-  <!-- The problem, in the reader's own vocabulary. Four signals, one per
-       framework, and exactly one choice, because a diagnosis that lets you tick
-       everything is not a diagnosis. The card carries only the symptom; the
-       verdict names the framework. That way the reveal is the payoff rather
-       than four pieces of jargon the reader has to wade through first. -->
-  <section class="band">
-    <h2 class="section-h">Pick the one that sounds most like you</h2>
-    <p class="signals-lede">You already know which one is yours. One only, and
-      the closest fit rather than the complete picture. What you choose names the
-      part of the system to look at first.</p>
-    <div class="grid-3 signals" id="signals" role="radiogroup"
-         aria-label="Which of these sounds most like the last three months">
-      <button class="signal fw-create" type="button" role="radio" aria-checked="false"
-              tabindex="0" data-fw="create">
-        <p class="num">01</p>
-        <h3>Winning still feels like a near miss</h3>
-        <p>The team delivers, and it costs more every quarter. A company that
-          runs on heroics is a company with no system underneath it.</p>
-        <span class="signal-foot">
-          <span class="signal-pick">That one&rsquo;s mine</span>
-          <span class="signal-fw" aria-hidden="true"><img src="assets/icon_create.png" alt=""
-              width="26" height="26"><b>CREATE</b><i>The engine</i></span>
-        </span>
-      </button>
-      <button class="signal fw-voices" type="button" role="radio" aria-checked="false"
-              tabindex="-1" data-fw="voices">
-        <p class="num">02</p>
-        <h3>Every hard conversation sounds the same</h3>
-        <p>Same tone, same posture, same you, whether it is a missed number or a
-          resignation. One setting is not a range. It is a habit.</p>
-        <span class="signal-foot">
-          <span class="signal-pick">That one&rsquo;s mine</span>
-          <span class="signal-fw" aria-hidden="true"><img src="assets/icon_voices.png" alt=""
-              width="26" height="26"><b>VOICES</b><i>The gearbox</i></span>
-        </span>
-      </button>
-      <button class="signal fw-sixc" type="button" role="radio" aria-checked="false"
-              tabindex="-1" data-fw="sixc">
-        <p class="num">03</p>
-        <h3>Three people, three different maps</h3>
-        <p>Ask where the project stands and you get three answers. That isn&rsquo;t
-          a communication problem. It&rsquo;s a system routing everything through you.</p>
-        <span class="signal-foot">
-          <span class="signal-pick">That one&rsquo;s mine</span>
-          <span class="signal-fw" aria-hidden="true"><img src="assets/icon_6C.png" alt=""
-              width="26" height="26"><b>The 6C Compass</b><i>The navigation system</i></span>
-        </span>
-      </button>
-      <button class="signal fw-delegate" type="button" role="radio" aria-checked="false"
-              tabindex="-1" data-fw="delegate">
-        <p class="num">04</p>
-        <h3>The week you took off didn&rsquo;t go well</h3>
-        <p>Not a long weekend with the laptop in the bag. The real thing. If you
-          can&rsquo;t find one in the last year, that&rsquo;s the diagnosis.</p>
-        <span class="signal-foot">
-          <span class="signal-pick">That one&rsquo;s mine</span>
-          <span class="signal-fw" aria-hidden="true"><img src="assets/icon_delegate.png" alt=""
-              width="26" height="26"><b>DELEGATE</b><i>The handoff system</i></span>
-        </span>
-      </button>
-    </div>
-    <div class="signal-verdict" id="signalVerdict" hidden aria-live="polite">
-      <div class="sv-text">
-        <img class="sv-icon" id="signalVerdictIcon" src="" alt=""
-             width="34" height="34" hidden>
-        <p class="sv-count" id="signalVerdictCount"></p>
-        <p class="sv-line" id="signalVerdictText"></p>
-        <p class="sv-next" id="signalVerdictNext"></p>
-      </div>
-      <p class="sv-actions">
-        <a class="btn" id="signalVerdictCta" href="diagnostic/">Run the ten-minute diagnostic</a>
-        <a class="link-arrow" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt">Or book a call</a>
-      </p>
-    </div>
-  </section>
 
   <!-- Client testimonials. Practice proof, kept separate from book reviews:
        a school buyer needs to hear from another school, not from a reader.
@@ -476,68 +477,79 @@
 </script>
 
 <script>
-/* Signals as a self-diagnostic. Four engine lights, one per framework, and a
-   forced single choice. A radiogroup rather than four toggles, because "pick
-   the closest" is the question being asked and toggles invite ticking all four,
-   which produces no diagnosis at all. The card shows only the symptom; this
-   script supplies the framework name, so the reveal is the payoff.
+/* Pick the one, as question 1 of the diagnostic (BUSINESS-176).
+   Five pattern cards in a radiogroup: one choice, arrow keys move and select.
+   The card shows only the symptom; the reveal names the pattern.
 
-   ASSESSMENTS maps a framework to its own Jotform. Leave an entry empty and
-   that framework falls back to the six-cylinder diagnostic, so the module is
-   never broken while the four instruments are being written. */
+   PATTERNS is the one config block. Each entry carries its quiz link and its
+   booking link, so the BUSINESS-161 swap is one edit per line.
+
+   PHASE 2 (live from 1 Oct, BUSINESS-161): each quiz link is
+     https://form.jotform.com/262713215187052?q1_friction=<q1, URL-encoded>&src=home-cards
+   using the q1 text below exactly, straight apostrophes and all (Jotform prefills Q1 by field name
+   q1_friction on "GDC - Diagnostic v2 (draft)"; hidden field src). Set
+   PHASE back to 1 to send picks to /diagnostic/?src=home-cards instead.
+
+   COUNT_URL: cookieless pick and click counter (Cloudflare Worker, KV).
+   Sends only the action and the pattern slug; nothing about the person.
+   Empty string = off. */
 (function () {
-  const ASSESSMENTS = {
-    create:   '',   /* paste the CREATE assessment URL here   */
-    voices:   '',   /* paste the VOICES assessment URL here   */
-    sixc:     '',   /* paste the 6C assessment URL here       */
-    delegate: ''    /* paste the DELEGATE assessment URL here */
-  };
-  const FALLBACK = { href: 'diagnostic/', label: 'Run the ten-minute diagnostic' };
+  const PHASE = 2;   /* switched on 1 Oct with BUSINESS-161 */
+  const QUIZ_V2 = 'https://form.jotform.com/262713215187052';
+  const CAL = 'https://calendly.com/matt-thatsgoodedesign/chatt-with-matt';
+  const COUNT_URL = '';   /* paste the Worker URL here once it is deployed */
+  function ping(action, slug) {
+    if (!COUNT_URL || !navigator.sendBeacon) return;
+    try { navigator.sendBeacon(COUNT_URL, JSON.stringify({ a: action, p: slug })); } catch (e) {}
+  }
 
-  const lines = {
-    create: {
-      icon: 'assets/icon_create.png',
-      label: 'CREATE',
-      head: 'CREATE. The engine is running rough.',
-      body: 'Output is holding because people are pushing, not because the system is producing. CREATE is six cylinders of capacity, and when one stops firing everything downstream costs more to do. The useful question is which one.',
-      next: 'Next: find out which of the six cylinders it is coming from.'
+  const PATTERNS = {
+    'bottleneck': {
+      name: 'The Bottleneck',
+      q1: 'Everything runs through me.',
+      body: 'About four in ten people who take the diagnostic pick this one. It’s almost never a people problem. It’s a design problem, and design can be changed. The catch: the person who redesigns it is usually the one it runs through.'
     },
-    voices: {
-      icon: 'assets/icon_voices.png',
-      label: 'VOICES',
-      head: 'VOICES. The gearbox is stuck in third.',
-      body: 'One stance, used everywhere, is the most common reason a capable leader stalls on hard ground. VOICES is six gears and the conditions each one is built for. Third will get you along a motorway and nowhere up a hill.',
-      next: 'Next: find out which gears you never use.'
+    'growth-gap': {
+      name: 'The Growth Gap',
+      q1: "We're growing fast, but clarity and accountability lag behind.",
+      body: 'Growing fast is a good problem, and it’s still a problem. Structure that worked at twenty people starts leaking at forty, and it leaks as missed handoffs, not as a crisis.'
     },
-    sixc: {
-      icon: 'assets/icon_6C.png',
-      label: 'the 6C Compass',
-      head: 'The 6C Compass. This is architecture, not trust.',
-      body: 'Three answers to one question is not a communication failure. It is an undecided decision, and undecided decisions route themselves back through you. The 6C Compass is six modes and the discipline of naming which one is in play before the conversation starts.',
-      next: 'Next: map who actually decides what.'
+    'drift': {
+      name: 'The Drift',
+      q1: 'Our culture and communications feel misaligned.',
+      body: 'Culture rarely breaks all at once. It drifts, and the people closest to the work notice first.'
     },
-    delegate: {
-      icon: 'assets/icon_delegate.png',
-      label: 'DELEGATE',
-      head: 'DELEGATE. Nothing is actually transferring.',
-      body: 'If a week away breaks things, the handoffs were loans rather than transfers. DELEGATE is eight steps for moving ownership so it stays moved, and the step people skip is almost always the same one.',
-      next: 'Next: find the step you are skipping.'
+    'stall': {
+      name: 'The Stall',
+      q1: 'We have big goals, but execution keeps stalling.',
+      body: 'Big goals and a stalling engine usually mean friction in the system, not a lack of effort.'
+    },
+    'new-seat': {
+      name: 'The New Seat',
+      q1: "My role is changing and I'm not sure what it is now.",
+      body: 'A new seat changes what’s asked of you, often before anyone says so out loud.'
     }
   };
+  function quiz(slug) {
+    if (PHASE === 1) return 'diagnostic/?src=home-cards';
+    /* Jotform splits prefill values on commas, so each comma is escaped as
+       "\\," (tested 1 Oct: without it The Growth Gap and The Stall come up blank). */
+    return QUIZ_V2 + '?q1_friction=' + encodeURIComponent(PATTERNS[slug].q1.replace(/,/g, '\\,')) + '&src=home-cards';
+  }
+  function book(slug) {
+    return CAL + '?a1=' + encodeURIComponent(PATTERNS[slug].name) +
+      '&utm_source=thatsgoodedesign&utm_medium=home-cards&utm_content=' + slug;
+  }
 
   const group = document.getElementById('signals');
   const box   = document.getElementById('signalVerdict');
-  const out   = document.getElementById('signalVerdictText');
-  if (!group || !box || !out) return;
-
+  if (!group || !box) return;
   const picks = [...group.querySelectorAll('.signal')];
-  const cnt   = document.getElementById('signalVerdictCount');
-  const next  = document.getElementById('signalVerdictNext');
+  const head  = document.getElementById('signalVerdictCount');
+  const body  = document.getElementById('signalVerdictText');
   const cta   = document.getElementById('signalVerdictCta');
-  const icon  = document.getElementById('signalVerdictIcon');
+  const bk    = document.getElementById('signalVerdictBook');
   if (!picks.length) return;
-
-  let shown = false;
 
   function select(btn, focus) {
     picks.forEach(b => {
@@ -546,37 +558,28 @@
       b.tabIndex = on ? 0 : -1;
     });
     if (focus) btn.focus();
-
-    const v = lines[btn.dataset.fw];
+    const slug = btn.dataset.pattern, v = PATTERNS[slug];
     if (!v) return;
-    cnt.textContent  = v.head;
-    out.textContent  = v.body;
-    next.textContent = v.next;
-
-    /* Paint the verdict in the chosen framework's colour and put its icon on
-       the panel, so the answer is visibly branded rather than generically gold. */
-    box.className = 'signal-verdict fw-' + btn.dataset.fw;
-    if (icon) {
-      if (v.icon) { icon.src = v.icon; icon.hidden = false; }
-      else { icon.hidden = true; }
-    }
-
-    const url = ASSESSMENTS[btn.dataset.fw];
-    if (cta) {
-      cta.href = url || FALLBACK.href;
-      cta.textContent = url ? ('Run the ' + v.label + ' assessment') : FALLBACK.label;
-    }
+    head.textContent = v.name;
+    body.textContent = v.body;
+    cta.href = quiz(slug);
+    bk.href  = book(slug);
+    cta.dataset.p = bk.dataset.p = slug;
+    ping('pick', slug);
     box.hidden = false;
-
-    /* The payoff sits below four tall cards, so on a first pick it can be off
-       screen entirely and the interaction reads as "the colour changed". */
-    if (!shown) {
-      shown = true;
-      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        box.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
+    /* Keep both buttons on screen after every pick, which on a phone means
+       scrolling the panel's bottom edge into view. */
+    const r = box.getBoundingClientRect();
+    if (r.bottom > window.innerHeight || r.top < 0) {
+      const smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      box.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'end' });
     }
   }
+
+  cta.addEventListener('click', () => ping('quiz', cta.dataset.p));
+  bk.addEventListener('click',  () => ping('book', bk.dataset.p));
+  const other = document.querySelector('.pc-other a');
+  if (other) other.addEventListener('click', () => ping('other', 'none'));
 
   picks.forEach((b, i) => {
     b.addEventListener('click', () => select(b, false));
