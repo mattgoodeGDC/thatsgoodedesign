@@ -111,12 +111,13 @@
   #page-email .ce-ft-link:hover{ color:var(--sc-ink); border-color:var(--sc-ink); }
   #page-email .ce-hero-inner{ max-width:1200px; margin:0 auto; padding:20px 40px 64px; display:grid; grid-template-columns:minmax(0,1fr) 440px; gap:56px; align-items:center; }
   #page-email .book-title{ font-family:'Montserrat',sans-serif; font-weight:800; color:var(--sc-ink); }
-  #page-email .ce-sub{ font-family:'Mulish',sans-serif; font-size:19px; color:var(--sc-ink2); margin:2px 0 14px; max-width:36em; }
+  #page-email .ce-sub{ font-family:'Mulish',sans-serif; font-size:19px; line-height:1.5; color:var(--sc-ink2); margin:14px 0 16px; max-width:36em; }
+  #page-email .ce-bookname{ color:var(--sc-ink); font-weight:800; }
   #page-email .ce-author{ font-family:'Mulish',sans-serif; font-weight:700; font-size:15px; letter-spacing:.14em; text-transform:uppercase; color:var(--sc-blue); margin-bottom:22px; }
   #page-email .ce-quote{ font-family:'Source Serif 4',serif; font-style:italic; font-size:20.5px; line-height:1.6; color:var(--sc-ink); max-width:34em; border-left:4px solid var(--sc-yellow); padding:4px 0 4px 18px; margin-top:8px; }
-  #page-email .ce-get{ max-width:460px; }
-  #page-email .ce-fields{ display:flex; gap:0; flex-wrap:wrap; }
-  #page-email .ce-input{ flex:1 1 220px; min-width:0; height:50px; padding:12px 14px; border:2px solid var(--sc-blue); border-right:none; border-radius:6px 0 0 6px; background:#fff; color:var(--sc-ink); font-family:'Mulish',sans-serif; font-size:16px; }
+  #page-email .ce-get{ max-width:540px; }
+  #page-email .ce-fields{ display:flex; gap:0; flex-wrap:nowrap; }
+  #page-email .ce-input{ flex:1 1 auto; min-width:0; height:50px; padding:12px 14px; border:2px solid var(--sc-blue); border-right:none; border-radius:6px 0 0 6px; background:#fff; color:var(--sc-ink); font-family:'Mulish',sans-serif; font-size:16px; }
   #page-email .ce-btn{ flex:0 0 auto; height:50px; padding:0 20px; background:var(--sc-blue); color:#fff; border:none; border-radius:0 6px 6px 0; font-family:'Montserrat',sans-serif; font-weight:700; font-size:13px; letter-spacing:.06em; text-transform:uppercase; cursor:pointer; }
   #page-email .ce-btn:hover{ background:var(--sc-blue-d); }
   #page-email .ce-fine{ font-family:'Mulish',sans-serif; font-size:14px; color:var(--sc-ink2); margin-top:10px; }
@@ -139,16 +140,31 @@
   #page-email .ce-schools svg{ width:1.5em; height:1.5em; flex:0 0 auto; }
   #page-email .ce-cap{ position:absolute; left:0; right:0; bottom:0; text-align:center; font-family:'Mulish',sans-serif; font-size:clamp(11px,3cqw,13.5px); color:var(--sc-ink2); }
 
-  #page-email .ce-list{ margin:6px 0 0; padding-left:1.1em; font-family:'Source Serif 4',serif; font-size:18px; line-height:1.7; }
-  #page-email .ce-list li{ margin:0 0 10px; }
-  #page-email .ce-list li::marker{ color:var(--sc-blue); }
-  #page-email .ce-list strong{ color:var(--sc-ink); }
+  #page-email .ce-inside-head{ font-family:'Montserrat',sans-serif; font-weight:800; font-size:20px; color:var(--sc-ink); margin:40px 0 18px; }
+  #page-email .ce-list{ list-style:none; margin:0; padding:0; display:grid; gap:12px; }
+  #page-email .ce-list li{ display:grid; grid-template-columns:30px 1fr; gap:14px; align-items:start; background:#fff; border:1px solid rgba(47,109,181,.14); border-radius:10px; padding:16px 18px; }
+  #page-email .ce-num{ width:30px; height:30px; border-radius:50%; background:var(--sc-sky); color:var(--sc-blue); font-family:'Montserrat',sans-serif; font-weight:800; font-size:14px; display:flex; align-items:center; justify-content:center; }
+  #page-email .ce-list strong{ display:block; font-family:'Montserrat',sans-serif; font-weight:700; font-size:16px; color:var(--sc-ink); margin:3px 0 4px; }
+  #page-email .ce-list span.d{ display:block; font-family:'Mulish',sans-serif; font-size:16px; line-height:1.55; color:var(--sc-ink2); }
+  #page-email .ce-forms{ margin-top:20px; background:#fff; border:1px solid var(--book-border); padding:22px 20px; }
+  #page-email .ce-forms-head{ font-family:'Source Serif 4',serif; font-size:11.5px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--sc-blue); margin-bottom:6px; }
+  #page-email .ce-forms-note{ font-family:'Mulish',sans-serif; font-size:14px; line-height:1.5; color:var(--sc-ink2); margin:0 0 14px; }
+  #page-email .ce-file{ display:grid; grid-template-columns:44px 1fr; gap:12px; align-items:start; padding:14px 0; border-top:1px solid rgba(47,109,181,.14); }
+  #page-email .ce-file svg{ width:44px; height:54px; display:block; }
+  #page-email .ce-file-title{ font-family:'Montserrat',sans-serif; font-weight:700; font-size:15px; line-height:1.3; color:var(--sc-ink); margin:2px 0 8px; }
+  #page-email .ce-file-links{ display:flex; flex-wrap:wrap; gap:6px; }
+  #page-email .ce-file-links a{ font-family:'Mulish',sans-serif; font-weight:700; font-size:13px; text-decoration:none; padding:5px 10px; border-radius:5px; border:1px solid currentColor; }
+  #page-email .ce-file-links a.doc{ color:var(--sc-blue); }
+  #page-email .ce-file-links a.sheet{ color:var(--sc-green); }
+  #page-email .ce-file-links a:hover{ background:currentColor; }
+  #page-email .ce-file-links a:hover span{ color:#fff; }
   #page-email .ce-band{ background:var(--sc-blue); padding:56px 40px; }
-  #page-email .ce-band-inner{ max-width:900px; margin:0 auto; display:grid; grid-template-columns:1.2fr 1fr; gap:40px; align-items:center; }
+  #page-email .ce-band-inner{ max-width:900px; margin:0 auto; display:grid; grid-template-columns:1fr 1.1fr; gap:48px; align-items:center; }
   #page-email .ce-band .book-about-label{ color:var(--sc-yellow); }
   #page-email .ce-band h2{ font-family:'Montserrat',sans-serif; font-weight:800; color:#fff; font-size:30px; line-height:1.15; margin:6px 0 12px; }
   #page-email .ce-band p{ font-family:'Mulish',sans-serif; color:rgba(255,255,255,.88); }
   #page-email .ce-band .ce-input{ border-color:#fff; }
+  #page-email .ce-band-inner .ce-get{ max-width:none; }
   #page-email .ce-band .ce-btn{ background:var(--sc-yellow); color:var(--sc-ink); }
   #page-email .ce-band .ce-btn:hover{ filter:brightness(1.05); }
   #page-email .ce-band .ce-fine{ color:rgba(255,255,255,.8); }
@@ -156,7 +172,7 @@
   #page-email .book-about{ padding-top:52px; }
   @media (min-width:901px){ #page-email .book-about-inner{ grid-template-columns:minmax(0,1fr) 300px; } #page-email .book-note-inner{ grid-template-columns:110px 1fr; } #page-email .book-note-avatar{ margin:0; } }
   @media (max-width:900px){ #page-email .ce-hero-inner{ grid-template-columns:1fr; gap:36px; padding:16px 20px 52px; } #page-email .ce-stack{ max-width:380px; } }
-  @media (max-width:780px){ #page-email .ce-band-inner{ grid-template-columns:1fr; } #page-email .ce-band{ padding:44px 20px; } #page-email .ce-input{ border-right:2px solid var(--sc-blue); border-radius:6px; } #page-email .ce-band .ce-input{ border-right-color:#fff; } #page-email .ce-btn{ flex:1 1 100%; margin-top:8px; border-radius:6px; } #page-email .book-hero-status{ padding:24px 20px 0; } }
+  @media (max-width:780px){ #page-email .ce-band-inner{ grid-template-columns:1fr; } #page-email .ce-band{ padding:44px 20px; } #page-email .ce-fields{ flex-wrap:wrap; } #page-email .ce-input{ flex:1 1 100%; border-right:2px solid var(--sc-blue); border-radius:6px; } #page-email .ce-band .ce-input{ border-right-color:#fff; } #page-email .ce-btn{ flex:1 1 100%; margin-top:8px; border-radius:6px; } #page-email .book-hero-status{ padding:24px 20px 0; } }
   </style>
 <main id="main">
 
@@ -164,8 +180,8 @@
   <div class="book-hero-status reveal ce-status"><span class="status-tag">Free · Designed for schools</span><a class="ce-ft-link" href="../field-tested/">The full guide: Field Tested, 70 methods &rarr;</a></div>
   <div class="ce-hero-inner reveal">
     <div class="ce-hero-text">
-      <h1 class="book-title">Couldn't Have Been an Email</h1>
-      <p class="ce-sub">Meeting rhythms for schools – and the follow-through that makes the time count. A free companion to Field Tested.</p>
+      <h1 class="book-title">This couldn't have been an email?</h1>
+      <p class="ce-sub"><strong class="ce-bookname">Couldn't Have Been an Email</strong> is a free guide to meeting rhythms for schools – and the follow-through that makes the time count. A companion to Field Tested.</p>
       <div class="ce-author">Matt Goode</div>
       <p class="ce-quote">Run the meeting that couldn't have been an email; send the email that shouldn't have been a meeting.</p>
       <div class="ce-get" style="margin-top:26px;">
@@ -199,13 +215,13 @@
           <p>A meeting is for the work only a room can do.</p>
         </div>
         <p>It was built for schools and works for anyone who runs a meeting. Every rhythm has a suggested length and a window, a structure you can follow to the minute, opening questions, and the Field Tested methods that pair with it. The research behind it is cited, and the facilitation advice is written for rooms full of people who redirect conversations for a living.</p>
-        <p style="font-weight:700;margin-top:26px;">What's inside</p>
+        <h2 class="ce-inside-head">What's inside</h2>
         <ul class="ce-list">
-          <li><strong>The case for fewer, better meetings.</strong> What the research says, and why psychological safety matters more than any timer.</li>
-          <li><strong>Ten meeting rhythms.</strong> Weekly staff, monthly team, grade-team operations, faculty, department, topics of concern, one-on-ones, after action reviews, students of concern and student support teams.</li>
-          <li><strong>Running the room.</strong> Moves for keeping skilled talkers on track without scolding, and the 6C Decision Compass for naming how a call gets made.</li>
-          <li><strong>Designed for every mind.</strong> Thinking time, more than one way in, and room setups matched to the work.</li>
-          <li><strong>A Students of Concern system.</strong> The meeting, a follow-up lifecycle so no student sits on the list untouched, and a referral form and tracker you can edit in Word, Excel or Google.</li>
+          <li><span class="ce-num">1</span><div><strong>The case for fewer, better meetings.</strong><span class="d">What the research says, and why psychological safety matters more than any timer.</span></div></li>
+          <li><span class="ce-num">2</span><div><strong>Ten meeting rhythms.</strong><span class="d">Weekly staff, monthly team, grade-team operations, faculty, department, topics of concern, one-on-ones, after action reviews, students of concern and student support teams.</span></div></li>
+          <li><span class="ce-num">3</span><div><strong>Running the room.</strong><span class="d">Moves for keeping skilled talkers on track without scolding, and the 6C Decision Compass for naming how a call gets made.</span></div></li>
+          <li><span class="ce-num">4</span><div><strong>Designed for every mind.</strong><span class="d">Thinking time, more than one way in, and room setups matched to the work.</span></div></li>
+          <li><span class="ce-num">5</span><div><strong>A Students of Concern system.</strong><span class="d">The meeting, a follow-up lifecycle so no student sits on the list untouched, and a referral form and tracker you can edit in Word, Excel or Google.</span></div></li>
         </ul>
       </div>
       <div>
@@ -223,7 +239,13 @@
           <div class="book-aside-stat"><div class="book-aside-stat-label">Length</div><div class="book-aside-stat-val">25 pages</div></div>
           <div class="book-aside-rule"></div>
           <a href="#get" class="book-aside-btn">Get it free</a>
-          <a href="../school-meeting-forms/" class="book-aside-btn">Just the forms</a>
+          <a href="#forms" class="book-aside-btn">Just the forms</a>
+        </div>
+        <div class="ce-forms" id="forms">
+          <div class="ce-forms-head">The forms</div>
+          <p class="ce-forms-note">Free to download. The Google links make your own copy.</p>
+          <div class="ce-file"><svg viewBox="0 0 44 54" aria-hidden="true"><path d="M4 2h26l12 12v36a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="#EAF1FA" stroke="#2F6DB5" stroke-width="2"/><path d="M30 2v12h12" fill="none" stroke="#2F6DB5" stroke-width="2"/><path d="M10 24h24M10 30h24M10 36h24M10 42h15" stroke="#2F6DB5" stroke-width="2.4" stroke-linecap="round"/></svg><div><div class="ce-file-title">Students of Concern referral form</div><div class="ce-file-links"><a class="doc" href="../assets/field-tested/students-of-concern-referral-form.docx" download><span>Word</span></a><a class="doc" href="https://docs.google.com/document/d/1T0ZxdGisNB8e_AQdk9GFhf6bBTGxJMOf_RfkgxRFXxk/copy" target="_blank" rel="noopener"><span>Google Doc</span></a></div></div></div>
+          <div class="ce-file"><svg viewBox="0 0 44 54" aria-hidden="true"><path d="M4 2h26l12 12v36a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="#E6F4EE" stroke="#2E8A64" stroke-width="2"/><path d="M30 2v12h12" fill="none" stroke="#2E8A64" stroke-width="2"/><rect x="9" y="22" width="26" height="22" fill="#fff" stroke="#2E8A64" stroke-width="2"/><path d="M9 29.3h26M9 36.6h26M18 22v22" stroke="#2E8A64" stroke-width="2"/></svg><div><div class="ce-file-title">Students of Concern tracker</div><div class="ce-file-links"><a class="sheet" href="../assets/field-tested/students-of-concern-tracker.xlsx" download><span>Excel</span></a><a class="sheet" href="https://docs.google.com/spreadsheets/d/1NMNVU5p3cg3y_Ww5BzxCBIvuy9R3UtCj0ln87DYLlIY/copy" target="_blank" rel="noopener"><span>Google Sheet</span></a></div></div></div>
         </div>
       </div>
     </div>
