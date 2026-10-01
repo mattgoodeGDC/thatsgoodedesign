@@ -151,9 +151,9 @@ em.ph, .ph { display:none !important; }
 .email-form { max-width:400px; margin:0 auto; display:flex; gap:0; }
 .email-form input { flex:1; padding:13px 16px; border:1px solid rgba(0,0,0,.15); font-family:'Source Serif 4'; font-size:16px; }
 .btn-follow { background:var(--sage); color:var(--ink); font-family:'Source Serif 4'; font-size:14px; text-transform:uppercase; letter-spacing:.08em; padding:14px 26px; border:none; white-space:nowrap; }
-.email-form { flex-direction:column; gap:10px; max-width:100%; }
+@media (max-width:480px){ .email-form { flex-direction:column; gap:10px; max-width:100%; }
 .email-form input { width:100%; }
-.btn-follow { width:100%; white-space:normal; }
+.btn-follow { width:100%; white-space:normal; } }
 /* ---------- Buttons (general) ---------- */
 .btn { display:inline-block; padding:12px 26px; font-family:'Source Serif 4'; font-size:14px; text-transform:uppercase; letter-spacing:.08em; text-decoration:none; border:1px solid transparent; }
 .btn-outline { background:transparent; border-color:currentColor; color:var(--warm); }
@@ -177,8 +177,8 @@ img.real-cover.img-missing { opacity:0; }
 .book-title { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:47.5px; letter-spacing:.02em; margin:6px 0 6px; }
 .book-kicker { font-family:'Source Serif 4'; font-size:14px; text-transform:uppercase; letter-spacing:.14em; color:rgba(255,255,255,.5); margin-bottom:24px; }
 .qa-a em.ph { font-style:normal; color:#b98; }
-.book-detail { grid-template-columns:1fr; }
-.book-cover-col { position:static; max-width:220px; }
+@media (max-width:640px){ .book-detail { grid-template-columns:1fr; }
+.book-cover-col { position:static; max-width:220px; } }
 /* ---------- SHARED BOOK-PAGE STRUCTURE: About/POV/Author-note/Companion-callout ----------
    Added 2026-07-30. Used by Field Tested, No Average Brain, Seven, Noble Island so all four
    share one real structure/style per Matt's "general rule" note, instead of each page repeating
@@ -205,7 +205,7 @@ img.real-cover.img-missing { opacity:0; }
 .book-aside-stat-val { font-family:'Source Serif 4',serif; font-size:15px; opacity:.9; }
 .book-aside-btn { display:block; text-align:center; font-family:'Source Serif 4',serif; font-size:14px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; border:1px solid var(--book-accent, currentColor); padding:11px 16px; text-decoration:none; margin-top:10px; color:inherit; transition:opacity .2s; }
 .book-aside-btn:hover { opacity:.7; }
-.book-about-inner { grid-template-columns:1fr; }
+@media (max-width:900px){ .book-about-inner { grid-template-columns:1fr; } }
 .book-note { padding:56px 40px; border-top:1px solid var(--book-border, rgba(255,255,255,.1)); border-bottom:1px solid var(--book-border, rgba(255,255,255,.1)); background:var(--book-panel, rgba(255,255,255,.02)); }
 .book-note-inner { max-width:1100px; margin:0 auto; display:grid; grid-template-columns:110px 1fr; gap:48px; align-items:start; }
 .book-note-avatar { width:88px; height:88px; border-radius:50%; background:var(--book-panel2, rgba(255,255,255,.06)); border:1px solid var(--book-border, rgba(255,255,255,.18)); display:flex; align-items:center; justify-content:center; font-family:'Source Serif 4',serif; font-style:italic; font-size:25.5px; color:var(--book-accent, currentColor); overflow:hidden; }
@@ -216,8 +216,8 @@ img.real-cover.img-missing { opacity:0; }
 .book-note-body p { font-family:'Source Serif 4',serif; font-size:17px; line-height:1.8; opacity:.82; margin-bottom:18px; }
 .book-note-body ul { font-family:'Source Serif 4',serif; font-size:17px; line-height:1.7; opacity:.82; margin:-6px 0 18px 20px; padding:0; }
 .book-note-body li { margin-bottom:7px; }
-.book-note-inner { grid-template-columns:1fr; }
-.book-note-avatar { margin:0 auto; }
+@media (max-width:700px){ .book-note-inner { grid-template-columns:1fr; }
+.book-note-avatar { margin:0 auto; } }
 /* Companion/teacher-guide callout – raised-profile card, replaces the plain .daughter-banner
    line when Matt asked to raise a companion product's visual profile (e.g. Field Tested's
    Teacher Companion, "Couldn't Have Been an Email"). */
@@ -240,7 +240,7 @@ img.real-cover.img-missing { opacity:0; }
 /* ---------- Reveal-on-scroll ---------- */
 .reveal { opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease; }
 .reveal.is-visible { opacity:1; transform:none; }
-.reveal { opacity:1; transform:none; transition:none; }
+@media (prefers-reduced-motion: reduce){ .reveal { opacity:1; transform:none; transition:none; } }
 .pal-balance .status-tag,.pal-balance .book-title,.pal-balance .qa-q { color:var(--balance-accent); }
 .pal-balance .book-title { text-transform:uppercase; letter-spacing:.06em; }
 .pal-wrath .status-tag,.pal-wrath .qa-q { color:var(--wrath-accent); }
