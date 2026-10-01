@@ -107,10 +107,13 @@
   #page-email .ce-band h2{ font-family:'Montserrat',sans-serif; font-weight:800; color:#fff; font-size:30px; line-height:1.15; margin:6px 0 12px; }
   #page-email .ce-band p{ font-family:'Mulish',sans-serif; color:rgba(237,229,214,.82); }
   @media (max-width:780px){ #page-email .ce-band-inner{ grid-template-columns:1fr; } #page-email .ce-band{ padding:44px 20px; } #page-email .ce-input{ border-right:1px solid rgba(184,143,70,.6); } #page-email .ce-btn{ flex:1 1 100%; margin-top:8px; } }
+  #page-email .ce-status{ display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:10px 24px; }
+  #page-email .ce-ft-link{ font-family:'Mulish',sans-serif; font-weight:600; font-size:14px; color:var(--ft-accent); text-decoration:none; border-bottom:1px solid rgba(184,143,70,.45); padding-bottom:2px; }
+  #page-email .ce-ft-link:hover{ color:#fff; border-color:#fff; }
   </style>
 <main id="main">
 
-  <div class="book-hero-status reveal"><span class="status-tag">Free · A Field Tested companion</span></div>
+  <div class="book-hero-status reveal ce-status"><span class="status-tag">Free · A Field Tested companion</span><a class="ce-ft-link" href="../field-tested/">The full guide: Field Tested, 70 methods &rarr;</a></div>
   <div class="book-detail reveal">
     <div class="book-cover-col">
       <img class="real-cover" src="../assets/cover_email.png" alt="Couldn't Have Been an Email – cover" onerror="this.classList.add('img-missing')">
