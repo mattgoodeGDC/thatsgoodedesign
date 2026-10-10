@@ -209,6 +209,7 @@
     .obd-hero { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); align-items: start; }
     .obd-hero h1 { font-size: clamp(34px, 4.6vw, 56px); }
     .obd-hero-figure { margin-top: clamp(0px, 4vw, 52px); }
+    .obd-hero-figure figcaption { max-width: none; }
     .obd-hero-figure img { aspect-ratio: 4 / 3; object-position: 50% 50%; }
     @media (max-width: 820px) {
       .obd-hero { grid-template-columns: 1fr; }
@@ -216,8 +217,9 @@
     }
     /* Hero proof points as a two-by-two grid with a small green mark, so a
        wrapped line never starts with a separator dot. Buttons sit side by side. */
-    .obd-hero .obd-proof { display: grid; grid-template-columns: repeat(2, minmax(0, auto));
-      justify-content: start; gap: 10px 32px; margin-top: 26px; }
+    .obd-hero .obd-proof { display: grid; grid-template-columns: 1fr;
+      gap: 12px; margin: 22px 0 0; padding: 20px 22px; background: var(--paper-alt);
+      border: 1px solid var(--rule); font-size: 15px; color: var(--ink); }
     .obd-hero .obd-proof li { position: relative; padding-left: 16px; }
     .obd-hero .obd-proof li::before, .obd-hero .obd-proof li + li::before { margin: 0; content: ""; position: absolute; left: 0; top: .55em;
       width: 7px; height: 7px; background: var(--green-rule); transform: rotate(45deg); }
@@ -228,6 +230,29 @@
       .obd-hero .cta-row .btn { flex: 1 1 100%; text-align: center; }
       .obd-hero .cta-row .link-arrow { margin-inline: auto; }
     }
+    /* Contents of a full read, beside the sample. */
+    .obd-toc { margin: 18px 0 20px; padding: 0 0 0 22px; display: grid; gap: 6px;
+      font-size: 15px; color: var(--ink); }
+    .obd-toc li::marker { color: var(--green); font-weight: 700; }
+    .obd-sample .obd-sample-end { font-size: 13px; color: var(--muted); font-style: italic;
+      margin: 18px 0 0; padding-top: 12px; border-top: 1px solid var(--rule); }
+    /* Sample read, section furniture. */
+    .obd-sample h4 { display: flex; gap: 10px; align-items: baseline; }
+    .obd-sample h4 span { color: var(--gold-ink); }
+    .obd-gauges, .obd-rows, .obd-questions { list-style: none; padding: 0; margin: 0 0 10px; }
+    .obd-gauges li { display: flex; justify-content: space-between; gap: 12px; font-size: 14px;
+      padding: 6px 0; border-bottom: 1px dotted var(--rule-2); }
+    .obd-gauges b { color: var(--green); letter-spacing: .12em; font-weight: 400; white-space: nowrap; }
+    .obd-rows li { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 10px;
+      font-size: 14px; padding: 7px 0; border-bottom: 1px dotted var(--rule-2); }
+    .obd-rows b { color: var(--ink); }
+    .obd-pull { margin: 4px 0 12px; padding: 4px 0 4px 16px; border-left: 3px solid var(--gold);
+      font-size: 17px; line-height: 1.45; font-weight: 700; color: var(--ink); }
+    .obd-actions { margin: 0 0 10px; padding-left: 20px; font-size: 15px; line-height: 1.55; }
+    .obd-actions li { margin-bottom: 6px; }
+    .obd-actions li::marker { color: var(--green); font-weight: 700; }
+    .obd-questions li { font-size: 15px; font-style: italic; line-height: 1.55;
+      padding-left: 14px; border-left: 2px solid var(--rule-2); margin-bottom: 8px; }
   </style>
 
   <!-- Screen 1. -->
@@ -245,12 +270,6 @@
         against each other, so the work starts from how you actually operate
         under pressure rather than from what everyone assumes.
       </p>
-      <ul class="obd-proof" aria-label="About the OBD">
-        <li>CliftonStrengths® and EQ-i 2.0</li>
-        <li>Both reports in full, and yours to keep</li>
-        <li>Gallup-Certified Strengths Coach</li>
-        <li>Cerrito Forum panelist, 2025 and 2026</li>
-      </ul>
       <p class="cta-row">
         <a class="btn" href="#book">Book thirty minutes</a>
         <a class="link-arrow" href="#levels">See the three levels</a>
@@ -262,6 +281,11 @@
              width="1200" height="900">
         <figcaption>One hundred and thirty thousand miles, and the light is on.
           The car knew before the driver did.</figcaption>
+        <ul class="obd-proof" aria-label="About the OBD">
+          <li>CliftonStrengths® and EQ-i 2.0</li>
+          <li>Both reports in full, and yours to keep</li>
+          <li>Gallup-Certified Strengths Coach</li>
+        </ul>
       </figure>
     </div>
   </section>
@@ -323,40 +347,102 @@
     <div class="book-wrap obd-gap">
       <div>
         <h3 class="obd-h3">What the read looks like</h3>
-        <p>The read is a few pages in plain English. It does not repeat
-          either report. It puts them side by side and says what they mean
-          together, for this person, in this job.</p>
-        <p>The sample is a fictional leader, written to show the format. Your
+        <p>A full read runs 15 to 20 pages in plain English. It does not
+          repeat either report. It puts them side by side and says what they
+          mean together, for this person, in this job.</p>
+        <ol class="obd-toc">
+          <li>Leadership snapshot</li>
+          <li>Your strengths pattern</li>
+          <li>What is running under the hood</li>
+          <li>Where your strengths and EQ meet</li>
+          <li>Your engine: the six CREATE cylinders</li>
+          <li>Your transmission: the six VOICES gears</li>
+          <li>How you show up</li>
+          <li>Your highest-leverage work</li>
+          <li>Questions for the road ahead</li>
+        </ol>
+        <p>The sample on the right is a fictional leader, with a few lines
+          from each of the nine sections so you can see the shape of it. Your
           own read is about you, and it stays yours: participants own their
           results, and the read is designed to be useful on its own, portable
           to any coach or supervisor, whether or not anything else follows.</p>
       </div>
-      <article class="obd-sample" aria-label="Sample OBD read for a fictional leader">
+      <article class="obd-sample" aria-label="Sample OBD read structure for a fictional leader">
         <p class="obd-sample-tag">Sample · fictional leader</p>
         <h3>OBD read: Dana R.</h3>
         <p class="obd-sample-who">VP Engineering, 60-person software company. Fourteen months in the role.</p>
-        <h4>The short version</h4>
+        <h4><span>1</span>Leadership snapshot</h4>
         <p>Under pressure, Dana narrows. Both reports point the same way: she
           is at her best working a hard problem herself, quickly and
           thoroughly, and her read of other people drops furthest exactly
           when deadlines tighten. Her team experiences this as silence.
           Decisions arrive finished.</p>
-        <h4>Through CREATE</h4>
-        <p>Execution is her strongest cylinder. Relationships pay
-          for it. The two are not in conflict when the pace is normal; they
-          are in conflict every time a release slips.</p>
-        <h4>Where the two reports disagree</h4>
-        <p>Her strengths report says she earns trust through competence. Her
-          EQ-i results say she rarely lets people see how she is doing. So
-          her team trusts her work and guesses at her mood, and the guessing
-          gets louder the closer a deadline is.</p>
-        <h4>What to work on first</h4>
-        <p>One decision a week made out loud, before it is finished, with
-          the people who will carry it out in the room.</p>
-        <h4>What to watch at ninety days</h4>
-        <p>Whether her direct reports start bringing her problems before
-          they have solved them, or after.</p>
-        <button type="button" class="obd-sample-more" aria-expanded="false">Read the full sample</button>
+
+        <h4><span>2</span>Your strengths pattern</h4>
+        <p>Her strengths cluster around getting hard things done and getting
+          them right. Very little in her profile pulls toward persuading a
+          room. When Dana changes someone's mind, she does it with evidence,
+          not energy, and only once she is sure.</p>
+
+        <h4><span>3</span>What is running under the hood</h4>
+        <ul class="obd-gauges">
+          <li><span>Reading other people</span><b aria-label="higher">●●●●○</b></li>
+          <li><span>Saying it out loud, early</span><b aria-label="lower">●●○○○</b></li>
+          <li><span>Holding steady under pressure</span><b aria-label="moderate">●●●○○</b></li>
+          <li><span>Deciding without waiting</span><b aria-label="moderate">●●●○○</b></li>
+        </ul>
+        <p>She notices more than she says. The gap between the two is the
+          widest reading in her profile.</p>
+
+        <h4><span>4</span>Where your strengths and EQ meet</h4>
+        <p>Her strengths say she earns trust through competence. Her EQ
+          results say she rarely lets people see how she is doing. So her
+          team trusts her work and guesses at her mood, and the guessing gets
+          louder the closer a deadline is.</p>
+
+        <h4><span>5</span>Your engine: the six CREATE cylinders</h4>
+        <ul class="obd-rows">
+          <li><b>Execution</b><span>Strongest cylinder. Carries the team through every release.</span></li>
+          <li><b>Relationships</b><span>Runs lean under load. Pays for Execution when the pace rises.</span></li>
+          <li><b>Teaching</b><span>Strong one to one. Not yet built into how the team works.</span></li>
+        </ul>
+
+        <h4><span>6</span>Your transmission: the six VOICES gears</h4>
+        <p>Operator is her default gear, and a good one. Independent is the
+          gear she reaches for least: when she disagrees with a decision from
+          above, she executes it well and says nothing. Her team reads the
+          silence as agreement.</p>
+
+        <h4><span>7</span>How you show up</h4>
+        <blockquote class="obd-pull">Dana is the person everyone wants on the
+          hard problem, and the last person anyone tells about a hard
+          week.</blockquote>
+
+        <h4><span>8</span>Your highest-leverage work</h4>
+        <ol class="obd-actions">
+          <li>Make one decision a week out loud, before it is finished, with
+            the people who will carry it out in the room.</li>
+          <li>Name one disagreement upward each month, in the meeting, before
+            the decision closes.</li>
+          <li>Hand one recurring fix to a direct report, and do not take it
+            back.</li>
+        </ol>
+        <p><strong>What to watch at ninety days:</strong> whether her direct
+          reports start bringing her problems before they have solved them,
+          or after.</p>
+
+        <h4><span>9</span>Questions for the road ahead</h4>
+        <ul class="obd-questions">
+          <li>What does your team know about where you stand because you told
+            them, and what have they only inferred?</li>
+          <li>Which problem did you solve yourself this month that someone
+            else should have owned?</li>
+        </ul>
+
+        <p class="obd-sample-end">Fictional leader, written to show the
+          structure. This is a few lines from each section; a full read runs
+          15 to 20 pages, written about you.</p>
+        <button type="button" class="obd-sample-more" aria-expanded="false">See all nine sections</button>
       </article>
     </div>
   </section>
@@ -598,7 +684,7 @@
       btn.addEventListener('click', function () {
         var open = card.classList.toggle('is-open');
         btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-        btn.textContent = open ? 'Show less' : 'Read the full sample';
+        btn.textContent = open ? 'Show less' : 'See all nine sections';
         if (!open) card.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
       });
     })();
