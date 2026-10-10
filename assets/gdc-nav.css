@@ -124,6 +124,29 @@
 }
 
 
+/* Sticky diagnostic bar on phones (BUSINESS-162). Injected by gdc-nav.js. */
+.gdc-mbar{display:none}
+@media (max-width:760px){
+  .gdc-mbar{
+    display:flex;align-items:center;gap:14px;
+    position:fixed;left:0;right:0;bottom:0;z-index:60;
+    padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+    background:#FBFAF7;border-top:1px solid #C6C2B6;
+    box-shadow:0 -6px 18px rgba(36,36,39,.08);
+  }
+  .gdc-mbar-main{
+    flex:1 1 auto;text-align:center;text-decoration:none;
+    background:#C4A26A;color:#242427;border:1px solid #C4A26A;
+    padding:13px 16px;font-size:13px;font-weight:800;
+    letter-spacing:.12em;text-transform:uppercase;
+  }
+  .gdc-mbar-book{
+    flex:0 0 auto;font-size:14px;font-weight:700;color:#242427;
+    text-decoration:underline;text-underline-offset:3px;
+  }
+  body.has-mbar{padding-bottom:76px}
+}
+
 /* ─── the hidden state, asserted last ───
    Five times on this build a later rule has out-specified an earlier one and
    broken something quietly. A panel that will not close is the worst of those,

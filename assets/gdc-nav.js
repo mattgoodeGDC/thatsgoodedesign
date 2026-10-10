@@ -62,3 +62,28 @@
     init();
   }
 })();
+
+/* Sticky diagnostic bar on phones (BUSINESS-162). One primary action in the
+   thumb zone on every page: the 2-minute diagnostic, with a small booking link
+   beside it. Skipped where it would compete or make no sense: /diagnostic/ has
+   its own Start bar, /booked/ is for people who already booked, /clients/ is
+   private. Shown only under 760px by gdc-nav.css. */
+(function () {
+  function init() {
+    var path = location.pathname;
+    if (/\/(diagnostic|booked|clients)\//.test(path)) return;
+    if (document.querySelector('.dx-bar, .gdc-mbar')) return;
+    var bar = document.createElement('div');
+    bar.className = 'gdc-mbar';
+    bar.innerHTML =
+      '<a class="gdc-mbar-main" href="/diagnostic/">2-minute diagnostic</a>' +
+      '<a class="gdc-mbar-book" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt">Book a call</a>';
+    document.body.appendChild(bar);
+    document.body.classList.add('has-mbar');
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
