@@ -214,6 +214,20 @@
       .obd-hero { grid-template-columns: 1fr; }
       .obd-hero-figure { order: 0; max-width: none; margin-top: 8px; }
     }
+    /* Hero proof points as a two-by-two grid with a small green mark, so a
+       wrapped line never starts with a separator dot. Buttons sit side by side. */
+    .obd-hero .obd-proof { display: grid; grid-template-columns: repeat(2, minmax(0, auto));
+      justify-content: start; gap: 10px 32px; margin-top: 26px; }
+    .obd-hero .obd-proof li { position: relative; padding-left: 16px; }
+    .obd-hero .obd-proof li::before, .obd-hero .obd-proof li + li::before { margin: 0; content: ""; position: absolute; left: 0; top: .55em;
+      width: 7px; height: 7px; background: var(--green-rule); transform: rotate(45deg); }
+    .obd-hero .cta-row { gap: 14px 28px; margin-top: 30px; }
+    .obd-hero .cta-row .btn { white-space: nowrap; }
+    @media (max-width: 520px) {
+      .obd-hero .obd-proof { grid-template-columns: 1fr; }
+      .obd-hero .cta-row .btn { flex: 1 1 100%; text-align: center; }
+      .obd-hero .cta-row .link-arrow { margin-inline: auto; }
+    }
   </style>
 
   <!-- Screen 1. -->
@@ -238,8 +252,8 @@
         <li>Cerrito Forum panelist, 2025 and 2026</li>
       </ul>
       <p class="cta-row">
-        <a class="btn btn-lg" href="#book">Book thirty minutes</a>
-        <a class="btn btn-lg btn-ghost" href="#levels">See the three levels</a>
+        <a class="btn" href="#book">Book thirty minutes</a>
+        <a class="link-arrow" href="#levels">See the three levels</a>
       </p>
       </div>
       <figure class="hero-figure obd-hero-figure">
