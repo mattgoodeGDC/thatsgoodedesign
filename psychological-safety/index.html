@@ -117,14 +117,12 @@
     .ps-list strong { color: var(--ink); }
 
     .ps-who { margin-top: 26px; }
-    .ps-start { margin-left: 18px; white-space: nowrap; }
     .ps-h3 { font-size: 20px; font-weight: 700; line-height: 1.3; color: var(--ink); margin: 30px 0 0; }
     .ps-data { margin-top: 14px; }
     .ps-data li { font-size: 16px; }
     .ps-form { max-width: 820px; }
     .ps-form .embed-wrap { margin-top: 22px; }
     .ps-form .embed-wrap iframe { min-height: 0; display: block; }
-    @media (max-width: 520px) { .ps-start { display: inline-block; margin: 14px 0 0; } }
     .ps-fine { font-size: 14px; color: var(--muted); margin: 22px 0 0; max-width: 70ch; line-height: 1.55; }
     .ps-tm { font-size: 12px; color: var(--muted); margin: 26px 0 0; line-height: 1.5; max-width: 80ch; }
 
@@ -133,10 +131,22 @@
       line-height: 1.15; letter-spacing: -.02em; color: var(--ink); }
     .ps-quote footer { margin-top: 14px; font-size: 14px; color: var(--muted); }
 
-    .ps-stats { list-style: none; padding: 0; margin: 28px 0 0;
-      display: grid; gap: 34px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-    .ps-stats li { border-top: 2px solid var(--green-rule, var(--green)); padding-top: 18px; }
-    .ps-stats .ps-n { display: block; font-size: clamp(50px, 7vw, 84px);
+    .ps-carousel { position: relative; margin-top: 28px; }
+    .ps-stats { list-style: none; padding: 0 0 6px; margin: 0;
+      display: flex; gap: 34px; overflow-x: auto; scroll-snap-type: x mandatory;
+      scroll-behavior: smooth; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+    .ps-stats::-webkit-scrollbar { display: none; }
+    .ps-stats li { flex: 0 0 calc((100% - 68px) / 3); scroll-snap-align: start; }
+    @media (max-width: 900px) { .ps-stats li { flex-basis: calc((100% - 34px) / 2); } }
+    @media (max-width: 560px) { .ps-stats { gap: 22px; } .ps-stats li { flex-basis: 84%; } }
+    @media (prefers-reduced-motion: reduce) { .ps-stats { scroll-behavior: auto; } }
+    .ps-ctrl { display: flex; gap: 10px; margin-top: 22px; }
+    .ps-ctrl button { width: 44px; height: 44px; border: 1px solid var(--rule-2, #C6C2B6);
+      background: transparent; color: var(--ink); font-size: 18px; line-height: 1;
+      cursor: pointer; border-radius: 50%; }
+    .ps-ctrl button:hover, .ps-ctrl button:focus-visible { border-color: var(--gold); color: var(--ink); }
+    .ps-stats li { min-width: 0; border-top: 2px solid var(--green-rule, var(--green)); padding-top: 18px; }
+    .ps-stats .ps-n { display: block; font-size: clamp(48px, 5.6vw, 76px);
       font-weight: 800; line-height: 1; letter-spacing: -.035em; color: var(--ink);
       font-variant-numeric: tabular-nums; margin: 0 0 14px; }
     .ps-stats .ps-n small { font-size: .55em; letter-spacing: -.02em; }
@@ -154,11 +164,59 @@
       .ps-steps li::before { width: 38px; height: 38px; font-size: 16px; }
       .ps-steps h3 { margin-top: 6px; }
     }
+
+    .ps-split { display: grid; gap: clamp(28px, 5vw, 64px); grid-template-columns: 1fr; align-items: center; }
+    @media (min-width: 900px) { .ps-split { grid-template-columns: 1.4fr 1fr; }
+      .ps-who-runs { grid-template-columns: 260px 1fr; } }
+    .ps-fig { margin: 0; }
+    .ps-fig img { display: block; width: 100%; height: auto; }
+    .ps-fig figcaption { margin-top: 10px; font-size: 14px; font-style: italic; color: var(--muted); }
+    .ps-cover { display: block; max-width: 260px; }
+    .ps-cover img { display: block; width: 100%; height: auto; box-shadow: 0 14px 30px rgba(36,36,39,.18); }
+    .ps-creds { margin-top: 20px; }
+    .ps-creds li { font-size: 16px; }
+    .ps-mid { margin-top: clamp(34px, 4vw, 48px); }
+    .ps-refband { padding-top: clamp(36px, 4vw, 52px); padding-bottom: clamp(36px, 4vw, 52px); }
+    .ps-refband .ps-refs { margin-top: 10px; }
+
+    .ps-gate { margin-top: 28px; }
+    .ps-gate summary { cursor: pointer; font-weight: 700; color: var(--ink);
+      display: inline-block; padding: 12px 18px; border: 1px solid var(--rule-2, #C6C2B6); }
+    .ps-gate[open] summary { margin-bottom: 6px; }
+    .ps-gate .embed-wrap { margin-top: 18px; }
+    .ps-gate[open] ~ .ps-nocode { display: none; }
+
+    .ps-invite { display: none; background: var(--ink); color: #FBFAF7;
+      padding: 16px clamp(16px, 4vw, 40px); }
+    .ps-invite p { margin: 0 auto; max-width: 1100px; font-size: 16px; line-height: 1.5; }
+    .ps-invite a { color: #FBFAF7; text-decoration: underline; }
+    .ps-invited .ps-invite { display: block; }
+    .ps-invited .ps-sales, .ps-invited .ps-nocode, .ps-invited .ps-gate summary { display: none; }
+
+    .ps-sticky { display: none; }
+    @media (max-width: 700px) {
+      .ps-sticky { display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+        padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+        background: rgba(251,250,247,.96); border-top: 1px solid var(--rule, #DDDAD1);
+        transform: translateY(110%); transition: transform .25s ease; }
+      .ps-sticky.on { transform: none; }
+      .ps-sticky .btn { display: block; width: 100%; text-align: center; }
+      .ps-invited .ps-sticky { display: none; }
+      body { padding-bottom: 72px; }
+    }
+    @media (prefers-reduced-motion: reduce) { .ps-sticky { transition: none; } }
   </style>
 
+  <!-- Invited banner: shown only when the link carries a team code. -->
+  <div class="ps-invite" role="status">
+    <p><strong>You've been invited to a team survey.</strong> It's seven
+      statements and an optional comment, about two minutes, and it doesn't
+      ask for your name or email. <a href="#survey">Go to the survey</a></p>
+  </div>
+
   <!-- 1. Hero -->
-  <section class="hero hero-sub">
-    <p class="eyebrow">The Psychological Safety Check</p>
+  <section class="hero hero-sub ps-sales">
+    <p class="eyebrow">The Psychological Safety Check · For school and company leadership teams</p>
     <h1>Find out if your <span class="accent">warning lights</span> work.</h1>
     <p class="lede">
       Your team answers a published psychological safety scale, you answer
@@ -166,38 +224,46 @@
       the two. If we keep working together, we run it again at ninety days to
       see what moved.
     </p>
-    <p class="cta-row"><a class="btn btn-lg" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt">Book a call</a>
-      <a class="link-arrow ps-start" href="#survey">Or start the survey</a></p>
+    <p class="cta-row" id="ps-hero-cta"><a class="btn btn-lg" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt">Book a call</a></p>
   </section>
 
   <!-- 2. The problem -->
-  <section class="band alt">
-    <p class="eyebrow">The problem</p>
-    <h2 class="section-h big">A dashboard with no lights on can mean the engine is fine. Or that the bulbs are out.</h2>
-    <p class="lede">
-      Teams rarely go quiet all at once. Problems start arriving later,
-      smaller and better polished. Questions that used to come up in the
-      meeting come up in the hallway afterward, or not at all. Nothing
-      looks wrong, which is exactly the trouble.
-    </p>
-    <p class="lede">
-      Leaders usually believe their team is safer to speak up in than it
-      is. Not from vanity: from the head of the table, the room looks fine.
-      The person a team stops telling things to is the last to find out
-      it has stopped. That blind spot is what this check is built to
-      measure.
-    </p>
+  <section class="band alt ps-sales">
+    <div class="ps-split">
+      <div>
+        <p class="eyebrow">The problem</p>
+        <h2 class="section-h big">A dashboard with no lights on can mean the engine is fine. Or that the bulbs are out.</h2>
+        <p class="lede">
+          Teams rarely go quiet all at once. Problems start arriving later,
+          smaller and better polished. Questions that used to come up in the
+          meeting come up in the hallway afterward, or not at all. Nothing
+          looks wrong, which is exactly the trouble.
+        </p>
+        <p class="lede">
+          Leaders usually believe their team is safer to speak up in than it
+          is. Not from vanity: from the head of the table, the room looks fine.
+          The person a team stops telling things to is the last to find out
+          it has stopped. That blind spot is what this check is built to
+          measure.
+        </p>
+      </div>
+      <figure class="ps-fig">
+        <img src="../assets/photo-dashboard.jpg" alt="A car dashboard with the service light on" loading="lazy">
+        <figcaption>The light is only useful if it comes on.</figcaption>
+      </figure>
+    </div>
   </section>
 
-  <!-- 2b. The research. Peer-reviewed sources only; figures as published. -->
-  <section class="band">
+  <!-- 3. The research. Peer-reviewed sources plus one labeled industry study. -->
+  <section class="band ps-sales">
     <p class="eyebrow">What the research says</p>
     <blockquote class="ps-quote">
       <p>“… the team is safe for interpersonal risk taking.”</p>
       <footer>Amy C. Edmondson, defining team psychological safety, <i>Administrative Science Quarterly</i>, 1999</footer>
     </blockquote>
     <h2 class="section-h">Silence is common, it costs performance, and the people at the top feel it least</h2>
-    <ul class="ps-stats">
+    <div class="ps-carousel" role="region" aria-roledescription="carousel" aria-label="Research findings">
+    <ul class="ps-stats" id="ps-stats" tabindex="0">
       <li>
         <span class="ps-n">85<small>%</small></span>
         <p>of employees interviewed in one study had, at least once, stayed
@@ -213,7 +279,7 @@
         <span class="ps-src">Edmondson, <i>Administrative Science Quarterly</i>, 1999</span>
       </li>
       <li>
-        <span class="ps-n">22,000<small>+</small></span>
+        <span class="ps-n">22K<small>+</small></span>
         <p>people across 136 samples and nearly 5,000 groups. Psychological
           safety was linked to task performance, learning, engagement and
           information sharing, at both the individual and the team level.</p>
@@ -234,54 +300,78 @@
         <span class="ps-src">Google re:Work, Project Aristotle · industry research, not peer reviewed</span>
       </li>
     </ul>
+    <div class="ps-ctrl">
+      <button type="button" data-dir="-1" aria-controls="ps-stats" aria-label="Previous finding">&#8592;</button>
+      <button type="button" data-dir="1" aria-controls="ps-stats" aria-label="Next finding">&#8594;</button>
+    </div>
+    </div>
     <p class="lede ps-gap-note">
-      That last finding is the reason for the leader view. The person at the
-      top of a team is the one most likely to feel safe, which makes their
+      The clinician finding is the reason for the leader view. The person at
+      the top of a team is the one most likely to feel safe, which makes their
       own read of the room the least reliable one in it.
     </p>
-    <ol class="ps-refs" aria-label="References">
-      <li>Edmondson, A. (1999). Psychological safety and learning behavior in work teams. <i>Administrative Science Quarterly</i>, 44(2), 350–383. <a href="https://doi.org/10.2307/2666999">doi.org/10.2307/2666999</a></li>
-      <li>Milliken, F. J., Morrison, E. W., and Hewlin, P. F. (2003). An exploratory study of employee silence: Issues that employees don't communicate upward and why. <i>Journal of Management Studies</i>, 40(6), 1453–1476. <a href="https://doi.org/10.1111/1467-6486.00387">doi.org/10.1111/1467-6486.00387</a></li>
-      <li>Nembhard, I. M., and Edmondson, A. C. (2006). Making it safe: The effects of leader inclusiveness and professional status on psychological safety and improvement efforts in health care teams. <i>Journal of Organizational Behavior</i>, 27, 941–966. <a href="https://doi.org/10.1002/job.413">doi.org/10.1002/job.413</a></li>
-      <li>Frazier, M. L., Fainshmidt, S., Klinger, R. L., Pezeshkan, A., and Vracheva, V. (2017). Psychological safety: A meta-analytic review and extension. <i>Personnel Psychology</i>, 70(1), 113–165. <a href="https://doi.org/10.1111/peps.12183">doi.org/10.1111/peps.12183</a></li>
-    </ol>
+    <div class="next-step ps-mid">
+      <div>
+        <h3>Want to know what your team would say?</h3>
+        <p>Thirty minutes. We look at your team and whether this is the right
+          tool. No pitch; if it isn't a fit, I'll say so.</p>
+      </div>
+      <p class="next-step-action"><a class="btn btn-lg" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt">Book a call</a></p>
+    </div>
   </section>
 
-  <!-- 3. How it works -->
-  <section class="band alt">
+  <!-- 4. What you get -->
+  <section class="band alt ps-sales">
+    <p class="eyebrow">What you get</p>
+    <h2 class="section-h">An honest read, and a way to tell whether you fixed it</h2>
+    <ul class="ps-list">
+      <li><strong>Your team's results</strong> on a published research
+        scale, with the comments de-identified and grouped into themes.</li>
+      <li><strong>The gap between your view and theirs.</strong> Where you
+        expected one answer and your team gave another, that is the finding
+        that matters most.</li>
+      <li><strong>A 30-minute debrief with me,</strong> ending on the first
+        thing to redesign, not a list of everything that could be better.</li>
+      <li><strong>A 90-day re-run when we keep working together,</strong> so
+        you have evidence of whether the change worked instead of a feeling
+        that it did.</li>
+    </ul>
+  </section>
+
+  <!-- 5. How it works -->
+  <section class="band ps-sales">
     <p class="eyebrow">How it works</p>
-    <h2 class="section-h">Five steps, from survey to debrief to re-run</h2>
+    <h2 class="section-h">From the first call to the first change</h2>
     <ol class="ps-steps">
       <li>
-        <h3>Your team takes the survey</h3>
-        <p>Short and online, built on Amy Edmondson's published Team
-          Psychological Safety scale, with room for an optional comment.</p>
+        <h3>We talk for thirty minutes</h3>
+        <p>About your team, your timing and whether this is the right tool.
+          If it is, the survey is set up within a week of the call, with the
+          email you send your team and the links for you and them.</p>
       </li>
       <li>
-        <h3>You take your own version</h3>
-        <p>You rate the same scale the way you expect your team to answer,
-          before you see a single result. Your prediction is part of the
-          data.</p>
+        <h3>Your team takes the survey, and you take your own version</h3>
+        <p>They answer Amy Edmondson's published scale, with room for an
+          optional comment. You rate the same scale the way you expect them to
+          answer, before you see a single result.</p>
       </li>
       <li>
         <h3>I de-identify the comments</h3>
         <p>I read every comment myself and remove anything that could point
-          to who wrote it before you see it. You get what people meant,
-          not who said it. Results are shared only when at least five people
-          respond.</p>
+          to who wrote it. You get what people meant, not who said it.
+          Results are shared only when at least five people respond.</p>
       </li>
       <li>
         <h3>We debrief for thirty minutes</h3>
-        <p>We walk through the results together: your team's answers against
-          your prediction, the themes in the comments, and the first thing
-          worth redesigning.</p>
+        <p>Within a week of the survey closing, we go through the results and
+          agree the first thing worth redesigning.</p>
       </li>
       <li>
         <h3>If we keep working together, we run it again</h3>
-        <p>Ninety days later, same team, same scale. The second round shows whether what you
-          changed made a difference, or whether the lights are still off.
-          Rounds usually run in October and late January, or late January and
-          late April for teams starting mid-year.</p>
+        <p>Ninety days later, same team, same scale. The second round shows
+          whether what you changed made a difference, or whether the lights
+          are still off. Rounds usually run in October and late January, or
+          late January and late April for teams starting mid-year.</p>
       </li>
     </ol>
 
@@ -294,14 +384,11 @@
         mistake or try something new without it being held against you.
         What I add is the way it's run: the leader view, the de-identified
         comments, the debrief and the second round.</p>
-      <p class="ps-cite">Edmondson, A. (1999). Psychological safety and learning
-        behavior in work teams. <i>Administrative Science Quarterly</i>, 44(2),
-        350–383.</p>
     </div>
   </section>
 
-  <!-- 4. Who it's for -->
-  <section class="band">
+  <!-- 6. Who it's for -->
+  <section class="band alt ps-sales">
     <p class="eyebrow">Who it's for</p>
     <h2 class="section-h">Any intact team with one leader</h2>
     <div class="grid-3 tracks ps-who">
@@ -330,44 +417,8 @@
       organizations, because there is no shared team for them to describe.</p>
   </section>
 
-  <!-- 5. What you get -->
-  <section class="band alt">
-    <p class="eyebrow">What you get</p>
-    <h2 class="section-h">An honest read, and a way to tell whether you fixed it</h2>
-    <ul class="ps-list">
-      <li><strong>Your team's results</strong> on a published research
-        scale, with the comments de-identified and grouped into themes.</li>
-      <li><strong>The gap between your view and theirs.</strong> Where you
-        expected one answer and your team gave another, that is the finding
-        that matters most.</li>
-      <li><strong>A 30-minute debrief with me,</strong> ending on the first
-        thing to redesign, not a list of everything that could be better.</li>
-      <li><strong>A 90-day re-run when we keep working together,</strong> so
-        you have evidence of whether the change worked instead of a feeling
-        that it did.</li>
-    </ul>
-  </section>
-
-  <!-- 6. How this fits CLUTCH (verbatim) -->
-  <section class="band">
-    <p class="eyebrow">How this fits CLUTCH</p>
-    <h2 class="section-h big">Low safety is a design outcome, not a personality problem</h2>
-    <p class="lede">
-      CLUTCH is leadership by design, not personality. Silence is a design
-      problem too: a team that won't speak up is responding sensibly to the
-      system around it. In CREATE, safety starts in Culture and runs through
-      every cylinder. In VOICES, the Encourager builds it and an unchecked
-      Sculptor crushes it. In the 6C Compass, Consultative becomes fake
-      listening when input goes nowhere. In DELEGATE, Agree on Checkpoints
-      fails when people hide what isn't working. Emotional intelligence, the
-      clutch, is how a leader reads the gap between how they expect the team
-      to answer and how it does. This survey shows which part to redesign.
-    </p>
-    <p class="meta"><a class="link-arrow" href="../clutch/">About CLUTCH</a></p>
-  </section>
-
   <!-- 7. Three ways to use it -->
-  <section class="band alt">
+  <section class="band ps-sales">
     <p class="eyebrow">Three ways to use it</p>
     <h2 class="section-h">Start an engagement, open a workshop, or build it into a 360</h2>
     <div class="grid-3 tracks ps-who">
@@ -395,17 +446,70 @@
     </div>
   </section>
 
-  <!-- 7b. The survey. Jotform embed; client links pass team, round and role through. -->
+  <!-- 8. Who runs it -->
+  <section class="band alt ps-sales">
+    <div class="ps-split ps-who-runs">
+      <a class="ps-cover" href="../clutch/"><img src="../assets/clutch_cover.jpg" alt="CLUTCH by Matt Goode, book cover" loading="lazy"></a>
+      <div>
+        <p class="eyebrow">Who runs it</p>
+        <h2 class="section-h">The same person from the first call to the debrief</h2>
+        <p class="lede">I'm Matt Goode, author of <i>CLUTCH: How Leaders Build
+          Systems That Run Without Them</i>. I read every comment myself and run
+          every debrief. There is no associate layer and no handoff after the sale.</p>
+        <ul class="ps-list ps-creds">
+          <li>Gallup-Certified Strengths Coach, certified in EQ-i 2.0 and an ICF-trained coach</li>
+          <li>Twenty years inside schools, seventeen of them at McDonogh</li>
+          <li>Co-led enterprise talent development at USAID's Bureau for Humanitarian Assistance</li>
+        </ul>
+        <p class="meta"><a class="link-arrow" href="../about/">More about me</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. How this fits CLUTCH (verbatim) -->
+  <section class="band ps-sales">
+    <p class="eyebrow">How this fits CLUTCH</p>
+    <h2 class="section-h big">Low safety is a design outcome, not a personality problem</h2>
+    <p class="lede">
+      CLUTCH is leadership by design, not personality. Silence is a design
+      problem too: a team that won't speak up is responding sensibly to the
+      system around it. In CREATE, safety starts in Culture and runs through
+      every cylinder. In VOICES, the Encourager builds it and an unchecked
+      Sculptor crushes it. In the 6C Compass, Consultative becomes fake
+      listening when input goes nowhere. In DELEGATE, Agree on Checkpoints
+      fails when people hide what isn't working. Emotional intelligence, the
+      clutch, is how a leader reads the gap between how they expect the team
+      to answer and how it does. This survey shows which part to redesign.
+    </p>
+    <p class="meta"><a class="link-arrow" href="../clutch/">About CLUTCH</a></p>
+  </section>
+
+  <!-- 10. Closing call to action -->
+  <section class="band alt ps-sales" id="ps-close">
+    <div class="next-step">
+      <div>
+        <p class="eyebrow">Next step</p>
+        <h3>Book a call to set it up for your team</h3>
+        <p>Thirty minutes on your team, your timing, and whether this is the
+          right instrument or something else should come first. If it is, the
+          survey is set up within a week. If it isn't a fit, I'll say so on
+          the call.</p>
+      </div>
+      <p class="next-step-action">
+        <a class="btn btn-lg" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt">Book a call</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- 11. The survey. Open for invited links; collapsed for everyone else. -->
   <section class="band" id="survey">
     <div class="ps-form">
-      <p class="eyebrow">Start here</p>
+      <p class="eyebrow">For invited teams</p>
       <h2 class="section-h">Take the survey</h2>
       <p class="lede">Think about the team you work with most closely and rate
         how much you agree with each statement. It takes about two minutes,
         there are no right or wrong answers, and the form doesn't ask for
         your name or email.</p>
-      <p class="ps-fine">If you have a team code from your leader or from me,
-        enter it so your answers are counted with your team's.</p>
 
       <h3 class="ps-h3">What happens to your answers</h3>
       <ul class="ps-list ps-data">
@@ -419,31 +523,36 @@
           as long as we do, so each new round can be compared with the last.
           When the work ends, the ninety-day clock starts.</li>
       </ul>
-      <div class="embed-wrap">
-        <iframe id="JotFormIFrame-262822423143046"
-          title="Team Psychological Safety Survey"
-          src="https://form.jotform.com/262822423143046"
-          allow="fullscreen"
-          style="width:100%;height:900px;border:none;"
-          scrolling="no"></iframe>
-      </div>
+
+      <details class="ps-gate" id="ps-gate">
+        <summary>I have a team code – open the survey</summary>
+        <p class="ps-fine">Enter the team code from your leader or from me so
+          your answers are counted with your team's. Leaders: use the link I
+          sent you, which opens the leader version.</p>
+        <div class="embed-wrap">
+          <iframe id="JotFormIFrame-262822423143046"
+            title="Team Psychological Safety Survey"
+            data-src="https://form.jotform.com/262822423143046"
+            allow="fullscreen"
+            style="width:100%;height:900px;border:none;"
+            scrolling="no"></iframe>
+        </div>
+      </details>
+      <p class="ps-fine ps-nocode">No code? This survey is run for teams I'm
+        working with. If you lead a team and want to run it,
+        <a href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt">book a call</a>.</p>
     </div>
   </section>
 
-  <!-- 8. Closing call to action -->
-  <section class="band alt">
-    <div class="next-step">
-      <div>
-        <p class="eyebrow">Next step</p>
-        <h3>Book a call to set it up for your team</h3>
-        <p>Thirty minutes on your team, your timing, and whether this is the
-          right instrument or something else should come first. If it isn't
-          a fit, I'll say so on the call.</p>
-      </div>
-      <p class="next-step-action">
-        <a class="btn btn-lg" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt">Book a call</a>
-      </p>
-    </div>
+  <!-- 12. References and disclaimers -->
+  <section class="band ps-refband">
+    <p class="eyebrow">Sources</p>
+    <ol class="ps-refs" aria-label="References" start="1">
+      <li>Edmondson, A. (1999). Psychological safety and learning behavior in work teams. <i>Administrative Science Quarterly</i>, 44(2), 350–383. <a href="https://doi.org/10.2307/2666999">doi.org/10.2307/2666999</a></li>
+      <li>Milliken, F. J., Morrison, E. W., and Hewlin, P. F. (2003). An exploratory study of employee silence: Issues that employees don't communicate upward and why. <i>Journal of Management Studies</i>, 40(6), 1453–1476. <a href="https://doi.org/10.1111/1467-6486.00387">doi.org/10.1111/1467-6486.00387</a></li>
+      <li>Nembhard, I. M., and Edmondson, A. C. (2006). Making it safe: The effects of leader inclusiveness and professional status on psychological safety and improvement efforts in health care teams. <i>Journal of Organizational Behavior</i>, 27, 941–966. <a href="https://doi.org/10.1002/job.413">doi.org/10.1002/job.413</a></li>
+      <li>Frazier, M. L., Fainshmidt, S., Klinger, R. L., Pezeshkan, A., and Vracheva, V. (2017). Psychological safety: A meta-analytic review and extension. <i>Personnel Psychology</i>, 70(1), 113–165. <a href="https://doi.org/10.1111/peps.12183">doi.org/10.1111/peps.12183</a></li>
+    </ol>
     <p class="ps-tm">Amy C. Edmondson has not reviewed or endorsed this survey
       or this offer. The Team Psychological Safety scale is hers; the way it is
       run here is Goode Design &amp; Consulting's. Research figures are as
@@ -451,13 +560,49 @@
       reviewed or endorsed this survey or this offer.</p>
   </section>
 
+  <!-- Mobile booking bar -->
+  <div class="ps-sticky" id="ps-sticky" aria-hidden="true">
+    <a class="btn" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt" tabindex="-1">Book a call</a>
+  </div>
+
+  <script>
+    /* Research carousel: moves one card every 6s, loops, and stops for good
+       once the visitor hovers, focuses, touches or uses the arrows. No
+       autoplay when reduced motion is on. */
+    (function () {
+      var track = document.getElementById("ps-stats");
+      if (!track) return;
+      var box = track.parentNode, timer = null, stopped = false;
+      function step() {
+        var li = track.querySelector("li");
+        return li ? li.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 34) : track.clientWidth;
+      }
+      function go(dir) {
+        var max = track.scrollWidth - track.clientWidth;
+        if (dir > 0 && track.scrollLeft >= max - 4) track.scrollTo({ left: 0 });
+        else if (dir < 0 && track.scrollLeft <= 4) track.scrollTo({ left: max });
+        else track.scrollBy({ left: dir * step() });
+      }
+      function stop() { stopped = true; clearInterval(timer); }
+      box.querySelectorAll(".ps-ctrl button").forEach(function (b) {
+        b.addEventListener("click", function () { stop(); go(+b.getAttribute("data-dir")); });
+      });
+      ["mouseenter", "focusin", "touchstart", "wheel"].forEach(function (ev) {
+        box.addEventListener(ev, stop, { passive: true });
+      });
+      var calm = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!calm) timer = setInterval(function () { if (!stopped && !document.hidden) go(1); }, 6000);
+    })();
+  </script>
+
   <script src="https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js"></script>
   <script>
-    /* Pass client links through to the form. Send people to
-       /psychological-safety/?team=<code>&round=<n>[&role=leader]#survey;
-       the form has hidden fields with the matching names. Only letters,
-       digits and hyphens get through. To change forms, edit FORM_URL and
-       the iframe id. */
+    /* Survey: links with a team code (/psychological-safety/?team=<code>
+       &round=<n>[&role=leader]) switch the page to invited mode: banner on,
+       sales sections hidden, survey open and pre-filled. Without a code the
+       survey stays collapsed behind "I have a team code" and only loads
+       when opened. Only letters, digits and hyphens get through. To change
+       forms, edit FORM_URL and the iframe id. */
     (function () {
       var FORM_URL = "https://form.jotform.com/262822423143046";
       var q = new URLSearchParams(location.search), out = new URLSearchParams();
@@ -467,11 +612,35 @@
         if (v) out.set(MAP[k], v);
       });
       var frame = document.getElementById("JotFormIFrame-262822423143046");
-      var qs = out.toString();
-      if (frame && qs) frame.src = FORM_URL + "?" + qs;
-      if (window.jotformEmbedHandler) {
-        window.jotformEmbedHandler("iframe[id='JotFormIFrame-262822423143046']", "https://form.jotform.com/");
+      var gate = document.getElementById("ps-gate");
+      var loaded = false;
+      function load() {
+        if (loaded || !frame) return; loaded = true;
+        var qs = out.toString();
+        frame.src = FORM_URL + (qs ? "?" + qs : "");
+        if (window.jotformEmbedHandler) {
+          window.jotformEmbedHandler("iframe[id='JotFormIFrame-262822423143046']", "https://form.jotform.com/");
+        }
       }
+      if (gate) gate.addEventListener("toggle", function () { if (gate.open) load(); });
+      if (out.has("textbox0")) {
+        document.body.classList.add("ps-invited");
+        if (gate) gate.open = true;
+        load();
+      }
+    })();
+
+    /* Mobile booking bar: shows once the hero button has scrolled away and
+       hides again while the closing call to action is on screen. */
+    (function () {
+      var bar = document.getElementById("ps-sticky");
+      var hero = document.getElementById("ps-hero-cta");
+      var close = document.getElementById("ps-close");
+      if (!bar || !hero || !("IntersectionObserver" in window)) return;
+      var heroGone = false, closeOn = false;
+      function set() { bar.classList.toggle("on", heroGone && !closeOn); }
+      new IntersectionObserver(function (e) { heroGone = !e[0].isIntersecting && e[0].boundingClientRect.top < 0; set(); }).observe(hero);
+      if (close) new IntersectionObserver(function (e) { closeOn = e[0].isIntersecting; set(); }).observe(close);
     })();
   </script>
 
