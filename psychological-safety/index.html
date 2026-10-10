@@ -179,19 +179,12 @@
     .ps-refband { padding-top: clamp(36px, 4vw, 52px); padding-bottom: clamp(36px, 4vw, 52px); }
     .ps-refband .ps-refs { margin-top: 10px; }
 
-    .ps-gate { margin-top: 28px; }
-    .ps-gate summary { cursor: pointer; font-weight: 700; color: var(--ink);
-      display: inline-block; padding: 12px 18px; border: 1px solid var(--rule-2, #C6C2B6); }
-    .ps-gate[open] summary { margin-bottom: 6px; }
-    .ps-gate .embed-wrap { margin-top: 18px; }
-    .ps-gate[open] ~ .ps-nocode { display: none; }
-
     .ps-invite { display: none; background: var(--ink); color: #FBFAF7;
       padding: 16px clamp(16px, 4vw, 40px); }
     .ps-invite p { margin: 0 auto; max-width: 1100px; font-size: 16px; line-height: 1.5; }
     .ps-invite a { color: #FBFAF7; text-decoration: underline; }
     .ps-invited .ps-invite { display: block; }
-    .ps-invited .ps-sales, .ps-invited .ps-nocode, .ps-invited .ps-gate summary { display: none; }
+    .ps-invited .ps-sales, .ps-invited .ps-routes { display: none; }
 
     .ps-sticky { display: none; }
     @media (max-width: 700px) {
@@ -206,6 +199,23 @@
     }
     @media (prefers-reduced-motion: reduce) { .ps-sticky { transition: none; } }
     .ps-punch { display: block; margin-top: .45em; font-style: italic; font-weight: 800; color: var(--green, #146B4C); }
+    .ps-routes { margin-top: 22px; }
+    .ps-scope { max-width: 66ch; font-size: 17px; line-height: 1.6; margin: 12px 0 0; }
+    .ps-scaffold { display: grid; gap: 28px; grid-template-columns: 1fr; margin-top: 28px; max-width: 900px; }
+    @media (min-width: 760px) { .ps-scaffold { grid-template-columns: 1fr 1fr; } }
+    .ps-scaffold figure { margin: 0; padding: 18px 16px 10px; border: 1px solid var(--rule, #DDDAD1); background: var(--paper, #FBFAF7); }
+    .ps-d-head { font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 0 0 6px; }
+    .ps-diag { display: block; width: 100%; height: auto; font-family: inherit; }
+    .ps-d-ln { stroke: var(--rule-2, #C6C2B6); stroke-width: 1.5; }
+    .ps-d-l { fill: var(--ink, #242427); }
+    .ps-d-m { fill: var(--gold, #C4A26A); }
+    .ps-d-box { fill: none; stroke: var(--green, #146B4C); stroke-width: 1.6; stroke-dasharray: 5 4; }
+    .ps-d-box2 { stroke-dasharray: 2 4; }
+    .ps-d-code { font-size: 12px; font-weight: 600; fill: var(--green, #146B4C); }
+    .ps-d-lab { font-size: 13px; font-weight: 700; fill: var(--ink, #242427); }
+    .ps-d-sm { font-size: 12px; fill: var(--muted, #71706C); }
+    .ps-d-cap { font-size: 14px; font-weight: 700; fill: var(--ink, #242427); }
+    .ps-d-note { margin-top: 14px; }
   </style>
 
   <!-- Invited banner: shown only when the link carries a team code. -->
@@ -217,7 +227,7 @@
 
   <!-- 1. Hero -->
   <section class="hero hero-sub ps-sales">
-    <p class="eyebrow">The Psychological Safety Check · For school and company leadership teams</p>
+    <p class="eyebrow">The Psychological Safety Check · No fee · For school and company leadership teams</p>
     <h1>Find out if your <span class="accent">warning lights</span> work.</h1>
     <p class="lede">
       Your team answers a published psychological safety scale, you answer
@@ -321,22 +331,38 @@
     </div>
   </section>
 
-  <!-- 4. What you get -->
+  <!-- 4. No fee, and where it's used -->
   <section class="band alt ps-sales">
-    <p class="eyebrow">What you get</p>
-    <h2 class="section-h">An honest read, and a way to tell whether you fixed it</h2>
-    <ul class="ps-list">
-      <li><strong>Your team's results</strong> on a published research
-        scale, with the comments de-identified and grouped into themes.</li>
-      <li><strong>The gap between your view and theirs.</strong> Where you
-        expected one answer and your team gave another, that is the finding
-        that matters most.</li>
-      <li><strong>A 30-minute debrief with me,</strong> ending on the first
-        thing to redesign, not a list of everything that could be better.</li>
-      <li><strong>A 90-day re-run when we keep working together,</strong> so
-        you have evidence of whether the change worked instead of a feeling
-        that it did.</li>
-    </ul>
+    <p class="eyebrow">What it costs</p>
+    <h2 class="section-h big">There's no fee for the Check</h2>
+    <p class="lede">
+      I don't sell it as a product. I use it because a team that can't say
+      what it sees can't fix anything else, and it's the fastest way I know
+      to find out where a team really stands. You'll find it in three places
+      in my work.
+    </p>
+    <div class="grid-3 tracks ps-who">
+      <article class="track">
+        <h3>Onboarding a new client</h3>
+        <p>When I start working with a team, this is often the first thing we
+          do. It gives us a baseline before anything changes, and a second
+          reading at ninety days to show whether the work is landing.</p>
+      </article>
+      <article class="track">
+        <h3>Preparing a team for a workshop</h3>
+        <p>The team takes it before the session, so the room starts from how
+          people actually experience working together, not from a guess
+          about it.</p>
+      </article>
+      <article class="track">
+        <h3>Coaching with OBD Deluxe+</h3>
+        <p>It is the team side of a 360. The On-Board Diagnostic shows how
+          you operate; the Check shows how your team experiences it. Together
+          they show the distance between intent and impact.</p>
+        <p class="meta"><a class="link-arrow" href="../obd/">About the OBD</a></p>
+      </article>
+    </div>
+    <p class="lede ps-gap-note">Here's how it works.</p>
   </section>
 
   <!-- 5. How it works -->
@@ -388,8 +414,26 @@
     </div>
   </section>
 
-  <!-- 6. Who it's for -->
+  <!-- 4. What you get -->
   <section class="band alt ps-sales">
+    <p class="eyebrow">What you get</p>
+    <h2 class="section-h">An honest read, and a way to tell whether you fixed it</h2>
+    <ul class="ps-list">
+      <li><strong>Your team's results</strong> on a published research
+        scale, with the comments de-identified and grouped into themes.</li>
+      <li><strong>The gap between your view and theirs.</strong> Where you
+        expected one answer and your team gave another, that is the finding
+        that matters most.</li>
+      <li><strong>A 30-minute debrief with me,</strong> ending on the first
+        thing to redesign, not a list of everything that could be better.</li>
+      <li><strong>A 90-day re-run when we keep working together,</strong> so
+        you have evidence of whether the change worked instead of a feeling
+        that it did.</li>
+    </ul>
+  </section>
+
+  <!-- 6. Who it's for -->
+  <section class="band ps-sales">
     <p class="eyebrow">Who it's for</p>
     <h2 class="section-h">Any intact team with one leader</h2>
     <div class="grid-3 tracks ps-who">
@@ -412,39 +456,57 @@
           leader hears everything directly.</p>
       </article>
     </div>
-    <p class="ps-fine">Built for teams of up to fifteen people, all working
-      together under the same leader. Larger teams can run it too, quoted
-      separately on a call. It isn't built for cohorts drawn from different
-      organizations, because there is no shared team for them to describe.</p>
-  </section>
-
-  <!-- 7. Three ways to use it -->
-  <section class="band ps-sales">
-    <p class="eyebrow">Three ways to use it</p>
-    <h2 class="section-h">Start an engagement, open a workshop, or build it into a 360</h2>
-    <div class="grid-3 tracks ps-who">
-      <article class="track">
-        <h3>To start a consulting engagement</h3>
-        <p>When I take on a consulting client, this is one way we begin. It
-          gives us a baseline of how safe the team feels before anything
-          changes, and a second reading at ninety days to show whether the
-          work is landing.</p>
-      </article>
-      <article class="track">
-        <h3>To open a workshop</h3>
-        <p>Several of my workshops start with it. The team takes the survey
-          before the session, so the room begins from how people actually
-          experience working together, not from a guess about it.</p>
-      </article>
-      <article class="track">
-        <h3>As part of OBD Deluxe+</h3>
-        <p>OBD Deluxe+ uses the check as the team side of a 360. The
-          On-Board Diagnostic shows how you operate; the check shows how
-          your team experiences it. Together they show the distance between
-          intent and impact.</p>
-        <p class="meta"><a class="link-arrow" href="../obd/">About the OBD</a></p>
-      </article>
+    <h3 class="ps-h3">What it measures, and what it doesn't</h3>
+    <p class="ps-scope">
+      The Check reads one relationship: the people in a unit and the leader
+      who asked for their feedback. Everyone answering should sit within one
+      level of that leader, two at most. It won't tell you how safe things
+      are further up the organization or further down, and safety can look
+      quite different at each level.
+    </p>
+    <p class="ps-scope">
+      It does scale. A division or a whole organization runs it unit by
+      unit, each leader with their own people and their own code, so the
+      results line up side by side instead of blurring into one average.
+    </p>
+    <div class="ps-scaffold">
+      <figure>
+        <figcaption class="ps-d-head">A team</figcaption>
+        <svg class="ps-diag" viewBox="0 0 360 250" role="img" aria-labelledby="psdA">
+  <title id="psdA">One team: one leader and up to fifteen people, surveyed with one code</title>
+  <rect class="ps-d-box" x="40" y="44" width="280" height="142" rx="14"/>
+  <text class="ps-d-code" x="56" y="66">code: team-a</text>
+  <line class="ps-d-ln" x1="180" y1="102" x2="92" y2="150"/><line class="ps-d-ln" x1="180" y1="102" x2="136" y2="150"/><line class="ps-d-ln" x1="180" y1="102" x2="180" y2="150"/><line class="ps-d-ln" x1="180" y1="102" x2="224" y2="150"/><line class="ps-d-ln" x1="180" y1="102" x2="268" y2="150"/>
+  <circle class="ps-d-l" cx="180" cy="96" r="13"/>
+  <text class="ps-d-lab" x="180" y="76" text-anchor="middle">Leader</text>
+  <circle class="ps-d-m" cx="100" cy="156" r="5"/><circle class="ps-d-m" cx="116" cy="156" r="5"/><circle class="ps-d-m" cx="132" cy="156" r="5"/><circle class="ps-d-m" cx="148" cy="156" r="5"/><circle class="ps-d-m" cx="164" cy="156" r="5"/><circle class="ps-d-m" cx="180" cy="156" r="5"/><circle class="ps-d-m" cx="196" cy="156" r="5"/><circle class="ps-d-m" cx="212" cy="156" r="5"/><circle class="ps-d-m" cx="228" cy="156" r="5"/><circle class="ps-d-m" cx="244" cy="156" r="5"/><circle class="ps-d-m" cx="260" cy="156" r="5"/>
+  <text class="ps-d-sm" x="180" y="176" text-anchor="middle">Up to 15 people, one level down</text>
+  <text class="ps-d-cap" x="180" y="222" text-anchor="middle">One Check, one result</text>
+</svg>
+      </figure>
+      <figure>
+        <figcaption class="ps-d-head">An organization</figcaption>
+        <svg class="ps-diag" viewBox="0 0 360 250" role="img" aria-labelledby="psdB">
+  <title id="psdB">An organization: one Check for the senior team and one for each unit, each with its own code</title>
+  <rect class="ps-d-box ps-d-box2" x="22" y="26" width="316" height="100" rx="14"/>
+  <text class="ps-d-code" x="34" y="44">code: senior-team</text>
+  <line class="ps-d-ln" x1="180" y1="58" x2="70" y2="104"/><line class="ps-d-ln" x1="180" y1="58" x2="180" y2="104"/><line class="ps-d-ln" x1="180" y1="58" x2="290" y2="104"/><line class="ps-d-ln" x1="70" y1="116" x2="46" y2="166"/><line class="ps-d-ln" x1="70" y1="116" x2="62" y2="166"/><line class="ps-d-ln" x1="70" y1="116" x2="78" y2="166"/><line class="ps-d-ln" x1="70" y1="116" x2="94" y2="166"/><line class="ps-d-ln" x1="180" y1="116" x2="156" y2="166"/><line class="ps-d-ln" x1="180" y1="116" x2="172" y2="166"/><line class="ps-d-ln" x1="180" y1="116" x2="188" y2="166"/><line class="ps-d-ln" x1="180" y1="116" x2="204" y2="166"/><line class="ps-d-ln" x1="290" y1="116" x2="266" y2="166"/><line class="ps-d-ln" x1="290" y1="116" x2="282" y2="166"/><line class="ps-d-ln" x1="290" y1="116" x2="298" y2="166"/><line class="ps-d-ln" x1="290" y1="116" x2="314" y2="166"/>
+  <circle class="ps-d-l" cx="180" cy="52" r="11"/>
+  <rect class="ps-d-box" x="24" y="96" width="92" height="94" rx="12"/><circle class="ps-d-l" cx="70" cy="110" r="10"/><rect class="ps-d-box" x="134" y="96" width="92" height="94" rx="12"/><circle class="ps-d-l" cx="180" cy="110" r="10"/><rect class="ps-d-box" x="244" y="96" width="92" height="94" rx="12"/><circle class="ps-d-l" cx="290" cy="110" r="10"/>
+  <circle class="ps-d-m" cx="46" cy="170" r="5"/><circle class="ps-d-m" cx="62" cy="170" r="5"/><circle class="ps-d-m" cx="78" cy="170" r="5"/><circle class="ps-d-m" cx="94" cy="170" r="5"/><circle class="ps-d-m" cx="156" cy="170" r="5"/><circle class="ps-d-m" cx="172" cy="170" r="5"/><circle class="ps-d-m" cx="188" cy="170" r="5"/><circle class="ps-d-m" cx="204" cy="170" r="5"/><circle class="ps-d-m" cx="266" cy="170" r="5"/><circle class="ps-d-m" cx="282" cy="170" r="5"/><circle class="ps-d-m" cx="298" cy="170" r="5"/><circle class="ps-d-m" cx="314" cy="170" r="5"/>
+  <text class="ps-d-code" x="70" y="207" text-anchor="middle">unit-1</text><text class="ps-d-code" x="180" y="207" text-anchor="middle">unit-2</text><text class="ps-d-code" x="290" y="207" text-anchor="middle">unit-3</text>
+  <text class="ps-d-cap" x="180" y="240" text-anchor="middle">Four Checks, read side by side</text>
+</svg>
+      </figure>
     </div>
+    <p class="ps-fine ps-d-note">Each box is one Check: a leader, the people
+      within a level or two of them, and one code. The senior team's box
+      overlaps the units below it, so a division leader answers as a team
+      member in one Check and as the leader in their own.</p>
+    <p class="ps-fine">Built for units of up to fifteen people. Larger groups
+      can run it too; we work out the setup on a call. It isn't built for
+      cohorts drawn from different organizations, because there is no shared
+      team or leader for them to describe.</p>
   </section>
 
   <!-- 8. Who runs it -->
@@ -502,20 +564,31 @@
     </div>
   </section>
 
-  <!-- 11. The survey. Open for invited links; collapsed for everyone else. -->
+  <!-- 11. The survey. Open to everyone; the form branches on "Do you have a team code?". -->
   <section class="band" id="survey">
     <div class="ps-form">
-      <p class="eyebrow">For invited teams</p>
-      <h2 class="section-h">Take the survey</h2>
-      <p class="lede">Think about the team you work with most closely and rate
-        how much you agree with each statement. It takes about two minutes,
-        there are no right or wrong answers, and the form doesn't ask for
-        your name or email.</p>
+      <p class="eyebrow">Take the survey</p>
+      <h2 class="section-h">Two ways in, one survey</h2>
+      <div class="grid-3 tracks ps-who ps-routes">
+        <article class="track">
+          <h3>Invited by your team?</h3>
+          <p>Enter the team code your leader or I gave you. That code is the
+            only thing recorded with your answers: no name, no email. Your
+            answers are counted only with your team's, and your leader sees
+            team results once at least five people respond.</p>
+        </article>
+        <article class="track">
+          <h3>Leading a team?</h3>
+          <p>Try the leader view: rate the statements the way you think your
+            team would. Leave your name and email and I'll follow up on how to
+            run it with your team, so you can see how close your guess was.</p>
+        </article>
+      </div>
 
       <h3 class="ps-h3">What happens to your answers</h3>
       <ul class="ps-list ps-data">
-        <li><strong>Your leader never sees individual answers.</strong> They
-          see team results only, and only when at least five people respond.</li>
+        <li><strong>Team answers are anonymous.</strong> The team code is the
+          only identifier. Your leader never sees individual answers.</li>
         <li><strong>I read every comment myself</strong> and remove anything
           that could identify who wrote it. Your leader never sees a comment
           as written.</li>
@@ -523,30 +596,24 @@
           exception: if your team and I keep working together, I keep it for
           as long as we do, so each new round can be compared with the last.
           When the work ends, the ninety-day clock starts.</li>
+        <li><strong>Leaders who try it</strong> get a follow-up from me, and
+          that's all their email is used for.</li>
       </ul>
 
-      <details class="ps-gate" id="ps-gate">
-        <summary>I have a team code – open the survey</summary>
-        <p class="ps-fine">Enter the team code from your leader or from me so
-          your answers are counted with your team's. Leaders: use the link I
-          sent you, which opens the leader version.</p>
-        <div class="embed-wrap">
-          <iframe id="JotFormIFrame-262822423143046"
-            title="Team Psychological Safety Survey"
-            data-src="https://form.jotform.com/262822423143046"
-            allow="fullscreen"
-            style="width:100%;height:900px;border:none;"
-            scrolling="no"></iframe>
-        </div>
-      </details>
-      <p class="ps-fine ps-nocode">No code? This survey is run for teams I'm
-        working with. If you lead a team and want to run it,
-        <a href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt">book a call</a>.</p>
+      <div class="embed-wrap">
+        <iframe id="JotFormIFrame-262822423143046"
+          title="Team Psychological Safety Survey"
+          src="https://form.jotform.com/262822423143046"
+          allow="fullscreen"
+          loading="lazy"
+          style="width:100%;height:1000px;border:none;"
+          scrolling="no"></iframe>
+      </div>
     </div>
   </section>
 
   <!-- 12. References and disclaimers -->
-  <section class="band ps-refband">
+  <section class="band alt ps-refband">
     <p class="eyebrow">Sources</p>
     <ol class="ps-refs" aria-label="References" start="1">
       <li>Edmondson, A. (1999). Psychological safety and learning behavior in work teams. <i>Administrative Science Quarterly</i>, 44(2), 350–383. <a href="https://doi.org/10.2307/2666999">doi.org/10.2307/2666999</a></li>
@@ -598,12 +665,12 @@
 
   <script src="https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js"></script>
   <script>
-    /* Survey: links with a team code (/psychological-safety/?team=<code>
-       &round=<n>[&role=leader]) switch the page to invited mode: banner on,
-       sales sections hidden, survey open and pre-filled. Without a code the
-       survey stays collapsed behind "I have a team code" and only loads
-       when opened. Only letters, digits and hyphens get through. To change
-       forms, edit FORM_URL and the iframe id. */
+    /* Survey: the form is open to everyone and asks "Do you have a team
+       code?" itself. Links with a code (/psychological-safety/?team=<code>
+       &round=<n>[&role=leader]) switch the page to invited mode (banner on,
+       sales sections hidden) and pre-fill the form, which then skips its
+       first question. Only letters, digits and hyphens get through. To
+       change forms, edit FORM_URL and the iframe id. */
     (function () {
       var FORM_URL = "https://form.jotform.com/262822423143046";
       var q = new URLSearchParams(location.search), out = new URLSearchParams();
@@ -613,21 +680,10 @@
         if (v) out.set(MAP[k], v);
       });
       var frame = document.getElementById("JotFormIFrame-262822423143046");
-      var gate = document.getElementById("ps-gate");
-      var loaded = false;
-      function load() {
-        if (loaded || !frame) return; loaded = true;
-        var qs = out.toString();
-        frame.src = FORM_URL + (qs ? "?" + qs : "");
-        if (window.jotformEmbedHandler) {
-          window.jotformEmbedHandler("iframe[id='JotFormIFrame-262822423143046']", "https://form.jotform.com/");
-        }
-      }
-      if (gate) gate.addEventListener("toggle", function () { if (gate.open) load(); });
-      if (out.has("textbox0")) {
-        document.body.classList.add("ps-invited");
-        if (gate) gate.open = true;
-        load();
+      if (frame && out.toString()) frame.src = FORM_URL + "?" + out.toString();
+      if (out.has("textbox0")) document.body.classList.add("ps-invited");
+      if (window.jotformEmbedHandler) {
+        window.jotformEmbedHandler("iframe[id='JotFormIFrame-262822423143046']", "https://form.jotform.com/");
       }
     })();
 
