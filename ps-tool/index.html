@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Is it safe to speak up on your team? – Goode Design &amp; Consulting</title>
+<meta name="description" content="Leaders usually think their team is safer to speak up in than it is. Take the leader view of a published psychological safety scale, free, in about two minutes.">
+<link rel="canonical" href="https://thatsgoodedesign.com/ps-tool/">
+<meta name="robots" content="noai, noimageai">
+<meta name="tdm-reservation" content="1">
+<meta name="tdm-policy" content="https://thatsgoodedesign.com/terms/">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="../assets/mark.png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:site_name" content="Goode Design &amp; Consulting">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:title" content="You think your team tells you everything. Do they?">
+<meta property="og:description" content="A free, two-minute psychological safety check for leaders, built on Amy Edmondson's published scale.">
+<meta property="og:url" content="https://thatsgoodedesign.com/ps-tool/">
+<meta property="og:image" content="https://thatsgoodedesign.com/assets/og-default.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="You think your team tells you everything. Do they?">
+<meta name="twitter:description" content="A free, two-minute psychological safety check for leaders, built on Amy Edmondson's published scale.">
+<meta name="twitter:image" content="https://thatsgoodedesign.com/assets/og-default.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,700;1,800&amp;display=swap">
+<link rel="stylesheet" href="../assets/style.css?v=12">
+<link rel="stylesheet" href="../assets/gdc-nav.css?v=12">
+<script src="../assets/gdc-analytics.js?v=12"></script>
+<script src="../assets/gdc-nav.js?v=12" defer></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <a class="brand" href="../">
+    <img src="../assets/mark.png" alt="" width="40" height="40">
+    <span>Goode Design<em> &amp; Consulting</em></span>
+  </a>
+  <nav aria-label="Primary">
+    <a href="../system/">The system</a>
+    <div class="navmenu">
+      <button type="button" aria-expanded="false" aria-controls="menu-who">Who I help</button>
+      <ul class="navmenu-panel" id="menu-who" hidden>
+        <li><a href="../#lanes">Founders and scaling firms<span>Coaching and fractional operations</span></a></li>
+        <li><a href="../schools/">Independent schools<span>Coaching, cohorts, in-service, advisory</span></a></li>
+        <li><a href="../#lanes">Nonprofit and public sector<span>Team development and facilitation</span></a></li>
+      </ul>
+    </div>
+    <div class="navmenu">
+      <button type="button" aria-expanded="false" aria-controls="menu-services">Services</button>
+      <ul class="navmenu-panel navmenu-wide" id="menu-services" hidden>
+        <li class="nmp-group">
+          <p class="nmp-head">For companies</p>
+          <ul>
+            <li><a href="../products/#services">What a company can buy<span>One list, diagnostic to retained</span></a></li>
+            <li><a href="../obd/">The On-Board Diagnostic<span>Two instruments, one written read</span></a></li>
+            <li><a href="../products/#why">Why this is different<span>Five structural differences, not adjectives</span></a></li>
+          </ul>
+        </li>
+        <li class="nmp-group">
+          <p class="nmp-head">For schools and nonprofits</p>
+          <ul>
+            <li><a href="../schools/#services">What a school can buy<span>Nine services, plainly named</span></a></li>
+            <li><a href="../schools/rates/">Published rates<span>Real numbers for a budget line</span></a></li>
+            <li><a href="../schools/#why">Why this is different<span>Twenty years inside a school</span></a></li>
+          </ul>
+        </li>
+        <li class="nmp-foot">
+          <a href="../coaching-engagement/">How the engagement works<span>The terms, before you have to ask for them</span></a>
+        </li>
+        <li class="nmp-foot">
+          <a href="../diagnostic/">Start with the free diagnostic<span>Six cylinders, ten minutes, no email wall</span></a>
+        </li>
+      </ul>
+    </div>
+    <a href="../books/">Books</a>
+    <a href="../about/">About</a>
+    <a class="btn btn-sm" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt">Book a call</a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <style>
+    /* /ps-tool only: a short, shareable page for LinkedIn and other posts.
+       Everything else comes from style.css. */
+    .pt-hero h1 .pt-punch { display: block; margin-top: .3em; font-style: italic;
+      font-weight: 800; color: var(--green, #146B4C); }
+    .pt-cta { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+    .btn.pt-ghost { background: transparent; color: var(--ink, #242427);
+      box-shadow: inset 0 0 0 2px var(--ink, #242427); border-color: transparent; }
+    .btn.pt-ghost:hover, .btn.pt-ghost:focus-visible { background: var(--ink, #242427); color: #FBFAF7; }
+    @media (max-width: 520px) { .pt-cta .btn { flex: 1 1 100%; text-align: center; } }
+    .pt-trust { list-style: none; padding: 0; margin: 22px 0 0; display: flex; flex-wrap: wrap;
+      gap: 6px 0; font-size: 14px; font-weight: 600; color: var(--muted, #71706C); }
+    .pt-trust li + li::before { content: "\00B7"; margin: 0 10px; color: var(--rule-2, #C6C2B6); }
+
+    .pt-steps { list-style: none; padding: 0; margin: 28px 0 0; counter-reset: pt;
+      display: grid; gap: 26px; grid-template-columns: 1fr; }
+    @media (min-width: 820px) { .pt-steps { grid-template-columns: repeat(3, 1fr); } }
+    .pt-steps li { counter-increment: pt; border-top: 2px solid var(--gold, #C4A26A); padding-top: 18px; }
+    .pt-steps li::before { content: counter(pt); display: block; font-size: 44px; font-weight: 800;
+      line-height: 1; color: var(--ink, #242427); margin-bottom: 10px; }
+    .pt-steps h3 { font-size: 19px; font-weight: 700; color: var(--ink, #242427); margin: 0 0 6px; }
+    .pt-steps p { margin: 0; font-size: 16px; line-height: 1.55; }
+
+    .pt-stats { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 30px;
+      grid-template-columns: 1fr; }
+    @media (min-width: 760px) { .pt-stats { grid-template-columns: 1fr 1fr; } }
+    .pt-stats li { border-top: 2px solid var(--green, #146B4C); padding-top: 18px; }
+    .pt-n { display: block; font-size: clamp(48px, 7vw, 76px); font-weight: 800; line-height: 1;
+      letter-spacing: -.035em; color: var(--ink, #242427); margin-bottom: 12px; }
+    .pt-n small { font-size: .55em; }
+    .pt-stats p { margin: 0; font-size: 16px; line-height: 1.5; }
+    .pt-src { display: block; margin-top: 10px; font-size: 13px; color: var(--muted, #71706C); }
+
+    .pt-form { max-width: 820px; }
+    .pt-form .embed-wrap { margin-top: 22px; }
+    .pt-form .embed-wrap iframe { display: block; min-height: 0; }
+    .pt-fine { font-size: 14px; color: var(--muted, #71706C); margin: 14px 0 0; max-width: 70ch; line-height: 1.55; }
+    .pt-tm { font-size: 12px; color: var(--muted, #71706C); margin: 26px 0 0; line-height: 1.5; max-width: 80ch; }
+  </style>
+
+  <!-- 1. Hook -->
+  <section class="hero hero-sub pt-hero">
+    <p class="eyebrow">Free · About two minutes · Built on Amy Edmondson's research</p>
+    <h1>You think your team tells you everything.<span class="pt-punch">Do they?</span></h1>
+    <p class="lede">
+      Leaders almost always believe their team is safer to speak up in than
+      the team does. Take the leader view of a published psychological safety
+      scale, then find out how close your guess is.
+    </p>
+    <p class="cta-row pt-cta">
+      <a class="btn btn-lg" href="#take">Take it free</a>
+      <a class="btn btn-lg pt-ghost" href="../psychological-safety/">Want to know more?</a>
+    </p>
+    <ul class="pt-trust" aria-label="About the check">
+      <li>Seven statements</li>
+      <li>No fee</li>
+      <li>Team answers stay anonymous</li>
+    </ul>
+  </section>
+
+  <!-- 2. Why the gap matters -->
+  <section class="band alt">
+    <p class="eyebrow">Why it matters</p>
+    <h2 class="section-h">The person at the top is the last to hear</h2>
+    <ul class="pt-stats">
+      <li>
+        <span class="pt-n">85<small>%</small></span>
+        <p>of employees interviewed in one study had, at least once, stayed
+          silent with their boss about an issue they thought was important.</p>
+        <span class="pt-src">Milliken, Morrison and Hewlin, <i>Journal of Management Studies</i>, 2003 (40 interviews)</span>
+      </li>
+      <li>
+        <span class="pt-n">1,440</span>
+        <p>clinicians in 23 intensive care units. Higher-status professionals
+          felt significantly safer than the people they worked with, and
+          inclusive leaders narrowed that gap.</p>
+        <span class="pt-src">Nembhard and Edmondson, <i>Journal of Organizational Behavior</i>, 2006</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- 3. How it works -->
+  <section class="band">
+    <p class="eyebrow">How it works</p>
+    <h2 class="section-h">Your guess, their answers, and the gap between</h2>
+    <ol class="pt-steps">
+      <li>
+        <h3>You take the leader view</h3>
+        <p>Rate seven statements the way you think your team would. It takes
+          about two minutes and costs nothing.</p>
+      </li>
+      <li>
+        <h3>Your team answers</h3>
+        <p>The same seven statements, anonymously, with a team code instead of
+          names. Results only once at least five people respond.</p>
+      </li>
+      <li>
+        <h3>We look at the gap</h3>
+        <p>Thirty minutes on where your guess and their answers part ways,
+          and the first thing worth redesigning.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- 4. The form -->
+  <section class="band alt" id="take">
+    <div class="pt-form">
+      <p class="eyebrow">Take it free</p>
+      <h2 class="section-h">Start with your own read</h2>
+      <p class="lede">Choose "No, I lead a team" and answer the way you think
+        your team would. Leave your name and email and I'll send you how to run
+        it with them.</p>
+      <p class="pt-fine">Invited by your team? Choose "Yes" and enter your
+        team code. That code is the only thing recorded with your answers.</p>
+      <div class="embed-wrap">
+        <iframe id="JotFormIFrame-262822423143046"
+          title="Team Psychological Safety Survey"
+          src="https://form.jotform.com/262822423143046"
+          allow="fullscreen"
+          loading="lazy"
+          style="width:100%;height:1000px;border:none;"
+          scrolling="no"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Want to know more -->
+  <section class="band">
+    <div class="next-step">
+      <div>
+        <p class="eyebrow">Want to know more?</p>
+        <h3>How the Check works with a whole team</h3>
+        <p>The research behind it, what a leader gets, how the data is handled,
+          and how it scales from one team to a whole organization.</p>
+      </div>
+      <p class="next-step-action">
+        <a class="btn btn-lg" href="../psychological-safety/">See the full page</a>
+      </p>
+    </div>
+    <p class="pt-fine">Or skip ahead: <a href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt">book thirty minutes</a>.</p>
+    <p class="pt-tm">The seven statements are Amy C. Edmondson's Team
+      Psychological Safety scale (Edmondson, 1999, <i>Administrative Science
+      Quarterly</i>). She has not reviewed or endorsed this survey or this
+      offer.</p>
+  </section>
+
+  <script src="https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js"></script>
+  <script>
+    (function () {
+      if (window.jotformEmbedHandler) {
+        window.jotformEmbedHandler("iframe[id='JotFormIFrame-262822423143046']", "https://form.jotform.com/");
+      }
+    })();
+  </script>
+
+</main>
+
+<footer class="foot">
+  <div class="foot-in">
+    <div>
+      <img src="../assets/mark.png" alt="" width="34" height="34">
+      <p class="foot-name">Goode Design &amp; Consulting</p>
+      <p class="foot-meta">Washington, DC · Baltimore · New York · Boston · Available globally</p>
+    <ul class="socials" aria-label="Elsewhere">
+      <li><a href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt" title="Book a time"><img src="../assets/icon-calendly.png" alt="Book a time with Matt Goode"></a></li>
+      <li><a href="https://www.linkedin.com/in/goodematt/" title="LinkedIn"><img src="../assets/icon-linkedin.png" alt="Matt Goode on LinkedIn"></a></li>
+      <li><a href="https://thatsgoodedesign.substack.com/" title="The Leadership Lab on Substack"><img src="../assets/icon-substack.png" alt="The Leadership Lab on Substack"></a></li>
+      <li><a href="mailto:matt@thatsgoodedesign.com" title="Email"><img src="../assets/icon-email.png" alt="Email Matt Goode"></a></li>
+    </ul>
+    </div>
+    <nav aria-label="Footer">
+      <a href="../system/">The system</a>
+      <a href="../products/">Products</a>
+      <a href="../schools/">Schools</a>
+      <a href="../coaching-engagement/">How it works</a>
+      <a href="../diagnostic/">Diagnostic</a>
+      <a href="../books/">Books</a>
+      <a href="../about/">About</a>
+      <a href="../writing/">Writing</a>
+      <a href="mailto:matt@thatsgoodedesign.com">Contact</a>
+      <a href="../terms/">Terms</a>
+      <a href="../privacy/">Privacy</a>
+    </nav>
+  </div>
+  <p class="foot-legal">© 2026 Goode Design &amp; Consulting. CliftonStrengths®,
+    StrengthsFinder® and the 34 theme names are trademarks of Gallup, Inc.
+    EQ-i 2.0 is a trademark of Multi-Health Systems Inc. Matt Goode is a
+    Gallup-Certified Strengths Coach.
+    <br><br>
+    The non-Gallup information you are receiving has not been approved and is not
+    sanctioned or endorsed by Gallup in any way. Opinions, views and
+    interpretations of CliftonStrengths®, Clifton Youth StrengthsExplorer or
+    BP10 results are solely the beliefs of Goode Design &amp; Consulting.</p>
+</footer>
+
+</body>
+</html>
