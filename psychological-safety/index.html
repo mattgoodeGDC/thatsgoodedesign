@@ -217,8 +217,14 @@
     .ps-d-cap { font-size: 14px; font-weight: 700; fill: var(--ink, #242427); }
     .ps-d-note { margin-top: 14px; }
     .ps-start { margin-left: 18px; white-space: nowrap; }
+    #ps-hero-cta { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+    .btn.ps-ghost { background: transparent; color: var(--ink, #242427);
+      box-shadow: inset 0 0 0 2px var(--ink, #242427); border-color: transparent; }
+    .btn.ps-ghost:hover, .btn.ps-ghost:focus-visible { background: var(--ink, #242427); color: #FBFAF7; }
+    @media (max-width: 520px) { #ps-hero-cta .btn { flex: 1 1 100%; text-align: center; } }
     .ps-start2 { display: inline-block; margin-top: 14px; font-size: 15px; }
     @media (max-width: 520px) { .ps-start { display: inline-block; margin: 14px 0 0; } }
+    .ps-hero-note { margin: 16px 0 0; font-size: 16px; line-height: 1.5; color: var(--muted, #71706C); max-width: 60ch; }
   </style>
 
   <!-- Invited banner: shown only when the link carries a team code. -->
@@ -239,7 +245,9 @@
       see what moved.
     </p>
     <p class="cta-row" id="ps-hero-cta"><a class="btn btn-lg" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt">Book a call</a>
-      <a class="link-arrow ps-start" href="#survey">Or try it free – two minutes</a></p>
+      <a class="btn btn-lg ps-ghost" href="#survey">Try it free · 2 minutes</a></p>
+    <p class="ps-hero-note">You can take it yourself, free, in about two minutes.
+      The real value is the gap: your answers next to your team's.</p>
   </section>
 
   <!-- 2. The problem -->
