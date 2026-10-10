@@ -56,34 +56,41 @@
     });
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-})();
 
-/* Sticky diagnostic bar on phones (BUSINESS-162). One primary action in the
-   thumb zone on every page: the 2-minute diagnostic, with a small booking link
-   beside it. Skipped where it would compete or make no sense: /diagnostic/ has
-   its own Start bar, /booked/ is for people who already booked, /clients/ is
-   private. Shown only under 760px by gdc-nav.css. */
-(function () {
-  function init() {
-    var path = location.pathname;
-    if (/\/(diagnostic|booked|clients)\//.test(path)) return;
-    if (document.querySelector('.dx-bar, .gdc-mbar')) return;
-    var bar = document.createElement('div');
-    bar.className = 'gdc-mbar';
-    bar.innerHTML =
-      '<a class="gdc-mbar-main" href="/diagnostic/">2-minute diagnostic</a>' +
-      '<a class="gdc-mbar-book" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt">Book a call</a>';
-    document.body.appendChild(bar);
-    document.body.classList.add('has-mbar');
+  /* Mobile: collapse the primary nav behind a Menu button under 1024px.
+     "Book a call" stays visible in the bar; everything else opens below. */
+  function initToggle() {
+    var navs = [].slice.call(document.querySelectorAll('nav[aria-label="Primary"]'));
+    navs.forEach(function (nav, i) {
+      var bar = nav.parentElement;
+      if (!bar || bar.querySelector('.navtoggle')) return;
+      if (!nav.id) nav.id = 'primary-nav' + (i ? '-' + i : '');
+      bar.classList.add('has-navtoggle');
+      var t = document.createElement('button');
+      t.type = 'button';
+      t.className = 'navtoggle';
+      t.setAttribute('aria-expanded', 'false');
+      t.setAttribute('aria-controls', nav.id);
+      t.innerHTML = '<span class="navtoggle-bars" aria-hidden="true"></span><span class="navtoggle-label">Menu</span>';
+      bar.insertBefore(t, nav);
+      function set(open) {
+        bar.classList.toggle('nav-open', open);
+        t.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+      t.addEventListener('click', function () { set(!bar.classList.contains('nav-open')); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && bar.classList.contains('nav-open')) { set(false); t.focus(); }
+      });
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 1024 && bar.classList.contains('nav-open')) set(false);
+      });
+    });
   }
+
+  function boot() { initToggle(); init(); }
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', boot);
   } else {
-    init();
+    boot();
   }
 })();

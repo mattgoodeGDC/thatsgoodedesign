@@ -20,7 +20,7 @@
   font-size:13px;font-weight:600;letter-spacing:.04em;color:rgba(237,229,214,.72);
 }
 .bp-links .navmenu > button:hover{color:#EDE5D6}
-@media (max-width:760px){
+@media (max-width:1024px){
   .bp-links .navmenu > button{font-size:12px}
 }
 /* The bar is full at laptop width. Tighten before it wraps to two rows. */
@@ -69,7 +69,7 @@
 
 /* Narrow: the bar already wraps, so let the panel sit in the flow instead of
    floating off the side of a 390px screen. */
-@media (max-width:760px){
+@media (max-width:1024px){
   .navmenu{display:block;width:100%}
   .navmenu > button{width:100%;justify-content:flex-start}
   .navmenu-panel{
@@ -115,7 +115,7 @@
    wider than the viewport, so inside the wide panel labels may wrap. */
 .navmenu ul.navmenu-panel.navmenu-wide li a{white-space:normal}
 
-@media (max-width:760px){
+@media (max-width:1024px){
   .navmenu-panel.navmenu-wide:not([hidden]){
     width:100%;max-width:none;grid-template-columns:1fr;gap:0;
   }
@@ -124,32 +124,62 @@
 }
 
 
-/* Sticky diagnostic bar on phones (BUSINESS-162). Injected by gdc-nav.js. */
-.gdc-mbar{display:none}
-@media (max-width:760px){
-  .gdc-mbar{
-    display:flex;align-items:center;gap:14px;
-    position:fixed;left:0;right:0;bottom:0;z-index:60;
-    padding:10px 16px calc(10px + env(safe-area-inset-bottom));
-    background:#FBFAF7;border-top:1px solid #C6C2B6;
-    box-shadow:0 -6px 18px rgba(36,36,39,.08);
-  }
-  .gdc-mbar-main{
-    flex:1 1 auto;text-align:center;text-decoration:none;
-    background:#C4A26A;color:#242427;border:1px solid #C4A26A;
-    padding:13px 16px;font-size:13px;font-weight:800;
-    letter-spacing:.12em;text-transform:uppercase;
-  }
-  .gdc-mbar-book{
-    flex:0 0 auto;font-size:14px;font-weight:700;color:#242427;
-    text-decoration:underline;text-underline-offset:3px;
-  }
-  body.has-mbar{padding-bottom:76px}
-}
-
 /* ─── the hidden state, asserted last ───
    Five times on this build a later rule has out-specified an earlier one and
    broken something quietly. A panel that will not close is the worst of those,
    so the hidden state is restated here at (0,3,0), after everything, where no
    component rule can reach past it. */
 .navmenu .navmenu-panel[hidden]{display:none}
+
+/* ---------------------------------------------------------------------------
+   Mobile menu toggle (added by gdc-nav.js). Under 1024px the bar holds the
+   brand, "Book a call" and a menu button on one row; the rest opens below.
+--------------------------------------------------------------------------- */
+.navtoggle{display:none}
+@media (max-width:1024px){
+  .has-navtoggle{flex-wrap:wrap;gap:10px;row-gap:0;align-items:center}
+  .has-navtoggle > nav{order:1;margin-left:auto}
+  .has-navtoggle .navtoggle{
+    order:2;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    background:none;border:1px solid currentColor;border-radius:4px;
+    min-width:40px;height:38px;padding:0 10px;cursor:pointer;
+    font-family:inherit;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  }
+  .nav .navtoggle{color:#242427}
+  .bp-nav .navtoggle{color:#EDE5D6}
+  .navtoggle:focus-visible{outline:2px solid #C4A26A;outline-offset:3px}
+  .navtoggle-label{display:none}
+  .navtoggle-bars,.navtoggle-bars::before,.navtoggle-bars::after{
+    display:block;width:16px;height:2px;background:currentColor;position:relative;
+    transition:transform .16s ease;
+  }
+  .navtoggle-bars::before,.navtoggle-bars::after{content:"";position:absolute;left:0}
+  .navtoggle-bars::before{top:-5px}
+  .navtoggle-bars::after{top:5px}
+  .nav-open .navtoggle-bars{background:transparent}
+  .nav-open .navtoggle-bars::before{transform:translateY(5px) rotate(45deg)}
+  .nav-open .navtoggle-bars::after{transform:translateY(-5px) rotate(-45deg)}
+  /* Compact brand and button so the three fit one row at phone width. */
+  .has-navtoggle .brand,.has-navtoggle .bp-brand{font-size:13px}
+  .has-navtoggle .brand img,.has-navtoggle .bp-brand img{width:32px;height:auto}
+  .has-navtoggle .brand em,.has-navtoggle .bp-brand em{display:none}
+  .has-navtoggle > nav > .btn,.has-navtoggle > nav > .bp-cta{padding:10px 12px;font-size:11px;white-space:nowrap}
+  /* Collapsed: only the booking button shows. */
+  .has-navtoggle > nav > :not(.btn):not(.bp-cta){display:none}
+  /* Open: the full list drops below the bar. */
+  .has-navtoggle.nav-open > nav{
+    order:3;flex-basis:100%;margin-left:0;flex-direction:column;align-items:flex-start;
+    gap:16px;padding:16px 0 10px;
+  }
+  .has-navtoggle.nav-open > nav > :not(.btn):not(.bp-cta){display:block}
+  .has-navtoggle.nav-open > nav > .navmenu{width:100%}
+}
+@media (max-width:370px){
+  .has-navtoggle .brand span,.has-navtoggle .bp-brand span{display:none}
+}
+
+/* Footer links: two columns so the twelve links do not run down the page. */
+footer nav[aria-label="Footer"]{
+  display:grid !important;grid-template-columns:repeat(2,max-content);
+  column-gap:40px !important;row-gap:12px !important;align-content:start;
+}
