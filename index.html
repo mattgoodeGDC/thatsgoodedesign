@@ -36,17 +36,6 @@
 <meta name="tdm-policy" content="https://thatsgoodedesign.com/terms/">
 <meta name="robots" content="noai, noimageai">
 <style>.hero-cluster{margin:40px 0 0;max-width:1100px}.hero-cluster svg{display:block;width:100%;height:auto}.hero-cluster .cluster-phone{display:none;max-width:390px}@media (max-width:600px){.hero-cluster .cluster-wide{display:none}.hero-cluster .cluster-phone{display:block}}</style>
-<style>
-.cred-strip{list-style:none;margin:48px 0 0;padding:20px 0 0;border-top:1px solid var(--rule);display:flex;flex-wrap:nowrap;align-items:center;justify-content:space-between;gap:0}
-.cred-strip li{padding:0 14px;border-left:1px solid var(--rule);display:flex;flex-direction:column;gap:4px}
-.cred-strip li:first-child{border-left:0;padding-left:0}
-.cred-strip li.cred-badge+li{border-left:1px solid var(--rule)}
-.cred-strip img{display:block;width:64px;height:64px}
-.cred-strip span{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
-.cred-strip b{font-size:13px;font-weight:700;color:var(--ink)}
-@media (max-width:1180px){.cred-strip{display:grid;grid-template-columns:repeat(3,1fr);align-items:start;gap:18px 16px}.cred-strip li{border-left:0;padding:0}.cred-strip li.cred-badge{grid-column:1 / -1}.cred-strip li.cred-badge+li{border-left:0}}
-@media (max-width:700px){.cred-strip{grid-template-columns:1fr 1fr}.cred-strip li{border-left:0;padding:0}.cred-strip li.cred-badge{grid-column:1 / -1}.cred-strip li.cred-badge+li{border-left:0}}
-</style>
 </head>
 <body>
 
@@ -372,16 +361,36 @@
       </figure>
     </div>
 
-    <!-- Credential strip (VISUALS Round 2, item 10). Credentials named in text:
-         the LSE, Johns Hopkins, MHS and USAID logos need written permission
-         before use. The Gallup badge is the file Gallup supplied, unaltered. -->
-    <ul class="cred-strip" aria-label="Credentials">
-      <li class="cred-badge"><img src="assets/gallup-coach-badge.jpg" alt="Gallup Certified Strengths Coach, CliftonStrengths" width="64" height="64" loading="lazy"></li>
-      <li><span>Certified</span><b>EQ-i 2.0&reg; practitioner</b></li>
-      <li><span>Education</span><b>MSc, London School of Economics</b></li>
-      <li><span>Education</span><b>MA, Johns Hopkins</b></li>
-      <li><span>Federal</span><b>USAID/BHA, via EnCompass</b></li>
-      <li><span>Schools</span><b>McDonogh School, seventeen years</b></li>
+    <!-- Provenance, at full band width rather than squeezed into the text
+         column. Uniform tile height so five marks of different shapes read as
+         one set, and every one carries a label: a shield with no caption is a
+         puzzle, not a credential. -->
+    <ul class="logo-row">
+      <li>
+        <img src="assets/logo_gallup.png" alt="Gallup Certified Strengths Coach"
+             width="203" height="203" loading="lazy">
+        <b>Gallup</b><span>Certified Strengths Coach</span>
+      </li>
+      <li>
+        <img src="assets/logo_eqi.png" alt="EQ-i 2.0"
+             width="200" height="203" loading="lazy">
+        <b>EQ-i 2.0</b><span>Certified practitioner</span>
+      </li>
+      <li>
+        <img src="assets/logo_lse.png" alt="London School of Economics"
+             width="177" height="177" loading="lazy">
+        <b>London School of Economics</b><span>MSc, Sociology</span>
+      </li>
+      <li>
+        <img src="assets/logo_hopkins.png" alt="Johns Hopkins University"
+             width="186" height="203" loading="lazy">
+        <b>Johns Hopkins</b><span>MA, Education</span>
+      </li>
+      <li>
+        <img src="assets/logo_usaid.png" alt="United States Agency for International Development"
+             width="203" height="203" loading="lazy">
+        <b>USAID</b><span>Leadership and team development</span>
+      </li>
     </ul>
   </section>
 
