@@ -153,9 +153,7 @@
           </div>
           <div class="book-aside-rule"></div>
           <div class="book-aside-stat"><div class="book-aside-stat-label">Publication Date</div><div class="book-aside-stat-val">2027</div></div>
-          <div class="book-aside-stat"><div class="book-aside-stat-label">Format</div><div class="book-aside-stat-val"><em class="ph">TBD – see brief §7</em></div></div>
           <div class="book-aside-rule"></div>
-          <a href="#arc" class="book-aside-btn btn-coming-soon">Buy on Amazon</a>
           <a href="#arc" class="book-aside-btn" style="background:var(--nab-accent);border-color:var(--nab-accent);color:#fff;">Request an ARC</a>
         </div>
       </div>
@@ -163,31 +161,15 @@
   </div>
 
   <div class="carousel-section reveal">
-    <h2 class="carousel-heading" style="color:var(--nab-accent);">Early reads</h2>
+    <h2 class="carousel-heading" style="color:var(--nab-accent);">Why this book</h2>
     <!-- 2026-07-30: Matt sent one real photo to start ("card_brain_superheros.jpg" – family shot,
          "dyslexic" shirts) – wired as the first slide of a real carousel, matching Wrath's pattern.
          Not review quotes yet, just the one image; add more slides here the same way as they land. -->
     <div class="nab-carousel-track" id="nabCarouselTrack">
       <div class="nab-slide active"><img class="nab-slide-img" src="../assets/card_brain_superheros.jpg" alt="Matt Goode and family, wearing 'dyslexic' shirts" onerror="this.classList.add('img-missing')"></div>
     </div>
-    <div class="nab-carousel-nav">
-      <button type="button" onclick="(function(t){var s=t.querySelectorAll('.nab-slide');var i=0;for(var k=0;k<s.length;k++){if(s[k].classList.contains('active')){i=k;break;}}s[i].classList.remove('active');i=(i-1+s.length)%s.length;s[i].classList.add('active');})(document.getElementById('nabCarouselTrack'))">← Prev</button>
-      <button type="button" onclick="(function(t){var s=t.querySelectorAll('.nab-slide');var i=0;for(var k=0;k<s.length;k++){if(s[k].classList.contains('active')){i=k;break;}}s[i].classList.remove('active');i=(i+1)%s.length;s[i].classList.add('active');})(document.getElementById('nabCarouselTrack'))">Next →</button>
-    </div>
   </div>
 
-  <!-- A NOTE FROM THE AUTHOR – placeholder; no NAB author's note exists yet.
-       2026-07-30: avatar switched to card_brain_superheros.jpg per Matt – this photo belongs on
-       No Average Brain only (was also leaking onto Seven and Noble Island; fixed there too). -->
-  <section class="book-note reveal">
-    <div class="book-note-inner">
-      <div class="book-note-avatar"><img src="../assets/card_brain_superheros.jpg" alt="Matt Goode" loading="lazy" onerror="this.outerHTML='mk'"></div>
-      <div class="book-note-body">
-        <p class="book-about-label" style="margin-bottom:18px;">A Note from the Author</p>
-        <p><em class="ph">[Placeholder – Matt's note on No Average Brain goes here: the son he pulled from school, the leadership meetings, why now/why AI changes the calculus.]</em></p>
-      </div>
-    </div>
-  </section>
 
   <!-- Kit "BRAIN - ARC", form 9742028, uid 576f9eb10b. The HTML embed rather
        than the async JS one, for the same reason as every other form here: the

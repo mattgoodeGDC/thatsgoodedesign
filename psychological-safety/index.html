@@ -30,6 +30,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,700;1,800&amp;display=swap">
 <link rel="stylesheet" href="../assets/style.css?v=12">
 <link rel="stylesheet" href="../assets/gdc-nav.css?v=13">
+<link rel="stylesheet" href="../assets/products.css?v=3">
 <script src="../assets/gdc-analytics.js?v=12"></script>
 <script src="../assets/gdc-nav.js?v=13" defer></script>
 </head>
@@ -85,7 +86,9 @@
   </nav>
 </header>
 
-<main id="main">
+<main id="main" class="product product--psc">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="m-psc" viewBox="0 0 24 24"><path d="M6.5 4.5 C4 8 4 14.5 6.5 18.5 H17.5 C20 14.5 20 8 17.5 4.5 M4.5 20.5 H19.5 M12 8 V12.5 M12 15.5 V15.6"/></symbol></svg>
+  <div class="product__rule" aria-hidden="true"></div>
 
   <style>
     /* /psychological-safety only. Numbered steps, the credit note, list
@@ -236,6 +239,14 @@
 
   <!-- 1. Hero -->
   <section class="hero hero-sub ps-sales">
+    <div class="lockup">
+      <svg class="icon" aria-hidden="true"><use href="#m-psc"/></svg>
+      <div>
+        <p class="lockup-ey">GOODE DESIGN</p>
+        <p class="lockup-name">Psychological Safety Check</p>
+        <p class="product__tier">Team survey</p>
+      </div>
+    </div>
     <p class="eyebrow">The Psychological Safety Check · No fee · For school and company leadership teams</p>
     <h1>Find out if your <span class="accent">warning lights</span> work.</h1>
     <p class="lede">
@@ -535,7 +546,7 @@
           Systems That Run Without Them</i>. I read every comment myself and run
           every debrief. There is no associate layer and no handoff after the sale.</p>
         <ul class="ps-list ps-creds">
-          <li>Gallup-Certified Strengths Coach, certified in EQ-i 2.0 and an ICF-trained coach</li>
+          <li>Gallup-Certified Strengths Coach, EQ-i 2.0 Certified Practitioner, working toward the ICF ACC credential</li>
           <li>Twenty years inside schools, seventeen of them at McDonogh</li>
           <li>Co-led enterprise talent development at USAID's Bureau for Humanitarian Assistance</li>
         </ul>

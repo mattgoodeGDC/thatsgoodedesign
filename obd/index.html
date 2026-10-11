@@ -27,6 +27,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&amp;display=swap">
 <link rel="stylesheet" href="../assets/style.css?v=12">
 <link rel="stylesheet" href="../assets/gdc-nav.css?v=13">
+<link rel="stylesheet" href="../assets/products.css?v=3">
 <script src="../assets/gdc-analytics.js?v=12"></script>
 <script src="../assets/gdc-nav.js?v=13" defer></script>
 </head>
@@ -82,9 +83,11 @@
   </nav>
 </header>
 
-<main id="main">
+<main id="main" class="product product--obd">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="m-obd" viewBox="0 0 24 24"><path d="M3 6.5 Q3 5 4.5 5 H19.5 Q21 5 21 6.5 L19 17.5 Q18.7 19 17.2 19 H6.8 Q5.3 19 5 17.5 Z M7 9.5 V10 M10.3 9.5 V10 M13.7 9.5 V10 M17 9.5 V10 M8.7 14 V14.5 M12 14 V14.5 M15.3 14 V14.5"/></symbol></svg>
+  <div class="product__rule" aria-hidden="true"></div>
 
-  <!-- First draft copy for PUBLISHING to pass over. Nothing on this page is final. -->
+  <!-- Copy for PUBLISHING to pass over. -->
 
   <style>
     /* /obd only. Proof line, big-number band, column lists and the
@@ -258,6 +261,14 @@
   <section class="hero hero-sub">
     <div class="hero-split obd-hero">
       <div>
+    <div class="lockup">
+      <svg class="icon" aria-hidden="true"><use href="#m-obd"/></svg>
+      <div>
+        <p class="lockup-ey">GOODE DESIGN</p>
+        <p class="lockup-name">OBD</p>
+        <p class="product__tier">Core · Leader · Leader + Team</p>
+      </div>
+    </div>
       <p class="eyebrow">Leader diagnostic · two instruments · one written read · a 1:1 debrief</p>
       <h1>Find out what is going on <span class="accent">under the hood</span></h1>
       <p class="obd-hook">Something keeps landing back on your desk, and you
