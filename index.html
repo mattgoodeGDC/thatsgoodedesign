@@ -118,7 +118,10 @@
     button.signal.pc { padding: 16px 18px; }
     button.signal.pc h3 { font-size: 17px; margin: 0 0 6px; line-height: 1.3; }
     button.signal.pc p { font-size: 15px; line-height: 1.45; margin: 0; }
-    button.signal.pc[aria-checked="true"] { --fw: var(--green-rule); }
+    /* Selected is gold: product family guide v1.1, "gold means lit, and lit means act". */
+    button.signal.pc[aria-checked="true"] { --fw: var(--gold); }
+    button.signal.pc[aria-checked="true"] .num,
+    button.signal.pc[aria-checked="true"] .signal-pick { color: var(--gold-ink); }
     @media (max-width: 620px) {
       button.signal.pc { padding: 12px 14px; }
       button.signal.pc h3 { font-size: 16px; margin-bottom: 3px; }
@@ -309,7 +312,7 @@
           <p><a class="link-arrow" href="products/">What you can actually buy</a></p>
         </div>
         <ul class="lane-services">
-          <li><a href="products/#svc-owners-manual">Team development<span>Owner&rsquo;s Manual workshop, delegation seminar</span></a></li>
+          <li><a href="products/#svc-owners-manual">Team development<span>Know Thyself to Lead Others, delegation seminar</span></a></li>
           <li><a href="field-tested/">Facilitation<span>Seventy-two methods, field tested</span></a></li>
           <li><a href="products/#services">Program design<span>Cohorts and system-wide work</span></a></li>
         </ul>

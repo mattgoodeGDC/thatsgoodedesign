@@ -1,0 +1,76 @@
+/* GDC product family, web layer. Source: STYLE GUIDE - GDC Product Family v1.2
+   (approved 11 Oct 2026) and its Web tokens file. Loaded after style.css on
+   product pages and on any page that shows product cards.
+   The rule: product colour says WHICH product; gold says PRESS. Product colours
+   never go on buttons, links, lit icons or selected states. */
+
+:root {
+  --obd: #146B4C;  --obd-tint: #E2EDE7;  --obd-dark: #4FAE86;
+  --psc: #0E6670;  --psc-tint: #E0EDEE;  --psc-dark: #4FB3BC;
+  --gs:  #9C4A1A;  --gs-tint:  #F3E6DC;  --gs-dark:  #D9895A;
+  --bb:  #55652A;  --bb-tint:  #EAECE0;  --bb-dark:  #A3B36A;
+  --kt:  #575897;  --kt-tint:  #E6E6F0;  --kt-dark:  #9A9EDB;
+  --ec:  #9A3B6A;  --ec-tint:  #F3E4EB;  --ec-dark:  #D77FA8;
+  --own: #6B4A2E;  --own-tint: #EFE8E1;  --own-dark: #C99C74;
+}
+.product { --c: var(--ink); --c-tint: var(--paper-alt); }
+.product--obd { --c: var(--obd); --c-tint: var(--obd-tint); }
+.product--psc { --c: var(--psc); --c-tint: var(--psc-tint); }
+.product--gs  { --c: var(--gs);  --c-tint: var(--gs-tint); }
+.product--bb  { --c: var(--bb);  --c-tint: var(--bb-tint); }
+.product--kt  { --c: var(--kt);  --c-tint: var(--kt-tint); }
+.product--ec  { --c: var(--ec);  --c-tint: var(--ec-tint); }
+.product--own { --c: var(--own); --c-tint: var(--own-tint); }
+
+/* The 6 px rule: full bleed, directly under the site nav. */
+.product__rule { height: 6px; background: var(--c); margin-inline: calc(50% - 50vw); }
+
+/* Lockup: icon left, GOODE DESIGN eyebrow, product name, tier word in the product colour. */
+.lockup { display: flex; align-items: center; gap: 14px; margin: 0 0 22px; }
+.lockup .icon { width: 44px; height: 44px; color: var(--ink); }
+.lockup-ey { font-size: 11px; font-weight: 700; letter-spacing: .24em; color: var(--muted); margin: 0; }
+.lockup-name { font-size: 22px; font-weight: 800; color: var(--ink); line-height: 1.1; margin: 2px 0 0; }
+.product__tier { color: var(--c); font-weight: 700; font-size: 14px; margin: 2px 0 0; }
+
+/* Section labels take the product colour on the product's own page. */
+.product .product__label { color: var(--c); }
+.product__panel { background: var(--c-tint); color: var(--ink); border-radius: 12px; padding: 28px 30px; }
+.product__panel h2, .product__panel h3, .product__panel p, .product__panel li { color: var(--ink); }
+
+/* Icons: 24 px grid, 2 px stroke, currentColor. */
+.icon { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: 0 0 auto; }
+.icon-state { display: inline-grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; }
+.icon-state--off { border: 2px solid var(--rule-2); color: var(--muted); }
+.icon-state--on  { background: var(--gold); color: var(--ink); }
+
+/* Spec list inside the tinted panel. */
+.p-spec { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px 28px; margin: 18px 0 0; padding: 0; list-style: none; }
+.p-spec li { border-top: 2px solid var(--c); padding-top: 12px; font-size: 15px; line-height: 1.5; }
+.p-spec b { display: block; font-size: 17px; margin-bottom: 4px; }
+
+/* Timeline of phases. */
+.phases { list-style: none; margin: 24px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 22px; }
+.phases li { border-left: 3px solid var(--c); padding: 2px 0 2px 16px; }
+.phases .when { font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--c); margin: 0 0 6px; }
+.phases h3 { font-size: 18px; margin: 0 0 6px; color: var(--ink); }
+.phases p { margin: 0; font-size: 15px; }
+
+/* Framework strip: where a section names a framework, its colour wins. */
+.fw-strip { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 0; padding: 0; list-style: none; }
+.fw-strip li { border: 1px solid var(--rule); border-top: 3px solid var(--fwc); border-radius: 8px; padding: 10px 14px; font-weight: 700; color: var(--ink); font-size: 14px; background: var(--paper); }
+.fw-strip .fw-c { --fwc: #3E9B75; } .fw-strip .fw-v { --fwc: #3766A2; }
+.fw-strip .fw-6 { --fwc: #7E4FA6; } .fw-strip .fw-d { --fwc: #8D3E40; }
+
+/* Edition cards. */
+.editions { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-top: 22px; }
+.edition { background: var(--paper); border: 1px solid var(--rule); border-radius: 12px; padding: 22px 24px; }
+.edition .product__tier { margin: 0 0 6px; }
+.edition h3 { margin: 0 0 8px; color: var(--ink); }
+.edition p { font-size: 15px; margin: 0 0 12px; }
+
+/* Neutralise the site's generic list styling inside product components. */
+.product .p-spec li, .product .phases li, .product .fw-strip li { box-shadow: none; }
+.product .p-spec li { background: none; border: 0; border-top: 2px solid var(--c); border-radius: 0; padding: 12px 0 0; }
+.product .p-spec li::before, .product .phases li::before, .product .fw-strip li::before { content: none; display: none; }
+/* On a product page the hero claim stays ink: a green accent would read as the OBD colour. */
+.product .hero h1 .accent { color: inherit; }
