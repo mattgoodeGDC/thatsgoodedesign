@@ -59,7 +59,7 @@
 .fw-strip { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 0; padding: 0; list-style: none; }
 .fw-strip li { border: 1px solid var(--rule); border-top: 3px solid var(--fwc); border-radius: 8px; padding: 10px 14px; font-weight: 700; color: var(--ink); font-size: 14px; background: var(--paper); }
 .fw-strip .fw-c { --fwc: #3E9B75; } .fw-strip .fw-v { --fwc: #3766A2; }
-.fw-strip .fw-6 { --fwc: #7E4FA6; } .fw-strip .fw-d { --fwc: #8D3E40; }
+.fw-strip .fw-6 { --fwc: #7B2481; } .fw-strip .fw-d { --fwc: #8D3E40; }
 
 /* Edition cards. */
 .editions { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-top: 22px; }

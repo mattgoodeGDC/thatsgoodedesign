@@ -172,7 +172,7 @@
   .nav-open .navtoggle-bars::after{transform:translateY(-5px) rotate(-45deg)}
   /* Compact brand and button so the three fit one row at phone width. */
   .has-navtoggle .brand,.has-navtoggle .bp-brand{font-size:13px}
-  .has-navtoggle .brand img,.has-navtoggle .bp-brand img{width:32px;height:auto}
+  .has-navtoggle .bp-brand img{width:32px;height:auto}
   .has-navtoggle .brand em,.has-navtoggle .bp-brand em{display:none}
   .has-navtoggle > nav > .btn,.has-navtoggle > nav > .bp-cta{padding:10px 12px;font-size:11px;white-space:nowrap}
   /* Collapsed: only the booking button shows. */

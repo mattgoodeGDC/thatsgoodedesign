@@ -8,8 +8,10 @@
 <meta name="robots" content="noai, noimageai">
 <link rel="canonical" href="https://thatsgoodedesign.com/eighth-idea/">
 <link rel="icon" href="../favicon.ico" sizes="any">
-<link rel="icon" type="image/png" href="../assets/mark.png">
-<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="icon" href="../assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="../assets/favicon/icon-512.png" type="image/png" sizes="512x512">
+<link rel="apple-touch-icon" href="../assets/favicon/apple-touch-icon.png">
 <meta property="og:site_name" content="Goode Design &amp; Consulting">
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="website">
@@ -26,8 +28,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap">
-<link rel="stylesheet" href="../assets/style.css?v=12">
-<link rel="stylesheet" href="../assets/gdc-nav.css?v=14">
+<link rel="stylesheet" href="../assets/style.css?v=13">
+<link rel="stylesheet" href="../assets/gdc-nav.css?v=15">
 <script src="../assets/gdc-analytics.js?v=12"></script>
 <script src="../assets/gdc-nav.js?v=15" defer></script>
 <meta name="tdm-reservation" content="1">
@@ -142,8 +144,11 @@
 
 <header class="nav">
   <a class="brand" href="../">
-    <img src="../assets/mark.png" alt="" width="40" height="40">
-    <span>Goode Design<em> &amp; Consulting</em></span>
+    <picture>
+      <source media="(max-width: 370px)" srcset="../assets/gdc/gdc-mark.svg">
+      <source media="(max-width: 519px)" srcset="../assets/gdc/gdc-lockup-short.svg">
+      <img src="../assets/gdc/gdc-lockup.svg" alt="Goode Design &amp; Consulting" width="270" height="52">
+    </picture>
   </a>
   <nav aria-label="Primary">
     <a href="../system/">The system</a>
@@ -271,8 +276,8 @@ const PAGE_URL="https://thatsgoodedesign.com/eighth-idea/";
 /* Colors are the site's own framework colors from style.css (.fw-*). */
 const PILLARS={
   CREATE:{name:"The standard",line:"If the standard lives only in your head, it can't travel.",fix:"Building the Bench, so the standard lives in more than one person",color:"#2C7355"},
-  VOICES:{name:"How you show up",line:"Teachers take their cue from where you spend your time.",fix:"Executive coaching for school leaders, so where you show up is a choice, not a habit",color:"#2F5A8F"},
-  SIXC:{name:"Who decides",line:"Nobody owns what they cannot decide.",fix:"Decision rights and governance, so teachers and coaches know what's theirs",color:"#6B3F93"},
+  VOICES:{name:"How you show up",line:"Teachers take their cue from where you spend your time.",fix:"Executive coaching for school leaders, so where you show up is a choice, not a habit",color:"#3766A2"},
+  SIXC:{name:"Who decides",line:"Nobody owns what they cannot decide.",fix:"Decision rights and governance, so teachers and coaches know what's theirs",color:"#7B2481"},
   DELEGATE:{name:"Handing it off",line:"Hand over the outcome, not just the task.",fix:"Delegation and role clarity, so the coaching role is real, protected and owned",color:"#8D3E40"}
 };
 /* Answer order is fixed and already mixed by hand. Each option is
@@ -454,7 +459,7 @@ render();
 <footer class="foot">
   <div class="foot-in">
     <div>
-      <img src="../assets/mark.png" alt="" width="34" height="34">
+      <img src="../assets/gdc/gdc-mark.svg" alt="" width="34" height="34">
       <p class="foot-name">Goode Design &amp; Consulting</p>
       <p class="foot-meta">Washington, DC &middot; Baltimore &middot; New York &middot; Boston &middot; Available globally</p>
     <ul class="socials" aria-label="Elsewhere">
