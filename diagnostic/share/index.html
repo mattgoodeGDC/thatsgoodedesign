@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- "Share your result" link target from the Jotform v2 thank-you page:
+     /diagnostic/share/?p={patternName}. Sends the reader to that pattern's page,
+     or to /diagnostic/ if the pattern can't be matched. Not for search. -->
+<meta name="robots" content="noindex">
+<title>Your leadership warning light – Goode Design &amp; Consulting</title>
+<link rel="icon" href="../../favicon.ico" sizes="any">
+<link rel="icon" href="../../assets/favicon/favicon.svg" type="image/svg+xml">
+<script>
+(function () {
+  var p = (new URLSearchParams(location.search).get('p') || '').toLowerCase();
+  var map = [['bottleneck', 'bottleneck'], ['growth gap', 'growth-gap'], ['drift', 'drift'],
+             ['stall', 'stall'], ['new seat', 'new-seat']];
+  var slug = '';
+  for (var i = 0; i < map.length; i++) { if (p.indexOf(map[i][0]) !== -1) { slug = map[i][1]; break; } }
+  location.replace(slug ? '../' + slug + '/?utm_source=diagnostic&utm_medium=thank-you-share'
+                        : '../?src=share-fallback');
+})();
+</script>
+</head>
+<body>
+<p><a href="../">Find your leadership warning light</a></p>
+</body>
+</html>
