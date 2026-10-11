@@ -12,6 +12,15 @@
       btn.setAttribute('aria-expanded', 'false');
       panel.hidden = true;
     }
+    /* A wide panel anchored to its button can run off the left edge on a
+       narrow laptop. Nudge it back so it always sits 16px inside the window. */
+    function keepInView(panel) {
+      if (!panel.classList.contains('navmenu-wide')) return;
+      panel.style.translate = '';
+      var r = panel.getBoundingClientRect();
+      if (r.left < 16) panel.style.translate = (16 - r.left) + 'px 0';
+      else if (r.right > window.innerWidth - 16) panel.style.translate = (window.innerWidth - 16 - r.right) + 'px 0';
+    }
     function closeAll(except) {
       menus.forEach(function (m) { if (m !== except) close(m); });
     }
@@ -29,6 +38,7 @@
         closeAll(menu);
         btn.setAttribute('aria-expanded', open ? 'false' : 'true');
         panel.hidden = open;
+        if (!open) keepInView(panel);
       });
 
       btn.addEventListener('keydown', function (e) {

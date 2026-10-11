@@ -93,6 +93,17 @@
   min-width:0;width:max-content;max-width:min(92vw,620px);
   display:grid;grid-template-columns:1fr 1fr;gap:4px 10px;padding:12px;
 }
+/* Three groups on desktop: companies, schools, flagship programs. The wider
+   panel is anchored to the right edge of the Services button instead of
+   centred on it, so it grows leftward and never runs off the right of the
+   viewport, where Books, About and Book a call already sit. */
+@media (min-width:1025px){
+  .navmenu-panel.navmenu-wide:not([hidden]){
+    width:min(92vw,780px);max-width:min(92vw,780px);
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    left:auto;right:0;transform:none;
+  }
+}
 .navmenu-panel.navmenu-wide{min-width:0}
 .navmenu-panel.navmenu-wide .nmp-group{min-width:0}
 .navmenu-panel.navmenu-wide .nmp-group > ul{
