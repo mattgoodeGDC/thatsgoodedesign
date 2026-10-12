@@ -700,7 +700,7 @@
    card started each submission, not just "home-cards".
 
    PHASE 2 (live from 1 Oct, BUSINESS-161): each quiz link is
-     https://form.jotform.com/262713215187052?q1_friction=<q1>&src=home-card-<pattern>
+     https://form.jotform.com/262847718342162?q1_friction=<q1>&src=home-card-<pattern>
    using the q1 text below exactly, straight apostrophes and all (Jotform prefills Q1 by field name
    q1_friction on "GDC - Diagnostic v2"). Set PHASE back to 1 to send picks to
    /diagnostic/ instead.
@@ -710,7 +710,7 @@
    action and the pattern slug; nothing about the person. Empty string = off. */
 (function () {
   const PHASE = 2;   /* switched on 1 Oct with BUSINESS-161 */
-  const QUIZ_V2 = 'https://form.jotform.com/262713215187052';
+  const QUIZ_V2 = 'https://form.jotform.com/262847718342162';
   const COUNT_URL = '';   /* paste the Worker URL here once it is deployed */
   function ping(action, slug) {
     if (!COUNT_URL || !navigator.sendBeacon) return;
