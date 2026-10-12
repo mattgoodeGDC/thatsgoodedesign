@@ -36,9 +36,187 @@
 <meta name="tdm-policy" content="https://thatsgoodedesign.com/terms/">
 <meta name="robots" content="noai, noimageai">
 <style>
-.os-strip{position:sticky;top:var(--nav-h,88px);z-index:30;background:var(--paper);border-bottom:1px solid var(--rule);padding:8px var(--gut,16px)}
-.os-strip svg{display:block;width:100%;max-width:640px;height:auto;margin:0 auto}
-.os-strip svg rect:first-of-type{fill:var(--paper);stroke:none}
+/* ---------- /system/ page components (Oct 2026 rebuild) ----------
+   Everything here uses the house tokens from style.css. Framework colour comes
+   from the --fw token each .fw-* class already sets. */
+
+/* Hero: problem first, product second */
+.sys-hero h1 { max-width: 20ch; }
+.sys-hero .cta-row { margin-top: 28px; }
+.sys-hero .micro { margin-top: 12px; font-size: 14px; color: var(--muted); }
+.sys-hero .logo-row { margin-block: clamp(32px, 4vw, 48px) 0; }
+
+/* The map: four parts and the clutch between them */
+.os-map {
+  display: grid; margin-block: clamp(28px, 4vw, 44px) 0; padding: 0; list-style: none;
+  grid-template-columns: minmax(0,1fr) 40px minmax(0,1fr) 40px minmax(0,1fr) 40px minmax(0,1fr);
+  align-items: stretch;
+}
+.os-node a {
+  display: flex; flex-direction: column; gap: 6px; height: 100%;
+  padding: 22px 20px 20px; border: 1px solid var(--rule); border-top: 4px solid var(--fw);
+  border-radius: 4px; background: var(--paper-alt); color: var(--ink); text-decoration: none;
+  transition: transform .2s ease, border-color .2s ease;
+}
+.os-node a:hover, .os-node a:focus-visible { transform: translateY(-3px); border-color: var(--fw); }
+.os-node img { width: 40px; height: 40px; }
+.os-node .n { font-size: 12px; font-weight: 700; letter-spacing: .14em; color: var(--muted); }
+.os-node .k { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--fw); }
+.os-node b { font-size: clamp(20px, 2vw, 24px); font-weight: 800; letter-spacing: .02em; }
+.os-node .d { font-size: 15px; color: var(--body); }
+.os-node .go { margin-top: auto; padding-top: 10px; font-size: 13px; font-weight: 600; color: var(--muted); }
+.os-joint { position: relative; display: grid; place-items: center; }
+.os-joint::before { content: ""; position: absolute; left: -2px; right: -2px; top: 50%; height: 2px; background: var(--gold); }
+.os-joint span {
+  position: relative; width: 26px; height: 26px; border-radius: 50%;
+  border: 6px solid var(--gold); background: transparent;
+  box-shadow: 0 0 0 3px var(--paper-alt);
+}
+.os-map:hover .os-joint span { animation: slip 1.6s ease-in-out; }
+@keyframes slip { 0% { transform: rotate(0) } 60% { transform: rotate(200deg) } 100% { transform: rotate(180deg) } }
+.os-rail {
+  display: grid; grid-template-columns: 48px minmax(0,1fr); gap: 18px; align-items: center;
+  margin-block: 22px 0; padding: 18px 22px; border: 1px solid var(--gold); border-radius: 4px;
+}
+.os-rail img { width: 48px; height: 48px; }
+.os-rail p { margin: 0; }
+.os-rail b { color: var(--ink); }
+@media (max-width: 900px) {
+  .os-map { grid-template-columns: minmax(0,1fr); }
+  .os-joint { height: 34px; }
+  .os-joint::before { left: 50%; right: auto; top: -2px; bottom: -2px; width: 2px; height: auto; }
+  .os-joint span { width: 22px; height: 22px; border-width: 5px; }
+  .os-node a { display: grid; grid-template-columns: 40px minmax(0,1fr); column-gap: 14px; row-gap: 2px; }
+  .os-node img { grid-row: span 4; }
+  .os-node .go { display: none; }
+}
+
+/* Sticky in-page nav. Lights come on as each section is reached and stay on,
+   the same idea as the old strip, but every light is now a link. */
+.os-nav {
+  position: sticky; top: var(--nav-h, 88px); z-index: 30;
+  background: color-mix(in srgb, var(--paper) 94%, transparent);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--rule);
+}
+.os-nav ol {
+  list-style: none; margin: 0 auto; padding: 8px var(--gut); max-width: calc(var(--maxw) + 2 * var(--gut));
+  display: flex; justify-content: space-between; gap: 4px;
+}
+.os-nav a {
+  display: flex; align-items: center; gap: 8px; padding: 4px 6px; border-radius: 999px;
+  color: var(--muted); text-decoration: none; font-size: 12px; font-weight: 700; letter-spacing: .08em;
+}
+.os-nav a:hover { color: var(--ink); }
+.os-dot {
+  flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%;
+  border: 2px solid var(--rule-2); color: var(--muted); transition: background .5s ease, border-color .5s ease, color .5s ease;
+}
+.os-dot svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.os-nav [data-k="eq"], .os-nav [data-k="development"], .os-nav [data-k="results"] { --fw: var(--gold); }
+.os-nav a.lit .os-dot { background: var(--fw); border-color: var(--fw); color: #fff; }
+.os-nav a[data-k="eq"].lit .os-dot, .os-nav a[data-k="development"].lit .os-dot, .os-nav a[data-k="results"].lit .os-dot { color: var(--ink); }
+.os-nav a[aria-current="true"] { color: var(--ink); background: var(--paper-alt); }
+@media (max-width: 860px) {
+  .os-nav .os-lbl { display: none; }
+  .os-nav a[aria-current="true"] .os-lbl { display: inline; }
+  .os-nav a { padding: 3px; }
+}
+@media (prefers-reduced-motion: reduce) { .os-dot, .os-node a { transition: none; } .os-map:hover .os-joint span { animation: none; } }
+
+/* Why a clutch: two paragraphs up front, the rest on request */
+.why-more { margin-top: 18px; border-top: 1px solid var(--rule); }
+.why-more summary {
+  cursor: pointer; list-style: none; padding: 16px 0 0; font-weight: 700; color: var(--gold-ink);
+}
+.why-more summary::-webkit-details-marker { display: none; }
+.why-more summary::after { content: " +"; }
+.why-more[open] summary::after { content: " –"; }
+.why-more p { margin-top: 14px; }
+
+/* Acronym letters: bigger, filled, so the word reads down the column */
+.fw .parts li span {
+  display: inline-grid; place-items: center; min-width: 34px; height: 34px; margin-right: 14px;
+  border-radius: 4px; background: var(--fw); color: #fff; font-weight: 800;
+}
+
+/* After each "Ask yourself": the answer points somewhere */
+.fw-next { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; margin-top: 22px; }
+.fw-next .btn { border-color: var(--fw); }
+.fw-proof { margin-top: 28px; }
+.fw-proof blockquote { margin: 0; font-size: 17px; color: var(--ink); }
+.fw-proof figcaption { margin-top: 8px; font-size: 13px; color: var(--muted); }
+
+/* Title and license, as a contrast rather than two equal cards */
+.tl .half h3 small { display: block; margin-top: 4px; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.tl .half:first-child { border-top: 4px solid var(--ink); }
+.tl .half:last-child { border-top: 4px solid var(--fw); }
+
+/* Put it to work */
+.work .track .step { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-ink); }
+.work-also { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 12px 28px; }
+
+/* Meet Matt */
+.meet .hero-figure { max-width: 360px; justify-self: end; }
+.meet .lived { margin-top: 24px; }
+@media (max-width: 760px) { .meet .hero-split { grid-template-columns: minmax(0,1fr); } .meet .hero-figure { justify-self: start; max-width: 280px; order: -1; } }
+
+/* The ecosystem: audiences, the ladder, and the OS underneath */
+.eco-who { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-block: 28px 0; }
+.eco-who-h { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-right: 6px; }
+.eco-who a { padding: 7px 14px; border: 1px solid var(--rule-2); border-radius: 999px; color: var(--ink); text-decoration: none; font-size: 14px; font-weight: 600; }
+.eco-who a:hover { border-color: var(--gold); }
+.eco-scale { position: relative; display: flex; justify-content: space-between; margin-block: 34px 0; padding-bottom: 12px;
+  font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.eco-scale::after { content: ""; position: absolute; left: 0; right: 10px; bottom: 0; height: 3px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--rule-2), var(--gold)); }
+.eco-scale::before { content: ""; position: absolute; right: 0; bottom: -5px; border-left: 12px solid var(--gold);
+  border-top: 6.5px solid transparent; border-bottom: 6.5px solid transparent; }
+.eco-cols { list-style: none; margin: 16px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 12px; }
+.eco-col { padding: 18px 16px 16px; border: 1px solid var(--rule); border-top: 3px solid var(--gold); border-radius: 4px; background: var(--paper-alt); }
+.eco-col:first-child { border-top-color: var(--rule-2); }
+.eco-n { margin: 0; font-size: 12px; font-weight: 800; color: var(--gold); letter-spacing: .1em; }
+.eco-col h3 { margin: 4px 0 2px; font-size: 17px; color: var(--ink); }
+.eco-v { margin: 0 0 12px; font-size: 13px; color: var(--muted); }
+.eco-col ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+.eco-col li { border-bottom: 1px solid var(--rule); }
+.eco-col li a { display: block; padding: 8px 0; font-size: 14px; color: var(--body); text-decoration: none; }
+.eco-col li a:hover { color: var(--ink); }
+.eco-room { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin-block: 12px 0; padding: 14px 16px;
+  border: 1px dashed var(--rule-2); border-radius: 4px; color: var(--body); font-size: 14px; }
+.eco-room b { color: var(--ink); }
+.eco-room .link-arrow { margin-left: auto; }
+.eco-base { margin-block: 18px 0; padding: 18px; border: 1px solid var(--gold); border-radius: 4px; }
+.eco-base-h { margin: 0 0 12px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+.eco-fw { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 8px; }
+.eco-fw a { display: block; padding: 12px 14px; border-radius: 3px; background: var(--fw); color: #242427; font-weight: 800; letter-spacing: .03em; text-decoration: none; }
+.eco-fw a span { display: block; font-size: 12px; font-weight: 500; letter-spacing: 0; opacity: .85; }
+.eco-eq { display: flex; align-items: center; gap: 10px; margin: 10px 0 0; padding: 8px 12px; border-radius: 3px;
+  background: color-mix(in srgb, var(--gold) 18%, transparent); color: var(--ink); font-size: 14px; font-weight: 600; }
+.eco-inst { margin: 10px 0 0; font-size: 13px; color: var(--muted); }
+@media (max-width: 1000px) { .eco-cols { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+@media (max-width: 680px) {
+  .eco-cols, .eco-fw { grid-template-columns: minmax(0,1fr); }
+  .eco-fw { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .eco-room .link-arrow { margin-left: 0; }
+  .eco-scale { display: none; }
+}
+
+/* Mobile: one sticky action, shown only between the hero and the final ask */
+.m-cta { display: none; }
+@media (max-width: 760px) {
+  .m-cta {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+    background: var(--ink); color: var(--paper); font-size: 14px;
+    transform: translateY(110%); transition: transform .25s ease;
+  }
+  .m-cta.show { transform: none; }
+  .m-cta .btn { flex: none; padding: 10px 16px; font-size: 14px; }
+  body { padding-bottom: 72px; }
+}
+@media (prefers-reduced-motion: reduce) { .m-cta { transition: none; } }
 </style>
 </head>
 <body>
@@ -95,7 +273,7 @@
           <a href="../coaching-engagement/">How the engagement works<span>The terms, before you have to ask for them</span></a>
         </li>
         <li class="nmp-foot">
-          <a href="../diagnostic/">Start with the free diagnostic<span>Five questions, about two minutes, five patterns</span></a>
+          <a href="../diagnostic/">Start with the free diagnostic<span>A few short questions, about two minutes, five patterns</span></a>
         </li>
       </ul>
     </div>
@@ -107,297 +285,507 @@
 
 <main id="main">
 
-  <section class="hero hero-sub">
-    <p class="eyebrow">The operating system</p>
-    <h1>The CLUTCH <span class="accent">OS</span>.</h1>
+  <!-- 1. HERO. Leads with the reader's problem, not the product name.
+       Copy approved by PUBLISHING, 12 Oct 2026. -->
+  <section class="hero hero-sub sys-hero" id="top">
+    <p class="eyebrow">The CLUTCH Leadership Operating System</p>
+    <h1>People blame the parts. <span class="accent">It is almost always the connections.</span></h1>
     <p class="lede">
-      Four frameworks and the mechanism between them. Built across twenty years
-      inside schools, humanitarian assistance at USAID, and founder-led companies
-      where honest feedback was the only kind on offer.
+      CLUTCH is four frameworks you can run on a Tuesday, and the one mechanism
+      that lets them meet without shearing. Built across twenty years inside
+      schools, humanitarian assistance at USAID, and founder-led companies where
+      honest feedback was the only kind on offer.
     </p>
     <p class="cta-row">
-      <a class="btn" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=system-hero">Book thirty minutes</a>
-      <a class="link-arrow" href="../diagnostic/">Run the free diagnostic</a>
+      <a class="btn btn-lg" href="../diagnostic/?src=system-hero">Find out where it is slipping</a>
+      <a class="link-arrow" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=system-hero">Or book thirty minutes</a>
     </p>
+    <p class="micro">Free. A few short questions, about two minutes, and your result appears before any email.</p>
+
+    <!-- 6. AUTHORITY. Same credential row as the home page, now above the fold. -->
+    <ul class="logo-row" aria-label="Credentials">
+      <li><img src="../assets/logo_gallup.png" alt="Gallup Certified Strengths Coach" width="203" height="203"><b>Gallup</b><span>Certified Strengths Coach</span></li>
+      <li><img src="../assets/logo_eqi.png" alt="EQ-i 2.0" width="200" height="203"><b>EQ-i 2.0</b><span>Certified practitioner</span></li>
+      <li><img src="../assets/logo_lse.png" alt="London School of Economics" width="177" height="177"><b>London School of Economics</b><span>MSc, Sociology</span></li>
+      <li><img src="../assets/logo_hopkins.png" alt="Johns Hopkins University" width="186" height="203"><b>Johns Hopkins</b><span>MA, Education</span></li>
+      <li><img src="../assets/logo_usaid.png" alt="United States Agency for International Development" width="203" height="203"><b>USAID</b><span>Leadership and team development</span></li>
+    </ul>
   </section>
 
-  <!-- The primer. Everything on this page rests on one metaphor, so the
-       metaphor goes first rather than being inferred from the icons. -->
-  <section class="band alt">
-    <p class="eyebrow">Start here</p>
-    <h2 class="section-h">Why it is called a clutch</h2>
-    <div class="book-wrap">
-      <div>
-        <p class="lede">An organization is a drivetrain. Something generates the
-          power, something chooses the gear, something decides the direction, and
-          something transfers the force to the wheels. When an organization runs
-          badly, people usually blame the parts. It is almost always the
-          connections between them.</p>
-        <p>A clutch is the only component in a car engineered to slip. Everything
-          else is built to grip. It exists so that two things spinning at
-          completely different speeds can meet without shattering each other.
-          Engine at four thousand rpm, gearbox not turning at all: take away the
-          part in between and you do not get movement, you get metal filings.</p>
-        <p>That part is emotional intelligence. Not a soft skill, a mechanical
-          necessity, and the reason the book is called CLUTCH rather than
-          something about vision.</p>
-        <p><strong>If you have ever driven a manual, you already know how this
-          is learned.</strong> Nobody hands you a chart of engine speeds. You
-          learn to hear it. You feel the moment come up through your foot, and
-          you shift before any gauge tells you to, because the car told you
-          first. That ear is the whole of it: reading the load, sensing the
-          moment, knowing when to change gear and when to hold the one you are
-          in. And the first few weeks you are terrible at it, which is worth
-          remembering about the people you are asking to lead.</p>
-        <p>Which is also why it is not one of the four. CREATE, VOICES, the 6C
-          Compass and DELEGATE are frameworks, each with a method you can
-          actually run on a Tuesday. Emotional intelligence is not a step in
-          that sequence and does not get a framework here, because it is the
-          medium the other four move through. It has a chapter to itself in the
-          book, and it is in every other chapter whether it is named there or
-          not.</p>
-      </div>
-      <aside class="spec">
-        <img class="spec-photo" src="../assets/photo-engine.jpg"
-             alt="A cylinder head with the plugs out"
-             width="675" height="900">
-        <h3>The four, in one line each</h3>
-        <ul>
-          <li>CREATE generates the power</li>
-          <li>VOICES chooses the gear</li>
-          <li>The 6C Compass sets the direction</li>
-          <li>DELEGATE transfers it to the wheels</li>
-        </ul>
-        <p class="spec-meta spec-eq">
-          <img src="../assets/icon_EQ.png" alt="" aria-hidden="true" width="40" height="40">
-          <span>Emotional intelligence is the fifth thing and the first one.
-            Not a framework, and what lets the other four meet without
-            shearing.</span></p>
-      </aside>
+  <!-- 2 + 3. THE MAP. Replaces the cylinder-head photo, the "four in one line"
+       list and the four-card band, which said the same thing three times.
+       One picture of the whole system before any explanation of it. -->
+  <section class="band dark" id="map">
+    <p class="eyebrow">The system on one page</p>
+    <h2 class="section-h">Four parts, and the clutch between them</h2>
+    <p class="lede">Each one does a specific job. Each fails in a way the others
+      predict. Pick the one that sounds like this week.</p>
+    <div class="os-map" role="list">
+      <div class="os-node fw-create" role="listitem"><a href="#create">
+        <img src="../assets/icon_create.png" alt="" width="40" height="40">
+        <span class="n">I</span><span class="k">The engine</span><b>CREATE</b>
+        <span class="d">Generates the power</span><span class="go">Six cylinders &darr;</span></a></div>
+      <div class="os-joint" aria-hidden="true"><span></span></div>
+      <div class="os-node fw-voices" role="listitem"><a href="#voices">
+        <img src="../assets/icon_voices.png" alt="" width="40" height="40">
+        <span class="n">II</span><span class="k">The gearbox</span><b>VOICES</b>
+        <span class="d">Chooses the gear</span><span class="go">Six presences &darr;</span></a></div>
+      <div class="os-joint" aria-hidden="true"><span></span></div>
+      <div class="os-node fw-sixc" role="listitem"><a href="#sixc">
+        <img src="../assets/icon_6C.png" alt="" width="40" height="40">
+        <span class="n">III</span><span class="k">The navigation</span><b>6C Compass</b>
+        <span class="d">Sets the direction</span><span class="go">Six decision modes &darr;</span></a></div>
+      <div class="os-joint" aria-hidden="true"><span></span></div>
+      <div class="os-node fw-delegate" role="listitem"><a href="#delegate">
+        <img src="../assets/icon_delegate.png" alt="" width="40" height="40">
+        <span class="n">IV</span><span class="k">The handoff</span><b>DELEGATE</b>
+        <span class="d">Transfers it to the wheels</span><span class="go">Eight steps &darr;</span></a></div>
+    </div>
+    <div class="os-rail">
+      <img src="../assets/icon_EQ.png" alt="" width="48" height="48">
+      <p><b>Emotional intelligence is the fifth thing and the first one.</b>
+        Not a framework, and what lets the other four meet without shearing.
+        <a class="link-arrow" href="#clutch">Why it is called a clutch</a></p>
     </div>
   </section>
 
-  <!-- The four at a glance, borrowed from the CLUTCH page's Four Systems
-       module: dark ground, colored top rule, icon, numeral, kicker, name.
-       The detail sections below are the same four in full. -->
-  <section class="band dark">
-    <p class="eyebrow">The architecture</p>
-    <h2 class="section-h">The four systems</h2>
-    <p class="lede">Each one does a specific job. Together they are a complete
-      leadership operating system, and each fails in a way the others predict.</p>
-    <ol class="fw-cards">
-      <li class="fw-card fw-create">
-        <img src="../assets/icon_create.png" alt="" width="38" height="38">
-        <p class="fw-num">I</p>
-        <p class="fw-kicker">The engine</p>
-        <h3>CREATE</h3>
-        <p>Six cylinders that generate capacity. When one stops firing the whole
-          thing runs rough long before anyone names why.</p>
-        <a href="#create">CREATE in full</a>
+  <div class="os-scroll">
+    <!-- 10. Sticky in-page nav. Replaces the decorative strip with the same
+         lights, now clickable, keyboard reachable and visible to screen readers. -->
+    <nav class="os-nav" aria-label="On this page">
+      <ol>
+        <li><a href="#create" class="fw-create" data-k="create"><span class="os-dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11V15 M3 13H5 M5 10H7.5L9 8H16L17.5 10H19.5V9H21V16H19.5V15H18L16 17H7L5 15Z M12.5 8V5.5 M10 5.5H15"/></svg></span><span class="os-lbl">CREATE</span></a></li>
+        <li><a href="#voices" class="fw-voices" data-k="voices"><span class="os-dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6.8V17.2 M12 6.8V17.2 M18 6.8V17.2 M6 12H18 M4.2 5a1.8 1.8 0 1 0 3.6 0a1.8 1.8 0 1 0 -3.6 0 M10.2 5a1.8 1.8 0 1 0 3.6 0a1.8 1.8 0 1 0 -3.6 0 M16.2 5a1.8 1.8 0 1 0 3.6 0a1.8 1.8 0 1 0 -3.6 0 M4.2 19a1.8 1.8 0 1 0 3.6 0a1.8 1.8 0 1 0 -3.6 0 M10.2 19a1.8 1.8 0 1 0 3.6 0a1.8 1.8 0 1 0 -3.6 0 M16.2 19a1.8 1.8 0 1 0 3.6 0a1.8 1.8 0 1 0 -3.6 0"/></svg></span><span class="os-lbl">VOICES</span></a></li>
+        <li><a href="#clutch" data-k="eq"><span class="os-dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0 M9 12a3 3 0 1 0 6 0a3 3 0 1 0 -6 0 M12 3v3 M12 18v3 M3 12h3 M18 12h3"/></svg></span><span class="os-lbl">EQ</span></a></li>
+        <li><a href="#sixc" class="fw-sixc" data-k="6c"><span class="os-dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.5C12 21.5 5 15 5 9.5A7 7 0 0 1 19 9.5C19 15 12 21.5 12 21.5Z M9.5 9.5a2.5 2.5 0 1 0 5 0a2.5 2.5 0 1 0 -5 0"/></svg></span><span class="os-lbl">6C</span></a></li>
+        <li><a href="#delegate" class="fw-delegate" data-k="delegate"><span class="os-dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 15.5a3.5 3.5 0 1 0 7 0a3.5 3.5 0 1 0 -7 0 M9.5 13L19 3.5 M15 7.5l2.5 2.5 M17.5 5l2 2"/></svg></span><span class="os-lbl">DELEGATE</span></a></li>
+        <li><a href="#license" data-k="development"><span class="os-dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16 M4 20v-5h5v-5h5V5h6v15"/></svg></span><span class="os-lbl">TITLE / LICENSE</span></a></li>
+        <li><a href="#work" data-k="results"><span class="os-dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 4L3 21 M14.5 4L21 21 M12 6V8 M12 11V13.5 M12 17V20.5"/></svg></span><span class="os-lbl">PUT IT TO WORK</span></a></li>
+      </ol>
+    </nav>
+
+    <!-- 3. WHY A CLUTCH, trimmed. The two paragraphs that carry the argument
+         stay up front; the rest of the essay is one click away, unchanged. -->
+    <section class="band alt" id="clutch" data-light="eq">
+      <p class="eyebrow">Why it is called a clutch</p>
+      <h2 class="section-h">The only part engineered to slip</h2>
+      <div class="book-wrap">
+        <div>
+          <p class="lede">A clutch is the only component in a car engineered to slip.
+            Everything else is built to grip. It exists so that two things spinning
+            at completely different speeds can meet without shattering each other.
+            Engine at four thousand rpm, gearbox not turning at all: take away the
+            part in between and you do not get movement, you get metal filings.</p>
+          <p>That part is emotional intelligence. Not a soft skill, a mechanical
+            necessity, and the reason the book is called CLUTCH rather than
+            something about vision.</p>
+          <details class="why-more">
+            <summary>Read the full argument</summary>
+            <p>An organization is a drivetrain. Something generates the power,
+              something chooses the gear, something decides the direction, and
+              something transfers the force to the wheels. When an organization runs
+              badly, people usually blame the parts. It is almost always the
+              connections between them.</p>
+            <p><strong>If you have ever driven a manual, you already know how this
+              is learned.</strong> Nobody hands you a chart of engine speeds. You
+              learn to hear it. You feel the moment come up through your foot, and
+              you shift before any gauge tells you to, because the car told you
+              first. That ear is the whole of it: reading the load, sensing the
+              moment, knowing when to change gear and when to hold the one you are
+              in. And the first few weeks you are terrible at it, which is worth
+              remembering about the people you are asking to lead.</p>
+            <p>Which is also why it is not one of the four. CREATE, VOICES, the 6C
+              Compass and DELEGATE are frameworks, each with a method you can
+              actually run on a Tuesday. Emotional intelligence is not a step in
+              that sequence and does not get a framework here, because it is the
+              medium the other four move through. It has a chapter to itself in the
+              book, and it is in every other chapter whether it is named there or
+              not.</p>
+          </details>
+        </div>
+        <aside class="spec">
+          <img class="spec-photo" src="../assets/photo-engine.jpg"
+               alt="A cylinder head with the plugs out"
+               width="675" height="900" loading="lazy">
+          <p class="spec-meta spec-eq">
+            <img src="../assets/icon_EQ.png" alt="" aria-hidden="true" width="40" height="40">
+            <span>Measured, not guessed: every OBD includes the EQ-i 2.0, the
+              instrument behind this part of the system.</span></p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- CREATE -->
+    <section class="band fw-create fw" id="create" data-light="create">
+      <div class="fw-head">
+        <img class="fw-icon" src="../assets/icon_create.png" alt="" width="44" height="44">
+        <p class="fw-label">I &middot; The engine</p>
+        <h2 class="fw-name">CREATE</h2>
+      </div>
+      <div class="fw-body">
+        <div>
+          <p class="lede">Six cylinders. An organization generates capacity the way
+            an engine generates torque.</p>
+          <p>An engine down one cylinder still runs. It just runs rough, burns
+            more, and gets slower in a way nobody can quite point at. Most teams
+            diagnose the symptom. The engine light tells you which cylinder.</p>
+          <div class="fw-ask">
+            <p class="fw-ask-label">Ask yourself</p>
+            <p class="fw-ask-q">Name the last thing that took three times longer
+              than it should have. Which of the six was it?</p>
+            <p class="fw-ask-note">If you cannot answer that in ten seconds, that
+              is the answer.</p>
+          </div>
+          <!-- 4. NEXT STEP after the self-diagnosis -->
+          <p class="fw-next">
+            <a class="btn btn-ghost" href="../diagnostic/?src=system-create">Find your pattern in the free diagnostic</a>
+            <a class="link-arrow" href="https://goode-design-consulting.kit.com/products/create_chapter">The CREATE ebook, $3.99</a>
+          </p>
+        </div>
+        <ol class="parts six">
+          <li><span>C</span>Culture</li>
+          <li><span>R</span>Relationships</li>
+          <li><span>E</span>Execution</li>
+          <li><span>A</span>Agility</li>
+          <li><span>T</span>Teaching</li>
+          <li><span>E</span>Ethics</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- VOICES -->
+    <section class="band fw-voices alt fw" id="voices" data-light="voices">
+      <div class="fw-head">
+        <img class="fw-icon" src="../assets/icon_voices.png" alt="" width="44" height="44">
+        <p class="fw-label">II &middot; The gearbox</p>
+        <h2 class="fw-name">VOICES</h2>
+      </div>
+      <div class="fw-body">
+        <div>
+          <p class="lede">Six leadership presences, shifted by context. You do not
+            have a leadership style. You have one gear you never shift out of, and
+            your team has built its habits around it.</p>
+          <p>A gearbox does not choose where you are going. It decides how much of
+            the engine&rsquo;s power actually reaches the road right now. The worry
+            leaders raise first is whether changing presence will confuse people.
+            It does the opposite. Teams do not need you consistent. They need you
+            legible.</p>
+          <div class="fw-ask">
+            <p class="fw-ask-label">Ask yourself</p>
+            <p class="fw-ask-q">What gear were you in for your last three hard
+              conversations?</p>
+            <p class="fw-ask-note">Same gear all three times is a gearbox stuck in
+              third. It will get you along a motorway and nowhere up a hill.</p>
+          </div>
+          <p class="fw-next">
+            <a class="btn btn-ghost" href="../diagnostic/?src=system-voices">Find your pattern in the free diagnostic</a>
+            <a class="link-arrow" href="https://goode-design-consulting.kit.com/products/voices_chapter">The VOICES ebook, $3.99</a>
+          </p>
+        </div>
+        <ol class="parts six">
+          <li><span>V</span>Visionary</li>
+          <li><span>O</span>Operator</li>
+          <li><span>I</span>Independent</li>
+          <li><span>C</span>Coach</li>
+          <li><span>E</span>Encourager</li>
+          <li><span>S</span>Sculptor</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 6C -->
+    <section class="band fw-sixc fw" id="sixc" data-light="6c">
+      <div class="fw-head">
+        <img class="fw-icon" src="../assets/icon_6C.png" alt="" width="44" height="44">
+        <p class="fw-label">III &middot; The navigation system</p>
+        <h2 class="fw-name">The 6C Decision Compass</h2>
+      </div>
+      <div class="fw-body">
+        <div>
+          <p class="lede">Who decides, how, and when. Six modes, named out loud, so
+            nobody has to reverse-engineer decision rights from your tone.</p>
+          <p>Satnav does not drive the car. It tells you which turn belongs to you,
+            before the junction rather than in it. Command is not domineering, it
+            is simply expensive, and most organizations spend it like it is free.</p>
+          <div class="fw-ask">
+            <p class="fw-ask-label">Ask yourself</p>
+            <p class="fw-ask-q">Map your last ten decisions. How many were actually
+              yours to make?</p>
+            <p class="fw-ask-note">If the answer is seven, you do not have a trust
+              problem. You have an architecture problem.</p>
+          </div>
+          <p class="fw-next">
+            <a class="btn btn-ghost" href="../diagnostic/?src=system-6c">Find your pattern in the free diagnostic</a>
+            <a class="link-arrow" href="https://goode-design-consulting.kit.com/products/6c_chapter">The 6C Compass ebook, $3.99</a>
+          </p>
+        </div>
+        <ol class="parts six">
+          <li><span>1</span>Command</li>
+          <li><span>2</span>Consultative</li>
+          <li><span>3</span>Collaborative</li>
+          <li><span>4</span>Consensus</li>
+          <li><span>5</span>Core Expert</li>
+          <li><span>6</span>Choice</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- DELEGATE -->
+    <section class="band fw-delegate alt fw" id="delegate" data-light="delegate">
+      <div class="fw-head">
+        <img class="fw-icon" src="../assets/icon_delegate.png" alt="" width="44" height="44">
+        <p class="fw-label">IV &middot; The handoff system</p>
+        <h2 class="fw-name">DELEGATE</h2>
+      </div>
+      <div class="fw-body">
+        <div>
+          <p class="lede">Eight steps for transferring real ownership, so a handoff
+            develops someone instead of dumping a task on them.</p>
+          <p>You can hand someone the keys and still keep a foot on the pedal.
+            That is most delegation. Define the container, not the contents:
+            the why, the what and the by-when. The how belongs to them.</p>
+          <div class="fw-ask">
+            <p class="fw-ask-label">Ask yourself</p>
+            <p class="fw-ask-q">Think of the last thing you handed over. How many
+              times has it come back to you since?</p>
+            <p class="fw-ask-note">Once is a handoff finding its feet. Three times
+              was never delegation. It was a loan.</p>
+          </div>
+          <p class="fw-next">
+            <a class="btn btn-ghost" href="../diagnostic/?src=system-delegate">Find your pattern in the free diagnostic</a>
+            <a class="link-arrow" href="https://goode-design-consulting.kit.com/products/delegate_chapter">The DELEGATE ebook, $3.99</a>
+          </p>
+          <!-- 5. PROOF, placed where it is most specific. Same quote and credit
+               as the home page. -->
+          <figure class="pullquote fw-proof">
+            <blockquote>I participated in a delegation workshop sponsored by my
+              employer, and used the framework in a 1:1 the next day. That
+              doesn&rsquo;t happen with most workshops.</blockquote>
+            <figcaption>VP of Operations, Fintech</figcaption>
+          </figure>
+        </div>
+        <ol class="parts eight">
+          <li><span>D</span>Define the win</li>
+          <li><span>E</span>Establish the way</li>
+          <li><span>L</span>List the guardrails</li>
+          <li><span>E</span>Expect the process</li>
+          <li><span>G</span>Give the right support</li>
+          <li><span>A</span>Agree on checkpoints</li>
+          <li><span>T</span>Transfer ownership</li>
+          <li><span>E</span>Encourage growth</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Title vs license. The sharpest single idea in the system. -->
+    <section class="band tl fw-delegate" id="license" data-light="development">
+      <p class="eyebrow">The distinction most delegation dies on</p>
+      <h2 class="section-h">You keep the title. They get the license.</h2>
+      <div class="split">
+        <article class="half">
+          <h3>Title<small>Stays with you</small></h3>
+          <p>Final accountability. It stays with the leader, and pretending
+            otherwise is how people end up carrying weight they were never given
+            authority to carry.</p>
+        </article>
+        <article class="half">
+          <h3>License<small>Transfers to them</small></h3>
+          <p>Operational ownership. It transfers, completely, and the boundary gets
+            said out loud rather than assumed.</p>
+        </article>
+      </div>
+      <p class="rate-note">Most delegation fails because these two get conflated.
+        The leader believes they handed over the work. The team believes they were
+        handed a test. DELEGATE separates them and makes the line explicit.</p>
+    </section>
+
+    <!-- 5. PROOF. The two remaining client quotes from the home page, same
+         credits, placed just before the ask. -->
+    <section class="band alt" id="proof">
+      <p class="eyebrow">From people who ran it the next week</p>
+      <h2 class="section-h">Skeptical of the metaphor. Kept the method.</h2>
+      <div class="quote-stage" data-carousel>
+        <figure class="q is-live">
+          <blockquote>I run a real dashboard for a living. I came in skeptical of the metaphor &ndash; I left with a usable distinction between what&rsquo;s actually a leading indicator and what&rsquo;s just a soft signal I&rsquo;d have noticed anyway.</blockquote>
+          <figcaption><span class="q-name">Technical Founder</span> <span class="q-role">Technology</span></figcaption>
+        </figure>
+        <figure class="q">
+          <blockquote>Most people assume you can hire fast and fire decisively. My world can&rsquo;t. What I appreciated is that the core framework still held up once I did the translation myself, and Matt&rsquo;s workshop does that translation for you.</blockquote>
+          <figcaption><span class="q-name">CEO</span> <span class="q-role">Professional Services</span></figcaption>
+        </figure>
+        <div class="q-nav">
+          <button type="button" class="q-arrow" data-prev aria-label="Previous testimonial">&larr;</button>
+          <div class="q-dots" role="tablist" aria-label="Choose a testimonial"></div>
+          <button type="button" class="q-arrow" data-next aria-label="Next testimonial">&rarr;</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. THE PATH TO PAID WORK. Find, fix, teach.
+         Copy approved by PUBLISHING, 12 Oct 2026. No prices here by design;
+         the OBD page carries them. -->
+    <section class="band work" id="work" data-light="results">
+      <p class="eyebrow">Put it to work</p>
+      <h2 class="section-h">The book teaches the system. The work installs it.</h2>
+      <p class="lede">Three ways the system gets into an organization, in the order
+        most engagements run. Each starts from data about how your people actually
+        operate under pressure, not from a fortnight of interviews.</p>
+      <div class="grid-3 tracks">
+        <article class="track">
+          <p class="step">1 &middot; Find the part</p>
+          <h3>The On-Board Diagnostic</h3>
+          <p class="track-kind">CliftonStrengths and EQ-i 2.0, one written read</p>
+          <p>Two published instruments, read against each other, so you know which
+            part is slipping before anyone spends money fixing it.</p>
+          <p class="meta"><a class="link-arrow" href="../obd/">See the OBD levels</a></p>
+        </article>
+        <article class="track">
+          <p class="step">2 &middot; Fix it with one leader</p>
+          <h3>Executive coaching</h3>
+          <p class="track-kind">Six sessions, built on the OBD</p>
+          <p>Session one starts from your read, not an introduction. The framework
+            that matches what is breaking becomes the agenda.</p>
+          <p class="meta"><a class="link-arrow" href="../executive-coaching/">How coaching works</a></p>
+        </article>
+        <article class="track">
+          <p class="step">3 &middot; Teach it to the team</p>
+          <h3>Know Thyself to Lead Others</h3>
+          <p class="track-kind">Team workshop and Owner&rsquo;s Manual</p>
+          <p>The whole team learns the same language for how each of them runs,
+            so handoffs and hard conversations stop depending on guesswork.</p>
+          <p class="meta"><a class="link-arrow" href="../know-thyself/">See the workshop</a></p>
+        </article>
+      </div>
+      <p class="work-also">
+        <a class="link-arrow" href="#ecosystem">See everything the system powers</a>
+      </p>
+    </section>
+  </div>
+
+  <!-- THE ECOSYSTEM. Everything Goode Design & Consulting offers, on one
+       picture: who it is for, the ladder from free to retained, and the one
+       operating system underneath all of it. Names are the published service
+       names from /products/ and /schools/.
+       NEW COPY (eyebrow, h2, lede, column verbs, scale labels): PUBLISHING
+       to sign off. -->
+  <section class="band dark eco" id="ecosystem">
+    <p class="eyebrow">The whole ecosystem</p>
+    <h2 class="section-h">One operating system. Every way in.</h2>
+    <p class="lede">Every book, instrument, program and engagement runs on the
+      same four frameworks. Start anywhere. Most organizations go further in
+      over time.</p>
+
+    <div class="eco-who" aria-label="Who it is for">
+      <span class="eco-who-h">Built for</span>
+      <a href="../#lanes">Founders and scaling firms</a>
+      <a href="../schools/">Independent schools</a>
+      <a href="../#lanes">Nonprofit and public sector</a>
+    </div>
+
+    <div class="eco-scale" aria-hidden="true"><span>Free and low cost</span><span>Deeper commitment</span></div>
+
+    <ol class="eco-cols">
+      <li class="eco-col">
+        <p class="eco-n">0</p>
+        <h3>Learn it</h3>
+        <p class="eco-v">On your own, at your pace</p>
+        <ul>
+          <li><a href="../diagnostic/?src=system-ecosystem">Free diagnostic</a></li>
+          <li><a href="https://www.amazon.com/dp/B0HHFGV2MT">CLUTCH</a></li>
+          <li><a href="../clutch/ebooks/">Four framework ebooks</a></li>
+          <li><a href="../books/">Field Tested</a></li>
+          <li><a href="../books/">No Average Brain</a></li>
+          <li><a href="../writing/">The Leadership Lab</a></li>
+          <li><a href="https://www.linkedin.com/newsletters/clutch-the-leadership-shift-7425346322725048320/">The Leadership Shift</a></li>
+        </ul>
       </li>
-      <li class="fw-card fw-voices">
-        <img src="../assets/icon_voices.png" alt="" width="38" height="38">
-        <p class="fw-num">II</p>
-        <p class="fw-kicker">The gearbox</p>
-        <h3>VOICES</h3>
-        <p>Six leadership stances, and when each one is the right gear. The
-          gearbox does not choose your destination.</p>
-        <a href="#voices">VOICES in full</a>
+      <li class="eco-col">
+        <p class="eco-n">1</p>
+        <h3>See it clearly</h3>
+        <p class="eco-v">Find the part that is slipping</p>
+        <ul>
+          <li><a href="../obd/">The On-Board Diagnostic</a></li>
+          <li><a href="../products/#services">Psychological Safety Check</a></li>
+        </ul>
       </li>
-      <li class="fw-card fw-sixc">
-        <img src="../assets/icon_6C.png" alt="" width="38" height="38">
-        <p class="fw-num">III</p>
-        <p class="fw-kicker">The navigation system</p>
-        <h3>6C Compass</h3>
-        <p>Six decision modes. The question is not what to decide, it is how to
-          decide who decides.</p>
-        <a href="#sixc">The 6C Compass in full</a>
+      <li class="eco-col">
+        <p class="eco-n">2</p>
+        <h3>Develop one leader</h3>
+        <p class="eco-v">The person in the seat</p>
+        <ul>
+          <li><a href="../executive-coaching/">Executive coaching</a></li>
+          <li><a href="../goodestart/">GoodeStart</a></li>
+          <li><a href="../building-the-bench/">Building the Bench</a></li>
+        </ul>
       </li>
-      <li class="fw-card fw-delegate">
-        <img src="../assets/icon_delegate.png" alt="" width="38" height="38">
-        <p class="fw-num">IV</p>
-        <p class="fw-kicker">The handoff system</p>
-        <h3>DELEGATE</h3>
-        <p>Eight steps for transferring ownership so it stays transferred, rather
-          than coming back with interest.</p>
-        <a href="#delegate">DELEGATE in full</a>
+      <li class="eco-col">
+        <p class="eco-n">3</p>
+        <h3>Develop the team</h3>
+        <p class="eco-v">A shared language</p>
+        <ul>
+          <li><a href="../know-thyself/">Know Thyself to Lead Others</a></li>
+          <li><a href="../know-thyself/">Owner&rsquo;s Manual</a></li>
+          <li><a href="../products/#services">Seminars</a></li>
+          <li><a href="../products/#services">Field Tested train-the-trainer</a></li>
+        </ul>
+      </li>
+      <li class="eco-col">
+        <p class="eco-n">4</p>
+        <h3>Redesign the system</h3>
+        <p class="eco-v">How the whole thing runs</p>
+        <ul>
+          <li><a href="../products/#services">Executive team consulting</a></li>
+          <li><a href="../products/#services">System-wide consulting</a></li>
+        </ul>
       </li>
     </ol>
-  </section>
 
-  <!-- CREATE -->
-  <!-- CLUTCH OS scroll moment (VISUALS Round 2, item 12). The strip sticks under
-       the nav; as each section below reaches mid-screen, the lights up to that
-       system come on in book order (CREATE, VOICES, EQ, 6C, DELEGATE,
-       Development, Results) and stay on. EQ, the clutch, comes on with 6C;
-       Development with "Title and license"; Results with the last section. -->
-  <div class="os-scroll">
-    <div class="os-strip"><svg class="os-strip-svg" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 96 1200 160" role="img" data-on=""><title>The CLUTCH leadership operating system</title><style>.light .lit{opacity:0}.lbl{fill:#71706C}@keyframes warm{0%{opacity:0}35%{opacity:.35}60%{opacity:.2}100%{opacity:1}}[data-on~="create"] #light-create .lit{opacity:1;animation:warm 600ms ease-out 400ms both}[data-on~="create"] #label-create{fill:#856521}[data-on~="voices"] #light-voices .lit{opacity:1;animation:warm 600ms ease-out 400ms both}[data-on~="voices"] #label-voices{fill:#856521}[data-on~="eq"] #light-eq .lit{opacity:1;animation:warm 600ms ease-out 400ms both}[data-on~="eq"] #label-eq{fill:#856521}[data-on~="6c"] #light-6c .lit{opacity:1;animation:warm 600ms ease-out 400ms both}[data-on~="6c"] #label-6c{fill:#856521}[data-on~="delegate"] #light-delegate .lit{opacity:1;animation:warm 600ms ease-out 400ms both}[data-on~="delegate"] #label-delegate{fill:#856521}[data-on~="development"] #light-development .lit{opacity:1;animation:warm 600ms ease-out 400ms both}[data-on~="development"] #label-development{fill:#856521}[data-on~="results"] #light-results .lit{opacity:1;animation:warm 600ms ease-out 400ms both}[data-on~="results"] #label-results{fill:#856521}@media (prefers-reduced-motion:reduce){.light .lit{animation:none!important}}</style><rect x="12" y="12" width="1176" height="336" rx="28" fill="#F1EFE9" stroke="#DDDAD1" stroke-width="1.5"/><g id="light-create" class="light" transform="translate(59.0 111.0) scale(2.1667)"><g class="unlit"><circle cx="24" cy="24" r="23" fill="none" stroke="#C6C2B6" stroke-width="2"/><g transform="translate(12 12)"><path fill="none" stroke="#71706C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 11V15 M3 13H5 M5 10H7.5L9 8H16L17.5 10H19.5V9H21V16H19.5V15H18L16 17H7L5 15Z M12.5 8V5.5 M10 5.5H15"/></g></g><g class="lit"><circle cx="24" cy="24" r="24" fill="#C4A26A"/><g transform="translate(12 12)"><path fill="none" stroke="#242427" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 11V15 M3 13H5 M5 10H7.5L9 8H16L17.5 10H19.5V9H21V16H19.5V15H18L16 17H7L5 15Z M12.5 8V5.5 M10 5.5H15"/></g></g></g><path class="lbl" id="label-create" fill="#71706C" d="M87.6 239.1Q86.7 239.1 85.9 238.8Q85.2 238.5 84.6 238Q84 237.5 83.7 236.7Q83.4 236 83.4 235.2Q83.4 234.3 83.7 233.6Q84 232.8 84.6 232.3Q85.2 231.8 85.9 231.5Q86.7 231.2 87.6 231.2Q88.6 231.2 89.4 231.5Q90.2 231.9 90.8 232.5L89.6 233.6Q89.2 233.1 88.7 232.9Q88.3 232.7 87.7 232.7Q87.1 232.7 86.7 232.9Q86.2 233 85.9 233.4Q85.6 233.7 85.4 234.1Q85.2 234.6 85.2 235.2Q85.2 235.7 85.4 236.2Q85.6 236.6 85.9 236.9Q86.2 237.3 86.7 237.4Q87.1 237.6 87.7 237.6Q88.3 237.6 88.7 237.4Q89.2 237.2 89.6 236.7L90.8 237.8Q90.2 238.4 89.4 238.8Q88.6 239.1 87.6 239.1ZM93.9 239V231.3H97.3Q98.3 231.3 99.1 231.6Q99.8 232 100.2 232.6Q100.6 233.2 100.6 234.1Q100.6 235 100.2 235.6Q99.8 236.2 99.1 236.5Q99 236.5 99 236.5L100.8 239H98.8L97.4 236.9Q97.3 236.9 97.3 236.9H95.7V239ZM95.7 235.4H97.2Q98 235.4 98.4 235.1Q98.8 234.7 98.8 234.1Q98.8 233.5 98.4 233.1Q98 232.8 97.2 232.8H95.7ZM105.8 237.6H110V239H104V231.3H109.8V232.7H105.8V234.4H109.4V235.8H105.8ZM112.4 239 115.8 231.3H117.5L121 239H119.1L118.4 237.3H114.9L114.2 239ZM117.9 236 116.7 233 115.4 236ZM125.4 239V232.8H122.9V231.3H129.6V232.8H127.1V239ZM134.3 237.6H138.5V239H132.5V231.3H138.4V232.7H134.3V234.4H137.9V235.8H134.3Z"/><g id="light-voices" class="light" transform="translate(222.0 111.0) scale(2.1667)"><g class="unlit"><circle cx="24" cy="24" r="23" fill="none" stroke="#C6C2B6" stroke-width="2"/><g transform="translate(12 12)"><path fill="none" stroke="#71706C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 6.8V17.2 M12 6.8V17.2 M18 6.8V17.2 M6 12H18 M4.2 5 A1.8 1.8 0 1 0 7.8 5 A1.8 1.8 0 1 0 4.2 5 M4.2 19 A1.8 1.8 0 1 0 7.8 19 A1.8 1.8 0 1 0 4.2 19 M10.2 5 A1.8 1.8 0 1 0 13.8 5 A1.8 1.8 0 1 0 10.2 5 M10.2 19 A1.8 1.8 0 1 0 13.8 19 A1.8 1.8 0 1 0 10.2 19 M16.2 5 A1.8 1.8 0 1 0 19.8 5 A1.8 1.8 0 1 0 16.2 5 M16.2 19 A1.8 1.8 0 1 0 19.8 19 A1.8 1.8 0 1 0 16.2 19"/></g></g><g class="lit"><circle cx="24" cy="24" r="24" fill="#C4A26A"/><g transform="translate(12 12)"><path fill="none" stroke="#242427" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 6.8V17.2 M12 6.8V17.2 M18 6.8V17.2 M6 12H18 M4.2 5 A1.8 1.8 0 1 0 7.8 5 A1.8 1.8 0 1 0 4.2 5 M4.2 19 A1.8 1.8 0 1 0 7.8 19 A1.8 1.8 0 1 0 4.2 19 M10.2 5 A1.8 1.8 0 1 0 13.8 5 A1.8 1.8 0 1 0 10.2 5 M10.2 19 A1.8 1.8 0 1 0 13.8 19 A1.8 1.8 0 1 0 10.2 19 M16.2 5 A1.8 1.8 0 1 0 19.8 5 A1.8 1.8 0 1 0 16.2 5 M16.2 19 A1.8 1.8 0 1 0 19.8 19 A1.8 1.8 0 1 0 16.2 19"/></g></g></g><path class="lbl" id="label-voices" fill="#71706C" d="M250.5 239 247.2 231.3H249.1L251.4 236.8L253.8 231.3H255.6L252.3 239ZM262.1 239.1Q261.2 239.1 260.4 238.8Q259.6 238.5 259.1 238Q258.5 237.5 258.2 236.7Q257.9 236 257.9 235.2Q257.9 234.3 258.2 233.6Q258.5 232.8 259.1 232.3Q259.7 231.8 260.4 231.5Q261.2 231.2 262.1 231.2Q263 231.2 263.8 231.5Q264.5 231.8 265.1 232.3Q265.7 232.8 266 233.6Q266.3 234.3 266.3 235.2Q266.3 236 266 236.7Q265.7 237.5 265.1 238Q264.5 238.5 263.8 238.8Q263 239.1 262.1 239.1ZM262.1 237.6Q262.6 237.6 263 237.4Q263.5 237.3 263.8 236.9Q264.1 236.6 264.3 236.2Q264.5 235.7 264.5 235.2Q264.5 234.6 264.3 234.1Q264.1 233.7 263.8 233.4Q263.5 233 263.1 232.9Q262.6 232.7 262.1 232.7Q261.6 232.7 261.1 232.9Q260.7 233 260.4 233.4Q260.1 233.7 259.9 234.1Q259.7 234.6 259.7 235.2Q259.7 235.7 259.9 236.1Q260.1 236.6 260.4 236.9Q260.7 237.3 261.1 237.4Q261.6 237.6 262.1 237.6ZM269.6 239V231.3H271.4V239ZM278.9 239.1Q278 239.1 277.3 238.8Q276.5 238.5 275.9 238Q275.4 237.5 275.1 236.7Q274.7 236 274.7 235.2Q274.7 234.3 275.1 233.6Q275.4 232.8 275.9 232.3Q276.5 231.8 277.3 231.5Q278 231.2 278.9 231.2Q279.9 231.2 280.7 231.5Q281.5 231.9 282.1 232.5L280.9 233.6Q280.5 233.1 280.1 232.9Q279.6 232.7 279 232.7Q278.5 232.7 278 232.9Q277.6 233 277.2 233.4Q276.9 233.7 276.7 234.1Q276.5 234.6 276.5 235.2Q276.5 235.7 276.7 236.2Q276.9 236.6 277.2 236.9Q277.6 237.3 278 237.4Q278.5 237.6 279 237.6Q279.6 237.6 280.1 237.4Q280.5 237.2 280.9 236.7L282.1 237.8Q281.5 238.4 280.7 238.8Q279.9 239.1 278.9 239.1ZM287 237.6H291.2V239H285.3V231.3H291.1V232.7H287V234.4H290.6V235.8H287ZM297.2 239.1Q296.2 239.1 295.4 238.9Q294.5 238.6 294 238.2L294.6 236.9Q295.1 237.3 295.8 237.5Q296.5 237.7 297.2 237.7Q297.7 237.7 298 237.6Q298.3 237.5 298.5 237.3Q298.7 237.1 298.7 236.9Q298.7 236.6 298.4 236.4Q298.2 236.2 297.8 236.1Q297.4 236 296.9 235.9Q296.4 235.8 295.9 235.6Q295.5 235.5 295.1 235.2Q294.7 235 294.4 234.6Q294.2 234.2 294.2 233.6Q294.2 232.9 294.5 232.4Q294.9 231.8 295.6 231.5Q296.3 231.2 297.4 231.2Q298.1 231.2 298.8 231.3Q299.6 231.5 300.1 231.8L299.5 233.2Q299 232.9 298.5 232.7Q297.9 232.6 297.4 232.6Q296.9 232.6 296.6 232.7Q296.2 232.8 296.1 233Q295.9 233.2 295.9 233.5Q295.9 233.8 296.2 234Q296.4 234.1 296.8 234.2Q297.2 234.4 297.7 234.5Q298.2 234.6 298.7 234.7Q299.1 234.9 299.5 235.1Q299.9 235.3 300.2 235.7Q300.4 236.1 300.4 236.7Q300.4 237.4 300.1 237.9Q299.7 238.5 299 238.8Q298.3 239.1 297.2 239.1Z"/><g id="light-eq" class="light" transform="translate(385.0 111.0) scale(2.1667)"><g class="unlit"><circle cx="24" cy="24" r="23" fill="none" stroke="#C6C2B6" stroke-width="2"/><g transform="translate(12 12)"><g transform="translate(-1.484 -1.472) scale(0.03368)"><path fill="#71706C" fill-rule="evenodd" d="M362.68,685.47C355.92,671.90 353.07,666.89 351.99,666.64C351.17,666.46 347.18,665.61 343.12,664.77C334.71,663.01 320.63,659.14 312.49,656.35L306.97,654.46L289.78,665.92C280.32,672.22 272.44,677.38 272.27,677.38C272.00,677.38 224.56,650.15 223.96,649.65C223.82,649.54 224.30,640.11 225.00,628.70L226.29,607.94L221.55,603.74C215.21,598.13 201.45,584.34 196.33,578.46L192.20,573.73L171.40,575.03C159.96,575.74 150.50,576.21 150.38,576.07C150.26,575.92 143.96,565.03 136.37,551.85L122.57,527.89L134.07,510.63L145.58,493.37L142.58,484.17C139.31,474.11 134.75,456.23 133.98,450.46L133.50,446.80L114.76,437.44L96.03,428.08L96.03,399.99L96.03,371.91L114.50,362.69C124.66,357.63 133.12,352.98 133.29,352.36C133.46,351.75 133.98,349.25 134.45,346.81C136.01,338.75 139.68,324.79 142.65,315.64L145.58,306.63L134.06,289.36L122.55,272.09L136.35,248.14C143.95,234.97 150.26,224.07 150.39,223.91C150.53,223.76 159.97,224.22 171.39,224.93L192.15,226.23L195.93,221.89C200.82,216.28 216.29,200.80 221.92,195.90L226.29,192.09L225.01,171.32C224.30,159.90 223.82,150.46 223.96,150.34C224.54,149.82 271.89,122.62 272.22,122.62C272.42,122.62 280.31,127.77 289.75,134.05L306.93,145.49L318.01,141.89C326.93,138.99 340.73,135.51 351.99,133.31C353.09,133.10 355.82,128.30 362.68,114.53L371.91,96.03L400.00,96.03L428.09,96.03L437.29,114.48L446.50,132.93L450.58,133.72C459.17,135.39 475.77,139.71 484.24,142.49L493.07,145.38L510.59,133.94L528.11,122.50L552.15,136.39L576.18,150.28L576.19,152.89C576.19,154.32 575.65,163.74 574.99,173.81L573.78,192.13L577.01,194.81C580.77,197.92 601.17,218.25 605.29,222.99L608.09,226.21L628.78,224.92C646.33,223.83 649.57,223.79 650.13,224.65C652.20,227.87 677.38,271.72 677.38,272.11C677.38,272.37 672.25,280.31 665.99,289.75L654.60,306.93L657.45,315.42C660.09,323.32 664.41,339.93 666.27,349.42L667.07,353.49L685.89,362.89L704.71,372.30L704.71,400.00L704.71,427.70L685.89,437.11L667.07,446.51L666.27,450.58C664.41,460.07 660.09,476.68 657.45,484.58L654.60,493.07L666.04,510.32C672.33,519.81 677.33,527.97 677.14,528.46C676.78,529.40 650.10,575.63 649.66,576.07C649.52,576.21 640.08,575.74 628.68,575.03L607.95,573.74L604.86,577.36C600.88,582.02 582.05,600.85 577.42,604.81L573.86,607.85L575.14,628.57C575.85,639.97 576.29,649.44 576.12,649.60C575.95,649.76 565.05,656.11 551.91,663.70L528.01,677.51L510.70,665.97L493.39,654.44L482.15,658.07C473.10,661.00 459.25,664.49 448.01,666.69C446.91,666.90 444.18,671.70 437.32,685.47L428.09,703.97L400.00,703.97L371.91,703.97L362.68,685.47ZM426.82,591.36C468.93,585.13 506.43,566.53 535.87,537.30C566.67,506.70 585.69,468.42 591.80,424.75C593.11,415.44 593.11,384.56 591.80,375.25C583.05,312.69 547.55,260.93 492.34,230.22C473.30,219.63 451.16,212.30 426.96,208.56C415.05,206.72 385.88,206.71 373.41,208.54C332.23,214.58 295.13,232.81 265.65,261.48C233.49,292.77 214.60,330.66 208.20,376.73C206.95,385.80 206.95,414.02 208.22,423.27C210.68,441.25 214.59,456.59 220.43,471.11C240.61,521.32 279.92,560.30 330.46,580.20C345.40,586.08 364.31,590.59 381.54,592.38C390.70,593.33 417.60,592.73 426.82,591.36ZM345.34,577.72C305.71,561.61 304.92,561.19 303.94,555.94C303.55,553.90 304.39,551.22 308.48,541.36C315.97,523.32 315.59,520.89 303.63,510.35C300.20,507.31 294.90,502.02 291.87,498.58C281.49,486.82 278.81,486.37 261.87,493.49C249.54,498.67 245.98,499.26 242.53,496.70C240.50,495.20 236.14,485.53 224.13,455.94C218.96,443.17 220.00,441.11 234.72,435.09C248.13,429.61 250.94,427.95 253.09,424.30C255.09,420.88 255.04,421.50 255.04,400.74C255.04,380.81 255.03,380.71 253.84,378.43C251.72,374.36 248.41,372.22 237.03,367.53C224.88,362.52 222.06,360.56 221.31,356.56C220.74,353.53 219.82,356.15 230.98,329.09C240.62,305.68 241.51,304.19 246.45,303.26C248.40,302.90 251.24,303.79 260.91,307.81C278.90,315.30 281.49,314.92 291.59,303.32C294.89,299.53 300.57,293.85 304.21,290.70C315.46,280.98 315.86,278.15 308.45,260.10C304.60,250.72 303.57,247.47 303.91,245.69C304.84,240.79 306.38,239.89 331.24,229.66C353.63,220.45 354.95,220.01 357.50,220.77C361.60,222.00 363.12,224.18 367.87,235.59C373.27,248.55 374.40,250.40 378.22,252.55C381.19,254.22 381.72,254.26 401.48,254.26C428.51,254.26 426.87,255.17 435.12,235.57C439.99,224.00 441.39,221.99 445.46,220.77C448.32,219.91 448.10,219.83 488.57,236.66C500.92,241.80 501.43,244.02 494.20,261.13C487.05,278.04 487.52,280.95 499.09,291.02C502.94,294.37 508.59,300.03 511.67,303.60C521.26,314.77 524.28,315.19 542.04,307.81C560.64,300.08 559.78,299.50 571.44,327.61C582.29,353.79 582.21,353.56 581.64,356.58C580.89,360.55 578.06,362.53 565.92,367.53C549.13,374.45 547.72,376.17 548.12,389.29C548.44,399.87 548.44,401.66 548.12,412.23C547.87,420.12 547.98,421.00 549.61,423.90C551.81,427.81 553.48,428.84 566.65,434.38C578.23,439.25 580.22,440.65 581.45,444.73C582.36,447.77 582.30,447.94 568.98,479.71C561.79,496.89 560.75,498.29 555.26,498.19C553.21,498.16 548.43,496.56 541.09,493.46C524.22,486.33 521.49,486.79 511.08,498.58C508.05,502.02 502.76,507.31 499.32,510.35C487.42,520.84 487.04,523.30 494.49,541.39C499.91,554.57 500.17,556.58 496.92,560.31C495.81,561.58 488.47,565.01 473.87,571.06C447.77,581.88 447.39,582.00 443.71,580.25C440.52,578.74 440.15,578.11 434.32,564.16C430.06,553.99 427.71,550.42 424.01,548.49C421.31,547.10 381.60,547.12 378.87,548.52C375.22,550.40 372.61,554.48 368.26,565.12C365.86,571.00 363.43,576.53 362.88,577.41C361.77,579.17 357.70,581.35 355.57,581.34C354.82,581.33 350.21,579.71 345.34,577.72ZM421.85,508.26C444.18,503.53 462.06,493.88 477.97,477.97C493.73,462.19 503.64,444.06 508.37,422.30C510.74,411.36 510.74,388.64 508.37,377.70C503.62,355.86 493.83,337.93 477.96,322.02C462.14,306.17 444.54,296.61 421.98,291.62C411.45,289.29 389.21,289.29 378.53,291.61C367.48,294.02 360.37,296.50 350.51,301.38C320.05,316.45 298.13,345.60 291.32,380.08C289.32,390.20 289.46,410.03 291.60,420.70C296.11,443.15 306.21,462.14 322.03,477.97C339.87,495.81 362.41,506.65 388.55,509.97C394.77,510.76 414.93,509.73 421.85,508.26Z"/></g></g></g><g class="lit"><circle cx="24" cy="24" r="24" fill="#C4A26A"/><g transform="translate(12 12)"><g transform="translate(-1.484 -1.472) scale(0.03368)"><path fill="#242427" fill-rule="evenodd" d="M362.68,685.47C355.92,671.90 353.07,666.89 351.99,666.64C351.17,666.46 347.18,665.61 343.12,664.77C334.71,663.01 320.63,659.14 312.49,656.35L306.97,654.46L289.78,665.92C280.32,672.22 272.44,677.38 272.27,677.38C272.00,677.38 224.56,650.15 223.96,649.65C223.82,649.54 224.30,640.11 225.00,628.70L226.29,607.94L221.55,603.74C215.21,598.13 201.45,584.34 196.33,578.46L192.20,573.73L171.40,575.03C159.96,575.74 150.50,576.21 150.38,576.07C150.26,575.92 143.96,565.03 136.37,551.85L122.57,527.89L134.07,510.63L145.58,493.37L142.58,484.17C139.31,474.11 134.75,456.23 133.98,450.46L133.50,446.80L114.76,437.44L96.03,428.08L96.03,399.99L96.03,371.91L114.50,362.69C124.66,357.63 133.12,352.98 133.29,352.36C133.46,351.75 133.98,349.25 134.45,346.81C136.01,338.75 139.68,324.79 142.65,315.64L145.58,306.63L134.06,289.36L122.55,272.09L136.35,248.14C143.95,234.97 150.26,224.07 150.39,223.91C150.53,223.76 159.97,224.22 171.39,224.93L192.15,226.23L195.93,221.89C200.82,216.28 216.29,200.80 221.92,195.90L226.29,192.09L225.01,171.32C224.30,159.90 223.82,150.46 223.96,150.34C224.54,149.82 271.89,122.62 272.22,122.62C272.42,122.62 280.31,127.77 289.75,134.05L306.93,145.49L318.01,141.89C326.93,138.99 340.73,135.51 351.99,133.31C353.09,133.10 355.82,128.30 362.68,114.53L371.91,96.03L400.00,96.03L428.09,96.03L437.29,114.48L446.50,132.93L450.58,133.72C459.17,135.39 475.77,139.71 484.24,142.49L493.07,145.38L510.59,133.94L528.11,122.50L552.15,136.39L576.18,150.28L576.19,152.89C576.19,154.32 575.65,163.74 574.99,173.81L573.78,192.13L577.01,194.81C580.77,197.92 601.17,218.25 605.29,222.99L608.09,226.21L628.78,224.92C646.33,223.83 649.57,223.79 650.13,224.65C652.20,227.87 677.38,271.72 677.38,272.11C677.38,272.37 672.25,280.31 665.99,289.75L654.60,306.93L657.45,315.42C660.09,323.32 664.41,339.93 666.27,349.42L667.07,353.49L685.89,362.89L704.71,372.30L704.71,400.00L704.71,427.70L685.89,437.11L667.07,446.51L666.27,450.58C664.41,460.07 660.09,476.68 657.45,484.58L654.60,493.07L666.04,510.32C672.33,519.81 677.33,527.97 677.14,528.46C676.78,529.40 650.10,575.63 649.66,576.07C649.52,576.21 640.08,575.74 628.68,575.03L607.95,573.74L604.86,577.36C600.88,582.02 582.05,600.85 577.42,604.81L573.86,607.85L575.14,628.57C575.85,639.97 576.29,649.44 576.12,649.60C575.95,649.76 565.05,656.11 551.91,663.70L528.01,677.51L510.70,665.97L493.39,654.44L482.15,658.07C473.10,661.00 459.25,664.49 448.01,666.69C446.91,666.90 444.18,671.70 437.32,685.47L428.09,703.97L400.00,703.97L371.91,703.97L362.68,685.47ZM426.82,591.36C468.93,585.13 506.43,566.53 535.87,537.30C566.67,506.70 585.69,468.42 591.80,424.75C593.11,415.44 593.11,384.56 591.80,375.25C583.05,312.69 547.55,260.93 492.34,230.22C473.30,219.63 451.16,212.30 426.96,208.56C415.05,206.72 385.88,206.71 373.41,208.54C332.23,214.58 295.13,232.81 265.65,261.48C233.49,292.77 214.60,330.66 208.20,376.73C206.95,385.80 206.95,414.02 208.22,423.27C210.68,441.25 214.59,456.59 220.43,471.11C240.61,521.32 279.92,560.30 330.46,580.20C345.40,586.08 364.31,590.59 381.54,592.38C390.70,593.33 417.60,592.73 426.82,591.36ZM345.34,577.72C305.71,561.61 304.92,561.19 303.94,555.94C303.55,553.90 304.39,551.22 308.48,541.36C315.97,523.32 315.59,520.89 303.63,510.35C300.20,507.31 294.90,502.02 291.87,498.58C281.49,486.82 278.81,486.37 261.87,493.49C249.54,498.67 245.98,499.26 242.53,496.70C240.50,495.20 236.14,485.53 224.13,455.94C218.96,443.17 220.00,441.11 234.72,435.09C248.13,429.61 250.94,427.95 253.09,424.30C255.09,420.88 255.04,421.50 255.04,400.74C255.04,380.81 255.03,380.71 253.84,378.43C251.72,374.36 248.41,372.22 237.03,367.53C224.88,362.52 222.06,360.56 221.31,356.56C220.74,353.53 219.82,356.15 230.98,329.09C240.62,305.68 241.51,304.19 246.45,303.26C248.40,302.90 251.24,303.79 260.91,307.81C278.90,315.30 281.49,314.92 291.59,303.32C294.89,299.53 300.57,293.85 304.21,290.70C315.46,280.98 315.86,278.15 308.45,260.10C304.60,250.72 303.57,247.47 303.91,245.69C304.84,240.79 306.38,239.89 331.24,229.66C353.63,220.45 354.95,220.01 357.50,220.77C361.60,222.00 363.12,224.18 367.87,235.59C373.27,248.55 374.40,250.40 378.22,252.55C381.19,254.22 381.72,254.26 401.48,254.26C428.51,254.26 426.87,255.17 435.12,235.57C439.99,224.00 441.39,221.99 445.46,220.77C448.32,219.91 448.10,219.83 488.57,236.66C500.92,241.80 501.43,244.02 494.20,261.13C487.05,278.04 487.52,280.95 499.09,291.02C502.94,294.37 508.59,300.03 511.67,303.60C521.26,314.77 524.28,315.19 542.04,307.81C560.64,300.08 559.78,299.50 571.44,327.61C582.29,353.79 582.21,353.56 581.64,356.58C580.89,360.55 578.06,362.53 565.92,367.53C549.13,374.45 547.72,376.17 548.12,389.29C548.44,399.87 548.44,401.66 548.12,412.23C547.87,420.12 547.98,421.00 549.61,423.90C551.81,427.81 553.48,428.84 566.65,434.38C578.23,439.25 580.22,440.65 581.45,444.73C582.36,447.77 582.30,447.94 568.98,479.71C561.79,496.89 560.75,498.29 555.26,498.19C553.21,498.16 548.43,496.56 541.09,493.46C524.22,486.33 521.49,486.79 511.08,498.58C508.05,502.02 502.76,507.31 499.32,510.35C487.42,520.84 487.04,523.30 494.49,541.39C499.91,554.57 500.17,556.58 496.92,560.31C495.81,561.58 488.47,565.01 473.87,571.06C447.77,581.88 447.39,582.00 443.71,580.25C440.52,578.74 440.15,578.11 434.32,564.16C430.06,553.99 427.71,550.42 424.01,548.49C421.31,547.10 381.60,547.12 378.87,548.52C375.22,550.40 372.61,554.48 368.26,565.12C365.86,571.00 363.43,576.53 362.88,577.41C361.77,579.17 357.70,581.35 355.57,581.34C354.82,581.33 350.21,579.71 345.34,577.72ZM421.85,508.26C444.18,503.53 462.06,493.88 477.97,477.97C493.73,462.19 503.64,444.06 508.37,422.30C510.74,411.36 510.74,388.64 508.37,377.70C503.62,355.86 493.83,337.93 477.96,322.02C462.14,306.17 444.54,296.61 421.98,291.62C411.45,289.29 389.21,289.29 378.53,291.61C367.48,294.02 360.37,296.50 350.51,301.38C320.05,316.45 298.13,345.60 291.32,380.08C289.32,390.20 289.46,410.03 291.60,420.70C296.11,443.15 306.21,462.14 322.03,477.97C339.87,495.81 362.41,506.65 388.55,509.97C394.77,510.76 414.93,509.73 421.85,508.26Z"/></g></g></g></g><path class="lbl" id="label-eq" fill="#71706C" d="M430.4 237.6H434.6V239H428.6V231.3H434.4V232.7H430.4V234.4H433.9V235.8H430.4ZM444.2 240.8Q443.7 240.8 443.3 240.7Q442.9 240.6 442.6 240.4Q442.2 240.1 441.7 239.8Q441.4 239.5 441.1 239.1Q440.5 239 440 238.8Q439.2 238.5 438.7 238Q438.1 237.5 437.8 236.7Q437.5 236 437.5 235.2Q437.5 234.3 437.8 233.6Q438.1 232.8 438.7 232.3Q439.2 231.8 440 231.5Q440.8 231.2 441.7 231.2Q442.6 231.2 443.4 231.5Q444.1 231.8 444.7 232.3Q445.3 232.8 445.6 233.6Q445.9 234.3 445.9 235.2Q445.9 236 445.6 236.7Q445.3 237.5 444.7 238Q444.1 238.5 443.4 238.8Q443.3 238.9 443.1 238.9Q443.2 239 443.2 239Q443.5 239.3 443.7 239.4Q444 239.5 444.2 239.5Q444.9 239.5 445.5 238.9L446.3 239.8Q445.5 240.8 444.2 240.8ZM441.7 237.6Q442.2 237.6 442.6 237.4Q443.1 237.3 443.4 236.9Q443.7 236.6 443.9 236.1Q444.1 235.7 444.1 235.2Q444.1 234.6 443.9 234.1Q443.7 233.7 443.4 233.4Q443.1 233 442.6 232.9Q442.2 232.7 441.7 232.7Q441.2 232.7 440.7 232.9Q440.3 233 440 233.4Q439.6 233.7 439.5 234.1Q439.3 234.6 439.3 235.2Q439.3 235.7 439.5 236.1Q439.6 236.6 440 236.9Q440.3 237.3 440.7 237.4Q441.2 237.6 441.7 237.6Z"/><g id="light-6c" class="light" transform="translate(548.0 111.0) scale(2.1667)"><g class="unlit"><circle cx="24" cy="24" r="23" fill="none" stroke="#C6C2B6" stroke-width="2"/><g transform="translate(12 12)"><path fill="none" stroke="#71706C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 21.5 C12 21.5 5 15 5 9.5 A7 7 0 0 1 19 9.5 C19 15 12 21.5 12 21.5 Z M9.5 9.5 A2.5 2.5 0 1 0 14.5 9.5 A2.5 2.5 0 1 0 9.5 9.5"/></g></g><g class="lit"><circle cx="24" cy="24" r="24" fill="#C4A26A"/><g transform="translate(12 12)"><path fill="none" stroke="#242427" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 21.5 C12 21.5 5 15 5 9.5 A7 7 0 0 1 19 9.5 C19 15 12 21.5 12 21.5 Z M9.5 9.5 A2.5 2.5 0 1 0 14.5 9.5 A2.5 2.5 0 1 0 9.5 9.5"/></g></g></g><path class="lbl" id="label-6c" fill="#71706C" d="M595.3 239.1Q594.3 239.1 593.5 238.7Q592.7 238.3 592.3 237.4Q591.9 236.6 591.9 235.3Q591.9 234 592.4 233.1Q592.9 232.1 593.8 231.7Q594.7 231.2 595.8 231.2Q596.4 231.2 597 231.3Q597.6 231.4 598 231.7L597.3 233Q597 232.8 596.6 232.7Q596.3 232.6 595.9 232.6Q594.9 232.6 594.3 233.2Q593.8 233.8 593.7 234.9Q593.8 234.8 593.8 234.8Q594.1 234.5 594.6 234.3Q595.1 234.2 595.6 234.2Q596.4 234.2 597 234.5Q597.5 234.8 597.9 235.3Q598.3 235.8 598.3 236.6Q598.3 237.3 597.9 237.9Q597.5 238.5 596.8 238.8Q596.2 239.1 595.3 239.1ZM595.2 237.8Q595.6 237.8 595.9 237.7Q596.2 237.5 596.4 237.3Q596.5 237 596.5 236.7Q596.5 236.1 596.2 235.8Q595.8 235.5 595.2 235.5Q594.8 235.5 594.5 235.7Q594.2 235.8 594.1 236.1Q593.9 236.3 593.9 236.7Q593.9 237 594.1 237.2Q594.2 237.5 594.5 237.7Q594.8 237.8 595.2 237.8ZM605.1 239.1Q604.2 239.1 603.4 238.8Q602.6 238.5 602.1 238Q601.5 237.5 601.2 236.7Q600.9 236 600.9 235.2Q600.9 234.3 601.2 233.6Q601.5 232.8 602.1 232.3Q602.7 231.8 603.4 231.5Q604.2 231.2 605.1 231.2Q606.1 231.2 606.9 231.5Q607.7 231.9 608.2 232.5L607.1 233.6Q606.7 233.1 606.2 232.9Q605.7 232.7 605.2 232.7Q604.6 232.7 604.2 232.9Q603.7 233 603.4 233.4Q603.1 233.7 602.9 234.1Q602.7 234.6 602.7 235.2Q602.7 235.7 602.9 236.2Q603.1 236.6 603.4 236.9Q603.7 237.3 604.2 237.4Q604.6 237.6 605.2 237.6Q605.7 237.6 606.2 237.4Q606.7 237.2 607.1 236.7L608.2 237.8Q607.7 238.4 606.9 238.8Q606.1 239.1 605.1 239.1Z"/><g id="light-delegate" class="light" transform="translate(711.0 111.0) scale(2.1667)"><g class="unlit"><circle cx="24" cy="24" r="23" fill="none" stroke="#C6C2B6" stroke-width="2"/><g transform="translate(12 12)"><g transform="translate(-4.049 -4.151) scale(0.04016)"><path fill="#71706C" fill-rule="evenodd" d="M366.02,674.95C357.87,673.97 348.55,670.96 342.63,667.40C337.42,664.26 305.14,642.71 287.89,630.85C281.88,626.72 271.43,619.82 264.67,615.53C248.46,605.22 240.72,599.63 233.46,592.99C226.36,586.50 222.95,580.60 223.85,576.41C225.51,568.69 232.72,561.46 240.41,559.80C246.68,558.45 256.92,562.47 276.69,574.03C283.28,577.89 291.66,582.73 295.31,584.80C298.96,586.87 307.84,592.03 315.04,596.27C322.23,600.52 330.14,604.94 332.62,606.10L337.11,608.20L363.09,608.44C392.70,608.70 396.93,608.28 400.20,604.68C403.00,601.59 403.07,597.85 400.36,594.64C397.30,591.01 392.51,590.35 372.49,590.82C353.44,591.26 350.40,590.91 343.23,587.38C334.05,582.86 324.99,571.87 325.01,565.28C325.03,559.48 331.71,549.86 337.74,546.95C340.91,545.43 343.00,545.36 405.47,544.86C461.95,544.41 471.37,544.51 481.64,545.62C503.94,548.03 513.89,551.20 529.69,560.93C543.08,569.18 541.70,568.95 583.59,569.60C603.57,569.91 623.53,570.19 627.93,570.24L635.94,570.31L635.94,612.11L635.94,653.91L580.15,653.91C517.13,653.91 521.56,653.55 498.35,660.42C472.35,668.10 458.01,670.72 426.95,673.46C406.32,675.28 375.17,676.04 366.02,674.95ZM445.88,517.59L434.38,505.49L434.38,500.89L434.38,496.30L437.93,495.30C442.86,493.92 446.09,490.75 446.09,487.29C446.09,483.72 443.99,481.19 438.71,478.43L434.38,476.17L434.38,470.59L434.38,465.02L437.20,464.49C445.85,462.86 446.07,452.81 437.55,448.46L434.62,446.97L434.11,437.42C433.82,432.17 433.58,425.74 433.57,423.12L433.55,418.36L429.37,415.83C417.17,408.45 407.60,395.07 404.20,380.65C402.40,373.01 403.10,360.21 405.76,351.95C411.99,332.63 429.30,316.94 448.72,313.01L453.52,312.04L453.73,296.65C453.84,288.18 453.66,281.25 453.33,281.25C452.99,281.25 447.93,282.28 442.09,283.53C428.94,286.35 415.05,288.89 391.80,292.73C374.86,295.52 372.87,295.69 357.03,295.66C344.58,295.64 338.32,295.28 332.81,294.28C314.67,290.97 298.72,285.33 287.76,278.35C275.89,270.80 269.29,267.19 264.84,265.81C259.62,264.20 253.93,264.23 202.59,266.07C182.31,266.80 165.17,267.18 164.50,266.92C163.41,266.51 163.28,261.25 163.28,218.48C163.28,181.02 163.50,170.34 164.26,169.76C164.86,169.30 174.86,169.24 190.62,169.60C231.50,170.54 257.41,170.40 264.06,169.21C267.29,168.63 274.32,166.84 279.69,165.23C303.70,158.03 326.78,151.96 379.30,139.00C419.80,129.00 425.38,128.25 437.01,131.23C446.31,133.60 453.27,137.67 489.84,162.10C508.54,174.59 529.40,188.31 536.22,192.60C548.47,200.31 558.45,208.45 560.50,212.41C561.53,214.40 561.97,217.29 561.80,220.87C561.67,223.66 557.29,227.90 551.71,230.65C546.86,233.04 546.00,233.20 538.69,233.15C532.11,233.11 529.92,232.76 525.00,230.92C512.55,226.27 491.14,215.19 469.77,202.32C457.03,194.65 456.48,194.53 433.65,194.54C410.21,194.56 403.62,195.76 397.78,201.07C390.99,207.23 390.98,222.46 397.76,228.67C402.35,232.89 403.37,233.02 439.45,233.76C457.93,234.14 474.39,234.81 476.02,235.24C479.86,236.25 484.61,240.57 486.75,245.00C488.15,247.89 488.39,249.52 488.14,254.52C487.95,258.34 487.28,261.68 486.33,263.64C484.39,267.61 479.54,272.31 474.98,274.62C473.00,275.62 471.01,276.91 470.55,277.48C470.04,278.12 469.60,284.97 469.43,295.28L469.14,312.05L474.53,313.47C482.41,315.55 492.79,321.21 498.77,326.68C505.17,332.55 510.88,341.14 514.19,349.91C516.68,356.48 516.74,356.93 516.74,369.14C516.74,380.71 516.59,382.03 514.72,386.91C513.61,389.80 511.51,394.19 510.06,396.66C506.51,402.70 496.82,412.17 490.18,416.09L484.77,419.28L484.38,464.04L483.98,508.79L479.69,512.66C475.40,516.53 458.44,529.69 457.74,529.69C457.54,529.69 452.20,524.24 445.88,517.59ZM468.94,360.48C475.24,356.38 477.77,349.36 475.46,342.41C472.82,334.46 465.37,330.25 457.19,332.08C448.03,334.14 442.40,344.19 445.65,352.70C447.15,356.63 452.04,361.45 455.25,362.16C456.45,362.42 457.77,362.77 458.20,362.93C460.09,363.63 466.26,362.23 468.94,360.48Z"/></g></g></g><g class="lit"><circle cx="24" cy="24" r="24" fill="#C4A26A"/><g transform="translate(12 12)"><g transform="translate(-4.049 -4.151) scale(0.04016)"><path fill="#242427" fill-rule="evenodd" d="M366.02,674.95C357.87,673.97 348.55,670.96 342.63,667.40C337.42,664.26 305.14,642.71 287.89,630.85C281.88,626.72 271.43,619.82 264.67,615.53C248.46,605.22 240.72,599.63 233.46,592.99C226.36,586.50 222.95,580.60 223.85,576.41C225.51,568.69 232.72,561.46 240.41,559.80C246.68,558.45 256.92,562.47 276.69,574.03C283.28,577.89 291.66,582.73 295.31,584.80C298.96,586.87 307.84,592.03 315.04,596.27C322.23,600.52 330.14,604.94 332.62,606.10L337.11,608.20L363.09,608.44C392.70,608.70 396.93,608.28 400.20,604.68C403.00,601.59 403.07,597.85 400.36,594.64C397.30,591.01 392.51,590.35 372.49,590.82C353.44,591.26 350.40,590.91 343.23,587.38C334.05,582.86 324.99,571.87 325.01,565.28C325.03,559.48 331.71,549.86 337.74,546.95C340.91,545.43 343.00,545.36 405.47,544.86C461.95,544.41 471.37,544.51 481.64,545.62C503.94,548.03 513.89,551.20 529.69,560.93C543.08,569.18 541.70,568.95 583.59,569.60C603.57,569.91 623.53,570.19 627.93,570.24L635.94,570.31L635.94,612.11L635.94,653.91L580.15,653.91C517.13,653.91 521.56,653.55 498.35,660.42C472.35,668.10 458.01,670.72 426.95,673.46C406.32,675.28 375.17,676.04 366.02,674.95ZM445.88,517.59L434.38,505.49L434.38,500.89L434.38,496.30L437.93,495.30C442.86,493.92 446.09,490.75 446.09,487.29C446.09,483.72 443.99,481.19 438.71,478.43L434.38,476.17L434.38,470.59L434.38,465.02L437.20,464.49C445.85,462.86 446.07,452.81 437.55,448.46L434.62,446.97L434.11,437.42C433.82,432.17 433.58,425.74 433.57,423.12L433.55,418.36L429.37,415.83C417.17,408.45 407.60,395.07 404.20,380.65C402.40,373.01 403.10,360.21 405.76,351.95C411.99,332.63 429.30,316.94 448.72,313.01L453.52,312.04L453.73,296.65C453.84,288.18 453.66,281.25 453.33,281.25C452.99,281.25 447.93,282.28 442.09,283.53C428.94,286.35 415.05,288.89 391.80,292.73C374.86,295.52 372.87,295.69 357.03,295.66C344.58,295.64 338.32,295.28 332.81,294.28C314.67,290.97 298.72,285.33 287.76,278.35C275.89,270.80 269.29,267.19 264.84,265.81C259.62,264.20 253.93,264.23 202.59,266.07C182.31,266.80 165.17,267.18 164.50,266.92C163.41,266.51 163.28,261.25 163.28,218.48C163.28,181.02 163.50,170.34 164.26,169.76C164.86,169.30 174.86,169.24 190.62,169.60C231.50,170.54 257.41,170.40 264.06,169.21C267.29,168.63 274.32,166.84 279.69,165.23C303.70,158.03 326.78,151.96 379.30,139.00C419.80,129.00 425.38,128.25 437.01,131.23C446.31,133.60 453.27,137.67 489.84,162.10C508.54,174.59 529.40,188.31 536.22,192.60C548.47,200.31 558.45,208.45 560.50,212.41C561.53,214.40 561.97,217.29 561.80,220.87C561.67,223.66 557.29,227.90 551.71,230.65C546.86,233.04 546.00,233.20 538.69,233.15C532.11,233.11 529.92,232.76 525.00,230.92C512.55,226.27 491.14,215.19 469.77,202.32C457.03,194.65 456.48,194.53 433.65,194.54C410.21,194.56 403.62,195.76 397.78,201.07C390.99,207.23 390.98,222.46 397.76,228.67C402.35,232.89 403.37,233.02 439.45,233.76C457.93,234.14 474.39,234.81 476.02,235.24C479.86,236.25 484.61,240.57 486.75,245.00C488.15,247.89 488.39,249.52 488.14,254.52C487.95,258.34 487.28,261.68 486.33,263.64C484.39,267.61 479.54,272.31 474.98,274.62C473.00,275.62 471.01,276.91 470.55,277.48C470.04,278.12 469.60,284.97 469.43,295.28L469.14,312.05L474.53,313.47C482.41,315.55 492.79,321.21 498.77,326.68C505.17,332.55 510.88,341.14 514.19,349.91C516.68,356.48 516.74,356.93 516.74,369.14C516.74,380.71 516.59,382.03 514.72,386.91C513.61,389.80 511.51,394.19 510.06,396.66C506.51,402.70 496.82,412.17 490.18,416.09L484.77,419.28L484.38,464.04L483.98,508.79L479.69,512.66C475.40,516.53 458.44,529.69 457.74,529.69C457.54,529.69 452.20,524.24 445.88,517.59ZM468.94,360.48C475.24,356.38 477.77,349.36 475.46,342.41C472.82,334.46 465.37,330.25 457.19,332.08C448.03,334.14 442.40,344.19 445.65,352.70C447.15,356.63 452.04,361.45 455.25,362.16C456.45,362.42 457.77,362.77 458.20,362.93C460.09,363.63 466.26,362.23 468.94,360.48Z"/></g></g></g></g><path class="lbl" id="label-delegate" fill="#71706C" d="M726.2 239V231.3H729.7Q730.9 231.3 731.9 231.8Q732.9 232.3 733.4 233.1Q733.9 234 733.9 235.2Q733.9 236.3 733.4 237.2Q732.9 238 731.9 238.5Q730.9 239 729.7 239ZM728 237.5H729.6Q730.4 237.5 730.9 237.2Q731.5 237 731.8 236.4Q732.1 235.9 732.1 235.2Q732.1 234.4 731.8 233.9Q731.5 233.3 730.9 233.1Q730.4 232.8 729.6 232.8H728ZM739 237.6H743.2V239H737.3V231.3H743.1V232.7H739V234.4H742.6V235.8H739ZM746.6 239V231.3H748.4V237.5H752.3V239ZM757 237.6H761.2V239H755.2V231.3H761.1V232.7H757V234.4H760.6V235.8H757ZM768.3 239.1Q767.4 239.1 766.6 238.8Q765.9 238.5 765.3 238Q764.7 237.5 764.4 236.7Q764.1 236 764.1 235.2Q764.1 234.3 764.4 233.6Q764.7 232.8 765.3 232.3Q765.9 231.8 766.7 231.5Q767.4 231.2 768.4 231.2Q769.4 231.2 770.2 231.5Q771 231.8 771.6 232.5L770.4 233.6Q770 233.1 769.5 232.9Q769 232.7 768.4 232.7Q767.9 232.7 767.4 232.9Q767 233 766.6 233.4Q766.3 233.7 766.1 234.1Q765.9 234.6 765.9 235.2Q765.9 235.7 766.1 236.1Q766.3 236.6 766.6 236.9Q767 237.3 767.4 237.4Q767.9 237.6 768.4 237.6Q769 237.6 769.5 237.4Q769.6 237.4 769.8 237.3V235H771.4V238.2Q770.8 238.6 770 238.9Q769.1 239.1 768.3 239.1ZM774.1 239 777.5 231.3H779.2L782.7 239H780.8L780.1 237.3H776.6L775.9 239ZM779.6 236 778.4 233 777.1 236ZM787.1 239V232.8H784.6V231.3H791.3V232.8H788.8V239ZM796 237.6H800.2V239H794.3V231.3H800.1V232.7H796V234.4H799.6V235.8H796Z"/><g id="light-development" class="light" transform="translate(874.0 111.0) scale(2.1667)"><g class="unlit"><circle cx="24" cy="24" r="23" fill="none" stroke="#C6C2B6" stroke-width="2"/><g transform="translate(12 12)"><g transform="translate(-3.034 -2.374) scale(0.03728)"><path fill="#71706C" fill-rule="evenodd" d="M205.17,578.23L205.17,502.58L403.32,502.58L601.48,502.58L601.29,578.04L601.11,653.51L403.14,653.69L205.17,653.88L205.17,578.23ZM205.17,385.61L205.17,309.96L321.03,309.96L436.90,309.96L436.90,385.61L436.90,461.25L321.03,461.25L205.17,461.25L205.17,385.61ZM205.17,192.99L205.17,117.34L263.10,117.34L321.03,117.34L321.03,192.99L321.03,268.63L263.10,268.63L205.17,268.63L205.17,192.99Z"/></g></g></g><g class="lit"><circle cx="24" cy="24" r="24" fill="#C4A26A"/><g transform="translate(12 12)"><g transform="translate(-3.034 -2.374) scale(0.03728)"><path fill="#242427" fill-rule="evenodd" d="M205.17,578.23L205.17,502.58L403.32,502.58L601.48,502.58L601.29,578.04L601.11,653.51L403.14,653.69L205.17,653.88L205.17,578.23ZM205.17,385.61L205.17,309.96L321.03,309.96L436.90,309.96L436.90,385.61L436.90,461.25L321.03,461.25L205.17,461.25L205.17,385.61ZM205.17,192.99L205.17,117.34L263.10,117.34L321.03,117.34L321.03,192.99L321.03,268.63L263.10,268.63L205.17,268.63L205.17,192.99Z"/></g></g></g></g><path class="lbl" id="label-development" fill="#71706C" d="M872.2 239V231.3H875.7Q877 231.3 877.9 231.8Q878.9 232.3 879.4 233.1Q880 234 880 235.2Q880 236.3 879.4 237.2Q878.9 238 877.9 238.5Q877 239 875.7 239ZM874 237.5H875.6Q876.4 237.5 877 237.2Q877.5 237 877.8 236.4Q878.1 235.9 878.1 235.2Q878.1 234.4 877.8 233.9Q877.5 233.3 877 233.1Q876.4 232.8 875.6 232.8H874ZM885 237.6H889.2V239H883.3V231.3H889.1V232.7H885V234.4H888.6V235.8H885ZM894.9 239 891.6 231.3H893.6L895.9 236.8L898.3 231.3H900L896.7 239ZM904.6 237.6H908.8V239H902.8V231.3H908.6V232.7H904.6V234.4H908.2V235.8H904.6ZM912.2 239V231.3H914V237.5H917.8V239ZM924.5 239.1Q923.6 239.1 922.9 238.8Q922.1 238.5 921.5 238Q921 237.5 920.6 236.7Q920.3 236 920.3 235.2Q920.3 234.3 920.6 233.6Q921 232.8 921.5 232.3Q922.1 231.8 922.9 231.5Q923.6 231.2 924.5 231.2Q925.4 231.2 926.2 231.5Q927 231.8 927.5 232.3Q928.1 232.8 928.4 233.6Q928.8 234.3 928.8 235.2Q928.8 236 928.4 236.7Q928.1 237.5 927.5 238Q927 238.5 926.2 238.8Q925.4 239.1 924.5 239.1ZM924.5 237.6Q925.1 237.6 925.5 237.4Q925.9 237.3 926.3 236.9Q926.6 236.6 926.8 236.2Q926.9 235.7 926.9 235.2Q926.9 234.6 926.8 234.1Q926.6 233.7 926.3 233.4Q925.9 233 925.5 232.9Q925.1 232.7 924.5 232.7Q924 232.7 923.6 232.9Q923.2 233 922.8 233.4Q922.5 233.7 922.3 234.1Q922.1 234.6 922.1 235.2Q922.1 235.7 922.3 236.1Q922.5 236.6 922.8 236.9Q923.1 237.3 923.6 237.4Q924 237.6 924.5 237.6ZM932.1 239V231.3H935.4Q936.4 231.3 937.2 231.6Q937.9 232 938.3 232.6Q938.7 233.2 938.7 234.1Q938.7 235 938.3 235.6Q937.9 236.2 937.2 236.5Q936.4 236.9 935.4 236.9H933.9V239ZM933.9 235.4H935.3Q936.1 235.4 936.5 235.1Q936.9 234.7 936.9 234.1Q936.9 233.5 936.5 233.1Q936.1 232.8 935.3 232.8H933.9ZM942.1 239V231.3H943.6L946.5 236.1L949.3 231.3H950.8L950.8 239H949.1L949.1 234.4L946.8 238.2H946L943.8 234.5V239ZM956.4 237.6H960.6V239H954.6V231.3H960.4V232.7H956.4V234.4H959.9V235.8H956.4ZM964 239V231.3H965.4L969.3 236V231.3H971V239H969.5L965.7 234.3V239ZM976.4 239V232.8H973.9V231.3H980.7V232.8H978.2V239Z"/><g id="light-results" class="light" transform="translate(1037.0 111.0) scale(2.1667)"><g class="unlit"><circle cx="24" cy="24" r="23" fill="none" stroke="#C6C2B6" stroke-width="2"/><g transform="translate(12 12)"><path fill="none" stroke="#71706C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9.5 4 L3 21 M14.5 4 L21 21 M12 6 V8 M12 11 V13.5 M12 17 V20.5"/></g></g><g class="lit"><circle cx="24" cy="24" r="24" fill="#C4A26A"/><g transform="translate(12 12)"><path fill="none" stroke="#242427" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9.5 4 L3 21 M14.5 4 L21 21 M12 6 V8 M12 11 V13.5 M12 17 V20.5"/></g></g></g><path class="lbl" id="label-results" fill="#71706C" d="M1058.2 239V231.3H1061.5Q1062.5 231.3 1063.3 231.6Q1064 232 1064.4 232.6Q1064.8 233.2 1064.8 234.1Q1064.8 235 1064.4 235.6Q1064 236.2 1063.3 236.5Q1063.3 236.5 1063.3 236.5L1065 239H1063.1L1061.6 236.9Q1061.5 236.9 1061.5 236.9H1059.9V239ZM1059.9 235.4H1061.4Q1062.2 235.4 1062.6 235.1Q1063 234.7 1063 234.1Q1063 233.5 1062.6 233.1Q1062.2 232.8 1061.4 232.8H1059.9ZM1070 237.6H1074.2V239H1068.2V231.3H1074.1V232.7H1070V234.4H1073.6V235.8H1070ZM1080.1 239.1Q1079.2 239.1 1078.4 238.9Q1077.5 238.6 1077 238.2L1077.6 236.9Q1078.1 237.3 1078.8 237.5Q1079.4 237.7 1080.1 237.7Q1080.7 237.7 1081 237.6Q1081.3 237.5 1081.5 237.3Q1081.6 237.1 1081.6 236.9Q1081.6 236.6 1081.4 236.4Q1081.1 236.2 1080.7 236.1Q1080.3 236 1079.9 235.9Q1079.4 235.8 1078.9 235.6Q1078.4 235.5 1078 235.2Q1077.6 235 1077.4 234.6Q1077.1 234.2 1077.1 233.6Q1077.1 232.9 1077.5 232.4Q1077.9 231.8 1078.6 231.5Q1079.3 231.2 1080.4 231.2Q1081.1 231.2 1081.8 231.3Q1082.5 231.5 1083.1 231.8L1082.5 233.2Q1082 232.9 1081.4 232.7Q1080.9 232.6 1080.4 232.6Q1079.9 232.6 1079.5 232.7Q1079.2 232.8 1079.1 233Q1078.9 233.2 1078.9 233.5Q1078.9 233.8 1079.2 234Q1079.4 234.1 1079.8 234.2Q1080.2 234.4 1080.7 234.5Q1081.1 234.6 1081.6 234.7Q1082.1 234.9 1082.5 235.1Q1082.9 235.3 1083.1 235.7Q1083.4 236.1 1083.4 236.7Q1083.4 237.4 1083 237.9Q1082.7 238.5 1081.9 238.8Q1081.2 239.1 1080.1 239.1ZM1090 239.1Q1088.4 239.1 1087.4 238.2Q1086.5 237.3 1086.5 235.6V231.3H1088.3V235.5Q1088.3 236.6 1088.8 237.1Q1089.2 237.6 1090 237.6Q1090.8 237.6 1091.3 237.1Q1091.7 236.6 1091.7 235.5V231.3H1093.5V235.6Q1093.5 237.3 1092.6 238.2Q1091.7 239.1 1090 239.1ZM1097.2 239V231.3H1099V237.5H1102.9V239ZM1107.5 239V232.8H1105V231.3H1111.7V232.8H1109.2V239ZM1117.2 239.1Q1116.2 239.1 1115.4 238.9Q1114.6 238.6 1114 238.2L1114.6 236.9Q1115.1 237.3 1115.8 237.5Q1116.5 237.7 1117.2 237.7Q1117.7 237.7 1118 237.6Q1118.4 237.5 1118.5 237.3Q1118.7 237.1 1118.7 236.9Q1118.7 236.6 1118.4 236.4Q1118.2 236.2 1117.8 236.1Q1117.4 236 1116.9 235.9Q1116.4 235.8 1116 235.6Q1115.5 235.5 1115.1 235.2Q1114.7 235 1114.4 234.6Q1114.2 234.2 1114.2 233.6Q1114.2 232.9 1114.5 232.4Q1114.9 231.8 1115.6 231.5Q1116.3 231.2 1117.4 231.2Q1118.2 231.2 1118.9 231.3Q1119.6 231.5 1120.1 231.8L1119.6 233.2Q1119 232.9 1118.5 232.7Q1117.9 232.6 1117.4 232.6Q1116.9 232.6 1116.6 232.7Q1116.2 232.8 1116.1 233Q1116 233.2 1116 233.5Q1116 233.8 1116.2 234Q1116.4 234.1 1116.8 234.2Q1117.2 234.4 1117.7 234.5Q1118.2 234.6 1118.7 234.7Q1119.2 234.9 1119.5 235.1Q1119.9 235.3 1120.2 235.7Q1120.4 236.1 1120.4 236.7Q1120.4 237.4 1120.1 237.9Q1119.7 238.5 1119 238.8Q1118.3 239.1 1117.2 239.1Z"/></svg></div>
-  <section class="band fw-create alt fw" id="create" data-light="create">
-    <div class="fw-head">
-      <img class="fw-icon" src="../assets/icon_create.png" alt="" width="44" height="44">
-      <p class="fw-label">The engine</p>
-      <h2 class="fw-name">CREATE</h2>
-    </div>
-    <div class="fw-body">
-      <div>
-        <p class="lede">Six cylinders. An organization generates capacity the way
-          an engine generates torque, and when one cylinder stops firing the whole
-          thing runs rough long before anyone names why.</p>
-        <p>An engine down one cylinder still runs. It just runs rough, burns
-          more, and gets slower in a way nobody can quite point at. Most teams
-          diagnose the symptom. The engine light tells you which cylinder.</p>
-        <div class="fw-ask">
-          <p class="fw-ask-label">Ask yourself</p>
-          <p class="fw-ask-q">Name the last thing that took three times longer
-            than it should have. Which of the six was it?</p>
-          <p class="fw-ask-note">If you cannot answer that in ten seconds, that
-            is the answer.</p>
-        </div>
-      </div>
-      <ol class="parts six">
-        <li><span>C</span>Culture</li>
-        <li><span>R</span>Relationships</li>
-        <li><span>E</span>Execution</li>
-        <li><span>A</span>Agility</li>
-        <li><span>T</span>Teaching</li>
-        <li><span>E</span>Ethics</li>
+    <p class="eco-room"><b>Speak to the room</b> <span>Keynotes, retreats and
+      in-service days, at any stage</span> <a class="link-arrow" href="../products/">See the keynotes</a></p>
+
+    <div class="eco-base">
+      <p class="eco-base-h">Underneath all of it: the CLUTCH OS</p>
+      <ol class="eco-fw">
+        <li class="fw-create"><a href="#create">CREATE<span>the engine</span></a></li>
+        <li class="fw-voices"><a href="#voices">VOICES<span>the gearbox</span></a></li>
+        <li class="fw-sixc"><a href="#sixc">6C Compass<span>the navigation</span></a></li>
+        <li class="fw-delegate"><a href="#delegate">DELEGATE<span>the handoff</span></a></li>
       </ol>
+      <p class="eco-eq"><img src="../assets/icon_EQ.png" alt="" width="28" height="28">
+        <span>Emotional intelligence, the clutch between every part</span></p>
+      <p class="eco-inst">Measured with CliftonStrengths&reg; and EQ-i 2.0</p>
     </div>
   </section>
 
-  <!-- VOICES -->
-  <section class="band fw-voices fw" id="voices" data-light="voices">
-    <div class="fw-head">
-      <img class="fw-icon" src="../assets/icon_voices.png" alt="" width="44" height="44">
-      <p class="fw-label">The gearbox</p>
-      <h2 class="fw-name">VOICES</h2>
-    </div>
-    <div class="fw-body">
+  <!-- 7. MEET MATT. A face and three lines, all drawn from published pages. -->
+  <section class="band alt meet" id="matt">
+    <div class="hero-split">
       <div>
-        <p class="lede">Six leadership presences, shifted by context. You do not
-          have a leadership style. You have one gear you never shift out of, and
-          your team has built its habits around it.</p>
-        <p>A gearbox does not choose where you are going. It decides how much of
-          the engine&rsquo;s power actually reaches the road right now. The worry
-          leaders raise first is whether changing presence will confuse people.
-          It does the opposite. Teams do not need you consistent. They need you
-          legible.</p>
-        <div class="fw-ask">
-          <p class="fw-ask-label">Ask yourself</p>
-          <p class="fw-ask-q">What gear were you in for your last three hard
-            conversations?</p>
-          <p class="fw-ask-note">Same gear all three times is a gearbox stuck in
-            third. It will get you along a motorway and nowhere up a hill.</p>
-        </div>
+        <p class="eyebrow">Who built it</p>
+        <h2 class="section-h">Twenty years in the rooms this system came from</h2>
+        <p class="lede">I spent seventeen years at McDonogh School as teacher,
+          coach, dean of students and administrator, then three years on leadership
+          and team development at USAID&rsquo;s Bureau for Humanitarian Assistance.
+          Now I coach founders, school leaders and the operators beside them.</p>
+        <ul class="lived">
+          <li><strong>It came out of what did not work.</strong>
+            <span>Most of this operating system came out of the professional
+              development that did not stick, and the question of why.</span></li>
+          <li><strong>The same person, start to finish.</strong>
+            <span>Whoever reads your diagnostic is whoever is in the room a year
+              later. There is no associate layer and no handoff after the sale.</span></li>
+        </ul>
+        <p class="meta"><a class="link-arrow" href="../about/">More about Matt</a></p>
       </div>
-      <ol class="parts six">
-        <li><span>V</span>Visionary</li>
-        <li><span>O</span>Operator</li>
-        <li><span>I</span>Independent</li>
-        <li><span>C</span>Coach</li>
-        <li><span>E</span>Encourager</li>
-        <li><span>S</span>Sculptor</li>
-      </ol>
+      <figure class="hero-figure">
+        <img src="../assets/matt.jpg" alt="Matt Goode" width="780" height="1040" loading="lazy">
+      </figure>
     </div>
   </section>
 
-  <!-- 6C -->
-  <section class="band fw-sixc alt fw" id="sixc" data-light="6c">
-    <div class="fw-head">
-      <img class="fw-icon" src="../assets/icon_6C.png" alt="" width="44" height="44">
-      <p class="fw-label">The navigation system</p>
-      <h2 class="fw-name">The 6C Decision Compass</h2>
-    </div>
-    <div class="fw-body">
-      <div>
-        <p class="lede">Who decides, how, and when. Six modes, named out loud, so
-          nobody has to reverse-engineer decision rights from your tone.</p>
-        <p>Satnav does not drive the car. It tells you which turn belongs to you,
-          before the junction rather than in it. Command is not domineering, it
-          is simply expensive, and most organizations spend it like it is free.</p>
-        <div class="fw-ask">
-          <p class="fw-ask-label">Ask yourself</p>
-          <p class="fw-ask-q">Map your last ten decisions. How many were actually
-            yours to make?</p>
-          <p class="fw-ask-note">If the answer is seven, you do not have a trust
-            problem. You have an architecture problem.</p>
-        </div>
-      </div>
-      <ol class="parts six">
-        <li><span>1</span>Command</li>
-        <li><span>2</span>Consultative</li>
-        <li><span>3</span>Collaborative</li>
-        <li><span>4</span>Consensus</li>
-        <li><span>5</span>Core Expert</li>
-        <li><span>6</span>Choice</li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- DELEGATE -->
-  <section class="band fw-delegate fw" id="delegate" data-light="delegate">
-    <div class="fw-head">
-      <img class="fw-icon" src="../assets/icon_delegate.png" alt="" width="44" height="44">
-      <p class="fw-label">The handoff system</p>
-      <h2 class="fw-name">DELEGATE</h2>
-    </div>
-    <div class="fw-body">
-      <div>
-        <p class="lede">Eight steps for transferring real ownership, so a handoff
-          develops someone instead of dumping a task on them.</p>
-        <p>You can hand someone the keys and still keep a foot on the pedal.
-          That is most delegation. Define the container, not the contents:
-          the why, the what and the by-when. The how belongs to them.</p>
-        <div class="fw-ask">
-          <p class="fw-ask-label">Ask yourself</p>
-          <p class="fw-ask-q">Think of the last thing you handed over. How many
-            times has it come back to you since?</p>
-          <p class="fw-ask-note">Once is a handoff finding its feet. Three times
-            was never delegation. It was a loan.</p>
-        </div>
-      </div>
-      <ol class="parts eight">
-        <li><span>D</span>Define the win</li>
-        <li><span>E</span>Establish the way</li>
-        <li><span>L</span>List the guardrails</li>
-        <li><span>E</span>Expect the process</li>
-        <li><span>G</span>Give the right support</li>
-        <li><span>A</span>Agree on checkpoints</li>
-        <li><span>T</span>Transfer ownership</li>
-        <li><span>E</span>Encourage growth</li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- Title vs license. The sharpest single idea in the system. -->
-  <section class="band alt" data-light="development">
-    <p class="eyebrow">The distinction most delegation dies on</p>
-    <h2 class="section-h">You keep the title. They get the license.</h2>
-    <div class="split">
-      <article class="half">
-        <h3>Title</h3>
-        <p>Final accountability. It stays with the leader, and pretending
-          otherwise is how people end up carrying weight they were never given
-          authority to carry.</p>
-      </article>
-      <article class="half">
-        <h3>License</h3>
-        <p>Operational ownership. It transfers, completely, and the boundary gets
-          said out loud rather than assumed.</p>
-      </article>
-    </div>
-    <p class="rate-note">Most delegation fails because these two get conflated.
-      The leader believes they handed over the work. The team believes they were
-      handed a test. DELEGATE separates them and makes the line explicit, which
-      is the difference between delegation that sticks and delegation that comes
-      back with interest.</p>
-  </section>
-
-  <!-- Three ways in, at three levels of commitment, before anyone is asked to
-       book anything. -->
-  <section class="band" data-light="results">
-    <p class="eyebrow">Three ways in</p>
+  <!-- Three ways in, at three levels of commitment. -->
+  <section class="band">
+    <p class="eyebrow">Not ready to talk?</p>
     <h2 class="section-h">Learn the system before you buy anything</h2>
     <div class="grid-3 tracks">
       <article class="track">
@@ -405,21 +793,18 @@
              alt="" width="35" height="52" loading="lazy">
         <h3>The book</h3>
         <p class="track-kind">The whole system, on paper</p>
-        <p>CLUTCH is the operating system in full: all four frameworks, emotional
-          intelligence as the mechanism between them, and a diagnostic for every
-          part. Or buy the one framework that matches what is currently breaking,
-          as a standalone ebook at $3.99.</p>
-        <p class="meta"><a class="link-arrow" href="../clutch/">About CLUTCH</a></p>
+        <p>All four frameworks, emotional intelligence as the mechanism between
+          them, and a diagnostic for every part. Or buy only the framework that
+          matches what is breaking, as a <a href="../clutch/ebooks/">$3.99 framework ebook</a>.</p>
+        <p class="meta"><a class="link-arrow" href="https://www.amazon.com/dp/B0HHFGV2MT">Buy CLUTCH on Amazon</a></p>
       </article>
       <article class="track">
         <img class="track-icon" src="../assets/icon-substack.png"
              alt="" width="52" height="52" loading="lazy">
         <h3>The Leadership Lab</h3>
         <p class="track-kind">Essays, weekly</p>
-        <p>Long enough to actually argue something. One idea worked through
-          properly, with the coaching questions I would ask in the room, what to
-          try on Monday, and the occasional account of getting it wrong in
-          public.</p>
+        <p>One idea worked through properly, with the coaching questions I would
+          ask in the room and what to try on Monday.</p>
         <p class="meta"><a class="link-arrow" href="../writing/">Read the essays</a></p>
       </article>
       <article class="track">
@@ -428,28 +813,32 @@
         <h3>The Leadership Shift</h3>
         <p class="track-kind">LinkedIn newsletter, short</p>
         <p>One framework, one move, read in ninety seconds on a phone between
-          meetings. It is where people disagree with me in the comments and the
-          argument gets better for it.</p>
+          meetings.</p>
         <p class="meta"><a class="link-arrow" href="https://www.linkedin.com/newsletters/clutch-the-leadership-shift-7425346322725048320/">Follow the newsletter</a></p>
       </article>
     </div>
   </section>
 
-  </div>
-
-  <section class="band alt book-call">
-    <p class="eyebrow">Or skip ahead</p>
+  <!-- 9. One primary action, repeated: the diagnostic. The call is secondary. -->
+  <section class="band alt book-call" id="close">
+    <p class="eyebrow">Start here</p>
     <h2 class="section-h big">Find out which part is actually broken</h2>
-    <p class="lede center">Five questions, about two minutes, and no email
-      needed to see your result. The bottleneck is rarely where you think it
+    <p class="lede center">A few short questions, about two minutes, and your
+      result appears before any email. The bottleneck is rarely where you think it
       is, which is why guessing costs more than asking.</p>
     <p class="cta-row center">
-      <a class="btn btn-lg" href="../diagnostic/">Run the free diagnostic</a>
-      <a class="link-arrow" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt">Or book a call</a>
+      <a class="btn btn-lg" href="../diagnostic/?src=system-close">Run the free diagnostic</a>
+      <a class="link-arrow" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=system-close">Or book thirty minutes</a>
     </p>
   </section>
 
 </main>
+
+<!-- 10. Mobile only: one sticky action between the hero and the final ask. -->
+<div class="m-cta" aria-hidden="true">
+  <span>Where is your system slipping?</span>
+  <a class="btn" href="../diagnostic/?src=system-sticky" tabindex="-1">Free diagnostic</a>
+</div>
 
 <footer class="foot">
   <div class="foot-in">
@@ -493,24 +882,82 @@
 </footer>
 
 <script>
-/* CLUTCH OS scroll moment: lights come on in book order and stay on. */
+/* Sticky offset under the site nav. */
 (function () {
   var nav = document.querySelector('.nav');
   function navH() { if (nav) document.documentElement.style.setProperty('--nav-h', nav.offsetHeight + 'px'); }
   navH(); window.addEventListener('load', navH); window.addEventListener('resize', navH);
   if (nav && 'ResizeObserver' in window) new ResizeObserver(navH).observe(nav);
-  var svg = document.querySelector('.os-strip svg');
-  if (!svg || !('IntersectionObserver' in window)) { if (svg) svg.setAttribute('data-on', 'create voices eq 6c delegate development results'); return; }
-  var book = ['create', 'voices', 'eq', '6c', 'delegate', 'development', 'results'];
-  var lit = -1;
+})();
+
+/* In-page nav: each light comes on when its section is reached and stays on;
+   the section in view is marked current. */
+(function () {
+  var links = {};
+  document.querySelectorAll('.os-nav a[data-k]').forEach(function (a) { links[a.getAttribute('data-k')] = a; });
+  var secs = document.querySelectorAll('.os-scroll [data-light]');
+  if (!('IntersectionObserver' in window)) { Object.keys(links).forEach(function (k) { links[k].classList.add('lit'); }); return; }
   var io = new IntersectionObserver(function (es) {
     es.forEach(function (e) {
       if (!e.isIntersecting) return;
-      var i = book.indexOf(e.target.getAttribute('data-light'));
-      if (i > lit) { lit = i; svg.setAttribute('data-on', book.slice(0, i + 1).join(' ')); }
+      var a = links[e.target.getAttribute('data-light')];
+      if (!a) return;
+      a.classList.add('lit');
+      Object.keys(links).forEach(function (k) { links[k].removeAttribute('aria-current'); });
+      a.setAttribute('aria-current', 'true');
     });
-  }, { rootMargin: '-45% 0px -45% 0px' });
-  document.querySelectorAll('.os-scroll [data-light]').forEach(function (s) { io.observe(s); });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  secs.forEach(function (s) { io.observe(s); });
+})();
+
+/* Mobile action bar: shown once the hero is gone, hidden again at the final ask. */
+(function () {
+  var bar = document.querySelector('.m-cta');
+  var hero = document.getElementById('top');
+  var close = document.getElementById('close');
+  if (!bar || !hero || !close || !('IntersectionObserver' in window)) return;
+  var heroIn = true, closeIn = false;
+  function set() { bar.classList.toggle('show', !heroIn && !closeIn); }
+  new IntersectionObserver(function (es) { heroIn = es[0].isIntersecting; set(); }).observe(hero);
+  new IntersectionObserver(function (es) { closeIn = es[0].isIntersecting; set(); }).observe(close);
+})();
+
+/* Testimonial rotator, same as the home page. */
+(function () {
+  var stage = document.querySelector('[data-carousel]');
+  if (!stage) return;
+  var slides = Array.prototype.slice.call(stage.querySelectorAll('.q'));
+  if (slides.length < 2) { var n = stage.querySelector('.q-nav'); if (n) n.hidden = true; return; }
+  var dotWrap = stage.querySelector('.q-dots');
+  var i = 0, timer = null;
+  var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var dots = slides.map(function (_, n) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'q-dot';
+    b.setAttribute('aria-label', 'Testimonial ' + (n + 1) + ' of ' + slides.length);
+    b.addEventListener('click', function () { go(n); restart(); });
+    dotWrap.appendChild(b);
+    return b;
+  });
+  function go(n) {
+    i = (n + slides.length) % slides.length;
+    slides.forEach(function (s, k) { s.classList.toggle('is-live', k === i); });
+    dots.forEach(function (d, k) {
+      d.classList.toggle('on', k === i);
+      d.setAttribute('aria-current', k === i ? 'true' : 'false');
+    });
+  }
+  function restart() { stop(); if (!still) timer = setInterval(function () { go(i + 1); }, 7000); }
+  function stop() { if (timer) { clearInterval(timer); timer = null; } }
+  stage.querySelector('[data-next]').addEventListener('click', function () { go(i + 1); restart(); });
+  stage.querySelector('[data-prev]').addEventListener('click', function () { go(i - 1); restart(); });
+  stage.addEventListener('mouseenter', stop);
+  stage.addEventListener('mouseleave', restart);
+  stage.addEventListener('focusin', stop);
+  stage.addEventListener('focusout', restart);
+  go(0);
+  restart();
 })();
 </script>
 </body>
