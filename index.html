@@ -115,12 +115,13 @@
        credibility band further down carries a photo of its own. */
     .hero.hero-home {
       display: grid; grid-template-columns: minmax(0, 1fr) clamp(240px, 26vw, 320px);
-      gap: clamp(32px, 5vw, 64px); align-items: center;
+      gap: clamp(40px, 6vw, 88px); align-items: center;
       padding-block: clamp(56px, 8vw, 104px) clamp(28px, 3.5vw, 44px);
     }
-    .hero-home h1 { font-size: clamp(32px, 4.7vw, 58px); }
-    .hero-home h1 .hl { white-space: normal !important; }
-    @media (min-width: 1120px) { .hero-home h1 .hl { white-space: nowrap !important; } }
+    /* Sized to the text column, not the page. Each sentence keeps its own
+       line block but may wrap inside it, balanced so no word is left alone. */
+    .hero-home h1 { font-size: clamp(32px, 3.9vw, 54px); }
+    .hero-home h1 .hl { white-space: normal !important; text-wrap: balance; }
     .hero-home .lede { max-width: 54ch; }
     .hero-note { margin: 12px 0 0; font-size: 14px; color: var(--muted); }
     .hero-route {
