@@ -497,6 +497,48 @@
       nonprofits: <a href="schools/rates/">every rate is published</a>.</p>
   </section>
 
+  <!-- The ladder, slimmed from /system/: five steps, no product lists.
+       Shows there is a low-risk first step and a path up from it. -->
+  <style>
+    .ladder-scale { position: relative; display: flex; justify-content: space-between; margin: 26px 0 0; padding-bottom: 12px;
+      font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+    .ladder-scale::after { content: ""; position: absolute; left: 0; right: 10px; bottom: 0; height: 3px; border-radius: 2px;
+      background: linear-gradient(90deg, var(--rule-2), var(--gold)); }
+    .ladder-scale::before { content: ""; position: absolute; right: 0; bottom: -5px; border-left: 12px solid var(--gold);
+      border-top: 6.5px solid transparent; border-bottom: 6.5px solid transparent; }
+    .ladder { list-style: none; margin: 14px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+    .ladder li { padding: 16px 16px 14px; border: 1px solid var(--rule); border-top: 3px solid var(--gold); background: var(--paper-alt); }
+    .ladder li:first-child { border-top-color: var(--rule-2); }
+    .ladder-n { display: block; font-size: 12px; font-weight: 800; color: var(--gold-ink); letter-spacing: .1em; }
+    .ladder b { display: block; margin: 4px 0 2px; font-size: 16px; color: var(--ink); line-height: 1.3; }
+    .ladder span.v { display: block; font-size: 13px; color: var(--muted); line-height: 1.4; }
+    .ladder-go { margin: 18px 0 0; }
+    @media (max-width: 900px) {
+      .ladder-scale { display: none; }
+      .ladder { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+      .ladder li { display: grid; grid-template-columns: 28px minmax(0, 1fr); column-gap: 10px; padding: 12px 14px;
+        border-top-width: 1px; border-left: 3px solid var(--gold); }
+      .ladder li:first-child { border-left-color: var(--rule-2); }
+      .ladder-n { grid-row: 1 / span 2; padding-top: 3px; }
+      .ladder b { margin-top: 0; }
+    }
+  </style>
+  <section class="band" id="ladder" aria-labelledby="ladder-h">
+    <p class="eyebrow">How the work grows</p>
+    <h2 class="section-h" id="ladder-h">One operating system. Every way in.</h2>
+    <p class="lede">Every book, instrument, program and engagement runs on the same
+      four frameworks. Start where you are. Most organizations climb from there.</p>
+    <div class="ladder-scale" aria-hidden="true"><span>Free and low cost</span><span>Deeper commitment</span></div>
+    <ol class="ladder">
+      <li><span class="ladder-n">0</span><b>Learn it</b><span class="v">On your own, at your pace</span></li>
+      <li><span class="ladder-n">1</span><b>See it clearly</b><span class="v">Find the part that is slipping</span></li>
+      <li><span class="ladder-n">2</span><b>Develop one leader</b><span class="v">The person in the seat</span></li>
+      <li><span class="ladder-n">3</span><b>Develop the team</b><span class="v">A shared language</span></li>
+      <li><span class="ladder-n">4</span><b>Redesign the system</b><span class="v">How the whole machine runs</span></li>
+    </ol>
+    <p class="ladder-go"><a class="link-arrow" href="system/">See every way in</a></p>
+  </section>
+
   <!-- Credibility. The credential marks moved up to the proof strip, so this
        band is the story and the person. -->
   <section class="band credibility">
@@ -531,15 +573,47 @@
   </section>
 
   <!-- Leadership Lab. The catch for anyone who reached the end of the page and
-       is not ready to book. Kit form 9910445 (GDC - Leadership Lab), same
-       embed as /writing/. -->
+       is not ready to book: the three newest pieces as proof, then the sign-up.
+       Kit form 9910445 (GDC - Leadership Lab), same embed as /writing/.
+       The three posts are static; refresh them when a new piece goes up
+       (the Substack migration task repoints them to the site's own pages). -->
+  <style>
+    .lab-posts { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 12px;
+      grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    @media (max-width: 900px) { .lab-posts { grid-template-columns: minmax(0, 1fr); } }
+    .lab-posts a { display: flex; flex-direction: column; height: 100%; padding: 16px 18px; text-decoration: none;
+      background: var(--paper); border: 1px solid var(--rule); border-top: 3px solid var(--gold);
+      transition: background-color .18s, box-shadow .18s; }
+    .lab-posts a:hover, .lab-posts a:focus-visible { background: #F6EFE2; box-shadow: 0 6px 18px rgba(36,36,39,.07); }
+    .lp-date { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--gold-ink); }
+    .lab-posts b { display: block; margin: 6px 0 4px; font-size: 17px; line-height: 1.3; color: var(--ink); }
+    .lp-sub { font-size: 14px; line-height: 1.45; color: var(--body); }
+    .lab-more { margin: 16px 0 0; }
+    .lab .signup-wrap { margin-top: clamp(28px, 4vw, 44px); }
+  </style>
   <section class="band alt lab" id="lab">
+    <p class="eyebrow">Not ready for a call?</p>
+    <h2 class="section-h">Read the Leadership Lab</h2>
+    <ul class="lab-posts">
+        <li><a href="https://thatsgoodedesign.substack.com/p/accountability-isnt-an-event">
+          <span class="lp-date">8 Oct 2026 &middot; 6 min read</span>
+          <b>Accountability isn&#x27;t an event</b><span class="lp-sub">Leaders and their managers agree on what leaders are worst at. Knowing hasn&#x27;t fixed it</span>
+        </a></li>
+        <li><a href="https://thatsgoodedesign.substack.com/p/what-the-auditors-couldnt-count">
+          <span class="lp-date">7 Oct 2026 &middot; 4 min read</span>
+          <b>What the auditors couldn&#x27;t count</b><span class="lp-sub">A watchdog can count awards and positions. It can&#x27;t count what the people in those positions knew</span>
+        </a></li>
+        <li><a href="https://thatsgoodedesign.substack.com/p/the-manuscript-is-not-the-bottleneck">
+          <span class="lp-date">6 Oct 2026 &middot; 7 min read</span>
+          <b>The manuscript is not the bottleneck</b><span class="lp-sub">The second job</span>
+        </a></li>
+    </ul>
+    <p class="lab-more"><a class="link-arrow" href="writing/">Every piece in the Lab</a></p>
     <div class="signup-wrap">
       <div>
-        <p class="eyebrow">Not ready for a call?</p>
-        <h2 class="section-h">Get the Leadership Lab</h2>
-        <p>One idea a week for people who have become the bottleneck in the thing
-          they built, and something to do with it. Free. Leave whenever you like.</p>
+        <h3 class="lab-h3" style="margin:0 0 8px;font-size:20px;color:var(--ink)">Get new pieces by email</h3>
+        <p>For people who have become the bottleneck in the thing they built: one
+          idea at a time, and something to do with it. Free. Leave whenever you like.</p>
       </div>
       <div class="signup-form">
         <script src="https://f.convertkit.com/ck.5.js" async></script>

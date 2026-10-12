@@ -125,7 +125,7 @@
       : '<span>Where is your system slipping?</span><a class="btn" tabindex="-1" href="/diagnostic/?src=' + slug + '-sticky">Free diagnostic</a>';
     document.body.appendChild(bar);
     if (!('IntersectionObserver' in window)) return;
-    var stops = [].slice.call(document.querySelectorAll('.book-call, footer'));
+    var stops = [].slice.call(document.querySelectorAll('.book-call, .lab, footer'));
     var stopIn = {}, scrolled = false;
     function set() {
       var anyStop = Object.keys(stopIn).some(function (k) { return stopIn[k]; });
