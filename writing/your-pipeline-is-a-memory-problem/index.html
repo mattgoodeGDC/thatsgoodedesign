@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your pipeline is a memory problem – The Leadership Lab</title>
+<meta name="description" content="More systems thinking for small business owners... from a system-thinking small business owner">
+<link rel="canonical" href="https://thatsgoodedesign.com/writing/your-pipeline-is-a-memory-problem/">
+<link rel="alternate" type="application/rss+xml" title="The Leadership Lab" href="https://thatsgoodedesign.com/writing/feed.xml">
+<link rel="icon" href="../../favicon.ico" sizes="any">
+<link rel="icon" href="../../assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/favicon/apple-touch-icon.png">
+<meta property="og:site_name" content="Goode Design &amp; Consulting">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Your pipeline is a memory problem">
+<meta property="og:description" content="More systems thinking for small business owners... from a system-thinking small business owner">
+<meta property="og:url" content="https://thatsgoodedesign.com/writing/your-pipeline-is-a-memory-problem/">
+<meta property="og:image" content="https://substack-post-media.s3.amazonaws.com/public/images/be4734db-0ede-414c-9b52-bc296d955552_2048x1365.jpeg">
+<meta property="article:published_time" content="2026-09-29T23:13:08.731Z">
+<meta property="article:author" content="Matt Goode">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Your pipeline is a memory problem">
+<meta name="twitter:description" content="More systems thinking for small business owners... from a system-thinking small business owner">
+<meta name="twitter:image" content="https://substack-post-media.s3.amazonaws.com/public/images/be4734db-0ede-414c-9b52-bc296d955552_2048x1365.jpeg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap">
+<link rel="stylesheet" href="../../assets/style.css?v=14">
+<link rel="stylesheet" href="../../assets/gdc-nav.css?v=16">
+<link rel="stylesheet" href="../../assets/writing.css?v=1">
+<script src="../../assets/gdc-analytics.js?v=12"></script>
+<script src="../../assets/gdc-nav.js?v=16" defer></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Your pipeline is a memory problem", "description": "More systems thinking for small business owners... from a system-thinking small business owner", "datePublished": "2026-09-29T23:13:08.731Z", "url": "https://thatsgoodedesign.com/writing/your-pipeline-is-a-memory-problem/", "image": "https://substack-post-media.s3.amazonaws.com/public/images/be4734db-0ede-414c-9b52-bc296d955552_2048x1365.jpeg", "mainEntityOfPage": "https://thatsgoodedesign.com/writing/your-pipeline-is-a-memory-problem/", "inLanguage": "en-US", "author": {"@type": "Person", "@id": "https://thatsgoodedesign.com/#matt", "name": "Matt Goode", "url": "https://thatsgoodedesign.com/about/"}, "publisher": {"@id": "https://thatsgoodedesign.com/#org"}, "isPartOf": {"@type": "Blog", "name": "The Leadership Lab", "url": "https://thatsgoodedesign.com/writing/"}, "keywords": "Growing faster than it's getting clearer, Winning feels like a near miss"}</script>
+<meta name="tdm-reservation" content="1">
+<meta name="tdm-policy" content="https://thatsgoodedesign.com/terms/">
+<meta name="robots" content="noai, noimageai">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <a class="brand" href="../../">
+    <picture>
+      <source media="(max-width: 370px)" srcset="../assets/gdc/gdc-mark.svg">
+      <source media="(max-width: 519px)" srcset="../assets/gdc/gdc-lockup-short.svg">
+      <img src="../../assets/gdc/gdc-lockup-header.svg" alt="Goode Design &amp; Consulting" width="269" height="52">
+    </picture>
+  </a>
+  <nav aria-label="Primary">
+    <a href="../../system/">The system</a>
+    <div class="navmenu">
+      <button type="button" aria-expanded="false" aria-controls="menu-who">Who I help</button>
+      <ul class="navmenu-panel" id="menu-who" hidden>
+        <li><a href="../../#lanes">Founders and scaling firms<span>Coaching and fractional operations</span></a></li>
+        <li><a href="../../schools/">Independent schools<span>Coaching, cohorts, in-service, advisory</span></a></li>
+        <li><a href="../../#lanes">Nonprofit and public sector<span>Team development and facilitation</span></a></li>
+      </ul>
+    </div>
+    <div class="navmenu">
+      <button type="button" aria-expanded="false" aria-controls="menu-services">Services</button>
+      <ul class="navmenu-panel navmenu-wide" id="menu-services" hidden>
+        <li class="nmp-group">
+          <p class="nmp-head">For companies</p>
+          <ul>
+            <li><a href="../../products/#services">What a company can buy<span>One list, diagnostic to retained</span></a></li>
+            <li><a href="../../obd/">The On-Board Diagnostic<span>Two instruments, one written read</span></a></li>
+            <li><a href="../../products/#why">Why this is different<span>Five structural differences, not adjectives</span></a></li>
+          </ul>
+        </li>
+        <li class="nmp-group">
+          <p class="nmp-head">For schools and nonprofits</p>
+          <ul>
+            <li><a href="../../schools/#services">What a school can buy<span>Nine services, plainly named</span></a></li>
+            <li><a href="../../schools/rates/">Published rates<span>Real numbers for a budget line</span></a></li>
+            <li><a href="../../schools/#why">Why this is different<span>Twenty years inside a school</span></a></li>
+          </ul>
+        </li>
+        <li class="nmp-group">
+          <p class="nmp-head">Flagship programs</p>
+          <ul>
+            <li><a href="../../goodestart/">GoodeStart<span>The first ninety days, on purpose</span></a></li>
+            <li><a href="../../building-the-bench/">Building the Bench<span>A cohort for the next seat</span></a></li>
+            <li><a href="../../know-thyself/">Know Thyself to Lead Others<span>A strengths workshop for a whole staff</span></a></li>
+            <li><a href="../../owners-manual/">Owner&rsquo;s Manual<span>How each of us works, written down</span></a></li>
+            <li><a href="../../executive-coaching/">Executive coaching<span>Six sessions, built on the OBD</span></a></li>
+          </ul>
+        </li>
+        <li class="nmp-foot">
+          <a href="../../coaching-engagement/">How the engagement works<span>The terms, before you have to ask for them</span></a>
+        </li>
+        <li class="nmp-foot">
+          <a href="../../diagnostic/">Start with the free diagnostic<span>A few short questions, about two minutes, five patterns</span></a>
+        </li>
+        <li class="nmp-foot">
+          <a href="../../free/">Free tools<span>Diagnostics, templates and a free chapter</span></a>
+        </li>
+      </ul>
+    </div>
+    <a href="../../books/">Books</a>
+    <a href="../../about/">About</a>
+    <a class="btn btn-sm" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=writing-nav">Book a call</a>
+  </nav>
+</header>
+
+<main id="main">
+  <article class="post">
+    <header class="post-head">
+      <p class="eyebrow"><a href="../">The Leadership Lab</a></p>
+      <h1>Your pipeline is a memory problem</h1>
+      <p class="post-sub">More systems thinking for small business owners... from a system-thinking small business owner</p>
+      <p class="post-meta">
+        <span>Matt Goode</span><span><time datetime="2026-09-29">29 September 2026</time></span><span>6 min read</span>
+        <a class="post-sub-jump" href="#subscribe">Get new pieces by email</a>
+      </p>
+      <p class="post-tags"><a class="post-tag" href="../?tag=growth-gap#archive">#&nbsp;Growing faster than it&#x27;s getting clearer</a><a class="post-tag" href="../?tag=stall#archive">#&nbsp;Winning feels like a near miss</a></p>
+    </header>
+    <div class="prose">
+<p>Yesterday I shared a drawing of the system that runs my practice. It got a lot of buzz, several people replied to the short form at the bottom of the post (it’s there again). But the first answer to come in on the form was about the part I’d spent the least time on: DALE, the small gear that brings the work in.</p><p>It came from a solo consultant who runs, I gathered, and, as they reported, their business mostly from their head and a notes app. They said everything waits on them. On a bad week, good conversations and real interest never turn into paid work, because every next step depends on them finding the time to take it.</p><p>I could have given that answer six months ago.</p><p>Most good conversations don’t die from lack of interest. They die in the gap between the call ending and you remembering.</p><h3><strong>The leak isn’t where you think</strong></h3><p>Most people running a practice of one assume their revenue problem is about demand. Not enough people know about them. So they post more, speak more, and take more coffees.</p><p>Usually demand is fine. The conversations are good. People lean in and say “we should talk about this properly,” and they mean it. Then the call ends, a client emergency lands, and the follow-up waits for a quiet afternoon that never comes. Three weeks later it feels awkward to write. Six weeks later it’s gone.</p><h3><strong>A handover with nobody on the other end</strong></h3><p>Relay races are rarely lost on the straights. They’re lost in the exchange zone, the few meters where one runner hands the baton to the next. Good teams drill that handover more than anything else, because that’s where most races go wrong. In swimming, it’s always the false start, not a stroke violation, that DQs a relay. <em>BTW, did you see that Michigan 4x400 relay runner the other day? Wow. <a href="https://www.ncaa.com/news/trackfield-indoor-women/article/2023-01-22/watch-michigan-relay-teams-remarkable-comeback-win-after-fall-track">Check this out</a>.</em></p><p>A solo practice runs a relay too. The you on Tuesday’s call hands the baton to the you with a free hour on Thursday. Those are two different runners. One knows exactly what was said and why it mattered. The other has forty unread emails and a client deadline. Because both of them are you, nobody drills the exchange. Nobody even marks the zone. You just assume you’ll remember.</p><p>That isn’t a sales problem. It’s a handover problem, and the dropped baton is the follow-up.</p><h3><strong>What the small gear does</strong></h3><p>DALE stands for Direct Action &amp; Lead Expansion, which is a grander name than it deserves. Actually, I named it after a business coach named Dale, who helped me get my practice off the ground when I suddenly found myself RIF’ed from USAID. It’s the marked zone.</p><p>When someone shows interest, I track what they said somewhere other than my head. In practice, that’s Airtable, a database with one table for people and another for the ideas they send me. If they reach out in writing, by email, a comment, or a DM, I keep their exact words and link back to the original so I can reread the whole thing. If it was a conversation in person, it’s my best recollection, written down while it’s still fresh. The rule is simple: if it isn’t in the table, it didn’t happen.</p><p>Each entry has a handful of fields. There’s what they’re wrestling with, and what it connects to, whether that’s another reader who said something similar or an essay already on the list. There’s a field for what a useful next step would be for them, which isn’t the same as what would be useful for me. And there’s a credit preference: name them, first name only, anonymous, or ask first.</p><p>Every person also sits in exactly one stage, from someone I haven’t contacted yet to someone I’m working with. Nobody is in two stages, and nobody is in none. When I want to know where a conversation stands, I look at the stage, not at my memory.</p><p>Then the next step gets drafted. I spend a lot of my time writing. Sometimes it’s a thank-you that names the specific thing they said. Sometimes it’s a note with something useful attached, like an essay that speaks to their problem. Sometimes it’s just a question back.</p><p>Every lead also carries a score. I’m purposely not sharing this for now; it’s my secret sauce. No one likes to be objectified as a number on a Likert scale - but anyone who runs a marketing funnel essentially knows: hot, warm, and cold. Once a month, I take a day to look at those scores and check them against what actually happened. Where they were wrong, I change the structure. A score nobody audits is flattery.</p><p><strong>What it looked like this week</strong></p><p>Over the past week I asked readers a few questions about the leadership problems in front of them.</p><p>Before DALE, those would have lived in my inbox, starred, until they weren’t. This time, each idea went into the table in the writer’s own words, next to where it came from and what it might become. Two readers had described the same problem from different chairs, and the table put them side by side. Another pushed back on the premise of an essay I’d planned, which will make it a better essay. I also want to be able to go back and ask them, “Could I use their words in this essay” or, when I finally do write about it, I can cc them and say: Hey, was thinking of you.</p><p><strong>Not a capacity problem</strong></p><p>The part of that form answer that stays with me is capacity. It’s a real limit, but it points the wrong way. Capacity problems usually get framed as needing more of you: more energy, better habits, another Sunday evening spent catching up.</p><p>You don’t have a capacity problem. You have a storage problem. Shocking, it’s a systems issue.</p><p>The whole argument of <em>CLUTCH</em> is that leaders should build systems that run without them. That holds for a practice of one too. You don’t need more capacity to follow up. You need follow-up that doesn’t draw on your capacity until the moment you decide.</p><p>Try it on paper this week. For years I used just my moleskin, and that was fine until my business grew – more clients, more leads, more balls in the air. I needed… a system. But there is no reason why paper and pencil still don’t work. It’s cheap and fast.  Take the last five good conversations you had and write down where the next step for each one lives right now. If the answer is “in my head,” you’ve found the leak. The fix doesn’t need to be clever. It just needs to live somewhere else.</p><p><strong>Still asking</strong></p><p>Yesterday’s form is still open. If you run a solo or small practice and the small gear sounds like the one you’re missing, raise your hand. It is definitely not one of those cold solicitations that I know we call get: What if we could bring you 12x qualified prospects, we bring you clients, blah, blah. Nope, not that. But it’s a way to track and organize the ones you’re already bringing in.</p><p>It’s six questions and takes two minutes. I read every answer, and I’ll only follow up if you say I can. After everything above, you can hold me to that.</p><hr/><p><strong>Raise your hand →</strong> (<a href="https://form.jotform.com/262684808473065">https://form.jotform.com/262684808473065</a>)</p><p><em>If you know someone whose best conversations keep going quiet, send them this.</em></p><hr/><p><em>Matt Goode runs Goode Design &amp; Consulting, helping technical founders and school leaders build leadership systems that run without them. Before that, he spent twenty years in schools as a teacher and dean, and he is a Gallup-Certified Strengths Coach. His book, CLUTCH*, is the long version of this essay’s first paragraph.*</em></p><p><em><strong><a href="https://www.amazon.com/dp/B0HHFGV2MT">Get your copy of CLUTCH on Amazon →</a></strong></em></p>
+    </div>
+
+    <section class="post-subscribe" id="subscribe" aria-labelledby="sub-h">
+      <div>
+        <p class="eyebrow">The Leadership Lab, by email</p>
+        <h2 id="sub-h">Get the next piece in your inbox</h2>
+        <p>For people who have become the bottleneck in the thing they built: one idea at a time, and something to do with it. Free. Leave whenever you like.</p>
+      </div>
+      <div class="signup-form">
+        <script src="https://f.convertkit.com/ck.5.js" async></script>
+        <form action="https://app.kit.com/forms/9910445/subscriptions"
+              class="seva-form formkit-form" method="post"
+              data-sv-form="9910445" data-uid="906eaeb714" data-format="inline" data-version="5"
+              style="width:100%">
+          <div data-style="clean">
+            <ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert"></ul>
+            <div data-element="fields" data-stacked="false" class="seva-fields formkit-fields">
+              <div class="formkit-field">
+                <input class="formkit-input" name="email_address" aria-label="Email address"
+                       placeholder="Email address" required type="email">
+              </div>
+              <button data-element="submit" class="formkit-submit formkit-submit">
+                <div class="formkit-spinner"><div></div><div></div><div></div></div>
+                <span>Subscribe</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="post-next">
+      <div>
+        <p class="eyebrow">Where is your system slipping?</p>
+        <p>Five questions, about two minutes, and you will know which of five patterns you are in. No email needed.</p>
+        <p class="cta-row"><a class="btn" href="../../diagnostic/?src=writing-your-pipeline-is-a-memor">Run the free diagnostic</a>
+        <a class="link-arrow" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=writing-post">Or book a 30-minute call</a></p>
+      </div>
+    </section>
+    <nav class="post-pn" aria-label="More from the Lab"><a class="pn-old" href="../i-build-systems-for-leaders-so-i/"><span>Older</span>I build systems for leaders. So I drew one up for myself.</a><a class="pn-new" href="../the-eighth-idea/"><span>Newer</span>The Eighth Idea</a></nav>
+  </article>
+</main>
+
+<footer class="foot">
+  <div class="foot-in">
+    <div>
+      <img src="../../assets/gdc/gdc-mark.svg" alt="" width="34" height="34">
+      <p class="foot-name">Goode Design &amp; Consulting</p>
+      <p class="foot-meta">Washington, DC &middot; Baltimore &middot; New York &middot; Boston &middot; Available globally</p>
+    <ul class="socials" aria-label="Elsewhere">
+      <li><a href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=writing-footer" title="Book a time"><img src="../../assets/icon-calendly.png" alt="Book a time with Matt Goode"></a></li>
+      <li><a href="https://www.linkedin.com/in/goodematt/" title="LinkedIn"><img src="../../assets/icon-linkedin.png" alt="Matt Goode on LinkedIn"></a></li>
+      <li><a href="https://thatsgoodedesign.substack.com/" title="The Leadership Lab on Substack"><img src="../../assets/icon-substack.png" alt="The Leadership Lab on Substack"></a></li>
+      <li><a href="mailto:matt@thatsgoodedesign.com" title="Email"><img src="../../assets/icon-email.png" alt="Email Matt Goode"></a></li>
+    </ul>
+    </div>
+    <nav aria-label="Footer">
+      <a href="../../system/">The system</a>
+      <a href="../../products/">Products</a>
+      <a href="../../obd/">The OBD</a>
+      <a href="../../schools/">Schools</a>
+      <a href="../../coaching-engagement/">How it works</a>
+      <a href="../../diagnostic/">Free diagnostic</a>
+      <a href="../../free/">Free tools</a>
+      <a href="../../books/">Books</a>
+      <a href="../../writing/">Writing</a>
+      <a href="../../about/">About</a>
+      <a href="mailto:matt@thatsgoodedesign.com">Contact</a>
+      <a href="../../terms/">Terms</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+  </div>
+  <p class="foot-legal">&copy; 2026 Goode Design &amp; Consulting. CliftonStrengths&reg;,
+    StrengthsFinder&reg; and the 34 theme names are trademarks of Gallup, Inc.
+    EQ-i 2.0 is a trademark of Multi-Health Systems Inc. Matt Goode is a
+    Gallup-Certified Strengths Coach.
+    <br><br>
+    The non-Gallup information you are receiving has not been approved and is not
+    sanctioned or endorsed by Gallup in any way. Opinions, views and
+    interpretations of CliftonStrengths&reg;, Clifton Youth StrengthsExplorer or
+    BP10 results are solely the beliefs of Goode Design &amp; Consulting.</p>
+</footer>
+
+</body>
+</html>
