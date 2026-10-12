@@ -30,6 +30,32 @@
 <link rel="stylesheet" href="../assets/style.css?v=13">
 <link rel="stylesheet" href="../assets/gdc-nav.css?v=15">
 <link rel="stylesheet" href="../assets/products.css?v=4">
+<style>
+/* Four doors (12 Oct 2026) */
+.doors { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 14px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 1000px) { .doors { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .doors { grid-template-columns: minmax(0, 1fr); gap: 10px; } }
+.doors a { display: flex; flex-direction: column; gap: 6px; height: 100%; padding: 20px 20px 18px; background: var(--paper-alt); border: 1px solid var(--rule); border-top: 3px solid var(--gold); text-decoration: none; color: var(--body); transition: background .18s, box-shadow .18s, transform .18s; }
+.doors a:hover, .doors a:focus-visible { background: var(--paper); box-shadow: 0 6px 18px rgba(36,36,39,.07); transform: translateY(-2px); }
+.doors strong { font-size: 20px; line-height: 1.2; color: var(--ink); }
+.doors span:not(.door-num) { font-size: 15px; line-height: 1.5; }
+.doors em { margin-top: auto; padding-top: 10px; font-style: normal; font-size: 13px; font-weight: 600; color: var(--ink); }
+.door-num { font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-ink); }
+.doors-help { margin: 18px 0 0; font-size: 16px; }
+.doors-help a { color: var(--ink); text-decoration-color: var(--gold-ink); }
+.door-group { margin-top: 40px; scroll-margin-top: 90px; }
+.door-group .door-num { margin: 0 0 4px; }
+.door-h { margin: 0 0 4px; font-size: clamp(22px, 2.6vw, 28px); line-height: 1.2; color: var(--ink); }
+.door-line { margin: 0; color: var(--body); font-size: 16px; }
+.door-group .svc { margin-top: 16px; }
+.sem-list { list-style: none; padding: 0; margin: 10px 0 14px; display: grid; gap: 6px; }
+.sem-list li { font-size: 15px; }
+.sem-list strong { color: var(--ink); }
+.sem-light { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-left: 6px; }
+.sem-now { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink); background: var(--gold); padding: 2px 6px; margin-left: 6px; }
+@media (prefers-reduced-motion: reduce) { .doors a { transition: none; } .doors a:hover { transform: none; } }
+</style>
+
 <script src="../assets/gdc-analytics.js?v=12"></script>
 <script src="../assets/gdc-nav.js?v=15" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://thatsgoodedesign.com/#org","name":"Goode Design & Consulting","alternateName":"GDC","url":"https://thatsgoodedesign.com/","logo":"https://thatsgoodedesign.com/assets/favicon/icon-512.png","image":"https://thatsgoodedesign.com/assets/og-default.jpg","email":"matt@thatsgoodedesign.com","description":"Leadership coaching and consulting for growth-stage founders, independent schools, and nonprofit and public-sector teams. Assessment-led engagements built on CliftonStrengths and EQ-i 2.0.","founder":{"@id":"https://thatsgoodedesign.com/#matt"},"areaServed":[{"@type":"City","name":"Washington, DC"},{"@type":"City","name":"Baltimore"},{"@type":"City","name":"New York"},{"@type":"City","name":"Boston"},{"@type":"AdministrativeArea","name":"Worldwide"}],"serviceType":["Executive coaching","Leadership development","Organizational consulting","Leadership assessment","Keynote speaking","Professional development for schools"],"knowsAbout":["Executive coaching","Leadership development","CliftonStrengths","EQ-i 2.0","Emotional intelligence","Delegation","Decision rights","Organizational design","Independent school leadership","Succession planning","Neuroinclusive leadership"],"sameAs":["https://www.linkedin.com/in/goodematt/","https://thatsgoodedesign.substack.com/"]},{"@type":"Person","@id":"https://thatsgoodedesign.com/#matt","name":"Matt Goode","jobTitle":"Leadership coach and consultant","url":"https://thatsgoodedesign.com/about/","image":"https://thatsgoodedesign.com/assets/matt-bowtie.jpg","worksFor":{"@id":"https://thatsgoodedesign.com/#org"},"description":"Founder of Goode Design & Consulting. Seventeen years at McDonogh School as teacher, coach, dean of students and administrator, then three years of leadership and team development at USAID's Bureau for Humanitarian Assistance. Author of CLUTCH.","alumniOf":[{"@type":"CollegeOrUniversity","name":"The London School of Economics and Political Science"},{"@type":"CollegeOrUniversity","name":"Johns Hopkins University"}],"hasCredential":[{"@type":"EducationalOccupationalCredential","name":"Gallup-Certified Strengths Coach","credentialCategory":"certification","recognizedBy":{"@type":"Organization","name":"Gallup, Inc."}},{"@type":"EducationalOccupationalCredential","name":"EQ-i 2.0 Certified Practitioner","credentialCategory":"certification","recognizedBy":{"@type":"Organization","name":"Multi-Health Systems Inc."}},{"@type":"EducationalOccupationalCredential","name":"MSc in Sociology","credentialCategory":"degree","recognizedBy":{"@type":"CollegeOrUniversity","name":"The London School of Economics and Political Science"}},{"@type":"EducationalOccupationalCredential","name":"MA in Education","credentialCategory":"degree","recognizedBy":{"@type":"CollegeOrUniversity","name":"Johns Hopkins University"}}],"knowsAbout":["Executive coaching","Leadership development","CliftonStrengths","EQ-i 2.0","Delegation","Decision rights","Independent school leadership","Neuroinclusive leadership"],"sameAs":["https://www.linkedin.com/in/goodematt/","https://thatsgoodedesign.substack.com/"]},{"@type":"WebSite","@id":"https://thatsgoodedesign.com/#website","url":"https://thatsgoodedesign.com/","name":"Goode Design & Consulting","publisher":{"@id":"https://thatsgoodedesign.com/#org"},"inLanguage":"en-US"},{"@type":"BreadcrumbList","@id":"https://thatsgoodedesign.com/products/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thatsgoodedesign.com/"},{"@type":"ListItem","position":2,"name":"Products & services","item":"https://thatsgoodedesign.com/products/"}]},{"@type":"OfferCatalog","@id":"https://thatsgoodedesign.com/products/#catalog","name":"What a company can buy","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"The On-Board Diagnostic","description":"CliftonStrengths and EQ-i 2.0 read against each other and written up as one read of how a leader operates under load.","url":"https://thatsgoodedesign.com/products/#obd","provider":{"@id":"https://thatsgoodedesign.com/#org"},"areaServed":[{"@type":"City","name":"Washington, DC"},{"@type":"City","name":"Baltimore"},{"@type":"City","name":"New York"},{"@type":"City","name":"Boston"}]}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Executive coaching","description":"Six structured sessions built on diagnostic data. Coaching and consulting modes, named in the room.","url":"https://thatsgoodedesign.com/coaching-engagement/","provider":{"@id":"https://thatsgoodedesign.com/#org"},"areaServed":[{"@type":"City","name":"Washington, DC"},{"@type":"City","name":"Baltimore"},{"@type":"City","name":"New York"},{"@type":"City","name":"Boston"}]}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Know Thyself to Lead Others","description":"A three-hour session giving one team a shared vocabulary for how each person operates.","url":"https://thatsgoodedesign.com/products/#services","provider":{"@id":"https://thatsgoodedesign.com/#org"},"areaServed":[{"@type":"City","name":"Washington, DC"},{"@type":"City","name":"Baltimore"},{"@type":"City","name":"New York"},{"@type":"City","name":"Boston"}]}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Delegation seminar","description":"Ninety minutes on why handoffs fail and what a definition of done actually contains.","url":"https://thatsgoodedesign.com/products/#services","provider":{"@id":"https://thatsgoodedesign.com/#org"},"areaServed":[{"@type":"City","name":"Washington, DC"},{"@type":"City","name":"Baltimore"},{"@type":"City","name":"New York"},{"@type":"City","name":"Boston"}]}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"GoodeStart","description":"The first ninety days done on purpose, for someone newly promoted into leading people.","url":"https://thatsgoodedesign.com/products/#services","provider":{"@id":"https://thatsgoodedesign.com/#org"},"areaServed":[{"@type":"City","name":"Washington, DC"},{"@type":"City","name":"Baltimore"},{"@type":"City","name":"New York"},{"@type":"City","name":"Boston"}]}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Building the Bench","description":"A cohort programme for the leaders who step up next.","url":"https://thatsgoodedesign.com/products/#services","provider":{"@id":"https://thatsgoodedesign.com/#org"},"areaServed":[{"@type":"City","name":"Washington, DC"},{"@type":"City","name":"Baltimore"},{"@type":"City","name":"New York"},{"@type":"City","name":"Boston"}]}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Executive team consulting","description":"Decision rights, sequencing and structural bottlenecks with a senior team.","url":"https://thatsgoodedesign.com/products/#services","provider":{"@id":"https://thatsgoodedesign.com/#org"},"areaServed":[{"@type":"City","name":"Washington, DC"},{"@type":"City","name":"Baltimore"},{"@type":"City","name":"New York"},{"@type":"City","name":"Boston"}]}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Keynotes","description":"Conference and in-service talks on delegation, decision-making and leadership systems.","url":"https://thatsgoodedesign.com/products/#keynotes","provider":{"@id":"https://thatsgoodedesign.com/#org"},"areaServed":[{"@type":"City","name":"Washington, DC"},{"@type":"City","name":"Baltimore"},{"@type":"City","name":"New York"},{"@type":"City","name":"Boston"}]}}]},{"@type":"WebPage","@id":"https://thatsgoodedesign.com/products/#webpage","url":"https://thatsgoodedesign.com/products/","name":"What a company can actually buy","description":"Diagnostics, coaching, workshops and keynotes from Goode Design & Consulting. The On-Board Diagnostic (OBD), executive coaching, the Owner's Manual Workshop, the Delegation Seminar, and leadership programs for independent schools.","isPartOf":{"@id":"https://thatsgoodedesign.com/#website"},"about":{"@id":"https://thatsgoodedesign.com/#org"},"inLanguage":"en-US","breadcrumb":{"@id":"https://thatsgoodedesign.com/products/#breadcrumb"},"mainEntity":{"@id":"https://thatsgoodedesign.com/products/#catalog"}}]}</script>
@@ -115,63 +141,24 @@
     </p>
     <p class="cta-row">
       <a class="btn" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=products-hero">Book thirty minutes</a>
-      <a class="link-arrow" href="../obd/">Or start with the OBD</a>
+      <a class="link-arrow" href="../diagnostic/?src=products-hero">Not sure where to start? Take the 2-minute diagnostic</a>
     </p>
   </section>
 
-  <!-- The OBD. The signature product and the front door to everything else,
-       so it gets the most room. -->
-  <section class="band alt" id="obd">
-    <p class="eyebrow">The front door</p>
-    <h2 class="section-h">The On-Board Diagnostic</h2>
-    <figure class="obd-figure">
-      <img src="../assets/photo-dashboard.jpg"
-           alt="A car dashboard reading 130,762 miles with the service light on"
-           width="1200" height="900" loading="lazy">
-      <figcaption>One hundred and thirty thousand miles, and the light is on.
-        The car knew before the driver did.</figcaption>
-    </figure>
-    <div class="book-wrap">
-      <div>
-        <p>The name is a joke I am going to explain, because a joke nobody gets
-          is just a name. The book is called CLUTCH. The whole argument runs on
-          one extended metaphor: an organization is a drivetrain, leadership is
-          the mechanism that lets its parts turn at different speeds without
-          shearing, and the frameworks are the engine, the gearbox, the
-          navigation and the handoff. So the diagnostic is the OBD, the port
-          under the dashboard a mechanic plugs into before touching anything.</p>
-        <p>Most assessments tell a leader who they are. The OBD tells them where
-          the engine is already knocking. It is an individual instrument: one
-          leader, one read, one debrief.</p>
-        <p>It uses two validated instruments, CliftonStrengths&reg; and the
-          EQ-i 2.0. You receive both reports in full, exactly as their publishers
-          issue them, unaltered. What I add is a third document in my own words:
-          a written read of what the two results together suggest about how you
-          operate under pressure, using CREATE and VOICES as the lens. Neither
-          instrument makes that argument on its own, and neither publisher makes
-          it for you.</p>
-        <p>Participants own their results. The report is designed to be useful by
-          itself, portable to any coach or supervisor, and valid as a personal
-          reference whether or not anything else follows. There is no obligation
-          to continue.</p>
-      </div>
-      <aside class="spec">
-        <img class="badge-in-panel obd-badge" src="../assets/icon_OBD.png" alt="" width="200" height="200">
-        <h3>What&rsquo;s in it</h3>
-        <ul>
-          <li>Your CliftonStrengths&reg; report, unaltered</li>
-          <li>Your EQ-i 2.0 report, unaltered</li>
-          <li>A guide to reading each one</li>
-          <li>The OBD read, written by me</li>
-          <li>45-minute 1:1 debrief</li>
-        </ul>
-        <p class="spec-meta">Report within 10 business days of assessment
-          completion. Debrief scheduled on delivery. Assessment codes are bought
-          on your behalf and the results are yours to keep, whether or not
-          anything else follows.</p>
-      </aside>
-    </div>
+  <!-- Four doors (12 Oct 2026): the "which one is me?" route, before the detail. -->
+  <section class="band" id="doors" aria-labelledby="doors-h">
+    <p class="eyebrow">Four ways in</p>
+    <h2 class="section-h" id="doors-h">Start where the problem is</h2>
+    <ol class="doors">
+      <li><a href="#door-see"><span class="door-num">Door 1</span><strong>See it clearly</strong><span>Something&rsquo;s off and you can&rsquo;t name it yet.</span><em>Free diagnostic &middot; OBD from $450</em></a></li>
+      <li><a href="#door-leader"><span class="door-num">Door 2</span><strong>Develop one leader</strong><span>One person&rsquo;s growth would change the whole company.</span><em>Coaching &middot; GoodeStart &middot; Building the Bench</em></a></li>
+      <li><a href="#door-team"><span class="door-num">Door 3</span><strong>Develop the team</strong><span>The team works hard, just not together.</span><em>Workshops &middot; Seminars &middot; Train-the-trainer</em></a></li>
+      <li><a href="#door-system"><span class="door-num">Door 4</span><strong>Redesign the system</strong><span>The problem outlives every person you hire.</span><em>Executive team &middot; System-wide</em></a></li>
+    </ol>
+    <p class="doors-help">Not sure which door? <a href="../diagnostic/?src=products-doors">Take the 2-minute diagnostic</a> and I&rsquo;ll point you to one. Need a speaker instead? <a href="#keynotes">See the keynotes</a>.</p>
   </section>
+
+
 
   <!-- Everything else that builds on it. -->
   <!-- The company-side answer to "why you and not a firm". Every line is
@@ -271,15 +258,19 @@
   <section class="band" id="services">
     <p class="eyebrow">Services</p>
     <h2 class="section-h">What a company can actually buy</h2>
-    <p class="lede">Every one of these runs on the same operating system. One
-      list rather than four, in the order a company usually buys them: an
-      instrument first, then a programme, then the system itself.</p>
+    <p class="lede">Every one of these runs on the same operating system, grouped
+      by how deep the work goes: see it clearly, develop one leader, develop the
+      team, redesign the system.</p>
 
     <!-- Same component as the schools service list, so the two pages read as
          one practice: title left, three slots right for who it is for, what it
          runs on, and the mode and length. Collapsed by default, because four
          programmes at full length is a wall. -->
-    <ul class="svc">
+    <div class="door-group" id="door-see">
+      <p class="door-num">Door 1</p>
+      <h3 class="door-h">See it clearly</h3>
+      <p class="door-line">Know what&rsquo;s actually wrong before anyone spends money fixing it.</p>
+      <ul class="svc">
 
       <li id="svc-obd" class="product product--obd svc-badge"><details>
         <summary><h3><svg class="icon svc-icon" aria-hidden="true"><use href="#m-obd"/></svg>The On-Board Diagnostic</h3><span class="svc-meta"><span class="svc-for">One leader</span><span class="svc-how">Two instruments, one read</span></span></summary>
@@ -293,6 +284,25 @@
           <p><a class="link-arrow" href="../obd/">More about the OBD</a></p>
         </div>
       </details></li>
+
+      <li id="svc-psc"><details>
+        <summary><h3>Psychological Safety Check</h3><span class="svc-meta"><span class="svc-for">One team</span><span class="svc-how">Free, two rounds</span></span></summary>
+        <div class="svc-body">
+          <p>Your team answers seven short questions anonymously, built on Amy
+            Edmondson&rsquo;s team psychological safety scale. You see where people
+            speak up and where they go quiet, then a second round ninety days
+            later shows what moved. No fee.</p>
+          <p><a class="link-arrow" href="../psychological-safety/">How the Check works</a></p>
+        </div>
+      </details></li>
+      </ul>
+    </div>
+
+    <div class="door-group" id="door-leader">
+      <p class="door-num">Door 2</p>
+      <h3 class="door-h">Develop one leader</h3>
+      <p class="door-line">When one person&rsquo;s growth would change the whole company.</p>
+      <ul class="svc">
 
       <li id="svc-coaching" class="product product--ec svc-badge"><details>
         <summary><h3><svg class="icon svc-icon" aria-hidden="true"><use href="#m-ec"/></svg>Executive coaching</h3><span class="svc-meta"><span class="svc-for">One leader</span><span class="svc-how">Six sessions, ongoing</span></span></summary>
@@ -339,72 +349,6 @@
           <p><a class="link-arrow" href="../coaching-engagement/">Read the full
             terms before you book</a></p>
           <p><a class="link-arrow" href="../executive-coaching/">More about executive coaching</a></p>
-        </div>
-      </details></li>
-
-      <li id="svc-know-thyself" class="product product--kt svc-badge"><details>
-        <summary><h3><svg class="icon svc-icon" aria-hidden="true"><use href="#m-kt"/></svg>Know Thyself to Lead Others</h3><span class="svc-meta"><span class="svc-for">Up to 50</span><span class="svc-how">Three hours</span></span></summary>
-        <div class="svc-body">
-          <p>A three-hour workshop built on every participant&rsquo;s
-            CliftonStrengths report. Your team learns how each person does their
-            best work and what they need from colleagues, and leaves with an
-            Owner&rsquo;s Manual template.</p>
-          <p>For a whole department or a wider leadership group, virtual or in
-            person. No OBD needed: CliftonStrengths reports are invoiced
-            separately. Priced on a call.</p>
-          <p><a class="link-arrow" href="../know-thyself/">More about Know Thyself to Lead Others</a></p>
-        </div>
-      </details></li>
-
-      <li id="svc-owners-manual" class="product product--kt svc-badge"><details>
-        <summary><h3><svg class="icon svc-icon" aria-hidden="true"><use href="#m-om"/></svg>Owner&rsquo;s Manual</h3><span class="svc-meta"><span class="svc-for">Up to 15</span><span class="svc-how">Three hours</span></span></summary>
-        <div class="svc-body">
-          <p>A three-hour workshop for a small team that works together every
-            day. Each person turns their OBD into an Owner&rsquo;s Manual: how
-            they lead, what they need from colleagues, where their edges are.
-            Then the team swaps, so nobody has to guess how anyone else works.</p>
-          <p>Every participant needs an OBD, invoiced separately. Book it on its
-            own or as a full day with Know Thyself to Lead Others. Priced on a call.</p>
-          <p><a class="link-arrow" href="../owners-manual/">More about the Owner&rsquo;s Manual</a></p>
-        </div>
-      </details></li>
-
-      <li id="svc-delegation"><details>
-        <summary><h3>Delegation seminar</h3><span class="svc-meta"><span class="svc-for">Up to 300</span><span class="svc-on">DELEGATE</span><span class="svc-how">Ninety minutes</span></span></summary>
-        <div class="svc-body">
-          <p>Ninety minutes on DELEGATE: define the win, establish the way, list
-            the guardrails, expect the process, give the right support, agree on
-            checkpoints, transfer ownership, encourage growth.</p>
-          <p>Virtual, up to three hundred participants, no OBD required. Often
-            the first thing an organization buys and rarely the last.</p>
-        </div>
-      </details></li>
-
-      <li id="svc-field-tested"><details>
-        <summary><h3>Field Tested train-the-trainer</h3><span class="svc-meta"><span class="svc-for">Facilitators</span><span class="svc-on">Field Tested</span><span class="svc-how">Half day or a day</span></span></summary>
-        <div class="svc-body">
-          <p>I come to you, model the methods from <em>Field Tested</em> with
-            your facilitators, and help them sharpen their own practice,
-            including the neurodiversity lens on every method. We also practice
-            running the methods online and in hybrid rooms. In person only, for
-            up to twenty facilitators, over a half day or a full day.</p>
-          <p>Before the workshop, a 60-day lead-up: discovery calls with the
-            sponsor every two weeks, then weekly for the last two weeks; a short
-            intake from every facilitator on the rooms they run and what they
-            need; and a conversation with two or three of them, or a session I
-            sit in on. You sign off a written workshop plan before I arrive.
-            After it: a written debrief for the sponsor within a week, a
-            follow-up session with the facilitators at thirty days, written
-            feedback on one session plan from each facilitator, and a check-in
-            with the sponsor at ninety days. The workshop itself is in person;
-            the calls and the follow-up can be by video. Every workshop includes
-            an organization license for <em>Field Tested</em>, which is also sold
-            on its own.</p>
-          <p>Organization licenses are $750 for up to 50 staff and $1,500 for
-            up to 250. Workshops, license included: $4,500 for a half
-            day and $7,500 for a full day, in person in Baltimore and DC;
-            travel quoted. <a href="../field-tested/#team-licenses">Licenses and
-            workshops</a>.</p>
         </div>
       </details></li>
 
@@ -455,6 +399,108 @@
           <p><a class="link-arrow" href="../building-the-bench/">More about Building the Bench</a></p>
         </div>
       </details></li>
+      </ul>
+    </div>
+
+    <div class="door-group" id="door-team">
+      <p class="door-num">Door 3</p>
+      <h3 class="door-h">Develop the team</h3>
+      <p class="door-line">When the team works hard, just not together.</p>
+      <ul class="svc">
+
+      <li id="svc-know-thyself" class="product product--kt svc-badge"><details>
+        <summary><h3><svg class="icon svc-icon" aria-hidden="true"><use href="#m-kt"/></svg>Know Thyself to Lead Others</h3><span class="svc-meta"><span class="svc-for">Up to 50</span><span class="svc-how">Three hours</span></span></summary>
+        <div class="svc-body">
+          <p>A three-hour workshop built on every participant&rsquo;s
+            CliftonStrengths report. Your team learns how each person does their
+            best work and what they need from colleagues, and leaves with an
+            Owner&rsquo;s Manual template.</p>
+          <p>For a whole department or a wider leadership group, virtual or in
+            person. No OBD needed: CliftonStrengths reports are invoiced
+            separately. Priced on a call.</p>
+          <p><a class="link-arrow" href="../know-thyself/">More about Know Thyself to Lead Others</a></p>
+        </div>
+      </details></li>
+
+      <li id="svc-owners-manual" class="product product--kt svc-badge"><details>
+        <summary><h3><svg class="icon svc-icon" aria-hidden="true"><use href="#m-om"/></svg>Owner&rsquo;s Manual</h3><span class="svc-meta"><span class="svc-for">Up to 15</span><span class="svc-how">Three hours</span></span></summary>
+        <div class="svc-body">
+          <p>A three-hour workshop for a small team that works together every
+            day. Each person turns their OBD into an Owner&rsquo;s Manual: how
+            they lead, what they need from colleagues, where their edges are.
+            Then the team swaps, so nobody has to guess how anyone else works.</p>
+          <p>Every participant needs an OBD, invoiced separately. Book it on its
+            own or as a full day with Know Thyself to Lead Others. Priced on a call.</p>
+          <p><a class="link-arrow" href="../owners-manual/">More about the Owner&rsquo;s Manual</a></p>
+        </div>
+      </details></li>
+
+      <li id="svc-seminars"><details>
+        <summary><h3>Seminars</h3><span class="svc-meta"><span class="svc-for">Up to 300</span><span class="svc-on">Delegation available now</span><span class="svc-how">Ninety minutes</span></span></summary>
+        <div class="svc-body">
+          <p>Ninety minutes, one idea, one change your team can make on Monday.
+            One seminar for each light in the CLUTCH system, plus five on the
+            problems every growing company runs into.</p>
+          <ul class="sem-list">
+            <li><strong>Factory Settings</strong> &middot; What your systems teach your culture <span class="sem-light">CREATE</span></li>
+            <li><strong>Listen for the Rattle</strong> &middot; Hearing problems while they&rsquo;re still small <span class="sem-light">VOICES</span></li>
+            <li><strong>Redline</strong> &middot; Leading under pressure <span class="sem-light">EQ</span></li>
+            <li><strong>Who&rsquo;s Driving?</strong> &middot; Decision rights that stick <span class="sem-light">6C</span></li>
+            <li><strong>The Only Part Engineered to Slip</strong> &middot; Delegation <span class="sem-light">DELEGATE</span> <span class="sem-now">Available now</span></li>
+            <li><strong>Torque</strong> &middot; Leading from strengths <span class="sem-light">Development</span></li>
+            <li><strong>Miles, Not Motion</strong> &middot; From strategy to results <span class="sem-light">Results</span></li>
+            <li><strong>No More Idling</strong> &middot; Meetings that decide</li>
+            <li><strong>Riding Shotgun</strong> &middot; Managing up</li>
+            <li><strong>Break-in Period</strong> &middot; Your first 90 days</li>
+            <li><strong>Pit Stop</strong> &middot; Rest as strategy</li>
+            <li><strong>Hands at Ten and Two</strong> &middot; Accountability without micromanaging</li>
+          </ul>
+          <p><strong>Available now: The Only Part Engineered to Slip.</strong> Ninety
+            minutes on DELEGATE: define the win, establish the way, list the
+            guardrails, expect the process, give the right support, agree on
+            checkpoints, transfer ownership, encourage growth. Virtual, up to
+            three hundred participants, no OBD required. Often the first thing an
+            organization buys and rarely the last.</p>
+          <p>The rest are coming; <a href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=products-seminars">book thirty minutes</a> to be first in line or to scope one for your team.</p>
+        </div>
+      </details></li>
+
+
+      <li id="svc-field-tested"><details>
+        <summary><h3>Field Tested train-the-trainer</h3><span class="svc-meta"><span class="svc-for">Facilitators</span><span class="svc-on">Field Tested</span><span class="svc-how">Half day or a day</span></span></summary>
+        <div class="svc-body">
+          <p>I come to you, model the methods from <em>Field Tested</em> with
+            your facilitators, and help them sharpen their own practice,
+            including the neurodiversity lens on every method. We also practice
+            running the methods online and in hybrid rooms. In person only, for
+            up to twenty facilitators, over a half day or a full day.</p>
+          <p>Before the workshop, a 60-day lead-up: discovery calls with the
+            sponsor every two weeks, then weekly for the last two weeks; a short
+            intake from every facilitator on the rooms they run and what they
+            need; and a conversation with two or three of them, or a session I
+            sit in on. You sign off a written workshop plan before I arrive.
+            After it: a written debrief for the sponsor within a week, a
+            follow-up session with the facilitators at thirty days, written
+            feedback on one session plan from each facilitator, and a check-in
+            with the sponsor at ninety days. The workshop itself is in person;
+            the calls and the follow-up can be by video. Every workshop includes
+            an organization license for <em>Field Tested</em>, which is also sold
+            on its own.</p>
+          <p>Organization licenses are $750 for up to 50 staff and $1,500 for
+            up to 250. Workshops, license included: $4,500 for a half
+            day and $7,500 for a full day, in person in Baltimore and DC;
+            travel quoted. <a href="../field-tested/#team-licenses">Licenses and
+            workshops</a>.</p>
+        </div>
+      </details></li>
+      </ul>
+    </div>
+
+    <div class="door-group" id="door-system">
+      <p class="door-num">Door 4</p>
+      <h3 class="door-h">Redesign the system</h3>
+      <p class="door-line">When the problem outlives every person you hire.</p>
+      <ul class="svc">
 
       <li id="prog-exec"><details>
         <summary><h3>Executive team consulting</h3><span class="svc-meta"><span class="svc-for">Leaders of leaders</span><span class="svc-on">6C and DELEGATE</span><span class="svc-how">A year, six-month minimum</span></span></summary>
@@ -493,6 +539,14 @@
             about the twelve months is presumed by buying the diagnostic.</p>
         </div>
       </details></li>
+      </ul>
+    </div>
+
+    <div class="door-group" id="door-talks">
+      <p class="door-num">Talks</p>
+      <h3 class="door-h">Speak to the room</h3>
+      <p class="door-line">Keynotes for a conference or an all-staff.</p>
+      <ul class="svc">
 
       <li id="svc-keynotes"><details>
         <summary><h3>Keynotes</h3><span class="svc-meta"><span class="svc-for">Conference or all-staff</span><span class="svc-on">CLUTCH</span><span class="svc-how">One talk</span></span></summary>
@@ -502,13 +556,70 @@
             descriptions</a>.</p>
         </div>
       </details></li>
-    </ul>
+      </ul>
+    </div>
+
 
     <p class="cta-row">
       <a class="btn" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt">Book thirty minutes to scope it</a>
       <a class="link-arrow" href="../schools/#services">Schools buy these differently</a>
     </p>
   </section>
+
+  <!-- The OBD. The signature product and the front door to everything else,
+       so it gets the most room. -->
+  <section class="band alt" id="obd">
+    <p class="eyebrow">The front door</p>
+    <h2 class="section-h">The On-Board Diagnostic</h2>
+    <figure class="obd-figure">
+      <img src="../assets/photo-dashboard.jpg"
+           alt="A car dashboard reading 130,762 miles with the service light on"
+           width="1200" height="900" loading="lazy">
+      <figcaption>One hundred and thirty thousand miles, and the light is on.
+        The car knew before the driver did.</figcaption>
+    </figure>
+    <div class="book-wrap">
+      <div>
+        <p>The name is a joke I am going to explain, because a joke nobody gets
+          is just a name. The book is called CLUTCH. The whole argument runs on
+          one extended metaphor: an organization is a drivetrain, leadership is
+          the mechanism that lets its parts turn at different speeds without
+          shearing, and the frameworks are the engine, the gearbox, the
+          navigation and the handoff. So the diagnostic is the OBD, the port
+          under the dashboard a mechanic plugs into before touching anything.</p>
+        <p>Most assessments tell a leader who they are. The OBD tells them where
+          the engine is already knocking. It is an individual instrument: one
+          leader, one read, one debrief.</p>
+        <p>It uses two validated instruments, CliftonStrengths&reg; and the
+          EQ-i 2.0. You receive both reports in full, exactly as their publishers
+          issue them, unaltered. What I add is a third document in my own words:
+          a written read of what the two results together suggest about how you
+          operate under pressure, using CREATE and VOICES as the lens. Neither
+          instrument makes that argument on its own, and neither publisher makes
+          it for you.</p>
+        <p>Participants own their results. The report is designed to be useful by
+          itself, portable to any coach or supervisor, and valid as a personal
+          reference whether or not anything else follows. There is no obligation
+          to continue.</p>
+      </div>
+      <aside class="spec">
+        <img class="badge-in-panel obd-badge" src="../assets/icon_OBD.png" alt="" width="200" height="200">
+        <h3>What&rsquo;s in it</h3>
+        <ul>
+          <li>Your CliftonStrengths&reg; report, unaltered</li>
+          <li>Your EQ-i 2.0 report, unaltered</li>
+          <li>A guide to reading each one</li>
+          <li>The OBD read, written by me</li>
+          <li>45-minute 1:1 debrief</li>
+        </ul>
+        <p class="spec-meta">Report within 10 business days of assessment
+          completion. Debrief scheduled on delivery. Assessment codes are bought
+          on your behalf and the results are yours to keep, whether or not
+          anything else follows.</p>
+      </aside>
+    </div>
+  </section>
+
 
   <section class="band alt" id="keynotes">
     <p class="eyebrow">Speaking</p>
