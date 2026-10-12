@@ -178,10 +178,12 @@
       display: flex; flex-direction: column; text-decoration: none; color: inherit;
       background: var(--paper); border: 1px solid var(--rule); border-top: 3px solid var(--gold);
       padding: 20px 20px 18px; box-shadow: 0 1px 2px rgba(36,36,39,.04);
-      transition: border-color .18s, box-shadow .18s, transform .18s;
+      transition: border-color .18s, background-color .18s, box-shadow .18s, transform .18s;
     }
     a.signal.pc:hover, a.signal.pc:focus-visible {
       border-color: var(--rule-2); border-top-color: var(--gold-ink);
+      /* The light comes on and the whole card warms with it: gold at about 12%. */
+      background: #F6EFE2;
       box-shadow: 0 8px 22px rgba(36,36,39,.09); transform: translateY(-2px);
     }
     a.signal.pc:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 3px; }
