@@ -129,6 +129,7 @@
 .ro-later h3 { margin: 0 0 8px; font-size: 19px; color: var(--ink); }
 .ro-later p { margin: 0 0 14px; font-size: 16px; line-height: 1.55; color: var(--body); }
 .ro-later .btn-ghost { cursor: pointer; font-family: inherit; }
+.ro-bridge-call { max-width: 56ch; margin: 0 auto 16px; text-align: center; font-size: 18px; line-height: 1.55; color: var(--body); }
 .ro-promise { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px; padding: 0; margin: 0 0 22px; font-size: 15px; color: var(--body); }
 .ro-promise li::before { content: "\2713  "; color: var(--gold-ink); font-weight: 800; }
 @media (max-width: 620px) { .ro-track li { font-size: 13px; } .ro-track li b { font-size: 14px; } }
@@ -309,6 +310,7 @@
   <section class="band book-call">
     <p class="eyebrow">Next step</p>
     <h2 class="section-h big">Thirty minutes, then decide</h2>
+    <p class="ro-bridge-call" id="ro-bridge-call" hidden></p>
     <ul class="ro-promise">
       <li>No pitch</li>
       <li>We start from your readout</li>
@@ -378,7 +380,10 @@
 </footer>
 <script>
 /* Readout renderer. Jotform's thank-you page redirects to
-     /diagnostic/readout/#p={patternName}&n={name}&i={res_intro}&w={res_why}&m={res_move}&q={res_quote}
+     /diagnostic/readout/#p={patternName}&n={whatShould}&i={res_intro}&w={res_why}&m={res_move}
+       &q={q5_success}&t={res_quote}&b={res_bridge}
+   q is their own six-month answer; t is Jotform's pattern-matched client quote
+   ("... – Role, Sector"); b is the bridge line into the call.
    The fragment never reaches a server or the analytics, so the person's own
    words stay in their browser. Missing pieces just hide their section. */
 (function () {
@@ -476,8 +481,18 @@
   txt('ro-big-l', pr.bigl);
   txt('ro-stat', pr.stat);
   document.getElementById('ro-signs').innerHTML = pr.signs.map(function (x) { return '<li>' + x + '</li>'; }).join('');
-  txt('ro-tq', QUOTES[pr.t][0]);
-  txt('ro-tc', QUOTES[pr.t][1]);
+  /* Jotform's matched testimonial wins; the built-in set is the fallback. */
+  var tq = QUOTES[pr.t][0], tc = QUOTES[pr.t][1];
+  var tr = (h.get('t') || '').trim();
+  if (tr) {
+    var cut = tr.lastIndexOf(' \u2013 ');
+    if (cut > 0) { tq = tr.slice(0, cut); tc = tr.slice(cut + 3); } else { tq = tr; tc = ''; }
+    tq = tq.replace(/^[\u201C"]+|[\u201D"]+$/g, '');
+  }
+  txt('ro-tq', tq);
+  txt('ro-tc', tc);
+  var br = (h.get('b') || '').trim();
+  if (br) { var bl = document.getElementById('ro-bridge-call'); bl.textContent = br; bl.hidden = false; }
 
   txt('ro-start-h', v.h);
   txt('ro-start-p', v.p);
