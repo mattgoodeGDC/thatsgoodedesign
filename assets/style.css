@@ -157,7 +157,7 @@ a { color: var(--ink); }
 /* Two lines, one sentence each. Below tablet the type would have to be too
    small to hold a sentence per line, so wrapping is allowed again there. */
 .hero h1 .hl { display: block; }
-@media (min-width: 760px) { .hero h1 .hl { white-space: nowrap; } }
+@media (min-width: 760px) { .hero:not(.hero-sub) h1 .hl { white-space: nowrap; } }
 
 /* ---------- provenance row ----------
    Five marks of wildly different shapes: a black disc, a red square, a navy
@@ -1533,3 +1533,15 @@ button.signal[aria-checked="true"] .signal-fw { display: flex; }
 @media (max-width: 760px) {
   .trust-strip { grid-template-columns: 1fr; }
 }
+
+/* Client quote placed beside an ask (12 Oct 2026). */
+.proof-quote { margin-block: 0 36px; max-width: 640px; text-align: left; }
+.dx-ladder + .proof-quote { margin-block: 32px 0; }
+.book-call .proof-quote { margin-inline: auto; }
+.proof-quote figcaption { margin-top: 10px; font-size: 14px; color: var(--muted); }
+
+/* Four cards as two by two, so a row of three never leaves one on its own. */
+.grid-3.grid-2x2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 640px) { .grid-3.grid-2x2 { grid-template-columns: minmax(0, 1fr); } }
+
+.proof-line { margin-top: 28px; font-size: 15px; font-weight: 600; color: var(--ink); }

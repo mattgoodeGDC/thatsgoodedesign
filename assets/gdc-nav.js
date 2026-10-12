@@ -97,7 +97,49 @@
     });
   }
 
-  function boot() { initToggle(); init(); }
+  /* Mobile action bar (12 Oct 2026). One sticky action under 760px, shown
+     once the visitor has scrolled past the opening screen and hidden again
+     when the page's own closing call to action or the footer is in view.
+     The action follows the visitor's temperature: reading pages offer the
+     free diagnostic, buying pages offer the call. Pages that already carry
+     their own bar (.m-cta) or have one job of their own are skipped. */
+  var BUY = ['obd', 'executive-coaching', 'coaching-engagement', 'schools', 'schools/rates',
+    'products', 'goodestart', 'building-the-bench', 'know-thyself', 'owners-manual',
+    'psychological-safety', 'diagnostic/bottleneck', 'diagnostic/drift', 'diagnostic/growth-gap',
+    'diagnostic/stall', 'diagnostic/new-seat'];
+  var SKIP = ['diagnostic', 'diagnostic/readout', 'diagnostic/share', 'booked', 'downloads',
+    'privacy', 'terms', 'ps-tool', 'couldnt-have-been-an-email', 'couldnt-have-been-an-email/thanks',
+    'field-tested/sampler', 'field-tested/sampler/thanks', 'no-average-brain/chapter',
+    'school-meeting-forms', 'eighth-idea', 'clutch/review', 'free'];
+  function initActionBar() {
+    if (document.querySelector('.m-cta')) return;
+    var path = location.pathname.replace(/^\/+|\/+$/g, '').replace(/index\.html$/, '').replace(/\/$/, '');
+    if (SKIP.indexOf(path) !== -1 || /404/.test(path)) return;
+    var slug = (path || 'home').replace(/\//g, '-');
+    var buy = BUY.indexOf(path) !== -1;
+    var bar = document.createElement('div');
+    bar.className = 'm-cta m-cta-auto';
+    bar.setAttribute('aria-hidden', 'true');
+    bar.innerHTML = buy
+      ? '<span>Thirty minutes, then decide.</span><a class="btn" tabindex="-1" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=' + slug + '-sticky">Book a call</a>'
+      : '<span>Where is your system slipping?</span><a class="btn" tabindex="-1" href="/diagnostic/?src=' + slug + '-sticky">Free diagnostic</a>';
+    document.body.appendChild(bar);
+    if (!('IntersectionObserver' in window)) return;
+    var stops = [].slice.call(document.querySelectorAll('.book-call, footer'));
+    var stopIn = {}, scrolled = false;
+    function set() {
+      var anyStop = Object.keys(stopIn).some(function (k) { return stopIn[k]; });
+      bar.classList.toggle('show', scrolled && !anyStop);
+    }
+    stops.forEach(function (el, i) {
+      new IntersectionObserver(function (es) { stopIn[i] = es[0].isIntersecting; set(); }).observe(el);
+    });
+    function onScroll() { var s = window.scrollY > window.innerHeight * 0.8; if (s !== scrolled) { scrolled = s; set(); } }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  function boot() { initToggle(); init(); initActionBar(); }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', boot);
   } else {
