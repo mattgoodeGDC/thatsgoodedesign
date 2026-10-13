@@ -724,12 +724,22 @@
     'stall':      'We have big goals, but execution keeps stalling.',
     'new-seat':   "My role is changing and I'm not sure what it is now."
   };
+  const PICK = {
+    'bottleneck': "You picked The Bottleneck: everything still runs through you.",
+    'growth-gap': "You picked The Growth Gap: growing faster than it's getting clearer.",
+    'drift': "You picked The Drift: the culture is drifting.",
+    'stall': "You picked The Stall: winning still feels like a near miss.",
+    'new-seat': "You picked The New Seat: your role is changing, and nobody has said into what."
+  };
+  const PICK_TAIL = " A few questions and I'll show you whether that's the real pattern or a symptom of something else.";
+  /* pick: shown as the welcome line on the quiz's first page (Jotform field "pick"). Jotform splits prefill values on commas, so escape them. */
   function quiz(slug) {
     const src = 'home-card-' + slug;
     if (PHASE === 1 || !Q1[slug]) return 'diagnostic/?src=' + src;
     /* Jotform splits prefill values on commas, so each comma is escaped as
        "\\," (tested 1 Oct: without it The Growth Gap and The Stall come up blank). */
-    return QUIZ_V2 + '?q1_friction=' + encodeURIComponent(Q1[slug].replace(/,/g, '\\,')) + '&src=' + src;
+    return QUIZ_V2 + '?q1_friction=' + encodeURIComponent(Q1[slug].replace(/,/g, '\\,')) + '&src=' + src
+      + '&pick=' + encodeURIComponent(PICK[slug] + PICK_TAIL);
   }
 
   const group = document.getElementById('signals');
