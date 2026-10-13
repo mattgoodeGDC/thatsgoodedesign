@@ -92,6 +92,20 @@
   .om-sample-more:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 3px; }
   .om-sample.is-open .om-sample-more { position: static; transform: none; margin-top: 10px; background: transparent; border-color: var(--rule-2); }
   @media (max-width: 520px) { .om-sample { padding: 24px 20px 0; } .om-sample-tag { letter-spacing: .1em; font-size: 10px; } }
+  /* The four-step arc (from the LinkedIn feature graphic, 13 Oct 2026). */
+  .om-steps { list-style: none; margin: 26px 0 0; padding: 0; display: grid; gap: 0; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--rule); }
+  .om-steps li { position: relative; padding: 26px 22px 6px; border-left: 1px solid var(--rule); }
+  .om-steps li:first-child { border-left: 0; padding-left: 0; }
+  .om-steps li::before { content: ""; position: absolute; top: -5px; left: 22px; width: 9px; height: 9px; background: var(--gold); transform: rotate(45deg); }
+  .om-steps li:first-child::before { left: 0; }
+  .om-steps .k { display: block; font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-ink); margin: 0 0 8px; }
+  .om-steps h3 { font-size: 19px; margin: 0 0 8px; color: var(--ink); }
+  .om-steps p { font-size: 15px; line-height: 1.5; color: var(--body); margin: 0; }
+  @media (max-width: 860px) {
+    .om-steps { grid-template-columns: minmax(0, 1fr); border-top: 0; border-left: 1px solid var(--rule); margin-left: 4px; }
+    .om-steps li, .om-steps li:first-child { border-left: 0; padding: 0 0 22px 22px; }
+    .om-steps li::before, .om-steps li:first-child::before { top: 6px; left: -5px; }
+  }
 </style>
 </head>
 <body>
@@ -205,6 +219,24 @@
     </div>
   </section>
 
+  <!-- The arc, one OBD to a team that works. Pattern line from the LinkedIn
+       feature, 13 Oct 2026. -->
+  <section class="band">
+    <p class="eyebrow">Individual diagnostics, made legible to the whole team</p>
+    <h2 class="section-h">From one OBD to a team that works</h2>
+    <ol class="om-steps">
+      <li><span class="k">01 / Diagnose</span><h3>The OBD read</h3>
+        <p>Each person&rsquo;s CliftonStrengths&reg; and EQ-i results, read together through CREATE and VOICES.</p></li>
+      <li><span class="k">02 / Translate</span><h3>The Owner&rsquo;s Manual</h3>
+        <p>Each person writes one page: at my best, what I need, what you can expect, my flex gear, my basement tell.</p></li>
+      <li><span class="k">03 / Read together</span><h3>The swap</h3>
+        <p>The manuals are traded, and the pattern everyone has been managing around gets named out loud.</p></li>
+      <li><span class="k">04 / Agree</span><h3>Working agreements</h3>
+        <p>Up to five, written against real data instead of good intentions, and checked at day 60.</p></li>
+    </ol>
+    <p class="lede" style="margin-top:30px;">Run across a team, the manuals show the pattern it has been managing around silently: three Operators and no Visionary, a Command default in a room that needs Consultative, four people waiting on the same person to decide. Naming it turns private friction into a design problem the team can solve.</p>
+  </section>
+
   <!-- What goes on the page: the five sections of the template (v2), each
        with its stem and a line from the worked example. -->
   <section class="band alt">
@@ -233,7 +265,7 @@
       <div><b>Usable</b><span>It tells someone what to do on Monday.</span></div>
       <div><b>Honest</b><span>It includes a cost or a bad day.</span></div>
     </div>
-    <p class="lede" style="margin-top:30px;"><b>What the team leaves with:</b> a one-page manual each, a three-line version for a profile or email signature, and a shared &ldquo;How we work&rdquo; page that new joiners read in their first week.</p>
+    <p class="lede" style="margin-top:30px;"><b>What the team leaves with:</b> a one-page manual each, a three-line version for a profile or email signature, a shared &ldquo;How we work&rdquo; page that new joiners read in their first week, and up to five working agreements written against real data rather than good intentions.</p>
 
     <!-- Worked example. Sam is the fictional leader from the template's
          worked example and the deck (template v2, deck v2). -->
