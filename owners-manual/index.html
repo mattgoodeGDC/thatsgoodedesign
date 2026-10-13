@@ -57,6 +57,41 @@
   .om-rules li { font-size: 16px; line-height: 1.5; color: var(--body); }
   .om-rules b { display: block; color: var(--ink); font-size: 17px; margin-bottom: 4px; }
   @media (max-width: 860px) { .om-arc, .om-tests, .om-rules { grid-template-columns: minmax(0, 1fr); } }
+  /* Worked example, shown as a sheet of paper (mirrors the OBD sample). */
+  .om-gap { margin-top: clamp(40px, 5vw, 56px); }
+  .om-h3 { font-size: 20px; font-weight: 700; line-height: 1.3; color: var(--ink); margin: 0 0 14px; }
+  .om-cover { margin: 0 0 22px; }
+  .om-cover img { display: block; width: 100%; height: auto; border: 1px solid var(--rule-2); box-shadow: 0 18px 40px -24px rgba(36,36,39,.35); }
+  .om-cover figcaption { font-size: 13px; color: var(--muted); margin-top: 8px; }
+  .om-sample { position: relative; background: #fff; border: 1px solid var(--rule-2);
+    box-shadow: 0 18px 40px -24px rgba(36,36,39,.35); padding: 30px 30px 0;
+    max-height: 520px; overflow: hidden; transition: max-height .4s ease; }
+  .om-sample::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+    height: 120px; background: linear-gradient(rgba(255,255,255,0), #fff); }
+  .om-sample-tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--gold-ink); border: 1px solid var(--gold); padding: 4px 8px; margin: 0 0 18px; }
+  .om-sample h3 { font-size: 20px; font-weight: 800; color: var(--ink); margin: 0 0 4px; }
+  .om-sample .om-sample-who { font-size: 13px; color: var(--muted); margin: 0 0 18px;
+    padding-bottom: 14px; border-bottom: 1px solid var(--rule); }
+  .om-sample h4 { display: flex; gap: 10px; align-items: baseline; font-size: 12px; font-weight: 700;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--ink); margin: 18px 0 6px; }
+  .om-sample h4 span { color: var(--gold-ink); }
+  .om-sample p { font-size: 15px; line-height: 1.6; margin: 0 0 6px; color: var(--body); }
+  .om-sample .from { font-size: 12px; color: var(--muted); margin: 0 0 4px; }
+  .om-sample .from b { font-weight: 700; color: var(--gold-ink); letter-spacing: .06em; text-transform: uppercase; font-size: 11px; margin-right: 6px; }
+  .om-three { margin: 22px 0 0; padding: 14px 16px; background: var(--paper); border-left: 3px solid var(--gold); }
+  .om-three p { font-size: 14px; margin: 0; }
+  .om-sample .om-sample-end { font-size: 13px; color: var(--muted); font-style: italic;
+    margin: 18px 0 0; padding-top: 12px; border-top: 1px solid var(--rule); }
+  .om-sample.is-open { max-height: none; padding-bottom: 26px; }
+  .om-sample.is-open::after { display: none; }
+  .om-sample-more { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 2;
+    cursor: pointer; font: inherit; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--ink); background: var(--gold); border: 1px solid var(--gold); padding: 11px 20px; white-space: nowrap; }
+  .om-sample-more:hover { background: var(--gold-hi); border-color: var(--gold-hi); }
+  .om-sample-more:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 3px; }
+  .om-sample.is-open .om-sample-more { position: static; transform: none; margin-top: 10px; background: transparent; border-color: var(--rule-2); }
+  @media (max-width: 520px) { .om-sample { padding: 24px 20px 0; } .om-sample-tag { letter-spacing: .1em; font-size: 10px; } }
 </style>
 </head>
 <body>
@@ -199,6 +234,64 @@
       <div><b>Honest</b><span>It includes a cost or a bad day.</span></div>
     </div>
     <p class="lede" style="margin-top:30px;"><b>What the team leaves with:</b> a one-page manual each, a three-line version for a profile or email signature, and a shared &ldquo;How we work&rdquo; page that new joiners read in their first week.</p>
+
+    <!-- Worked example. Sam is the fictional leader from the template's
+         worked example and the deck (template v2, deck v2). -->
+    <div class="book-wrap om-gap">
+      <div>
+        <figure class="om-cover">
+          <img src="../assets/om/om-cover.jpg" width="1100" height="619" loading="lazy"
+               alt="Cover of the Owner's Manual workshop: How to work with me, on one page">
+          <figcaption>The workshop cover. Every participant leaves with their own page.</figcaption>
+        </figure>
+        <h3 class="om-h3">What a finished manual looks like</h3>
+        <p>One page, five sections, each line tested. Every section notes
+          where the line came from in the writer&rsquo;s OBD, so the page is
+          built on evidence, not on a good mood.</p>
+        <p>The sample is Sam, the fictional leader from the workshop&rsquo;s
+          worked example. Yours is written by you, in your words, and you
+          decide who sees it.</p>
+      </div>
+      <article class="om-sample" aria-label="Sample Owner's Manual for a fictional leader">
+        <p class="om-sample-tag">Sample · fictional leader</p>
+        <h3>How to work with Sam</h3>
+        <p class="om-sample-who">One page. I&rsquo;ll revisit it in sixty days.</p>
+        <h4><span>1</span>At my best</h4>
+        <p>When I&rsquo;m at my best, I map the path through the mess, so you get a next step, not just a meeting.</p>
+        <p class="from"><b>From my OBD</b>Strategic, Ideation</p>
+        <h4><span>2</span>What I need</h4>
+        <p>I do my best work with time to think. Send me the question the day before, and give me a day before I respond to feedback.</p>
+        <p class="from"><b>From my OBD</b>Intellection; a colleague&rsquo;s view</p>
+        <h4><span>3</span>What you can expect</h4>
+        <p>Even on a bad week, I&rsquo;ll tell you whether a decision is open or already made. When I ask for input, I&rsquo;ll say what I&rsquo;ll do with it.</p>
+        <p class="from"><b>From my OBD</b>Consultative default</p>
+        <h4><span>4</span>My flex gear</h4>
+        <p>Operator. Closing loops costs me, so I run on lists, and my project leads have been waiting for decisions on Fridays. If something&rsquo;s slipping, tell me early.</p>
+        <p class="from"><b>From my OBD</b>Visionary home</p>
+        <h4><span>5</span>My basement tell</h4>
+        <p>Under pressure I go quiet. Quiet means I&rsquo;m thinking, not upset. Ask what I&rsquo;m chewing on.</p>
+        <p class="from"><b>From my OBD</b>Intellection; low Emotional Expression</p>
+        <div class="om-three">
+          <p><b>The three-line version</b>, for a profile or email signature:<br>
+          Send me the question a day early. &middot; I&rsquo;ll always say whether a decision is open or made. &middot; If I go quiet, I&rsquo;m thinking: ask what I&rsquo;m chewing on.</p>
+        </div>
+        <p class="om-sample-end">Fictional leader, written to show the shape of the page.</p>
+        <button type="button" class="om-sample-more" aria-expanded="false">See the whole page</button>
+      </article>
+    </div>
+    <script>
+      (function () {
+        var card = document.querySelector('.om-sample');
+        var btn = card && card.querySelector('.om-sample-more');
+        if (!btn) return;
+        btn.addEventListener('click', function () {
+          var open = card.classList.toggle('is-open');
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+          btn.textContent = open ? 'Show less' : 'See the whole page';
+          if (!open) card.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        });
+      })();
+    </script>
   </section>
 
   <!-- How it runs: before, the three hours, after (facilitator guide v2 and
