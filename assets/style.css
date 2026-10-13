@@ -1549,3 +1549,11 @@ button.signal[aria-checked="true"] .signal-fw { display: flex; }
 /* Honest capacity line beside a booking button (12 Oct 2026). */
 .capacity-line { margin-top: 14px; max-width: 52ch; font-size: 14px; color: var(--muted); }
 .cta-row.center + .capacity-line { margin-inline: auto; text-align: center; }
+
+/* Button pairs (13 Oct 2026): where the free diagnostic and a call sit
+   together, both are buttons, gold first and outlined second. On phones
+   they stack at full width so neither looks like an afterthought. */
+@media (max-width: 620px) {
+  .cta-row:has(.btn + .btn) { gap: 12px; }
+  .cta-row:has(.btn + .btn) .btn { display: block; width: 100%; text-align: center; }
+}

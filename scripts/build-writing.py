@@ -300,9 +300,9 @@ def page(p, posts, i, header, footer):
     <section class="post-next">
       <div>
         <p class="eyebrow">Where is your system slipping?</p>
-        <p>Six short questions, about two minutes, and you will know which of five patterns you are in. No email needed.</p>
-        <p class="cta-row"><a class="btn" href="../../diagnostic/?src=writing-{p['slug'][:24]}">Run the free diagnostic</a>
-        <a class="link-arrow" href="{CALENDLY}?utm_content=writing-post">Or book a 30-minute call</a></p>
+        <p>A few short questions, about two minutes, and you will know which of five patterns you are in. No email needed.</p>
+        <p class="cta-row"><a class="btn" href="../../diagnostic/?src=writing-{p['slug'][:24]}#doors">Run the free diagnostic</a>
+        <a class="btn btn-ghost" href="{CALENDLY}?utm_content=writing-post">Book a 30-minute call</a></p>
       </div>
     </section>
     {nav}
