@@ -243,13 +243,13 @@
   </section>
 
   <!-- Give first: the insight and a move they can use without me. -->
-  <section class="band alt">
+  <section class="band alt" id="ro-give">
     <div class="ro-two">
-      <article class="ro-panel">
+      <article class="ro-panel" id="ro-why-panel">
         <div class="ro-ph"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="21" fill="#242427"/><path d="M14 19a9 9 0 0 1 15.5-4.2M30 25a9 9 0 0 1-15.5 4.2" fill="none" stroke="#C4A26A" stroke-width="2.4" stroke-linecap="round"/><path d="M30.5 10.5v5h-5M13.5 33.5v-5h5" fill="none" stroke="#C4A26A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><div><span>The pattern</span><h2>Why it keeps coming back</h2></div></div>
         <p id="ro-why"></p>
       </article>
-      <article class="ro-panel move">
+      <article class="ro-panel move" id="ro-move-panel">
         <div class="ro-ph"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="21" fill="#C4A26A"/><circle cx="22" cy="22" r="11" fill="none" stroke="#242427" stroke-width="2.2"/><circle cx="22" cy="22" r="5" fill="none" stroke="#242427" stroke-width="2.2"/><circle cx="22" cy="22" r="1.6" fill="#242427"/></svg><div><span>Your first move</span><h2>One move for this week</h2></div></div>
         <p id="ro-move"></p>
         <p class="ro-free">Yours to use this week, with or without me.</p>
@@ -288,7 +288,7 @@
       <div>
         <p class="eyebrow">Who&rsquo;s behind this readout</p>
         <h2 class="section-h">I&rsquo;m Matt Goode. I&rsquo;ve been in this seat.</h2>
-        <p>Teacher, coach, dean of students and administrator for twenty years in schools, seventeen of them at McDonogh. Then leadership and team development in humanitarian assistance at USAID. Now growth-stage founders, where honest feedback is the only kind on offer.</p>
+        <p>Teacher, coach, dean of students and administrator for twenty years in schools, seventeen of them at McDonogh. Then leadership and team development in humanitarian assistance at USAID. <span id="ro-bio-end">Now growth-stage founders, where honest feedback is the only kind on offer.</span></p>
         <ul class="ro-creds">
           <li>Gallup-Certified Strengths Coach</li>
           <li>EQ-i 2.0 Certified Practitioner</li>
@@ -298,9 +298,9 @@
       </div>
     </div>
     <div class="ro-proof">
-      <figure>
-        <p class="ro-num">$65,000</p>
-        <p>An engineering firm was losing mid-level managers at roughly $65,000 a head. They built a simple development track. Turnover dropped to near zero.</p>
+      <figure id="ro-proof-fig">
+        <p class="ro-num" id="ro-proof-num">$65,000</p>
+        <p id="ro-proof-txt">An engineering firm was losing mid-level managers at roughly $65,000 a head. They built a simple development track. Turnover dropped to near zero.</p>
       </figure>
       <figure>
         <blockquote id="ro-tq"></blockquote>
@@ -445,14 +445,98 @@
     ['Most people assume you can hire fast and fire decisively. My world can’t. What I appreciated is that the core framework still held up once I did the translation myself, and Matt’s workshop does that translation for you.', 'CEO, Professional services']
   ];
 
+
+  /* Route-aware copy (13 Oct 2026). The school and nonprofit forms add
+     r=school or r=nonprofit to the readout link, and the nonprofit form adds
+     o=<organization type>. Copy from PUBLISHING, "GDC - Diagnostic result
+     copy: school and nonprofit routes". Anything not set here falls back to
+     the company version above. Signs: the first sentence is bold. */
+  var ROUTE = {
+    school: {
+      bio: 'Now heads, division heads and the chairs nobody trains, and I’m still a parent in one of these schools.',
+      proof: { num: '18–20%', txt: 'Wharton research on six years of personnel data found external hires are paid 18 to 20 percent more than internal promotions, review worse for their first two years, and leave sooner. The person already in the building is usually the better bet.' },
+      quote: ['Matt doesn’t arrive with a one-size-fits-all program. He listens, asks thoughtful questions, and helps educators recognize and build on the strengths they already possess.', 'Independent school leader, Mid-Atlantic'],
+      proofs: {
+        'bottleneck': { big: '44%', bigl: 'of heads considered leaving in the past year because of stress or burnout (NAIS, 2026).', stat: 'That’s rarely a stamina problem. A school that routes every decision to one desk wears that desk out first.',
+          signs: ['Decisions default upward. They reach you because nobody wrote down who owns them, not because your team lacks judgment.', 'Parents and faculty skip a step. They go to the top because that’s where answers have come from before.', 'Your calendar belongs to other people’s problems. The strategic work happens after hours, if at all.'] },
+        'growth-gap': { big: '60', bigl: 'causal studies found coaching lifted teachers’ instruction by nearly half a standard deviation (Review of Educational Research, 2018).', stat: 'Schools know how to develop teachers. I think the adults promoted to lead them deserve the same.',
+          signs: ['New leaders are still doing their old job. They teach a full load, then lead in the margins.', 'The promotion is the training. Nobody says what the new role is, so each person invents it.', 'Second-year leaders go quiet or go back. The ones who struggle retreat to the classroom, or leave.'] },
+        'drift': { big: '58%', bigl: 'of independent school teachers said the hiring process gave them realistic expectations of the job (NAIS survey of 704 teachers).', stat: 'Culture in a school is set by the adults, and new faculty feel it first.',
+          signs: ['Divisions run as separate schools. Same building, different rules.', 'Faculty meetings inform but don’t decide. The real conversation happens afterward, in the parking lot.', 'New colleagues learn the rules sideways. From the faculty room, not from anyone who leads.'] },
+        'stall': { big: '1 in 10', bigl: 'NAIS schools changed heads in 2025 (NAIS, 2026).', stat: 'NAIS cites research that lasting change takes a leader around five years. An initiative that lives in one person leaves with them.',
+          signs: ['The August launch, the February silence. Nobody announced the end; it just stopped.', 'One champion per initiative. When they’re busy it pauses, and when they leave it’s gone.', 'Nothing ever stops. Each new priority is added on top, never instead.'] },
+        'new-seat': { big: '1 in 5', bigl: 'new heads of school leaves within three years (NAIS, 2026).', stat: 'The first year sets the pattern, so it’s worth designing on purpose rather than surviving.',
+          signs: ['Every decision is read twice. Early calls become precedent before you mean them to.', 'Inherited habits run on autopilot. Nobody told you which to keep.', 'The calendar doesn’t wait. Admissions, budget and board cycles arrive whether you’re ready or not.'] }
+      },
+      start: {
+        'bottleneck': { h: 'Decision rights and governance', p: 'One working session with your senior team, then a written map of which decisions belong where: between board and Head, Head and cabinet, cabinet and department.',
+          alt: ['Want a read on the person everything lands on first?', 'Start with the On-Board Diagnostic', '../../obd/'], btn: 'See school services', url: '../../schools/#services' },
+        'growth-gap': { h: 'GoodeStart', p: 'The first ninety days for new chairs, deans and division heads: an assessment baseline, coaching and thirteen weeks of cohort work alongside the term.',
+          alt: ['Thinking about next year’s leaders too?', 'See Building the Bench', '../../building-the-bench/'], btn: 'See GoodeStart', url: '../../goodestart/' },
+        'drift': { h: 'The Psychological Safety Check, free', p: 'Your faculty or team answers anonymously, and you see where people speak up and where they go quiet, before the drift shows up as departures.',
+          alt: ['Want a shared language for the whole staff?', 'See Know Thyself to Lead Others', '../../know-thyself/'], btn: 'Run the free Check', url: '../../psychological-safety/' },
+        'stall': { h: 'Building the Bench', p: 'A year-long cohort for the people you can see stepping up next, so your priorities have more than one person who can carry them.',
+          alt: ['Want to start with one initiative?', 'Book thirty minutes', 'cal'], btn: 'See Building the Bench', url: '../../building-the-bench/' },
+        'new-seat': { h: 'Executive coaching for school leaders', p: 'Confidential, one to one, and it always starts with the On-Board Diagnostic. The school can engage me for you, or you can engage me yourself, at the same published rate.',
+          alt: ['New chair, dean or division head?', 'See GoodeStart', '../../goodestart/'], btn: 'See executive coaching', url: '../../executive-coaching/' }
+      }
+    },
+    nonprofit: {
+      bio: 'Now nonprofit and public-sector teams, where the work matters and the resources don’t stretch.',
+      proof: null,
+      quote: ['He brought a degree of creativity and clarity to the exercise that aligned with our leadership objectives. Professional, insightful, and especially skillful on the floor – facilitating some difficult discussions with grace and purpose.', 'Senior Humanitarian Advisor, Federal government'],
+      proofs: {
+        'bottleneck': { big: '1 in 3', bigl: 'nonprofit leaders said they were very concerned about their own burnout (Center for Effective Philanthropy, 2024).', stat: 'In mission work the leader is often the last line of defense. That’s rarely a stamina problem, it’s a design problem.',
+          signs: ['Funders and the board want to hear from the top. So the person at the top holds every relationship.', 'The team is capable, but nobody else has the full picture. They wait for it to be handed down.', 'It’s faster to do it than explain it. Every shortcut taken today becomes tomorrow’s dependency.'] },
+        'growth-gap': { big: '$29', bigl: 'a person spent on nonprofit leadership development, against $120 in the private sector (SSIR, 2014).', stat: 'Programs grow on grants. Management capacity rarely does.',
+          signs: ['New programs launch before anyone owns them.', 'Good program staff get promoted and left to work it out.', 'Reporting eats the time meant for managing. Funders and oversight bodies get the hours the team needed.'] },
+        'drift': { big: '76%', bigl: 'of nonprofit leaders said staff burnout was already affecting their ability to deliver the mission (Center for Effective Philanthropy, 2024).', stat: 'That’s a design problem before it’s a resilience problem.',
+          signs: ['Good people leave tired. The exit interviews say so, in almost the same words.', 'The mission is mentioned more than the values are lived.', 'Problems reach the top later than they used to. People have stopped expecting it to help.'] },
+        'stall': { big: '10–15%', bigl: 'is the overhead typical foundation grants allow; comparable service businesses run above 20% (SSIR, 2009).', stat: 'Plans stall when the work to deliver them is never paid for.',
+          signs: ['The plan waits for the next retreat, or the next budget cycle.', 'Every new grant or mandate adds work and nobody to do it.', 'You measure what funders or oversight bodies ask for, not what moves the mission.'] },
+        'new-seat': { big: '27%', bigl: 'of nonprofits had a written succession plan for the chief executive (BoardSource).', stat: 'So most new leaders inherit a seat nobody designed.',
+          signs: ['Nobody has said what the board or oversight body needs from you.', 'Your predecessor’s commitments are still on your desk. Some are yours now, and nobody said which.', 'The old job keeps pulling you back. Running programs is easier to see than leading the organization.'] }
+      },
+      /* Public agencies (o= says so): these two replace the number, label and line; the signs stay. */
+      publicAgency: {
+        'stall': { big: '1 in 3', bigl: 'state and local governments rated managing workload, with staff at their limit, as a very important issue (MissionSquare, 2025).', stat: 'A plan that assumes spare capacity is a design problem.' },
+        'new-seat': { big: '61%', bigl: 'of state and local governments had no formal succession planning process (MissionSquare, 2025).', stat: 'So most new leaders inherit a seat nobody designed.' }
+      },
+      start: {
+        'bottleneck': { h: 'The On-Board Diagnostic', p: 'Start with the On-Board Diagnostic for the person everything runs through. It shows why stepping in keeps working for them, and where authority can move first.',
+          alt: ['Rather talk it through first?', 'Book thirty minutes', 'cal'], btn: 'See the On-Board Diagnostic', url: '../../obd/' },
+        'growth-gap': { h: 'Building the Bench', p: 'A year-long cohort for the people stepping into management, so the organization’s capacity grows with its programs.',
+          alt: ['Already promoted someone this year?', 'See GoodeStart', '../../goodestart/'], btn: 'See Building the Bench', url: '../../building-the-bench/' },
+        'drift': { h: 'The Psychological Safety Check, free', p: 'Your team answers anonymously, and you see where people speak up and where they go quiet, before the drift shows up as departures.',
+          alt: ['Want a shared language for how each person works best?', 'See Know Thyself to Lead Others', '../../know-thyself/'], btn: 'Run the free Check', url: '../../psychological-safety/' },
+        'stall': { h: 'Thirty minutes with Matt', p: 'We’ll take your plan’s top priorities, see which ones have the capacity to deliver them, and decide what to stop so one can move.',
+          alt: ['Planning a retreat?', 'See Field Tested, my facilitation guide', '../../field-tested/'], btn: 'Book 30 minutes', url: 'cal' },
+        'new-seat': { h: 'Executive coaching', p: 'One to one, built on the On-Board Diagnostic, for a leader whose seat is new or has changed. We start with what the role is for now.',
+          alt: ['New to managing a team?', 'See GoodeStart', '../../goodestart/'], btn: 'See executive coaching', url: '../../executive-coaching/' }
+      }
+    }
+  };
+  function boldLead(x) { var i = x.indexOf('. '); return i < 0 ? '<b>' + x + '</b>' : '<b>' + x.slice(0, i + 1) + '</b>' + x.slice(i + 1); }
+
   var h = new URLSearchParams(location.hash.replace(/^#/, ''));
   var raw = h.get('p') || '';
   /* patternName carries the name plus a subline, so match with "contains". */
   var slug = ORDER.filter(function (s) { return raw.toLowerCase().indexOf(P[s].name.toLowerCase()) !== -1; })[0];
   if (!slug) { location.replace('../'); return; }
+  var route = ROUTE[(h.get('r') || '').toLowerCase()] || null;
+  var isPublic = /public agency/i.test(h.get('o') || '');
   var v = P[slug];
+  if (route) {
+    var rs = route.start[slug];
+    var altHtml = rs.alt ? rs.alt[0] + ' <a href="' + (rs.alt[2] === 'cal' ? 'cal' : rs.alt[2]) + '" data-alt-slug="' + slug + '">' + rs.alt[1] + '</a>.' : '';
+    v = { name: v.name, short: v.short, h: rs.h, p: rs.p, alt: altHtml, btn: rs.btn, url: rs.url };
+    PROOF = JSON.parse(JSON.stringify(PROOF));
+    var rp = route.proofs[slug], pa = isPublic && route.publicAgency && route.publicAgency[slug];
+    PROOF[slug] = { big: (pa || rp).big, bigl: (pa || rp).bigl, stat: (pa || rp).stat, signs: rp.signs.map(boldLead), t: PROOF[slug].t };
+    QUOTES = QUOTES.slice(); QUOTES[PROOF[slug].t] = route.quote;
+  }
   function txt(id, s) { var el = document.getElementById(id); if (el) el.textContent = s || ''; return el; }
-  function utm(u, c) { return u + (u.indexOf('?') < 0 ? '?' : '&') + 'utm_source=diagnostic&utm_medium=readout&utm_content=' + c; }
+  function utm(u, c) { var k = u.indexOf('#'), hs = k < 0 ? '' : u.slice(k); if (k >= 0) u = u.slice(0, k); return u + (u.indexOf('?') < 0 ? '?' : '&') + 'utm_source=diagnostic&utm_medium=readout&utm_content=' + c + hs; }
 
   /* Title and subline: "The Bottleneck, where everything runs through the founder". */
   var sub = raw.slice(raw.toLowerCase().indexOf(v.name.toLowerCase()) + v.name.length).replace(/^[\s,:–—-]+/, '');
@@ -501,7 +585,19 @@
 
   txt('ro-start-h', v.h);
   txt('ro-start-p', v.p);
-  if (v.alt) { var a = document.getElementById('ro-start-alt'); a.innerHTML = v.alt; a.hidden = false; }
+  if (v.alt) { var a = document.getElementById('ro-start-alt'); a.innerHTML = v.alt; a.hidden = false;
+    var al = a.querySelector('a[data-alt-slug]');
+    if (al) al.href = al.getAttribute('href') === 'cal' ? utm(CAL + '?a1=' + encodeURIComponent(v.name), slug + '-alt') : utm(al.getAttribute('href'), slug + '-alt'); }
+  if (route) {
+    txt('ro-bio-end', route.bio);
+    if (route.proof) { txt('ro-proof-num', route.proof.num); txt('ro-proof-txt', route.proof.txt); }
+    else { document.getElementById('ro-proof-fig').hidden = true; }
+  }
+  /* Board answerers get no why or move: hide what is empty. */
+  var noWhy = !(h.get('w') || '').trim(), noMove = !(h.get('m') || '').trim();
+  if (noWhy) document.getElementById('ro-why-panel').hidden = true;
+  if (noMove) document.getElementById('ro-move-panel').hidden = true;
+  if (noWhy && noMove) document.getElementById('ro-give').hidden = true;
   var btn = document.getElementById('ro-start-btn');
   btn.textContent = v.btn;
   btn.href = v.url === 'cal' ? utm(CAL + '?a1=' + encodeURIComponent(v.name), slug + '-start') : utm(v.url, slug);
