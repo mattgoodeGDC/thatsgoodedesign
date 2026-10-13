@@ -32,6 +32,32 @@
 <link rel="stylesheet" href="../assets/products.css?v=4">
 <script src="../assets/gdc-analytics.js?v=12"></script>
 <script src="../assets/gdc-nav.js?v=17" defer></script>
+<style>
+  /* Owner's Manual page (13 Oct 2026): content drawn from the workshop's
+     template, facilitator guide and pre-work pack. */
+  .om-sections { list-style: none; margin: 26px 0 0; padding: 0; display: grid; gap: 14px; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  @media (max-width: 1100px) { .om-sections { grid-template-columns: repeat(2, minmax(0, 1fr)); } .om-sections li:last-child { grid-column: 1 / -1; } }
+  @media (max-width: 620px) { .om-sections { grid-template-columns: minmax(0, 1fr); } }
+  .om-sections li { background: var(--paper); border: 1px solid var(--rule); border-top: 3px solid var(--gold); padding: 18px 20px; }
+  .om-sections .n { display: block; font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-ink); margin: 0 0 6px; }
+  .om-sections h3 { font-size: 18px; margin: 0 0 8px; color: var(--ink); }
+  .om-sections .stem { font-size: 15px; color: var(--muted); margin: 0 0 10px; font-style: italic; }
+  .om-sections .ex { font-size: 15px; line-height: 1.5; color: var(--ink); margin: 0; }
+  .om-tests { margin: 18px 0 0; display: grid; gap: 14px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .om-tests div { border-left: 3px solid var(--gold); padding: 2px 0 2px 16px; }
+  .om-tests b { display: block; color: var(--ink); font-size: 17px; margin-bottom: 4px; }
+  .om-tests span { font-size: 15px; color: var(--body); }
+  .om-arc { display: grid; gap: 28px; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 26px; }
+  .om-arc h3 { font-size: 20px; margin: 0 0 4px; color: var(--ink); }
+  .om-arc .when { font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-ink); margin: 0 0 6px; }
+  .om-arc ul { margin: 12px 0 0; padding-left: 18px; font-size: 15px; line-height: 1.5; color: var(--body); }
+  .om-arc li { margin: 0 0 8px; }
+  .om-arc li b { color: var(--ink); }
+  .om-rules { margin: 24px 0 0; padding: 0; list-style: none; display: grid; gap: 16px 28px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .om-rules li { font-size: 16px; line-height: 1.5; color: var(--body); }
+  .om-rules b { display: block; color: var(--ink); font-size: 17px; margin-bottom: 4px; }
+  @media (max-width: 860px) { .om-arc, .om-tests, .om-rules { grid-template-columns: minmax(0, 1fr); } }
+</style>
 </head>
 <body>
 
@@ -141,25 +167,85 @@
     </div>
   </section>
 
+  <!-- What goes on the page: the five sections of the template (v2), each
+       with its stem and a line from the worked example. -->
   <section class="band alt">
-    <h2 class="section-h">How it runs</h2>
-    <ol class="phases">
-      <li>
-        <p class="when">Before the workshop</p>
-        <h3>Every OBD done</h3>
-        <p>No OBD, no manual, so each participant completes theirs first.</p>
-      </li>
-      <li>
-        <p class="when">In the room</p>
-        <h3>Write the manual</h3>
-        <p>Each person turns their results into how they lead, what they need and where their edges are.</p>
-      </li>
-      <li>
-        <p class="when">Before you leave</p>
-        <h3>Swap</h3>
-        <p>The team trades manuals, so colleagues stop guessing how each other works.</p>
-      </li>
+    <p class="eyebrow">One page, five sections</p>
+    <h2 class="section-h">How to work with me, on one page</h2>
+    <ol class="om-sections">
+      <li><span class="n">1</span><h3>At my best</h3>
+        <p class="stem">When I&rsquo;m at my best, I ___, so you get ___.</p>
+        <p class="ex">&ldquo;When I&rsquo;m at my best, I map the path through the mess, so you get a next step, not just a meeting.&rdquo;</p></li>
+      <li><span class="n">2</span><h3>What I need</h3>
+        <p class="stem">I do my best work when ___. Help me by ___.</p>
+        <p class="ex">&ldquo;I do my best work with time to think. Send me the question the day before.&rdquo;</p></li>
+      <li><span class="n">3</span><h3>What you can expect</h3>
+        <p class="stem">Even on a bad week, you can count on me to ___.</p>
+        <p class="ex">&ldquo;Even on a bad week, I&rsquo;ll tell you whether a decision is open or already made.&rdquo;</p></li>
+      <li><span class="n">4</span><h3>My flex gear</h3>
+        <p class="stem">The gear I&rsquo;m growing into is ___. It costs me ___, and ___ has been waiting on it.</p>
+        <p class="ex">&ldquo;Operator. Closing loops costs me, so I run on lists, and my project leads have been waiting for decisions on Fridays.&rdquo;</p></li>
+      <li><span class="n">5</span><h3>My basement tell</h3>
+        <p class="stem">Under pressure, my ___ turns into ___. What helps is ___.</p>
+        <p class="ex">&ldquo;Under pressure I go quiet. Quiet means I&rsquo;m thinking, not upset. Ask what I&rsquo;m chewing on.&rdquo;</p></li>
     </ol>
+    <p class="lede" style="margin-top:30px;">Every line has to pass three tests before it goes in.</p>
+    <div class="om-tests">
+      <div><b>Specific</b><span>It could only be about you.</span></div>
+      <div><b>Usable</b><span>It tells someone what to do on Monday.</span></div>
+      <div><b>Honest</b><span>It includes a cost or a bad day.</span></div>
+    </div>
+    <p class="lede" style="margin-top:30px;"><b>What the team leaves with:</b> a one-page manual each, a three-line version for a profile or email signature, and a shared &ldquo;How we work&rdquo; page that new joiners read in their first week.</p>
+  </section>
+
+  <!-- How it runs: before, the three hours, after (facilitator guide v2 and
+       pre-work pack v2). -->
+  <section class="band">
+    <h2 class="section-h">How it runs</h2>
+    <div class="om-arc">
+      <div>
+        <p class="when">Two weeks before</p>
+        <h3>Ready before the room</h3>
+        <ul>
+          <li><b>Every OBD done.</b> No OBD, no manual.</li>
+          <li><b>A baseline.</b> The team takes the <a href="../psychological-safety/">Psychological Safety Check</a>, so day 60 has something to compare against.</li>
+          <li><b>The lead goes first.</b> On a thirty-minute call, the lead writes their manual, bad day included, and it goes out to the team.</li>
+          <li><b>Twenty minutes of pre-work.</b> Read your OBD summary, and ask one colleague two questions: what do I look like under pressure, and what&rsquo;s the best way to give me feedback?</li>
+        </ul>
+      </div>
+      <div>
+        <p class="when">Three hours</p>
+        <h3>Write it, then swap it</h3>
+        <ul>
+          <li><b>Harvest.</b> Mark what your OBD gets right, what surprises you and what you push back on, then set it against your colleague&rsquo;s view.</li>
+          <li><b>Gears.</b> Your home gear and flex gear on the six VOICES modes, and your first move on the 6C Decision Compass.</li>
+          <li><b>Write.</b> The five sections, one at a time, each line tested.</li>
+          <li><b>Swap.</b> Pairs read each other&rsquo;s manuals, say one line back in their own words, and ask questions. No advice.</li>
+          <li><b>Team.</b> The team gearbox, and up to five agreements: &ldquo;When ___, we will ___.&rdquo;</li>
+        </ul>
+      </div>
+      <div>
+        <p class="when">Sixty days after</p>
+        <h3>Make it hold</h3>
+        <ul>
+          <li><b>Within two days,</b> the team&rsquo;s &ldquo;How we work&rdquo; page: agreements, gearbox and an owner.</li>
+          <li><b>Weeks two and three,</b> fifteen minutes in a team meeting: one line back from a colleague&rsquo;s reply, lead first.</li>
+          <li><b>Day 60,</b> everyone marks each manual line &ldquo;true&rdquo;, &ldquo;partly&rdquo; or &ldquo;not yet&rdquo;, the Safety Check runs again, and we rewrite what didn&rsquo;t hold.</li>
+          <li><b>The sponsor</b> gets a one-page summary: which agreements held and what moved. Never anyone&rsquo;s manual.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- The rules in the room (facilitator guide v2, "Your standards"). -->
+  <section class="band alt">
+    <h2 class="section-h">The rules in the room</h2>
+    <ul class="om-rules">
+      <li><b>You choose every line.</b>Nothing from your OBD reaches the room unless you write it in yourself, and you decide whether your manual goes in the team folder.</li>
+      <li><b>The lead goes first.</b>People write as honestly as the most senior person in the room, so the lead reads their basement tell aloud in the first ten minutes.</li>
+      <li><b>Curiosity, not advice.</b>In the swap, readers ask questions. Nobody fixes anyone.</li>
+      <li><b>Say it, then write it.</b>Some of us think better out loud. Talk an answer through with a partner or into your phone, and write it down after.</li>
+    </ul>
   </section>
 
   <section class="band" id="editions">
