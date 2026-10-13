@@ -135,13 +135,19 @@
     a.hero-door:hover, a.hero-door:focus-visible { background: #F6EFE2; border-color: var(--gold-ink); }
     a.hero-door:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 3px; }
     @media (max-width: 620px) { .hero-doors-row { grid-template-columns: minmax(0, 1fr); } a.hero-door { min-height: 54px; } }
-    .hero-route {
-      margin: 26px 0 0; padding-top: 18px; border-top: 1px solid var(--rule);
-      font-size: 15px; color: var(--body); max-width: 54ch;
-    }
-    .hero-route a { color: var(--ink); font-weight: 700; text-decoration: underline;
-      text-decoration-color: var(--gold); text-underline-offset: 3px; }
-    .hero-route a:hover { text-decoration-color: var(--gold-ink); }
+    /* Route tiles (13 Oct 2026): the school and nonprofit alternative to the
+       company-first hero, given the weight of a real choice. */
+    .hero-route { margin: 28px 0 0; padding-top: 20px; border-top: 1px solid var(--rule); max-width: 640px; }
+    .hero-route-q { margin: 0 0 10px; font-size: 13px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-ink); }
+    .hero-route-row { display: grid; gap: 10px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    a.hero-route-tile { display: block; position: relative; padding: 14px 40px 14px 16px; text-decoration: none; color: var(--ink);
+      background: #F6EFE2; border: 1px solid var(--rule-2); border-left: 3px solid var(--gold); transition: border-color .15s, background-color .15s; }
+    a.hero-route-tile b { display: block; font-size: 16px; font-weight: 800; line-height: 1.25; }
+    a.hero-route-tile span { display: block; margin-top: 3px; font-size: 13px; color: var(--muted); }
+    a.hero-route-tile::after { content: "\2192"; position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: var(--gold-ink); font-weight: 800; }
+    a.hero-route-tile:hover, a.hero-route-tile:focus-visible { border-color: var(--gold-ink); background: #F1E6D2; }
+    a.hero-route-tile:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 3px; }
+    @media (max-width: 620px) { .hero-route-row { grid-template-columns: minmax(0, 1fr); } }
     .hero-portrait { margin: 0; position: relative; }
     .hero-portrait img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4;
       object-fit: cover; object-position: 50% 22%; border: 1px solid var(--rule); }
@@ -309,9 +315,13 @@
           <a class="hero-door" href="https://form.jotform.com/262852888637072?src=home-hero">A nonprofit or public agency</a>
         </div>
       </div>
-      <p class="hero-route">Leading a school or a mission-driven team?
-        <a href="schools/">Start with schools</a> or
-        <a href="nonprofits/">nonprofit and public sector</a>.</p>
+      <div class="hero-route">
+        <p class="hero-route-q">Leading a school or a mission-driven team?</p>
+        <div class="hero-route-row">
+          <a class="hero-route-tile" href="schools/"><b>Start with schools</b><span>Independent school leaders</span></a>
+          <a class="hero-route-tile" href="nonprofits/"><b>Nonprofit and public sector</b><span>Mission-driven and public teams</span></a>
+        </div>
+      </div>
     </div>
     <figure class="hero-portrait">
       <img src="assets/matt.jpg" alt="Matt Goode" width="780" height="1040" fetchpriority="high">
