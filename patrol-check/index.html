@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Patrol Check – Goode Design &amp; Consulting</title>
+<meta name="description" content="Four questions about each person you are trying to grow into a leader: a real job, real authority, no rescue and regular reps. Free, about two minutes, nothing sent or saved. From the Leadership Lab essay Don&#39;t Hire the Eagle Scout. Build the Patrol.">
+<meta name="robots" content="noai, noimageai">
+<link rel="canonical" href="https://thatsgoodedesign.com/patrol-check/">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" href="../assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="../assets/favicon/icon-512.png" type="image/png" sizes="512x512">
+<link rel="apple-touch-icon" href="../assets/favicon/apple-touch-icon.png">
+<meta property="og:site_name" content="Goode Design &amp; Consulting">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Patrol Check: are you developing leaders or hosting them?">
+<meta property="og:description" content="Are you developing your leaders, or hosting them? Score your team on the four parts of a Scout patrol in about two minutes.">
+<meta property="og:url" content="https://thatsgoodedesign.com/patrol-check/">
+<meta property="og:image" content="https://thatsgoodedesign.com/assets/og-default.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Patrol Check: are you developing leaders or hosting them?">
+<meta name="twitter:description" content="Are you developing your leaders, or hosting them? Score your team on the four parts of a Scout patrol in about two minutes.">
+<meta name="twitter:image" content="https://thatsgoodedesign.com/assets/og-default.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap">
+<link rel="stylesheet" href="../assets/style.css?v=17">
+<link rel="stylesheet" href="../assets/gdc-nav.css?v=17">
+<script src="../assets/gdc-analytics.js?v=12"></script>
+<script src="../assets/gdc-nav.js?v=17" defer></script>
+<meta name="tdm-reservation" content="1">
+<meta name="tdm-policy" content="https://thatsgoodedesign.com/terms/">
+<style>
+/* Page-only styles for the Patrol Check. Scoped to .pc and built on the site
+   tokens in style.css, same family as /eighth-idea/. */
+.pc-band { padding-block: clamp(36px, 6vw, 72px) clamp(48px, 7vw, 88px); }
+.pc { max-width: 46rem; margin: 0 auto; }
+.pc-head { border-bottom: 2px solid var(--ink); padding-bottom: 1.5rem; }
+.pc h1 { font-size: clamp(2.6rem, 10vw, 4.4rem); font-weight: 900; line-height: .95; letter-spacing: -.035em; color: var(--ink); margin: 0 0 .9rem; }
+.pc-word { color: var(--green); }
+.pc-question { margin: 0 0 .4rem; font-size: clamp(1.1rem, 3.4vw, 1.3rem); font-weight: 700; line-height: 1.3; color: var(--ink); text-wrap: balance; }
+.pc-lede { margin: 0; color: var(--muted); font-size: .95rem; }
+.pc-lede a { color: var(--ink); font-weight: 700; }
+.pc-intro { margin: 1.5rem 0 .75rem; }
+.pc-private { margin: 0 0 1.5rem; font-size: .88rem; color: var(--muted); }
+
+
+.pc-people { list-style: none; margin: 0; padding: 0; }
+.pc-person { background: #fff; border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1rem 1.1rem; margin: 0 0 .9rem; }
+.pc-person-top { display: flex; gap: .75rem; align-items: center; margin-bottom: .8rem; }
+.pc-name { text-transform: none; letter-spacing: normal; flex: 1 1 auto; min-width: 0; font: inherit; font-weight: 700; font-size: 1rem; color: var(--ink); min-height: 44px; padding: .5rem .7rem; border: 1.5px solid var(--rule-2); border-radius: 4px; background: var(--paper); }
+.pc-name:focus { border-color: var(--ink); }
+.pc-remove { font: inherit; font-size: .85rem; min-height: 44px; background: none; border: none; color: var(--muted); text-decoration: underline; cursor: pointer; padding: 0 .25rem; }
+.pc-row { display: grid; grid-template-columns: 1fr auto; gap: .4rem 1rem; align-items: center; padding: .55rem 0; border-top: 1px solid var(--rule); }
+.pc-row-q { margin: 0; font-size: .93rem; line-height: 1.4; color: var(--body); }
+.pc-row-q b { color: var(--ink); }
+.pc-yn { display: flex; gap: .35rem; }
+.pc-opt { font: inherit; font-size: .88rem; font-weight: 700; min-width: 4.2rem; min-height: 40px; padding: .4rem .7rem; border: 1.5px solid var(--rule-2); background: #fff; color: var(--ink); border-radius: 4px; cursor: pointer; }
+.pc-opt:hover { border-color: var(--ink); }
+.pc-opt[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+@media (max-width: 30rem) {
+  .pc-row { grid-template-columns: 1fr; }
+  .pc-yn .pc-opt { flex: 1 1 0; }
+}
+.pc-tally { margin: .7rem 0 0; font-size: .9rem; font-weight: 700; color: var(--muted); }
+.pc-tally.is-dev { color: var(--green); }
+.pc-tally.is-host { color: #8D3E40; }
+
+.pc-add { font: inherit; font-weight: 700; font-size: .9rem; min-height: 44px; padding: .55rem .95rem; border: 2px dashed var(--rule-2); background: transparent; color: var(--ink); border-radius: 4px; cursor: pointer; width: 100%; }
+.pc-add:hover { border-color: var(--ink); }
+.pc-add[hidden] { display: none; }
+
+.pc-result { margin: 1.75rem 0 0; border-left: 6px solid var(--green-rule); padding: .25rem 0 .25rem 1rem; min-height: 3rem; scroll-margin-top: 1rem; }
+.pc-result h2 { margin: 0 0 .35rem; font-size: 1.25rem; font-weight: 800; color: var(--ink); line-height: 1.3; }
+.pc-result p { margin: 0; color: var(--body); }
+.pc-result p + p { margin-top: .5rem; }
+.pc-result ul { margin: .7rem 0 0; padding-left: 1.1rem; }
+.pc-result li { margin: 0 0 .3rem; }
+.pc-fix { margin: 1rem 0 0 !important; padding: .75rem .9rem; background: var(--paper-alt); border-left: 3px solid var(--gold); }
+.pc-fix b { color: var(--ink); }
+
+.pc-help { margin: 1.5rem 0 0; background: var(--paper-alt); border: 1px solid var(--rule); border-radius: 6px; padding: 1.1rem 1.2rem 1.25rem; }
+.pc-help h3 { margin: 0 0 .4rem; font-size: 1.05rem; font-weight: 800; color: var(--ink); }
+.pc-help p { margin: 0 0 .6rem; }
+.pc-help ul { margin: 0 0 .9rem; padding-left: 1.1rem; }
+.pc-help li { margin: 0 0 .35rem; }
+.pc-help a { color: var(--ink); }
+.pc-small { font-size: .88rem; color: var(--muted); }
+.pc-book { margin: .4rem 0 .2rem; text-align: center; }
+@media (max-width: 30rem) { .pc-book { display: block; } }
+
+.pc-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1.25rem; margin-top: 1rem; }
+.pc-print { font: inherit; font-weight: 700; font-size: .9rem; min-height: 44px; padding: .55rem .95rem; border: 2px solid var(--ink); background: transparent; color: var(--ink); border-radius: 4px; cursor: pointer; }
+.pc-reset { font: inherit; font-size: .88rem; min-height: 44px; background: none; border: none; color: var(--muted); text-decoration: underline; cursor: pointer; padding: 0; }
+.pc-print[hidden], .pc-help[hidden] { display: none; }
+
+.pc-opt:focus-visible, .pc-add:focus-visible, .pc-remove:focus-visible, .pc-print:focus-visible, .pc-reset:focus-visible, .pc-name:focus-visible, .pc a:focus-visible { outline: 3px solid var(--green-rule); outline-offset: 2px; }
+.pc-result h2:focus { outline: none; }
+
+.pc-from { margin: 2.5rem 0 0; padding-top: 1.25rem; border-top: 1px solid var(--rule); font-size: .88rem; color: var(--muted); }
+.pc-from a { font-weight: 700; }
+.pc-printonly { display: none; }
+
+@media print {
+  @page { margin: 16mm; }
+  body { background: #fff; color: #000; font-size: 11pt; }
+  .skip, header.nav, footer.foot, .pc-actions, .pc-add, .pc-remove, .pc-private, .pc-help { display: none !important; }
+  .pc-band { padding: 0 !important; }
+  .pc { max-width: none; }
+  .pc h1 { font-size: 2.4rem; }
+  .pc-person { break-inside: avoid; border: 1px solid #ccc; }
+  .pc-name { border: none; padding: 0; min-height: 0; background: none; }
+  .pc-opt { border: none; padding: 0; min-height: 0; min-width: 0; background: none !important; color: #000 !important; }
+  .pc-opt[aria-pressed="false"] { display: none; }
+  .pc-result { break-inside: avoid; }
+  .pc-printonly { display: block; margin: .3rem 0 0; font-weight: 700; }
+}
+</style>
+
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <a class="brand" href="../">
+    <picture>
+      <source media="(max-width: 370px)" srcset="../assets/gdc/gdc-mark.svg">
+      <source media="(max-width: 519px)" srcset="../assets/gdc/gdc-lockup-short.svg">
+      <img src="../assets/gdc/gdc-lockup-header.svg" alt="Goode Design &amp; Consulting" width="269" height="52">
+    </picture>
+  </a>
+  <nav aria-label="Primary">
+    <a href="../system/">The system</a>
+    <div class="navmenu">
+      <button type="button" aria-expanded="false" aria-controls="menu-who">Who I help</button>
+      <ul class="navmenu-panel" id="menu-who" hidden>
+        <li><a href="../founders/">Founders and scaling firms<span>Coaching and fractional operations</span></a></li>
+        <li><a href="../schools/">Independent schools<span>Coaching, cohorts, in-service, advisory</span></a></li>
+        <li><a href="../nonprofits/">Nonprofit and public sector<span>Team development and facilitation</span></a></li>
+      </ul>
+    </div>
+    <div class="navmenu">
+      <button type="button" aria-expanded="false" aria-controls="menu-services">Services</button>
+      <ul class="navmenu-panel navmenu-wide" id="menu-services" hidden>
+        <li class="nmp-group">
+          <p class="nmp-head">For companies</p>
+          <ul>
+            <li><a href="../products/#services">What a company can buy<span>One list, diagnostic to retained</span></a></li>
+            <li><a href="../obd/">The On-Board Diagnostic<span>Two instruments, one written read</span></a></li>
+            <li><a href="../products/#why">Why this is different<span>Five structural differences, not adjectives</span></a></li>
+          </ul>
+        </li>
+        <li class="nmp-group">
+          <p class="nmp-head">For schools and nonprofits</p>
+          <ul>
+            <li><a href="../schools/#services">What a school can buy<span>Ten services, plainly named</span></a></li>
+            <li><a href="../schools/rates/">Published rates<span>Real numbers for a budget line</span></a></li>
+            <li><a href="../schools/#why">Why this is different<span>Twenty years inside a school</span></a></li>
+          </ul>
+        </li>
+        <li class="nmp-group">
+          <p class="nmp-head">Flagship programs</p>
+          <ul>
+            <li><a href="../goodestart/">GoodeStart<span>The first ninety days, on purpose</span></a></li>
+            <li><a href="../building-the-bench/">Building the Bench<span>A cohort for the next seat</span></a></li>
+            <li><a href="../know-thyself/">Know Thyself to Lead Others<span>A strengths workshop for a whole staff</span></a></li>
+            <li><a href="../owners-manual/">Owner&rsquo;s Manual<span>How each of us works, written down</span></a></li>
+            <li><a href="../executive-coaching/">Executive coaching<span>Six sessions, built on the OBD</span></a></li>
+          </ul>
+        </li>
+        <li class="nmp-foot">
+          <a href="../coaching-engagement/">How the engagement works<span>The terms, before you have to ask for them</span></a>
+        </li>
+        <li class="nmp-foot">
+          <a href="../diagnostic/">Start with the free diagnostic<span>A few short questions, about two minutes, five patterns</span></a>
+        </li>
+        <li class="nmp-foot">
+          <a href="../psychological-safety/">Psychological Safety Check, free<span>Is it safe to speak up on your team?</span></a>
+        </li>
+        <li class="nmp-foot">
+          <a href="../free/">Free tools<span>Diagnostics, templates and a free chapter</span></a>
+        </li>
+      </ul>
+    </div>
+    <a href="../books/">Books</a>
+    <a href="../writing/">Writing</a>
+    <a href="../about/">About</a>
+    <a class="btn btn-sm" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=patrol-check-nav">Book a call</a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <!-- The Patrol Check (13 Oct 2026).
+       Companion to the Leadership Lab essay "Don't Hire the Eagle Scout. Build
+       the Patrol." The essay links here; the four questions are the essay's,
+       word for word. Everything runs in the browser: no form, no email,
+       nothing stored or sent. -->
+  <section class="band pc-band">
+    <div class="pc">
+
+      <header class="pc-head">
+        <h1>The <span class="pc-word">Patrol</span> Check</h1>
+        <p class="pc-question">Are you developing your leaders, or hosting them?</p>
+        <p class="pc-lede">From the Leadership Lab essay "Don&rsquo;t Hire the Eagle Scout. Build the Patrol." <a href="../writing/dont-hire-the-eagle-scout-build-the/">Read it here &rarr;</a></p>
+      </header>
+
+      <p class="pc-intro">A Scout patrol grows leaders because of how it is built, not because of the badge. Four parts do the work: a real job, real authority, no rescue and regular reps. Think of the people you are trying to grow into leaders, and answer four questions about each of them. A no on any one means you aren&rsquo;t developing that person yet. You&rsquo;re hosting them.</p>
+      <p class="pc-private">About two minutes. First names or initials are fine. Everything stays in this browser; nothing is sent or saved.</p>
+
+
+      <ol class="pc-people" id="people" aria-label="People you are developing"></ol>
+      <button class="pc-add" id="add" type="button">Add another person</button>
+
+      <div class="pc-result" id="result" aria-live="polite"></div>
+
+      <section class="pc-help" id="help" hidden aria-labelledby="help-h">
+        <h3 id="help-h">Where I can help</h3>
+        <p>A no on this check is a design problem, not a people problem, and design is the work I do with founders and school leaders.</p>
+        <ul>
+          <li><a href="../goodestart/"><strong>GoodeStart.</strong></a> The first ninety days of a new leader, built so the job, the authority and the reps are real from day one.</li>
+          <li><a href="../building-the-bench/"><strong>Building the Bench.</strong></a> A cohort for the people who could step into the next seat, with real work between sessions.</li>
+          <li><a href="../executive-coaching/"><strong>Executive coaching.</strong></a> For the manager who has to keep their hands in their pockets.</li>
+        </ul>
+        <p class="pc-small">The system behind the patrol is in <a href="../clutch/">CLUTCH</a>, my book on building leadership that runs without you.</p>
+        <a class="btn pc-book" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_source=patrol-check&amp;utm_content=patrol-check-1">Talk it through with me</a>
+      </section>
+
+      <div class="pc-actions">
+        <button class="pc-print" id="print" type="button" hidden>Print your result</button>
+        <button class="pc-reset" id="reset" type="button">Start again</button>
+      </div>
+
+      <p class="pc-from">From <a href="../writing/">The Leadership Lab</a> by Matt Goode, Goode Design &amp; Consulting. Leadership is infrastructure, not training.</p>
+      <p class="pc-printonly">thatsgoodedesign.com/patrol-check</p>
+
+    </div>
+  </section>
+
+</main>
+
+<script>
+(function(){
+"use strict";
+var MAX = 8;
+/* The four questions, word for word from the essay. */
+var QS = [
+  { key: "job", miss: "a real job", label: "A real job",
+    q: "Do they own an outcome that fails visibly if they drop it?",
+    fix: "Give them one result that is theirs by name, with a date, where everyone can see if it slips. Shared ownership is usually nobody's." },
+  { key: "auth", miss: "real authority", label: "Real authority",
+    q: "Do they hold real authority over the work, even if it's borrowed?",
+    fix: "Write down what they can decide without asking you, and tell the people around them. Borrowed authority still counts when everyone knows who lent it." },
+  { key: "rescue", miss: "the no-rescue agreement", label: "No rescue",
+    q: "Has their manager agreed, out loud, not to rescue them?",
+    fix: "Sit down with their manager and agree, out loud, what counts as a copperhead. Everything short of that is theirs to fix, even when the manager could fix it in thirty seconds." },
+  { key: "reps", miss: "the next rep", label: "Reps",
+    q: "Will they get another rep within a month?",
+    fix: "Put the next rep on the calendar now, inside a month: the same kind of call, a little bigger. One stretch assignment a year is an event, not a cadence." }
+];
+
+var people = [];
+var seq = 0;
+var listEl = document.getElementById("people");
+var addEl = document.getElementById("add");
+var resultEl = document.getElementById("result");
+var helpEl = document.getElementById("help");
+var printEl = document.getElementById("print");
+
+function blank() { seq += 1; return { id: seq, name: "", a: {} }; }
+function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+function nameOf(p, i) { return p.name.trim() || ("Person " + (i + 1)); }
+function answered(p) { return QS.filter(function (q) { return p.a[q.key] !== undefined; }).length; }
+function misses(p) { return QS.filter(function (q) { return p.a[q.key] === false; }); }
+
+function render() {
+  listEl.innerHTML = "";
+  people.forEach(function (p, i) {
+    var li = document.createElement("li");
+    li.className = "pc-person";
+    var rows = QS.map(function (q) {
+      var y = p.a[q.key] === true, n = p.a[q.key] === false;
+      return '<div class="pc-row">' +
+        '<p class="pc-row-q" id="q-' + p.id + '-' + q.key + '"><b>' + q.label + '.</b> ' + esc(q.q) + '</p>' +
+        '<div class="pc-yn" role="group" aria-labelledby="q-' + p.id + '-' + q.key + '">' +
+          '<button type="button" class="pc-opt" data-id="' + p.id + '" data-k="' + q.key + '" data-v="1" aria-pressed="' + y + '">Yes</button>' +
+          '<button type="button" class="pc-opt" data-id="' + p.id + '" data-k="' + q.key + '" data-v="0" aria-pressed="' + n + '">No</button>' +
+        '</div></div>';
+    }).join("");
+    li.innerHTML =
+      '<div class="pc-person-top">' +
+        '<input class="pc-name" type="text" maxlength="40" autocomplete="off" data-id="' + p.id + '" ' +
+          'aria-label="Name or initials, person ' + (i + 1) + '" placeholder="Person ' + (i + 1) + ', name or initials" value="' + esc(p.name) + '">' +
+        (people.length > 1 ? '<button type="button" class="pc-remove" data-id="' + p.id + '">Remove</button>' : '') +
+      '</div>' + rows + '<p class="pc-tally" id="tally-' + p.id + '"></p>';
+    listEl.appendChild(li);
+  });
+  addEl.hidden = people.length >= MAX;
+  update();
+}
+
+function update() {
+  people.forEach(function (p) {
+    var t = document.getElementById("tally-" + p.id);
+    if (!t) return;
+    var n = answered(p), m = misses(p);
+    t.className = "pc-tally";
+    if (n < QS.length) { t.textContent = n ? (n + " of 4 answered") : ""; return; }
+    if (!m.length) { t.textContent = "4 of 4. You're developing this one."; t.className += " is-dev"; }
+    else { t.textContent = (4 - m.length) + " of 4. Hosting, for now: " + m.map(function (q) { return q.miss; }).join(", ") + "."; t.className += " is-host"; }
+  });
+
+  var done = people.filter(function (p) { return answered(p) === QS.length; });
+  if (!done.length) {
+    resultEl.innerHTML = '<p>Answer all four for at least one person to see your result.</p>';
+    helpEl.hidden = true; printEl.hidden = true; return;
+  }
+  var dev = done.filter(function (p) { return !misses(p).length; });
+  var host = done.length - dev.length;
+  var head, body;
+  if (!host) {
+    head = done.length === 1 ? "You're developing them." : "You're developing all " + done.length + ".";
+    body = "Every person you scored has a real job, real authority, room to fail and another rep coming. Keep it that way: check again after the next hard week, when the pull to step in is strongest.";
+  } else if (!dev.length) {
+    head = done.length === 1 ? "You're hosting them." : "You're hosting all " + done.length + ".";
+    body = "That's the usual starting point. Most organizations promote the best individual contributor, send them on a course and keep a boss close enough to catch every wobble. The fix is structure, not talent.";
+  } else {
+    head = "You're developing " + dev.length + " and hosting " + host + ".";
+    body = "The people with four yeses are in a patrol. The rest have the title without the structure underneath it.";
+  }
+
+  var count = {};
+  QS.forEach(function (q) { count[q.key] = 0; });
+  done.forEach(function (p) { misses(p).forEach(function (q) { count[q.key] += 1; }); });
+  var weakest = null;
+  QS.forEach(function (q) { if (count[q.key] && (!weakest || count[q.key] > count[weakest.key])) weakest = q; });
+
+  var list = done.map(function (p) {
+    var i = people.indexOf(p), m = misses(p);
+    return "<li><strong>" + esc(nameOf(p, i)) + ":</strong> " +
+      (m.length ? "missing " + m.map(function (q) { return q.miss; }).join(", ") : "all four") + "</li>";
+  }).join("");
+
+  var fix = weakest
+    ? '<p class="pc-fix"><b>Start with ' + weakest.miss + '.</b> ' +
+      (done.length > 1 ? "It's the no that came up most (" + count[weakest.key] + " of " + done.length + "). " : "") +
+      esc(weakest.fix) + "</p>"
+    : "";
+
+  resultEl.innerHTML = '<h2 tabindex="-1">' + esc(head) + '</h2><p>' + esc(body) + '</p><ul>' + list + '</ul>' + fix;
+  helpEl.hidden = !host;
+  printEl.hidden = false;
+}
+
+listEl.addEventListener("click", function (e) {
+  var b = e.target.closest("button");
+  if (!b) return;
+  var id = +b.getAttribute("data-id");
+  if (b.classList.contains("pc-remove")) {
+    people = people.filter(function (p) { return p.id !== id; });
+    render(); addEl.focus(); return;
+  }
+  if (b.classList.contains("pc-opt")) {
+    var p = people.filter(function (x) { return x.id === id; })[0];
+    var k = b.getAttribute("data-k"), v = b.getAttribute("data-v") === "1";
+    if (p.a[k] === v) delete p.a[k]; else p.a[k] = v;
+    b.parentNode.querySelectorAll(".pc-opt").forEach(function (o) {
+      o.setAttribute("aria-pressed", String(p.a[k] === (o.getAttribute("data-v") === "1")));
+    });
+    update();
+  }
+});
+listEl.addEventListener("input", function (e) {
+  if (!e.target.classList.contains("pc-name")) return;
+  var id = +e.target.getAttribute("data-id");
+  people.forEach(function (p) { if (p.id === id) p.name = e.target.value; });
+  update();
+});
+addEl.addEventListener("click", function () {
+  if (people.length >= MAX) return;
+  people.push(blank()); render();
+  var inputs = listEl.querySelectorAll(".pc-name");
+  if (inputs.length) inputs[inputs.length - 1].focus();
+});
+printEl.addEventListener("click", function () { window.print(); });
+document.getElementById("reset").addEventListener("click", function () {
+  people = [blank()]; render();
+  listEl.querySelector(".pc-name").focus();
+});
+
+people = [blank(), blank(), blank()];
+render();
+})();
+</script>
+
+<footer class="foot">
+  <div class="foot-in">
+    <div>
+      <img src="../assets/gdc/gdc-mark.svg" alt="" width="34" height="34">
+      <p class="foot-name">Goode Design &amp; Consulting</p>
+      <p class="foot-meta">Washington, DC &middot; Baltimore &middot; New York &middot; Boston &middot; Available globally</p>
+    <ul class="socials" aria-label="Elsewhere">
+      <li><a href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=patrol-check-footer" title="Book a time"><img src="../assets/icon-calendly.png" alt="Book a time with Matt Goode"></a></li>
+      <li><a href="https://www.linkedin.com/in/goodematt/" title="LinkedIn"><img src="../assets/icon-linkedin.png" alt="Matt Goode on LinkedIn"></a></li>
+      <li><a href="https://thatsgoodedesign.substack.com/" title="The Leadership Lab on Substack"><img src="../assets/icon-substack.png" alt="The Leadership Lab on Substack"></a></li>
+      <li><a href="mailto:matt@thatsgoodedesign.com" title="Email"><img src="../assets/icon-email.png" alt="Email Matt Goode"></a></li>
+    </ul>
+    </div>
+    <nav aria-label="Footer">
+      <a href="../system/">The system</a>
+      <a href="../products/">Products</a>
+      <a href="../obd/">The OBD</a>
+      <a href="../schools/">Schools</a>
+      <a href="../coaching-engagement/">How it works</a>
+      <a href="../diagnostic/">Free diagnostic</a>
+      <a href="../free/">Free tools</a>
+      <a href="../books/">Books</a>
+      <a href="../writing/">Writing</a>
+      <a href="../about/">About</a>
+      <a href="mailto:matt@thatsgoodedesign.com">Contact</a>
+      <a href="../terms/">Terms</a>
+      <a href="../privacy/">Privacy</a>
+    </nav>
+  </div>
+  <p class="foot-legal">&copy; 2026 Goode Design &amp; Consulting. CliftonStrengths&reg;,
+    StrengthsFinder&reg; and the 34 theme names are trademarks of Gallup, Inc.
+    EQ-i 2.0 is a trademark of Multi-Health Systems Inc. Matt Goode is a
+    Gallup-Certified Strengths Coach.
+    <br><br>
+    The non-Gallup information you are receiving has not been approved and is not
+    sanctioned or endorsed by Gallup in any way. Opinions, views and
+    interpretations of CliftonStrengths&reg;, Clifton Youth StrengthsExplorer or
+    BP10 results are solely the beliefs of Goode Design &amp; Consulting.</p>
+</footer>
+
+</body>
+</html>
