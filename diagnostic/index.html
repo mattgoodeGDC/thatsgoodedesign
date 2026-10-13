@@ -130,6 +130,21 @@
       border: 1px solid var(--rule); background: #E9D9BC; }
     .dx-who p { margin: 0; font-size: 18px; }
     .dx-tm { font-size: 12px; color: var(--muted); margin: 10px 0 0; line-height: 1.5; }
+    /* Three doors (13 Oct 2026): one diagnostic, three routes. Each door
+       opens its own Jotform; the other Start buttons scroll here. */
+    .dx-doors-q { margin: 0 0 12px; font-size: 13px; font-weight: 800; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--gold-ink); }
+    .dx-doors { display: grid; gap: 10px; grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 640px; }
+    a.dx-door { display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      min-height: 64px; padding: 14px 16px; text-decoration: none; color: var(--ink);
+      background: var(--paper); border: 2px solid var(--ink); font-weight: 800; font-size: 16px; line-height: 1.25;
+      transition: background-color .15s, border-color .15s; }
+    a.dx-door::after { content: "\2192"; color: var(--gold-ink); flex: none; }
+    a.dx-door:hover, a.dx-door:focus-visible { background: #F6EFE2; border-color: var(--gold-ink); }
+    a.dx-door:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 3px; }
+    a.dx-door.is-route { background: var(--gold); border-color: var(--gold); }
+    a.dx-door.is-route::after { color: var(--ink); }
+    @media (max-width: 620px) { .dx-doors { grid-template-columns: minmax(0, 1fr); } a.dx-door { min-height: 56px; } }
     .dx-bar { display: none; }
     /* Hero with a result preview on the right. */
     .dx-hero.hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
@@ -158,11 +173,11 @@
     .dx-privacy { margin: 10px 0 0; font-size: 13px; color: var(--muted); max-width: 52ch; }
     @media (prefers-reduced-motion: reduce) { a.dx-pat { transition: none; } a.dx-pat:hover { transform: none; } }
     @media (max-width: 760px) {
-      .dx-start { display: none; }
-      .dx-bar { display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+      .dx-bar { display: block; position: fixed; transform: translateY(110%); transition: transform .2s; left: 0; right: 0; bottom: 0; z-index: 50;
         background: var(--paper); border-top: 1px solid var(--rule-2);
         padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); text-align: center;
         box-shadow: 0 -6px 18px rgba(36,36,39,.08); }
+      .dx-bar.is-on { transform: none; }
       .dx-bar .btn { display: block; width: 100%; }
       .dx-bar p { margin: 6px 0 0; font-size: 13px; color: var(--muted); }
       body { padding-bottom: 96px; }
@@ -186,8 +201,13 @@
       <li>Gallup-Certified Strengths Coach</li>
       <li>Author of CLUTCH</li>
     </ul>
-    <div class="dx-start">
-      <a class="btn btn-lg" data-quiz href="https://form.jotform.com/262713215187052">Start the diagnostic</a>
+    <div class="dx-start" id="doors">
+      <p class="dx-doors-q" id="doors-q">Where do you lead?</p>
+      <div class="dx-doors" role="group" aria-labelledby="doors-q">
+        <a class="dx-door" data-route="company" href="https://form.jotform.com/262713215187052">A company</a>
+        <a class="dx-door" data-route="school" href="https://form.jotform.com/262853412698063">A school</a>
+        <a class="dx-door" data-route="nonprofit" href="https://form.jotform.com/262852888637072">A nonprofit or public agency</a>
+      </div>
       <p class="fineprint">No email needed to see your result.</p>
       <p class="dx-privacy">Your answers are used to show you your result. Nobody is added to a list unless they ask for the readout by email.</p>
     </div>
@@ -209,7 +229,7 @@
 
   <!-- Mobile: the same button, pinned to the thumb zone. -->
   <div class="dx-bar">
-    <a class="btn btn-lg" data-quiz href="https://form.jotform.com/262713215187052">Start the diagnostic</a>
+    <a class="btn btn-lg" data-quiz href="#doors">Start the diagnostic</a>
     <p>No email needed to see your result.</p>
   </div>
 
@@ -236,7 +256,7 @@
       <li><a class="dx-pat" href="https://form.jotform.com/262713215187052?q1_friction=My%20role%20is%20changing%20and%20I%27m%20not%20sure%20what%20it%20is%20now.&src=diagnostic-card-new-seat&amp;pick=You%20picked%20The%20New%20Seat%3A%20your%20role%20is%20changing%2C%20and%20nobody%20has%20said%20into%20what.%20A%20few%20questions%20and%20I%27ll%20show%20you%20whether%20that%27s%20the%20real%20pattern%20or%20a%20symptom%20of%20something%20else."><b>The New Seat</b><span>Stepping into or designing a new leadership role.</span><em>Start here</em></a></li>
     </ul>
     <div class="dx-again">
-      <a class="btn" data-quiz href="https://form.jotform.com/262713215187052">Not sure? Start the diagnostic</a>
+      <a class="btn" data-quiz href="#doors">Not sure? Start the diagnostic</a>
       <p class="fineprint">About 2 minutes. No email needed to see your result.</p>
     </div>
   </section>
@@ -289,22 +309,79 @@
       </article>
     </div>
     <div class="dx-again">
-      <a class="btn btn-lg" data-quiz href="https://form.jotform.com/262713215187052">Start the diagnostic</a>
+      <a class="btn btn-lg" data-quiz href="#doors">Start the diagnostic</a>
       <p class="fineprint">About 2 minutes. No email needed to see your result.</p>
     </div>
   </section>
 
   <script>
-    /* Pass the traffic source through to the quiz. Every tracked link points
-       at /diagnostic/?src=<channel>; the form has a hidden field named src.
-       Only letters, digits and hyphens get through. To change forms, edit
-       QUIZ_URL here and the two href fallbacks above. */
+    /* One diagnostic, three routes (13 Oct 2026). Each door opens its own
+       Jotform and passes the traffic source through in the hidden src field.
+       Only letters, digits and hyphens get through; with no src, the door
+       sends diagnostic-door-<route>.
+       The route is known in advance when the link says ?route=school or
+       ?route=nonprofit, or when src starts with schools- or nonprofits-. Then
+       that door is highlighted, the other Start buttons open that form, and
+       the pattern tiles start that route with its own first answer.
+       Otherwise the Start buttons scroll to the doors and the tiles start
+       the company route. */
     (function () {
-      var QUIZ_URL = "https://form.jotform.com/262713215187052";
-      var src = (new URLSearchParams(location.search).get("src") || "")
-        .toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 40);
-      var href = QUIZ_URL + (src ? "?src=" + encodeURIComponent(src) : "");
-      document.querySelectorAll("a[data-quiz]").forEach(function (a) { a.href = href; });
+      var FORMS = {
+        company:   "https://form.jotform.com/262713215187052",
+        school:    "https://form.jotform.com/262853412698063",
+        nonprofit: "https://form.jotform.com/262852888637072"
+      };
+      /* Gut-check lines per route, as written in the approved copy doc. */
+      var Q1 = {
+        school: {
+          "bottleneck": "Every decision still lands on my desk.",
+          "growth-gap": "We keep promoting good teachers into leadership and giving them nothing.",
+          "drift":      "The adults in the building aren't pulling the same way anymore.",
+          "stall":      "Good initiatives launch in August and are gone by February.",
+          "new-seat":   "I'm new to this seat, or the seat changed under me."
+        },
+        nonprofit: {
+          "bottleneck": "Everything still runs through the person at the top.",
+          "growth-gap": "The mission keeps growing; the management capacity doesn't.",
+          "drift":      "People are tired, and the culture is wearing thin.",
+          "stall":      "The strategic plan is sound; the work to deliver it never gets resourced.",
+          "new-seat":   "I've stepped into leadership, or the people I answer to have changed what they need from me."
+        }
+      };
+      var qs = new URLSearchParams(location.search);
+      var src = (qs.get("src") || "").toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 40);
+      var route = (qs.get("route") || "").toLowerCase();
+      if (!FORMS[route]) route = /^schools?-/.test(src) ? "school" : /^nonprofits?-/.test(src) ? "nonprofit" : "";
+
+      function link(r, s) { return FORMS[r] + "?src=" + encodeURIComponent(s || ("diagnostic-door-" + r)); }
+
+      document.querySelectorAll("a.dx-door[data-route]").forEach(function (a) {
+        var r = a.dataset.route;
+        a.href = link(r, src);
+        if (r === route) a.classList.add("is-route");
+      });
+      document.querySelectorAll("a[data-quiz]").forEach(function (a) {
+        a.href = route ? link(route, src) : "#doors";
+      });
+      if (route && Q1[route]) {
+        document.querySelectorAll("a.dx-pat").forEach(function (a) {
+          var m = a.href.match(/diagnostic-card-([a-z-]+)/), slug = m && m[1], line = slug && Q1[route][slug];
+          if (!line) return;
+          /* Jotform splits prefill values on commas, so each is escaped. */
+          a.href = FORMS[route] + "?q1_friction=" + encodeURIComponent(line.replace(/,/g, "\\,")) +
+            "&src=diagnostic-card-" + slug + "-" + route;
+          var span = a.querySelector("span");
+          if (span) span.textContent = line;
+        });
+      }
+
+      /* Phone bar: shown once the doors have scrolled away. */
+      var bar = document.querySelector(".dx-bar"), doors = document.getElementById("doors");
+      if (bar && doors && "IntersectionObserver" in window) {
+        new IntersectionObserver(function (e) {
+          bar.classList.toggle("is-on", !e[0].isIntersecting && e[0].boundingClientRect.top < 0);
+        }).observe(doors);
+      } else if (bar) { bar.classList.add("is-on"); }
     })();
   </script>
 
