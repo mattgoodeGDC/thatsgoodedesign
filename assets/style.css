@@ -1615,3 +1615,21 @@ a.signal.pc:hover .pc-go::after, a.signal.pc:focus-visible .pc-go::after { trans
   .pc-go { grid-column: 3; grid-row: 1 / span 2; padding: 0; font-size: 0; margin: 0; }
   .pc-go::after { font-size: 18px; margin: 0; }
 }
+
+/* ---------- pull quotes (13 Oct 2026) ----------
+   One client quote per section, next to the button it supports. Role and
+   sector only, from the approved testimonials brief. */
+.pull-quote { margin: 30px 0 0; max-width: 720px; border-left: 2px solid var(--gold); padding: 4px 0 4px 22px; }
+.pull-quote blockquote { margin: 0; }
+.pull-quote blockquote p { margin: 0 0 10px; font-size: clamp(17px, 1.6vw, 20px); line-height: 1.45; font-weight: 600; color: var(--ink); text-wrap: pretty; }
+.pull-quote blockquote p:first-child::before { content: "\201C"; }
+.pull-quote blockquote p:last-child { margin-bottom: 0; }
+.pull-quote blockquote p:last-child::after { content: "\201D"; }
+.pull-quote figcaption { margin-top: 12px; }
+.pull-quote-center { margin: 30px auto 0; border-left: 0; padding: 0; text-align: center; }
+.pull-quote-center::before { content: ""; display: block; width: 36px; height: 2px; background: var(--gold); margin: 0 auto 16px; }
+.pull-quote-center figcaption .q-name, .pull-quote-center figcaption .q-role { display: inline; }
+.pull-quote-center figcaption .q-role::before { content: ", "; }
+.pull-quote-pair { display: grid; gap: 24px; grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 960px; margin: 30px auto 0; text-align: left; }
+.pull-quote-pair .pull-quote { margin: 0; }
+@media (max-width: 760px) { .pull-quote-pair { grid-template-columns: minmax(0, 1fr); } }
