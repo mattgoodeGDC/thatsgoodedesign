@@ -49,6 +49,11 @@
   .bio-reads .why { display: block; font-size: 15px; line-height: 1.55; color: var(--body); margin: 0 0 10px; }
   .bio-reads .len { display: block; font-size: 13px; color: var(--muted); }
   @media (max-width: 760px) { .bio-reads { grid-template-columns: minmax(0, 1fr); } }
+  .bio-top { display: grid; gap: 32px; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); align-items: start; }
+  .bio-photo { margin: 6px 0 0; }
+  .bio-photo img { display: block; width: 100%; height: auto; border: 1px solid var(--rule); }
+  .bio-photo figcaption { font-size: 13px; color: var(--muted); margin-top: 8px; }
+  @media (max-width: 860px) { .bio-top { grid-template-columns: minmax(0, 1fr); gap: 18px; } }
 </style>
 </head>
 <body>
@@ -260,12 +265,21 @@
   <!-- Personal, brief. -->
   <section class="band">
     <p class="eyebrow">Off the clock</p>
+    <div class="bio-top">
+      <div>
     <h2 class="section-h">Maryland</h2>
     <p class="lede">I live in Maryland with my wife, three kids, two dogs, three
       cats and a small flock of chickens. Before any of the rest of it, I was a
       college team captain, which taught me the thing I have been restating ever
       since: a captain is not the best player on the team. A captain is the
       player whose presence makes the rest of the team better.</p>
+      </div>
+      <figure class="bio-photo">
+        <img src="../assets/family-2018.jpg" width="1100" height="825" loading="lazy"
+             alt="Matt with his wife and their three children at a Christmas tree farm, all five in Icelandic wool sweaters.">
+        <figcaption>Picking the tree, December 2018. The sweaters are Icelandic.</figcaption>
+      </figure>
+    </div>
     <h3 class="bio-reads-h">Four essays, if you want the longer version</h3>
     <p class="bio-reads-intro">That paragraph is the short version. These are where the
       ideas in my work actually came from, in my own words.</p>
