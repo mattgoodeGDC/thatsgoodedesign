@@ -122,7 +122,7 @@
     bar.setAttribute('aria-hidden', 'true');
     bar.innerHTML = buy
       ? '<span>Thirty minutes, then decide.</span><a class="btn" tabindex="-1" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=' + slug + '-sticky">Book a call</a>'
-      : '<span>Where is your system slipping?</span><a class="btn" tabindex="-1" href="/diagnostic/?src=' + slug + '-sticky">Free diagnostic</a>';
+      : '<span>Where is your system slipping?</span><a class="btn" tabindex="-1" href="/diagnostic/?src=' + slug + '-sticky#doors">Free diagnostic</a>';
     document.body.appendChild(bar);
     if (!('IntersectionObserver' in window)) return;
     var stops = [].slice.call(document.querySelectorAll('.book-call, .lab, footer'));

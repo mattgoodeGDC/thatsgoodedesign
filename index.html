@@ -124,6 +124,17 @@
     .hero-home h1 .hl { white-space: normal !important; text-wrap: balance; }
     .hero-home .lede { max-width: 54ch; }
     .hero-note { margin: 12px 0 0; font-size: 14px; color: var(--muted); }
+    /* Hero doors: same look as the /diagnostic/ doors. */
+    .hero-doors { margin: 18px 0 0; max-width: 640px; }
+    .hero-doors-q { margin: 0 0 10px; font-size: 13px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-ink); }
+    .hero-doors-row { display: grid; gap: 10px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    a.hero-door { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 60px; padding: 12px 14px;
+      text-decoration: none; color: var(--ink); background: var(--paper); border: 2px solid var(--ink); font-weight: 800; font-size: 15px; line-height: 1.25;
+      transition: background-color .15s, border-color .15s; }
+    a.hero-door::after { content: "\2192"; color: var(--gold-ink); flex: none; }
+    a.hero-door:hover, a.hero-door:focus-visible { background: #F6EFE2; border-color: var(--gold-ink); }
+    a.hero-door:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 3px; }
+    @media (max-width: 620px) { .hero-doors-row { grid-template-columns: minmax(0, 1fr); } a.hero-door { min-height: 54px; } }
     .hero-route {
       margin: 26px 0 0; padding-top: 18px; border-top: 1px solid var(--rule);
       font-size: 15px; color: var(--body); max-width: 54ch;
@@ -283,10 +294,21 @@
         Because nobody designed it at all.
       </p>
       <p class="cta-row">
-        <a class="btn" href="https://form.jotform.com/262713215187052?src=home-hero">Run the free diagnostic</a>
+        <a class="btn" id="hero-doors-btn" href="diagnostic/?src=home-hero#doors" aria-expanded="false" aria-controls="hero-doors">Run the free diagnostic</a>
         <a class="link-arrow" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=home-1">Or book a 30-minute call</a>
       </p>
       <p class="hero-note">About 2 minutes, no email needed.</p>
+      <!-- Three doors (13 Oct 2026). The hero button opens these in place, so
+           there is no extra page between the homepage and the quiz. Without
+           JavaScript the button goes to /diagnostic/#doors instead. -->
+      <div class="hero-doors" id="hero-doors" hidden>
+        <p class="hero-doors-q" id="hero-doors-q">Where do you lead?</p>
+        <div class="hero-doors-row" role="group" aria-labelledby="hero-doors-q">
+          <a class="hero-door" href="https://form.jotform.com/262713215187052?src=home-hero">A company</a>
+          <a class="hero-door" href="https://form.jotform.com/262853412698063?src=home-hero">A school</a>
+          <a class="hero-door" href="https://form.jotform.com/262852888637072?src=home-hero">A nonprofit or public agency</a>
+        </div>
+      </div>
       <p class="hero-route">Leading a school or a mission-driven team?
         <a href="schools/">Start with schools</a> or
         <a href="nonprofits/">nonprofit and public sector</a>.</p>
@@ -562,7 +584,7 @@
       problem or a design problem. It is almost always a design problem.</p>
     <p class="cta-row center">
       <a class="btn btn-lg" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=home-2">Book a 30-minute call</a>
-      <a class="link-arrow" href="https://form.jotform.com/262713215187052?src=home-close">Or run the free diagnostic first</a>
+      <a class="link-arrow" href="diagnostic/?src=home-close#doors">Or run the free diagnostic first</a>
     </p>
     <p class="fineprint"><strong>If it is not a fit I will say so on the call</strong> and send you the chapter that is. No deck, no follow-up sequence, no second call you did not ask for.<br>Prefer email? <a href="mailto:matt@thatsgoodedesign.com">matt@thatsgoodedesign.com</a></p>
   </section>
@@ -749,5 +771,19 @@
 })();
 </script>
 
+<script>
+/* Hero button opens the three doors in place (13 Oct 2026). */
+(function () {
+  var btn = document.getElementById('hero-doors-btn'), doors = document.getElementById('hero-doors');
+  if (!btn || !doors) return;
+  btn.addEventListener('click', function (e) {
+    e.preventDefault();
+    var open = doors.hidden;
+    doors.hidden = !open;
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) { var first = doors.querySelector('a'); if (first) first.focus({ preventScroll: true }); doors.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
+  });
+})();
+</script>
 </body>
 </html>
