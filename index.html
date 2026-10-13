@@ -694,10 +694,10 @@
 (function () {
   const PHASE = 2;   /* switched on 1 Oct with BUSINESS-161 */
   const QUIZ_V2 = 'https://form.jotform.com/262713215187052';
-  const COUNT_URL = '';   /* paste the Worker URL here once it is deployed */
+  const COUNT_URL = 'https://gdc-picker.matt-b2b.workers.dev';   /* Cloudflare Worker gdc-picker; counts read in Cloudflare KV gdc-picker */
   function ping(action, slug) {
     if (!COUNT_URL || !navigator.sendBeacon) return;
-    try { navigator.sendBeacon(COUNT_URL, JSON.stringify({ a: action, p: slug })); } catch (e) {}
+    try { navigator.sendBeacon(COUNT_URL, JSON.stringify({ a: action, p: slug, r: 'home' })); } catch (e) {}
   }
 
   const Q1 = {

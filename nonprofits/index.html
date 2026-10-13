@@ -217,6 +217,19 @@
     </p>
   </section>
 
+<script>
+/* Pattern cards: cookieless click count (Cloudflare Worker gdc-picker). Sends only
+   the page, the action and the pattern; nothing about the person. */
+(function () {
+  var COUNT_URL = 'https://gdc-picker.matt-b2b.workers.dev';
+  if (!navigator.sendBeacon) return;
+  document.querySelectorAll('a.signal.pc[data-pattern]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      try { navigator.sendBeacon(COUNT_URL, JSON.stringify({ a: 'quiz', p: a.getAttribute('data-pattern'), r: 'nonprofits' })); } catch (e) {}
+    });
+  });
+})();
+</script>
 </main>
 
 <footer class="foot">
