@@ -28,6 +28,11 @@
   .nav nav{gap:20px}
   .bp-links{gap:18px}
 }
+/* Writing joined the bar (13 Oct 2026). Tighten again so it stays on one row down to 1025px. */
+@media (min-width:1025px) and (max-width:1120px){
+  .nav nav{gap:14px}
+  .bp-links{gap:14px}
+}
 .navmenu > button::after{
   content:"";width:7px;height:7px;flex:0 0 auto;margin-top:-2px;
   border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;

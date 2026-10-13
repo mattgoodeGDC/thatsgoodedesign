@@ -257,7 +257,7 @@ def page(p, posts, i, header, footer):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap">
 <link rel="stylesheet" href="../../assets/style.css?v=17">
-<link rel="stylesheet" href="../../assets/gdc-nav.css?v=16">
+<link rel="stylesheet" href="../../assets/gdc-nav.css?v=17">
 <link rel="stylesheet" href="../../assets/writing.css?v=1">
 <script src="../../assets/gdc-analytics.js?v=12"></script>
 <script src="../../assets/gdc-nav.js?v=17" defer></script>
