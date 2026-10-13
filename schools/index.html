@@ -37,6 +37,15 @@
 <meta name="tdm-policy" content="https://thatsgoodedesign.com/terms/">
 <meta name="robots" content="noai, noimageai">
 <style>
+  /* School leader testimonial (13 Oct 2026): closes "Why this is different".
+     Same gold rule and caption as the homepage client quotes. */
+  .school-quote { margin: 40px 0 0; max-width: 820px; border-left: 2px solid var(--gold); padding: 6px 0 6px 24px; }
+  .school-quote blockquote { margin: 0; }
+  .school-quote blockquote p { margin: 0 0 14px; font-size: clamp(17px, 1.6vw, 19px); line-height: 1.5; font-weight: 600; color: var(--ink); text-wrap: pretty; }
+  .school-quote blockquote p:first-child::before { content: "\201C"; }
+  .school-quote blockquote p:last-child { margin-bottom: 0; }
+  .school-quote blockquote p:last-child::after { content: "\201D"; }
+  .school-quote figcaption { margin-top: 16px; }
   /* Phones: the H1 and the booking button come first; the photo follows the
      CTA as a short band rather than a full portrait above the headline. */
   @media (max-width:760px){
@@ -261,6 +270,29 @@
       chair to price what doing it will actually cost in goodwill, calendar and
       faculty attention, and to design the rollout so it survives contact with a
       Tuesday.</p>
+
+    <figure class="school-quote">
+      <blockquote>
+        <p>What sets Goode Designs &amp; Consulting apart is the ability to
+          understand the unique culture of a school while bringing a fresh,
+          practical perspective to leadership development. Matt doesn&rsquo;t
+          arrive with a one-size-fits-all program. He listens, asks thoughtful
+          questions, and helps educators recognize and build on the strengths
+          they already possess.</p>
+        <p>His work helped us think more intentionally about how we develop
+          faculty, empower emerging leaders, and create a culture of trust and
+          shared responsibility. The sessions were engaging, grounded in
+          research, and immediately applicable to the everyday challenges of
+          school leadership.</p>
+        <p>Perhaps most importantly, Matt understands educators because he has
+          been one. He knows that meaningful professional growth isn&rsquo;t
+          about adding another initiative to an already full plate. It&rsquo;s
+          about helping people work better together, lead with greater
+          confidence, and ultimately create a stronger school community.</p>
+      </blockquote>
+      <figcaption><span class="q-name">Independent school leader</span>
+        <span class="q-role">Mid-Atlantic</span></figcaption>
+    </figure>
   </section>
 
   <!-- Services. Deliberately plain names. A business officer has to be able to
