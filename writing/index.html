@@ -168,10 +168,20 @@
     .lab-posts { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 12px;
       grid-template-columns: repeat(3, minmax(0, 1fr)); }
     @media (max-width: 900px) { .lab-posts { grid-template-columns: minmax(0, 1fr); } }
-    .lab-posts a { display: flex; flex-direction: column; height: 100%; padding: 18px 20px; text-decoration: none;
+    .lab-posts li { position: relative; display: flex; flex-direction: column; height: 100%; padding: 18px 20px;
       background: var(--paper); border: 1px solid var(--rule); border-top: 3px solid var(--gold);
       transition: background-color .18s, box-shadow .18s; }
-    .lab-posts a:hover, .lab-posts a:focus-visible { background: #F6EFE2; box-shadow: 0 6px 18px rgba(36,36,39,.07); }
+    .lab-posts li:hover, .lab-posts li:focus-within { background: #F6EFE2; box-shadow: 0 6px 18px rgba(36,36,39,.07); }
+    .lp-link { text-decoration: none; color: inherit; }
+    .lp-link::after { content: ""; position: absolute; inset: 0; }
+    .lp-link:focus-visible { outline: none; }
+    .lab-posts li:has(.lp-link:focus-visible) { outline: 2px solid var(--gold-ink); outline-offset: 2px; }
+    .lp-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 14px; }
+    .lp-tag { position: relative; z-index: 1; font-size: 12px; font-weight: 600; line-height: 1.3; color: var(--ink);
+      text-decoration: none; padding: 4px 9px; border: 1px solid var(--rule-2); border-radius: 999px; background: #fff; }
+    .lp-tag:hover, .lp-tag:focus-visible { border-color: var(--gold-ink); color: var(--gold-ink); }
+    .lp-img { display: block; width: calc(100% + 40px); max-width: none; height: auto; aspect-ratio: 16 / 9;
+      object-fit: cover; margin: -18px -20px 14px; background: var(--paper-alt); }
     .lp-date { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--gold-ink); }
     .lab-posts b { display: block; margin: 6px 0 4px; font-size: 19px; line-height: 1.3; color: var(--ink); }
     .lp-sub { font-size: 15px; line-height: 1.45; color: var(--body); }
@@ -214,18 +224,27 @@
     <h2 class="section-h">New in the Lab</h2>
     <ul class="lab-posts">
       <!--LATEST-->
-      <li><a href="dont-hire-the-eagle-scout-build-the/">
+      <li>
+        <img class="lp-img" src="https://substackcdn.com/image/fetch/w_640,h_360,c_fill,f_auto,q_auto:good,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff52d7cf7-8f4a-4bb4-8f32-8169073566c1_2448x3264.jpeg" alt="" width="640" height="360" loading="lazy" decoding="async">
         <span class="lp-date">13 Oct 2026 &middot; 5 min read</span>
-        <b>Don’t Hire the Eagle Scout. Build the Patrol.</b><span class="lp-sub">The badge isn’t what makes Scouts lead. The system underneath it is.</span>
-      </a></li>
-      <li><a href="accountability-isnt-an-event/">
+        <a class="lp-link" href="dont-hire-the-eagle-scout-build-the/"><b>Don’t Hire the Eagle Scout. Build the Patrol.</b></a>
+        <span class="lp-sub">The badge isn’t what makes Scouts lead. The system underneath it is.</span>
+        <span class="lp-tags"><a class="lp-tag" href="?tag=new-seat#archive">#&nbsp;My role is changing</a><a class="lp-tag" href="?tag=delegate#archive">#&nbsp;DELEGATE</a></span>
+      </li>
+      <li>
+        <img class="lp-img" src="https://substackcdn.com/image/fetch/w_640,h_360,c_fill,f_auto,q_auto:good,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3801b2eb-935d-4726-8b3b-1bac68ffaf51_4000x3000.jpeg" alt="" width="640" height="360" loading="lazy" decoding="async">
         <span class="lp-date">8 Oct 2026 &middot; 6 min read</span>
-        <b>Accountability isn&#x27;t an event</b><span class="lp-sub">Leaders and their managers agree on what leaders are worst at. Knowing hasn&#x27;t fixed it</span>
-      </a></li>
-      <li><a href="what-the-auditors-couldnt-count/">
+        <a class="lp-link" href="accountability-isnt-an-event/"><b>Accountability isn&#x27;t an event</b></a>
+        <span class="lp-sub">Leaders and their managers agree on what leaders are worst at. Knowing hasn&#x27;t fixed it</span>
+        <span class="lp-tags"><a class="lp-tag" href="?tag=stall#archive">#&nbsp;Winning feels like a near miss</a><a class="lp-tag" href="?tag=create#archive">#&nbsp;CREATE</a></span>
+      </li>
+      <li>
+        <img class="lp-img" src="https://substackcdn.com/image/fetch/w_640,h_360,c_fill,f_auto,q_auto:good,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F82fee5f3-ee6a-4608-9683-1de530aafde6_3500x2333.jpeg" alt="" width="640" height="360" loading="lazy" decoding="async">
         <span class="lp-date">7 Oct 2026 &middot; 4 min read</span>
-        <b>What the auditors couldn&#x27;t count</b><span class="lp-sub">A watchdog can count awards and positions. It can&#x27;t count what the people in those positions knew</span>
-      </a></li>
+        <a class="lp-link" href="what-the-auditors-couldnt-count/"><b>What the auditors couldn&#x27;t count</b></a>
+        <span class="lp-sub">A watchdog can count awards and positions. It can&#x27;t count what the people in those positions knew</span>
+        <span class="lp-tags"><a class="lp-tag" href="?tag=drift#archive">#&nbsp;The culture is drifting</a><a class="lp-tag" href="?tag=psych-safety#archive">#&nbsp;Psychological safety</a></span>
+      </li>
       <!--/LATEST-->
     </ul>
   </section>

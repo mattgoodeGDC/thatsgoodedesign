@@ -21,6 +21,7 @@ import os
 import re
 import sys
 from email.utils import format_datetime
+from urllib.parse import quote
 
 from bs4 import BeautifulSoup, NavigableString
 
@@ -334,12 +335,23 @@ def archive_rows(posts):
 
 
 def cards(posts, prefix, indent):
+    """The three newest posts as cards. The title link stretches over the whole
+    card; the hashtag links sit above it and open the filtered archive."""
     pad = " " * indent
+    arc = prefix or ""
     out = []
     for p in posts[:3]:
-        sub = f'<span class="lp-sub">{esc(dashes(p["subtitle"].strip()))}</span>' if p["subtitle"].strip() else ""
-        out.append(f'{pad}<li><a href="{prefix}{p["slug"]}/">\n{pad}  <span class="lp-date">{pdate(p).strftime("%-d %b %Y")} &middot; '
-                   f'{mins(p["words"])} min read</span>\n{pad}  <b>{esc(clean_title(p["title"]))}</b>{sub}\n{pad}</a></li>')
+        sub = f'\n{pad}  <span class="lp-sub">{esc(dashes(p["subtitle"].strip()))}</span>' if p["subtitle"].strip() else ""
+        img = ""
+        if p.get("cover"):
+            src = "https://substackcdn.com/image/fetch/w_640,h_360,c_fill,f_auto,q_auto:good,g_auto/" + quote(p["cover"], safe="")
+            img = f'\n{pad}  <img class="lp-img" src="{esc(src)}" alt="" width="640" height="360" loading="lazy" decoding="async">'
+        tags = "".join(f'<a class="lp-tag" href="{arc}?tag={t}#archive">#&nbsp;{esc(TAGS[t])}</a>'
+                       for t in (p.get("tags") or []) if t in TAGS)
+        tags = f'\n{pad}  <span class="lp-tags">{tags}</span>' if tags else ""
+        out.append(f'{pad}<li>{img}\n{pad}  <span class="lp-date">{pdate(p).strftime("%-d %b %Y")} &middot; '
+                   f'{mins(p["words"])} min read</span>\n{pad}  <a class="lp-link" href="{prefix}{p["slug"]}/"><b>{esc(clean_title(p["title"]))}</b></a>'
+                   f'{sub}{tags}\n{pad}</li>')
     return "\n".join(out)
 
 
