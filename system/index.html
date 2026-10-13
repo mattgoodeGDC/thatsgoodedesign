@@ -174,7 +174,6 @@
   border-top: 6.5px solid transparent; border-bottom: 6.5px solid transparent; }
 .eco-cols { list-style: none; margin: 16px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 12px; }
 .eco-col { padding: 18px 16px 16px; border: 1px solid var(--rule); border-top: 3px solid var(--gold); border-radius: 4px; background: var(--paper-alt); }
-.eco-col:first-child { border-top-color: var(--rule-2); }
 .eco-n { margin: 0; font-size: 12px; font-weight: 800; color: var(--gold); letter-spacing: .1em; }
 .eco-col h3 { margin: 4px 0 2px; font-size: 17px; color: var(--ink); }
 .eco-v { margin: 0 0 12px; font-size: 13px; color: var(--muted); }
@@ -305,6 +304,7 @@
       <a class="link-arrow" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=system-hero">Or book thirty minutes</a>
     </p>
     <p class="micro">Free. A few short questions, about two minutes, and your result appears before any email.</p>
+    <p class="micro"><a class="link-arrow" href="#ecosystem">Already know what you need? See every way in</a></p>
 
     <!-- 6. AUTHORITY. Same credential row as the home page, now above the fold. -->
     <ul class="logo-row" aria-label="Credentials">
@@ -364,7 +364,7 @@
         <li><a href="#sixc" class="fw-sixc" data-k="6c"><span class="os-dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.5C12 21.5 5 15 5 9.5A7 7 0 0 1 19 9.5C19 15 12 21.5 12 21.5Z M9.5 9.5a2.5 2.5 0 1 0 5 0a2.5 2.5 0 1 0 -5 0"/></svg></span><span class="os-lbl">6C</span></a></li>
         <li><a href="#delegate" class="fw-delegate" data-k="delegate"><span class="os-dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 15.5a3.5 3.5 0 1 0 7 0a3.5 3.5 0 1 0 -7 0 M9.5 13L19 3.5 M15 7.5l2.5 2.5 M17.5 5l2 2"/></svg></span><span class="os-lbl">DELEGATE</span></a></li>
         <li><a href="#license" data-k="development"><span class="os-dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16 M4 20v-5h5v-5h5V5h6v15"/></svg></span><span class="os-lbl">TITLE / LICENSE</span></a></li>
-        <li><a href="#work" data-k="results"><span class="os-dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 4L3 21 M14.5 4L21 21 M12 6V8 M12 11V13.5 M12 17V20.5"/></svg></span><span class="os-lbl">PUT IT TO WORK</span></a></li>
+        <li><a href="#ecosystem" data-k="results"><span class="os-dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 4L3 21 M14.5 4L21 21 M12 6V8 M12 11V13.5 M12 17V20.5"/></svg></span><span class="os-lbl">EVERY WAY IN</span></a></li>
       </ol>
     </nav>
 
@@ -625,148 +625,89 @@
       </div>
     </section>
 
-    <!-- 8. THE PATH TO PAID WORK. Find, fix, teach.
-         Copy approved by PUBLISHING, 12 Oct 2026. No prices here by design;
-         the OBD page carries them. -->
-    <section class="band work" id="work" data-light="results">
-      <p class="eyebrow">Put it to work</p>
-      <h2 class="section-h">The book teaches the system. The work installs it.</h2>
-      <p class="lede">Four ways the system gets into an organization, in the order
-        most engagements run. Each starts from data about how your people actually
-        operate under pressure, not from a fortnight of interviews.</p>
-      <div class="grid-3 grid-2x2 tracks">
-        <article class="track">
-          <p class="step">1 &middot; Find the part</p>
-          <h3>The On-Board Diagnostic</h3>
-          <p class="track-kind">CliftonStrengths and EQ-i 2.0, one written read</p>
-          <p>Two published instruments, read against each other, so you know which
-            part is slipping before anyone spends money fixing it.</p>
-          <p class="meta"><a class="link-arrow" href="../obd/">See the OBD levels</a></p>
-        </article>
-        <article class="track">
-          <p class="step">2 &middot; Fix it with one leader</p>
-          <h3>Executive coaching</h3>
-          <p class="track-kind">Six sessions, built on the OBD</p>
-          <p>Session one starts from your read, not an introduction. The framework
-            that matches what is breaking becomes the agenda.</p>
-          <p class="meta"><a class="link-arrow" href="../executive-coaching/">How coaching works</a></p>
-        </article>
-        <article class="track">
-          <p class="step">3 &middot; Teach it to the team</p>
-          <h3>Know Thyself to Lead Others</h3>
-          <p class="track-kind">A strengths workshop for a whole staff</p>
-          <p>The whole team learns the same language for how each of them runs,
-            so handoffs and hard conversations stop depending on guesswork.</p>
-          <p class="meta"><a class="link-arrow" href="../know-thyself/">See the workshop</a></p>
-        </article>
-        <article class="track">
-          <p class="step">4 &middot; Write it down together</p>
-          <h3>Owner&rsquo;s Manual</h3>
-          <p class="track-kind">How each of us works, written down</p>
-          <p>A small team that works together daily turns each person&rsquo;s OBD
-            into a manual for how they work, then swaps. Up to 15 people.</p>
-          <p class="meta"><a class="link-arrow" href="../owners-manual/">See the workshop</a></p>
-        </article>
+    <!-- THE ECOSYSTEM. Moved 12 Oct 2026 to replace "Put it to work" and close the
+         framework walk-through; every item now lands on its own page or anchor. Everything Goode Design & Consulting offers, on one
+         picture: who it is for, the ladder from free to retained, and the one
+         operating system underneath all of it. Names are the published service
+         names from /products/ and /schools/.
+         Copy approved by PUBLISHING, 12 Oct 2026. -->
+    <section class="band dark eco" id="ecosystem" data-light="results">
+      <p class="eyebrow">The whole ecosystem</p>
+      <h2 class="section-h">One operating system. Every way in.</h2>
+      <p class="lede">Every book, instrument, program and engagement runs on the
+        same four frameworks. Start where you are. Most organizations climb from
+        there.</p>
+
+      <div class="eco-who" aria-label="Who it is for">
+        <span class="eco-who-h">Built for</span>
+        <a href="../products/">Founders and scaling firms</a>
+        <a href="../schools/">Independent schools</a>
+        <a href="../#lanes">Nonprofit and public sector</a>
       </div>
-      <p class="work-also">
-        <a class="link-arrow" href="#ecosystem">See everything the system powers</a>
-      </p>
+
+      <div class="eco-scale" aria-hidden="true"><span>Free and low cost</span><span>Deeper commitment</span></div>
+
+      <ol class="eco-cols">
+        <li class="eco-col">
+          <p class="eco-n">0</p>
+          <h3>Learn it</h3>
+          <p class="eco-v">On your own, at your pace</p>
+          <ul>
+            <li><a href="../diagnostic/?src=system-ecosystem">Free diagnostic</a></li>
+            <li><a href="../clutch/">CLUTCH</a></li>
+            <li><a href="../clutch/ebooks/">Four framework ebooks</a></li>
+            <li><a href="../field-tested/">Field Tested</a></li>
+            <li><a href="../no-average-brain/">No Average Brain</a></li>
+            <li><a href="../writing/">The Leadership Lab</a></li>
+            <li><a href="https://www.linkedin.com/newsletters/clutch-the-leadership-shift-7425346322725048320/">The Leadership Shift</a></li>
+          </ul>
+        </li>
+        <li class="eco-col">
+          <p class="eco-n">1</p>
+          <h3>See it clearly</h3>
+          <p class="eco-v">Find the part that is slipping</p>
+          <ul>
+            <li><a href="../obd/">The On-Board Diagnostic</a></li>
+            <li><a href="../psychological-safety/">Psychological Safety Check</a></li>
+          </ul>
+        </li>
+        <li class="eco-col">
+          <p class="eco-n">2</p>
+          <h3>Develop one leader</h3>
+          <p class="eco-v">The person in the seat</p>
+          <ul>
+            <li><a href="../executive-coaching/">Executive coaching</a></li>
+            <li><a href="../goodestart/">GoodeStart</a></li>
+            <li><a href="../building-the-bench/">Building the Bench</a></li>
+          </ul>
+        </li>
+        <li class="eco-col">
+          <p class="eco-n">3</p>
+          <h3>Develop the team</h3>
+          <p class="eco-v">A shared language</p>
+          <ul>
+            <li><a href="../know-thyself/">Know Thyself to Lead Others</a></li>
+            <li><a href="../owners-manual/">Owner&rsquo;s Manual</a></li>
+            <li><a href="../products/#svc-seminars">Seminars</a></li>
+            <li><a href="../field-tested/#team-licenses">Field Tested train-the-trainer</a></li>
+          </ul>
+        </li>
+        <li class="eco-col">
+          <p class="eco-n">4</p>
+          <h3>Redesign the system</h3>
+          <p class="eco-v">How the whole machine runs</p>
+          <ul>
+            <li><a href="../products/#prog-exec">Executive team consulting</a></li>
+            <li><a href="../products/#prog-system">System-wide consulting</a></li>
+          </ul>
+        </li>
+      </ol>
+
+      <p class="eco-room"><b>Speak to the room</b> <span>Keynotes, retreats and
+        in-service days, at any stage</span> <a class="link-arrow" href="../products/#keynotes">See the keynotes</a></p>
     </section>
   </div>
 
-  <!-- THE ECOSYSTEM. Everything Goode Design & Consulting offers, on one
-       picture: who it is for, the ladder from free to retained, and the one
-       operating system underneath all of it. Names are the published service
-       names from /products/ and /schools/.
-       Copy approved by PUBLISHING, 12 Oct 2026. -->
-  <section class="band dark eco" id="ecosystem">
-    <p class="eyebrow">The whole ecosystem</p>
-    <h2 class="section-h">One operating system. Every way in.</h2>
-    <p class="lede">Every book, instrument, program and engagement runs on the
-      same four frameworks. Start where you are. Most organizations climb from
-      there.</p>
-
-    <div class="eco-who" aria-label="Who it is for">
-      <span class="eco-who-h">Built for</span>
-      <a href="../#lanes">Founders and scaling firms</a>
-      <a href="../schools/">Independent schools</a>
-      <a href="../#lanes">Nonprofit and public sector</a>
-    </div>
-
-    <div class="eco-scale" aria-hidden="true"><span>Free and low cost</span><span>Deeper commitment</span></div>
-
-    <ol class="eco-cols">
-      <li class="eco-col">
-        <p class="eco-n">0</p>
-        <h3>Learn it</h3>
-        <p class="eco-v">On your own, at your pace</p>
-        <ul>
-          <li><a href="../diagnostic/?src=system-ecosystem">Free diagnostic</a></li>
-          <li><a href="https://www.amazon.com/dp/B0HHFGV2MT">CLUTCH</a></li>
-          <li><a href="../clutch/ebooks/">Four framework ebooks</a></li>
-          <li><a href="../books/">Field Tested</a></li>
-          <li><a href="../books/">No Average Brain</a></li>
-          <li><a href="../writing/">The Leadership Lab</a></li>
-          <li><a href="https://www.linkedin.com/newsletters/clutch-the-leadership-shift-7425346322725048320/">The Leadership Shift</a></li>
-        </ul>
-      </li>
-      <li class="eco-col">
-        <p class="eco-n">1</p>
-        <h3>See it clearly</h3>
-        <p class="eco-v">Find the part that is slipping</p>
-        <ul>
-          <li><a href="../obd/">The On-Board Diagnostic</a></li>
-          <li><a href="../psychological-safety/">Psychological Safety Check</a></li>
-        </ul>
-      </li>
-      <li class="eco-col">
-        <p class="eco-n">2</p>
-        <h3>Develop one leader</h3>
-        <p class="eco-v">The person in the seat</p>
-        <ul>
-          <li><a href="../executive-coaching/">Executive coaching</a></li>
-          <li><a href="../goodestart/">GoodeStart</a></li>
-          <li><a href="../building-the-bench/">Building the Bench</a></li>
-        </ul>
-      </li>
-      <li class="eco-col">
-        <p class="eco-n">3</p>
-        <h3>Develop the team</h3>
-        <p class="eco-v">A shared language</p>
-        <ul>
-          <li><a href="../know-thyself/">Know Thyself to Lead Others</a></li>
-          <li><a href="../owners-manual/">Owner&rsquo;s Manual</a></li>
-          <li><a href="../products/#services">Seminars</a></li>
-          <li><a href="../products/#services">Field Tested train-the-trainer</a></li>
-        </ul>
-      </li>
-      <li class="eco-col">
-        <p class="eco-n">4</p>
-        <h3>Redesign the system</h3>
-        <p class="eco-v">How the whole machine runs</p>
-        <ul>
-          <li><a href="../products/#services">Executive team consulting</a></li>
-          <li><a href="../products/#services">System-wide consulting</a></li>
-        </ul>
-      </li>
-    </ol>
-
-    <p class="eco-room"><b>Speak to the room</b> <span>Keynotes, retreats and
-      in-service days, at any stage</span> <a class="link-arrow" href="../products/">See the keynotes</a></p>
-
-    <div class="eco-base">
-      <p class="eco-base-h">Underneath all of it: the CLUTCH OS</p>
-      <ol class="eco-fw">
-        <li class="fw-create"><a href="#create">CREATE<span>the engine</span></a></li>
-        <li class="fw-voices"><a href="#voices">VOICES<span>the gearbox</span></a></li>
-        <li class="fw-sixc"><a href="#sixc">6C Compass<span>the navigation</span></a></li>
-        <li class="fw-delegate"><a href="#delegate">DELEGATE<span>the handoff</span></a></li>
-      </ol>
-      <p class="eco-eq"><img src="../assets/icon_EQ.png" alt="" width="28" height="28">
-        <span>Emotional intelligence, the clutch between every part</span></p>
-      <p class="eco-inst">Measured with CliftonStrengths&reg; and EQ-i 2.0&reg;</p>
-    </div>
-  </section>
 
   <!-- 7. MEET MATT. A face and three lines, all drawn from published pages. -->
   <section class="band alt meet" id="matt">
@@ -795,42 +736,6 @@
       <figure class="hero-figure">
         <img src="../assets/matt.jpg" alt="Matt Goode" width="780" height="1040" loading="lazy">
       </figure>
-    </div>
-  </section>
-
-  <!-- Three ways in, at three levels of commitment. -->
-  <section class="band">
-    <p class="eyebrow">Not ready to talk?</p>
-    <h2 class="section-h">Learn the system before you buy anything</h2>
-    <div class="grid-3 tracks">
-      <article class="track">
-        <img class="track-icon" src="../assets/clutch_cover.jpg"
-             alt="" width="35" height="52" loading="lazy">
-        <h3>The book</h3>
-        <p class="track-kind">The whole system, on paper</p>
-        <p>All four frameworks, emotional intelligence as the mechanism between
-          them, and a diagnostic for every part. Or buy only the framework that
-          matches what is breaking, as a <a href="../clutch/ebooks/">$3.99 framework ebook</a>.</p>
-        <p class="meta"><a class="link-arrow" href="https://www.amazon.com/dp/B0HHFGV2MT">Buy CLUTCH on Amazon</a></p>
-      </article>
-      <article class="track">
-        <img class="track-icon" src="../assets/icon-substack.png"
-             alt="" width="52" height="52" loading="lazy">
-        <h3>The Leadership Lab</h3>
-        <p class="track-kind">Essays, weekly</p>
-        <p>One idea worked through properly, with the coaching questions I would
-          ask in the room and what to try on Monday.</p>
-        <p class="meta"><a class="link-arrow" href="../writing/">Read the essays</a></p>
-      </article>
-      <article class="track">
-        <img class="track-icon" src="../assets/icon-linkedin.png"
-             alt="" width="52" height="52" loading="lazy">
-        <h3>The Leadership Shift</h3>
-        <p class="track-kind">LinkedIn newsletter, short</p>
-        <p>One framework, one move, read in ninety seconds on a phone between
-          meetings.</p>
-        <p class="meta"><a class="link-arrow" href="https://www.linkedin.com/newsletters/clutch-the-leadership-shift-7425346322725048320/">Follow the newsletter</a></p>
-      </article>
     </div>
   </section>
 
