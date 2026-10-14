@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Ship of Theseus problem – The Leadership Lab</title>
+<meta name="description" content="Are you getting credit for your ideas?">
+<link rel="canonical" href="https://thatsgoodedesign.com/writing/the-ship-of-theseus-problem/">
+<link rel="alternate" type="application/rss+xml" title="The Leadership Lab" href="https://thatsgoodedesign.com/writing/feed.xml">
+<link rel="icon" href="../../favicon.ico" sizes="any">
+<link rel="icon" href="../../assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/favicon/apple-touch-icon.png">
+<meta property="og:site_name" content="Goode Design &amp; Consulting">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Ship of Theseus problem">
+<meta property="og:description" content="Are you getting credit for your ideas?">
+<meta property="og:url" content="https://thatsgoodedesign.com/writing/the-ship-of-theseus-problem/">
+<meta property="og:image" content="https://substack-post-media.s3.amazonaws.com/public/images/6da9615f-ba83-4723-8c3e-533c26fc0eed_1024x653.jpeg">
+<meta property="article:published_time" content="2026-10-14T16:53:42.236Z">
+<meta property="article:author" content="Matt Goode">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Ship of Theseus problem">
+<meta name="twitter:description" content="Are you getting credit for your ideas?">
+<meta name="twitter:image" content="https://substack-post-media.s3.amazonaws.com/public/images/6da9615f-ba83-4723-8c3e-533c26fc0eed_1024x653.jpeg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap">
+<link rel="stylesheet" href="../../assets/style.css?v=17">
+<link rel="stylesheet" href="../../assets/gdc-nav.css?v=17">
+<link rel="stylesheet" href="../../assets/writing.css?v=1">
+<script src="../../assets/gdc-analytics.js?v=12"></script>
+<script src="../../assets/gdc-nav.js?v=17" defer></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "The Ship of Theseus problem", "description": "Are you getting credit for your ideas?", "datePublished": "2026-10-14T16:53:42.236Z", "url": "https://thatsgoodedesign.com/writing/the-ship-of-theseus-problem/", "image": "https://substack-post-media.s3.amazonaws.com/public/images/6da9615f-ba83-4723-8c3e-533c26fc0eed_1024x653.jpeg", "mainEntityOfPage": "https://thatsgoodedesign.com/writing/the-ship-of-theseus-problem/", "inLanguage": "en-US", "author": {"@type": "Person", "@id": "https://thatsgoodedesign.com/#matt", "name": "Matt Goode", "url": "https://thatsgoodedesign.com/about/"}, "publisher": {"@id": "https://thatsgoodedesign.com/#org"}, "isPartOf": {"@type": "Blog", "name": "The Leadership Lab", "url": "https://thatsgoodedesign.com/writing/"}, "keywords": "AI, DELEGATE, 6C"}</script>
+<meta name="tdm-reservation" content="1">
+<meta name="tdm-policy" content="https://thatsgoodedesign.com/terms/">
+<meta name="robots" content="noai, noimageai">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <a class="brand" href="../../">
+    <picture>
+      <source media="(max-width: 370px)" srcset="../assets/gdc/gdc-mark.svg">
+      <source media="(max-width: 519px)" srcset="../assets/gdc/gdc-lockup-short.svg">
+      <img src="../../assets/gdc/gdc-lockup-header.svg" alt="Goode Design &amp; Consulting" width="269" height="52">
+    </picture>
+  </a>
+  <nav aria-label="Primary">
+    <a href="../../system/">The system</a>
+    <div class="navmenu">
+      <button type="button" aria-expanded="false" aria-controls="menu-who">Who I help</button>
+      <ul class="navmenu-panel" id="menu-who" hidden>
+        <li><a href="../../founders/">Founders and scaling firms<span>Coaching and fractional operations</span></a></li>
+        <li><a href="../../schools/">Independent schools<span>Coaching, cohorts, in-service, advisory</span></a></li>
+        <li><a href="../../nonprofits/">Nonprofit and public sector<span>Team development and facilitation</span></a></li>
+      </ul>
+    </div>
+    <div class="navmenu">
+      <button type="button" aria-expanded="false" aria-controls="menu-services">Services</button>
+      <ul class="navmenu-panel navmenu-wide" id="menu-services" hidden>
+        <li class="nmp-group">
+          <p class="nmp-head">For companies</p>
+          <ul>
+            <li><a href="../../products/#services">What a company can buy<span>One list, diagnostic to retained</span></a></li>
+            <li><a href="../../obd/">The On-Board Diagnostic<span>Two instruments, one written read</span></a></li>
+            <li><a href="../../products/#why">Why this is different<span>Five structural differences, not adjectives</span></a></li>
+          </ul>
+        </li>
+        <li class="nmp-group">
+          <p class="nmp-head">For schools and nonprofits</p>
+          <ul>
+            <li><a href="../../schools/#services">What a school can buy<span>Ten services, plainly named</span></a></li>
+            <li><a href="../../schools/rates/">Published rates<span>Real numbers for a budget line</span></a></li>
+            <li><a href="../../schools/#why">Why this is different<span>Twenty years inside a school</span></a></li>
+          </ul>
+        </li>
+        <li class="nmp-group">
+          <p class="nmp-head">Flagship programs</p>
+          <ul>
+            <li><a href="../../goodestart/">GoodeStart<span>The first ninety days, on purpose</span></a></li>
+            <li><a href="../../building-the-bench/">Building the Bench<span>A cohort for the next seat</span></a></li>
+            <li><a href="../../know-thyself/">Know Thyself to Lead Others<span>A strengths workshop for a whole staff</span></a></li>
+            <li><a href="../../owners-manual/">Owner&rsquo;s Manual<span>How each of us works, written down</span></a></li>
+            <li><a href="../../executive-coaching/">Executive coaching<span>Six sessions, built on the OBD</span></a></li>
+          </ul>
+        </li>
+        <li class="nmp-foot">
+          <a href="../../coaching-engagement/">How the engagement works<span>The terms, before you have to ask for them</span></a>
+        </li>
+        <li class="nmp-foot">
+          <a href="../../diagnostic/">Start with the free diagnostic<span>A few short questions, about two minutes, five patterns</span></a>
+        </li>
+        <li class="nmp-foot">
+          <a href="../../psychological-safety/">Psychological Safety Check, free<span>Is it safe to speak up on your team?</span></a>
+        </li>
+        <li class="nmp-foot">
+          <a href="../../free/">Free tools<span>Diagnostics, templates and a free chapter</span></a>
+        </li>
+      </ul>
+    </div>
+    <a href="../../books/">Books</a>
+    <a href="../../writing/" aria-current="page">Writing</a>
+    <a href="../../about/">About</a>
+    <a class="btn btn-sm" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=writing-nav">Book a call</a>
+  </nav>
+</header>
+
+<main id="main">
+  <article class="post">
+    <header class="post-head">
+      <p class="eyebrow"><a href="../">The Leadership Lab</a></p>
+      <h1>The Ship of Theseus problem</h1>
+      <p class="post-sub">Are you getting credit for your ideas?</p>
+      <p class="post-meta">
+        <span>Matt Goode</span><span><time datetime="2026-10-14">14 October 2026</time></span><span>7 min read</span>
+        <a class="post-sub-jump" href="#subscribe">Get new pieces by email</a>
+      </p>
+      <p class="post-tags"><a class="post-tag" href="../?tag=ai#archive">#&nbsp;AI</a><a class="post-tag" href="../?tag=delegate#archive">#&nbsp;DELEGATE</a><a class="post-tag" href="../?tag=6c#archive">#&nbsp;6C</a></p>
+    </header>
+    <div class="prose">
+<p>Plutarch tells of the ship Theseus sailed home from Crete. The Athenians kept it for centuries, replacing each rotten plank with new timber, until philosophers began to argue: if they replaced every plank, <em>was it still his ship?</em> This month, book publishers walked into the same question, and so will every team handed a new tool.</p><p><strong>The story, briefly</strong></p><p>Recently, WIRED’s Adam Morgan spoke anonymously with more than two dozen staff at HarperCollins, Simon &amp; Schuster, and Hachette. His research uncovered that chatbots drafted publicity and back-cover copy, cover art, marketing materials, and emails to literary agents, often at executives’ request, rarely with disclosure or the author’s consent.</p><p>At HarperCollins, leaders bought the AI licenses first. Then dozens of staff were, <a href="https://www.wired.com/story/book-publishers-are-quietly-using-more-ai-staff-are-revolting/">in Morgan’s word</a>, “voluntold” to become AI Champions and find uses in monthly sessions. Simon &amp; Schuster ran a use-case contest in May 2024 with a $10,000 top prize, then pulled back after complaints, and staff organized a letter against workflow-monitoring software. Hachette says AI is for operations, not creative work, a line the reporting suggests doesn’t hold in practice. All of this on teams cut to five or six people handling two or three times as many books. One agent, Emma Dries, asked for something simple: <em>tell us which tools you use, and when.</em></p><p><strong>Whose work is it?</strong></p><p>Beneath the publishing story is a question every team will face. When a tool touches the work, who gets the credit?</p><p>Look at France. Last month the <em>Académie Goncourt </em>pulled Thélyson Orélien’s bestselling debut novel from its prize list after an anonymous account ran passages through an AI detector. Orélien, a Haitian-Canadian writer, denies it. He says he used tools for research on foreign idioms and that <a href="https://www.france24.com/en/culture/20261013-novelist-th%C3%A9lyson-or%C3%A9lien-rejects-ai-claims-after-book-pulled-from-french-prize-list">“not a single sentence”</a> came from a machine. He has also admitted to plagiarism in earlier writing. Detectors are disputed, and some critics have asked whether Caribbean speech rhythms simply read as machine-made to a machine. I don’t know what’s true. I suspect the people who decided don’t either.</p><p>That’s the point. Nobody agreed on the line before the work was done, so an algorithm and an anonymous account drew it afterward, in public. Credit went to whoever spoke first.</p><p>I’ll admit this one gets personal. I write novels, and the idea that anyone can sit down with a chatbot and ask it for the next great American novel makes me prickly. So I’ve had to ask myself why.</p><p>Art is a series of decisions. What color. How much pressure on the brush. Which word, which scene to cut. Those decisions come from some talent, a lot of experience with the medium, and more reps and revisions than anyone ever sees. A tool can offer options. It can’t make the decisions for you, and it can’t do the reps. So if a writer uses one, how is that different from using it for anything else? It comes down to ownership of the ideas. Whose decisions are on the page?</p><p>Which is why I’ll confess to a fair amount of <em>schadenfreude</em> reading about the publishers. This is an industry, prizes included, that publicly shames writers suspected of using AI, sometimes on the word of a detector that is itself an AI, while quietly running its own copy through chatbots. I couldn’t put that irony in a novel. An editor would cut it as too neat.</p><p>And it raises an uncomfortable question for me. I use a grammar checker, because grammar has never been my strength. Fixing a comma is one thing. Accepting a suggestion that rewrites my sentence is another. I’m on Theseus’s ship too. If I accept enough small fixes, is it still my sentence? My answer is that the ship belongs to whoever chooses the course. The idea and the argument are mine. But I’d rather say that here than have a detector say it for me.</p><p>So if art is a series of decisions, maybe AI is just another tool of creation, like the brush, the camera, or the word processor. Painters were told photography would kill painting. Instead, it freed them from copying the world and pushed them toward what only they could see. The tool was never the threat. The threat is handing it the decisions and keeping the byline. A chatbot can offer a thousand next sentences. Choosing the one that belongs on the page, and answering for it, is still the work, and still the credit.</p><p>The publishing staff is on the same edge. A publicist who writes a sharp pitch now has to wonder whether the agent thinks a chatbot wrote it. Undisclosed use quietly takes credit from everyone who did the work themselves.</p><p><strong>Three mistakes, in CLUTCH terms</strong></p><p>In CLUTCH, every piece of work carries a title and a license. The title is final accountability: the leader who answers for it when it goes out the door. <em>Note: in this sense, not a book title, but a car’s title</em>. The license is operational ownership: who actually makes the calls. Whoever makes the decisions holds the license, on a page or in a company. When both are clear, credit is clear. Every mistake in the publishing story blurs the two.</p><ul><li><p><strong>The tool came before the problem.</strong> Buying first quietly turns the job from “solve our problem” into “justify our purchase.” Monthly sessions to find uses are the tell. Nobody brainstorms uses for a fix they asked for.</p></li><li><p><strong>The mandate traveled down without the license.</strong> The champions were handed a job and no authority: not whether a use was appropriate, not whether authors should be told, not whether the honest answer was “nowhere.” DELEGATE exists to stop exactly this, a handoff where the work moves and the decision stays put. What follows is drift, private calls nobody decided, and the bottleneck: every real decision routed back up.</p></li><li><p><strong>The people whose names were on the line were never told. </strong>The executives held the title and made the call. The authors’ names went on the covers, and nobody told them what they touched in the work published under their names. And staff objections, the cheapest risk data a company ever gets, were treated as a cost of doing business.</p></li></ul><p><strong>What to do instead</strong></p><p>If you’re about to introduce anything new, a platform, a process, a chatbot, decide who’s steering before you start swapping planks.</p><ul><li><p><strong>Start from the problem.</strong> Name it before you buy anything. “Our teams carry three times the titles” is a problem. “We have licenses” is not.</p></li><li><p><strong>Give champions a real license.</strong> Write down what they can decide without asking, including the right to rule out a use. Use the 6C Compass to say the decision type out loud: is this your command, a consultation, or genuinely theirs?</p></li><li><p><strong>Treat objections as data.</strong> Log them, answer them in writing, and show what changed because of them. If nothing ever changes, people stop telling you.</p></li><li><p><strong>Write the credit line before the work.</strong> For anything that leaves the building, three questions: whose idea was it, who decided, and what tools touched it? Tell the people whose names are on it. Disclosure costs a paragraph. An accusation after the fact costs far more.</p></li></ul><p>Philosophers have argued about Theseus’s ship for two thousand years and still haven’t settled it. Your team doesn’t have that long. Someone will decide whose work this is: either you, in writing, before the tool goes in, or an algorithm and an anonymous account afterward. Leadership is infrastructure. Decide who’s steering, tell the people whose names are on the line, and a new tool is just another plank. So, are you getting credit for your ideas? Only if someone decided, out loud and in advance, who chooses the course.</p><hr/><p><em>Matt Goode is the founder of Goode Design &amp; Consulting, where he helps founders and school leaders build leadership that keeps working when they step away. He spent twenty years in the classroom, built leadership benches at USAID, and writes fiction as m kirk, where he still chooses the course.</em></p><p><strong>Who decides, who is told, whose name goes on it.</strong></p><p><em>CLUTCH: How Leaders Build Systems That Run Without Them</em> is the operating system behind this essay: title and license, the 6C Compass for decision rights, and DELEGATE for handoffs where the decision moves with the work. Paperback only, because it’s meant to be written in. Bring a pencil.</p><p><strong><a href="https://thatsgoodedesign.com/clutch/">Get your copy of CLUTCH →</a></strong></p><p><em>If you know someone about to roll out a new tool, send them this.</em></p>
+    </div>
+
+    <section class="post-subscribe" id="subscribe" aria-labelledby="sub-h">
+      <div>
+        <p class="eyebrow">The Leadership Lab, by email</p>
+        <h2 id="sub-h">Get the next piece in your inbox</h2>
+        <p>For people who have become the bottleneck in the thing they built: one idea at a time, and something to do with it. Free. Leave whenever you like.</p>
+      </div>
+      <div class="signup-form">
+        <script src="https://f.convertkit.com/ck.5.js" async></script>
+        <form action="https://app.kit.com/forms/9910445/subscriptions"
+              class="seva-form formkit-form" method="post"
+              data-sv-form="9910445" data-uid="906eaeb714" data-format="inline" data-version="5"
+              style="width:100%">
+          <div data-style="clean">
+            <ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert"></ul>
+            <div data-element="fields" data-stacked="false" class="seva-fields formkit-fields">
+              <div class="formkit-field">
+                <input class="formkit-input" name="email_address" aria-label="Email address"
+                       placeholder="Email address" required type="email">
+              </div>
+              <button data-element="submit" class="formkit-submit formkit-submit">
+                <div class="formkit-spinner"><div></div><div></div><div></div></div>
+                <span>Subscribe</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="post-next">
+      <div>
+        <p class="eyebrow">Where is your system slipping?</p>
+        <p>A few short questions, about two minutes, and you will know which of five patterns you are in. No email needed.</p>
+        <p class="cta-row"><a class="btn" href="../../diagnostic/?src=writing-the-ship-of-theseus-prob#doors">Run the free diagnostic</a>
+        <a class="btn btn-ghost" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=writing-post">Book a 30-minute call</a></p>
+      </div>
+    </section>
+    <nav class="post-pn" aria-label="More from the Lab"><a class="pn-old" href="../dont-hire-the-eagle-scout-build-the/"><span>Older</span>Don’t Hire the Eagle Scout. Build the Patrol.</a></nav>
+  </article>
+</main>
+
+<footer class="foot">
+  <div class="foot-in">
+    <div>
+      <img src="../../assets/gdc/gdc-mark.svg" alt="" width="34" height="34">
+      <p class="foot-name">Goode Design &amp; Consulting</p>
+      <p class="foot-meta">Washington, DC &middot; Baltimore &middot; New York &middot; Boston &middot; Available globally</p>
+    <ul class="socials" aria-label="Elsewhere">
+      <li><a href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=writing-footer" title="Book a time"><img src="../../assets/icon-calendly.png" alt="Book a time with Matt Goode"></a></li>
+      <li><a href="https://www.linkedin.com/in/goodematt/" title="LinkedIn"><img src="../../assets/icon-linkedin.png" alt="Matt Goode on LinkedIn"></a></li>
+      <li><a href="https://thatsgoodedesign.substack.com/" title="The Leadership Lab on Substack"><img src="../../assets/icon-substack.png" alt="The Leadership Lab on Substack"></a></li>
+      <li><a href="mailto:matt@thatsgoodedesign.com" title="Email"><img src="../../assets/icon-email.png" alt="Email Matt Goode"></a></li>
+    </ul>
+    </div>
+    <nav aria-label="Footer">
+      <a href="../../system/">The system</a>
+      <a href="../../products/">Products</a>
+      <a href="../../obd/">The OBD</a>
+      <a href="../../schools/">Schools</a>
+      <a href="../../coaching-engagement/">How it works</a>
+      <a href="../../diagnostic/">Free diagnostic</a>
+      <a href="../../free/">Free tools</a>
+      <a href="../../books/">Books</a>
+      <a href="../../writing/">Writing</a>
+      <a href="../../about/">About</a>
+      <a href="mailto:matt@thatsgoodedesign.com">Contact</a>
+      <a href="../../terms/">Terms</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+  </div>
+  <p class="foot-legal">&copy; 2026 Goode Design &amp; Consulting. CliftonStrengths&reg;,
+    StrengthsFinder&reg; and the 34 theme names are trademarks of Gallup, Inc.
+    EQ-i 2.0 is a trademark of Multi-Health Systems Inc. Matt Goode is a
+    Gallup-Certified Strengths Coach.
+    <br><br>
+    The non-Gallup information you are receiving has not been approved and is not
+    sanctioned or endorsed by Gallup in any way. Opinions, views and
+    interpretations of CliftonStrengths&reg;, Clifton Youth StrengthsExplorer or
+    BP10 results are solely the beliefs of Goode Design &amp; Consulting.</p>
+</footer>
+
+</body>
+</html>
