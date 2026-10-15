@@ -411,7 +411,10 @@
     var t = reportText(R); for (k in t) rec[k] = t[k];
     if (!REC.example) post(rec);
     $("fc-req").hidden = true; $("fc-done").hidden = false;
-    $("fc-reqpanel").scrollIntoView({ block: "center" });
+    requestAnimationFrame(function () {
+      var nav = document.querySelector(".nav"), h = nav && getComputedStyle(nav).position !== "static" ? nav.offsetHeight : 0;
+      window.scrollTo(0, Math.max(0, $("fc-reqpanel").getBoundingClientRect().top + window.scrollY - h - 16));
+    });
   }
 
   function post(rec) {
