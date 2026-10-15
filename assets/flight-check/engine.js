@@ -315,10 +315,13 @@ window.FLIGHT_CHECKS.engine = {
   report: {
     org:  { label: "What kind of organization are you in? (optional)", options: ["Company", "School", "Nonprofit", "Government", "Other"] },
     seat: { label: "Which best describes your role? (optional)", options: ["Founder or CEO", "Senior leader", "Head of School", "Other leader"] },
-    confirm: "Thanks. Matt will send your full report by email."
-    /* Switch to "Thanks. Your full report is on its way to your inbox." once
-       DALE's Kit handover confirms the report email is live. */
+    /* confirm.auto, block library v0.2 (Additions, 15 Oct), word for word.
+       {email} is filled with the address the person typed. */
+    confirm: "Done. Your full report is on its way to {email}. It comes from Matt Goode at matt@thatsgoodedesign.com. If it isn't in your inbox in ten minutes, check promotions or spam."
   },
+
+  /* Added to kitTags on the report request only (DALE's Zapier adds it anyway). */
+  reportTag: "engine-check-report",
 
   kitTags: function (r) {
     return ["engine-check-" + this.patterns[r.P].slug, "engine-check-weak-" + this.names[r.start].toLowerCase()];

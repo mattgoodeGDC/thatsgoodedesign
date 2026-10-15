@@ -303,6 +303,9 @@
     if (r.mixed.length) flags.push('<div class="fc-flag"><strong>' + esc(CFG.mixed.head.replace("{cylinder}", r.mixed.map(function (k) { return NAME[k]; }).join(" and "))) + "</strong><span>" + esc(CFG.mixed.line) + "</span></div>");
 
     var R0 = CFG.report;
+    REC = record(r, el, example);
+    /* Record ID rides on the booking link so DALE can match a booking to its readout. */
+    var calHref = CAL + "?utm_source=" + CFG.id + "-check&utm_content=" + encodeURIComponent(example ? "example" : REC.recordId);
     var opt = function (o) { return '<option value="">Choose one</option>' + o.options.map(function (x) { return "<option>" + esc(x) + "</option>"; }).join(""); };
 
     $("fc-r").innerHTML =
@@ -327,7 +330,7 @@
       lean +
       (flags.length ? '<div class="fc-flags">' + flags.join("") + "</div>" : "") +
       '<div class="fc-panel"><h3>A question to sit with</h3><ul class="fc-qs">' + r.qsScreen.map(function (q) { return "<li>" + esc(q) + "</li>"; }).join("") + "</ul></div>" +
-      '<div class="fc-cta"><h3>' + esc(CFG.cta.head) + "</h3><p>" + esc(CFG.cta.line) + '</p><a class="btn" href="' + esc(CAL + "?utm_content=" + CFG.id + "-check-readout") + '">Book a time with Matt</a></div>' +
+      '<div class="fc-cta"><h3>' + esc(CFG.cta.head) + "</h3><p>" + esc(CFG.cta.line) + '</p><a class="btn" href="' + esc(calHref) + '">Book a time with Matt</a></div>' +
 
       '<div class="fc-panel" id="fc-reqpanel"><h3>Send me the full report</h3>' +
         '<p class="fc-note">All six cylinder reads, the statements you hesitated on and three more questions.</p>' +
@@ -340,7 +343,7 @@
           '<p class="fc-err" id="fc-err" hidden>Add your first name and a full email address, like name@company.com.</p>' +
           '<div class="fc-row"><button class="btn" type="submit">Send the full report</button></div>' +
         "</form>" +
-        '<p class="fc-done" id="fc-done" hidden role="status">' + esc(R0.confirm) + "</p>" +
+        '<p class="fc-done" id="fc-done" hidden role="status"></p>' +
       "</div>" +
       '<div class="fc-row"><button class="btn btn-ghost" type="button" id="fc-again">Take it again</button></div>' +
       '<details class="fc-how"><summary>How the score works</summary><p>Each answer is worth a prime: 2, 3, 5, 7, 11 from strongly disagree to strongly agree, so conviction counts for more than mild agreement. One statement per cylinder is a warning sign and scores in reverse. Each cylinder scores 6 to 33, and because the steps are primes, only 22 of those scores can happen. Neutral all the way through leaves a cylinder at 15, still misfiring, because a cylinder only runs clean on conviction. Three statements also make up your candor reading. A hesitation is any answer that took more than 1.75 times your own typical answer time, and at least four seconds, so a careful reader is never marked down for reading speed.</p></details>';
@@ -348,7 +351,6 @@
     $("fc-again").onclick = function () { show("fc-start"); };
     $("fc-req").addEventListener("submit", requestReport);
 
-    REC = record(r, el, example);
     if (!example) post(REC);
     show("fc-r");
   }
@@ -406,10 +408,11 @@
       reportRequested: 1, requestedAt: new Date().toISOString(),
       firstName: n, email: em, organization: $("fc-org").value.trim(),
       orgType: $("fc-orgtype").value, seat: $("fc-seat").value,
-      kitTags: REC.kitTags, example: REC.example
+      kitTags: CFG.reportTag ? REC.kitTags + ", " + CFG.reportTag : REC.kitTags, example: REC.example
     }, k;
     var t = reportText(R); for (k in t) rec[k] = t[k];
     if (!REC.example) post(rec);
+    $("fc-done").textContent = CFG.report.confirm.replace("{email}", em);
     $("fc-req").hidden = true; $("fc-done").hidden = false;
     requestAnimationFrame(function () {
       var nav = document.querySelector(".nav"), h = nav && getComputedStyle(nav).position !== "static" ? nav.offsetHeight : 0;
