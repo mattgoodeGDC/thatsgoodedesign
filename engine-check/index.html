@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Engine check v1 (WEBSITE, 15 Oct 2026, CLUTCH-84). Copy: "CLUTCH - Engine
+     check - Block library v0.2". Logic and records: assets/flight-check/. -->
+<title>The engine check – Goode Design &amp; Consulting</title>
+<meta name="description" content="Eighteen statements about the team you lead, against the clock.">
+<link rel="canonical" href="https://thatsgoodedesign.com/engine-check/">
+<meta property="og:title" content="The engine check">
+<meta property="og:description" content="Eighteen statements about the team you lead, against the clock.">
+<meta property="og:url" content="https://thatsgoodedesign.com/engine-check/">
+<meta property="og:type" content="website">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" href="../assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="../assets/favicon/icon-512.png" type="image/png" sizes="512x512">
+<link rel="apple-touch-icon" href="../assets/favicon/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&amp;display=swap">
+<link rel="stylesheet" href="../assets/style.css?v=17">
+<link rel="stylesheet" href="../assets/gdc-nav.css?v=17">
+<style>
+/* Engine check (CLUTCH flight check 1 of 4). The site is light-only, so the
+   page pins color-scheme to light: a phone in dark mode gets the same paper
+   ground and light form controls as every other page. VISUALS round 1:
+   the arc progress gauge, warning lights per cylinder, the CREATE icon. */
+:root { color-scheme: light; }
+.fc-band { padding-block: clamp(28px, 6vw, 72px) clamp(48px, 8vw, 96px); padding-inline: max(16px, var(--gut), calc((100% - 760px) / 2)); }
+#fc-root { max-width: 720px; margin: 0 auto; scroll-margin-top: 96px; }
+.fc-screen { display: grid; gap: 22px; }
+.fc-screen[hidden] { display: none; }
+.fc-hero { background: var(--ink); color: var(--paper); padding: clamp(24px, 5vw, 40px); margin-inline: calc(-1 * clamp(0px, 2vw, 16px)); }
+.fc-hero .eyebrow { color: var(--gold); margin-bottom: 12px; }
+.fc-hero h1 { color: var(--paper); font-size: clamp(34px, 7vw, 56px); font-weight: 800; line-height: 1.02; letter-spacing: -.028em; margin: 0 0 14px; }
+.fc-icon { width: 64px; height: 64px; margin: 0 0 18px; filter: drop-shadow(0 0 18px rgba(196,162,106,.5)); }
+.fc-lede { margin: 0; font-size: clamp(17px, 2.4vw, 20px); line-height: 1.5; color: #E7E4DC; max-width: 46ch; }
+.fc-rules { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; counter-reset: r; }
+.fc-rules li { position: relative; padding-left: 46px; font-size: 16px; line-height: 1.55; color: var(--body); counter-increment: r; }
+.fc-rules li::before { content: "0" counter(r); position: absolute; left: 0; top: 0; font-weight: 800; font-size: 14px; letter-spacing: .06em; color: var(--gold-ink); }
+.fc-counts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; border-block: 1px solid var(--rule); padding-block: 16px; }
+.fc-counts div { display: grid; gap: 4px; }
+.fc-counts b { font-size: clamp(19px, 4.6vw, 28px); font-weight: 800; letter-spacing: -.02em; line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; }
+.fc-counts span { font-size: 12px; line-height: 1.35; color: var(--muted); }
+.fc-privacy { margin: 0; font-size: 14px; line-height: 1.55; color: var(--muted); border-left: 3px solid var(--rule-2); padding-left: 14px; max-width: 60ch; }
+.fc-row { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; }
+.fc-root button { font-family: inherit; }
+#fc-root .btn { cursor: pointer; font-family: inherit; }
+.fc-link { border: 0; background: none; padding: 8px 0; font: 600 15px Montserrat, sans-serif; color: var(--body); text-decoration: underline; text-decoration-color: var(--gold-ink); text-underline-offset: 4px; cursor: pointer; }
+.fc-note { font-size: 14px; color: var(--muted); margin: 0; }
+
+/* Statement screen */
+.fc-top { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; }
+.fc-gauge { width: min(200px, 52vw); }
+.fc-arc { display: block; width: 100%; height: auto; overflow: visible; }
+.fc-arc path { fill: none; stroke: var(--rule); stroke-width: 15; transition: stroke .2s; }
+.fc-arc path.done { stroke: var(--ink); }
+.fc-arc path.now { stroke: var(--gold); }
+.fc-arc-n { font: 800 38px Montserrat, sans-serif; fill: var(--ink); text-anchor: middle; letter-spacing: -.02em; }
+.fc-arc-of { font: 600 12px Montserrat, sans-serif; fill: var(--muted); text-anchor: middle; letter-spacing: .12em; text-transform: uppercase; }
+.fc-clockbox { display: grid; justify-items: end; gap: 2px; padding-bottom: 6px; }
+.fc-k { font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+#fc-clock { font-size: 28px; font-weight: 800; letter-spacing: -.01em; color: var(--ink); font-variant-numeric: tabular-nums; }
+#fc-clock.low { color: var(--burgundy); }
+#fc-clock.paused { color: var(--muted); }
+.fc-card { background: var(--paper); border: 1px solid var(--rule); border-top: 3px solid var(--ink); padding: 22px 20px; display: grid; gap: 20px; min-height: 26rem; align-content: start; }
+.fc-card[hidden] { display: none; }
+.fc-cardtop { display: flex; justify-content: space-between; align-items: center; }
+.fc-cardtop .eyebrow { margin: 0; color: var(--gold-ink); }
+.fc-count { font-size: 34px; font-weight: 800; line-height: 1; color: var(--gold-ink); font-variant-numeric: tabular-nums; min-width: 2ch; text-align: right; }
+.fc-count.over { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+.fc-stmt { margin: 0; font-size: clamp(25px, 6.4vw, 34px); font-weight: 800; line-height: 1.15; letter-spacing: -.02em; color: var(--ink); text-wrap: balance; min-height: 2.3em; }
+.fc-nudge { height: 4px; background: var(--rule); overflow: hidden; }
+.fc-nudge i { display: block; height: 100%; background: var(--gold); transform-origin: left; }
+.fc-nudge.run i { animation: fc-drain var(--nudge, 8s) linear forwards; }
+@keyframes fc-drain { to { transform: scaleX(0); } }
+.fc-answers { display: grid; gap: 8px; }
+.fc-answers button { display: flex; justify-content: space-between; align-items: center; text-align: left; padding: 15px 16px; min-height: 52px; font: 600 16px Montserrat, sans-serif; color: var(--ink); background: var(--paper); border: 1px solid var(--rule-2); cursor: pointer; }
+.fc-answers kbd { font: 700 12px Montserrat, sans-serif; color: var(--muted); border: 1px solid var(--rule-2); padding: 1px 7px; }
+.fc-answers button.picked { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.fc-answers button.picked kbd { color: var(--paper); border-color: var(--paper); }
+@media (hover: hover) { .fc-answers button:hover { border-color: var(--gold-ink); } }
+@media (hover: none) { .fc-keys { display: none; } }
+.flash { animation: fc-in .22s ease; }
+@keyframes fc-in { from { opacity: .35; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.fc-inter { background: var(--paper-alt); border-left: 4px solid var(--gold); padding: 30px 22px; display: grid; gap: 12px; min-height: 26rem; align-content: center; }
+.fc-inter[hidden] { display: none; }
+.fc-inter .eyebrow { margin: 0; color: var(--gold-ink); }
+.fc-inter h2 { margin: 0; font-size: clamp(28px, 7vw, 40px); font-weight: 800; line-height: 1.08; letter-spacing: -.02em; color: var(--ink); }
+.fc-inter p { margin: 0; font-size: 17px; line-height: 1.6; max-width: 52ch; }
+.fc-autobar { height: 3px; background: var(--rule); overflow: hidden; }
+.fc-autobar i { display: block; height: 100%; background: var(--gold); transform-origin: left; animation: fc-drain var(--auto, 3s) linear forwards; }
+.fc-foot[hidden] { display: none; }
+
+/* Readout */
+.fc-tag { justify-self: start; margin: 0; font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; padding: 5px 10px; background: var(--paper-3); color: var(--gold-ink); }
+.fc-readhead h2 { margin: 0 0 10px; font-size: clamp(30px, 6.4vw, 46px); font-weight: 800; line-height: 1.05; letter-spacing: -.025em; color: var(--ink); text-wrap: balance; }
+.fc-readhead .eyebrow { margin-bottom: 10px; }
+.fc-patline { margin: 0 0 22px; font-size: 18px; line-height: 1.55; max-width: 56ch; }
+.fc-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.fc-stats div { border-top: 3px solid var(--ink); padding-top: 10px; display: grid; gap: 2px; }
+.fc-stats b { font-size: clamp(34px, 8vw, 46px); font-weight: 800; line-height: 1; letter-spacing: -.03em; color: var(--ink); font-variant-numeric: tabular-nums; }
+.fc-stats span { font-size: 14px; color: var(--muted); }
+.fc-panel { background: var(--paper); border: 1px solid var(--rule); padding: 22px 20px; display: grid; gap: 14px; min-width: 0; }
+.fc-panel h3, .fc-focus h3, .fc-cta h3 { margin: 0; font-size: 20px; font-weight: 800; line-height: 1.2; color: var(--ink); }
+.fc-enginepanel { background: var(--ink); border-color: var(--ink); color: #D9D6CE; }
+.fc-engine { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; align-items: end; }
+.fc-cyl { --c: #C25A68; display: grid; justify-items: center; gap: 6px; text-align: center; min-width: 0; }
+.fc-cyl.rough { --c: var(--gold); }
+.fc-cyl.clean { --c: #4FB08A; }
+.fc-light { width: 16px; height: 16px; border-radius: 50%; background: var(--c); box-shadow: 0 0 12px 2px color-mix(in srgb, var(--c) 60%, transparent); }
+.fc-cyl.clean .fc-light { box-shadow: none; opacity: .9; }
+.fc-bar { position: relative; width: 100%; max-width: 54px; height: 140px; background: #2E2E32; border: 1px solid #3A3A3F; overflow: hidden; }
+.fc-bar::before, .fc-bar::after { content: ""; position: absolute; left: 0; right: 0; border-top: 1px dashed #6A6870; z-index: 1; }
+.fc-bar::before { bottom: calc(18 / 27 * 100%); }
+.fc-bar::after { bottom: calc(10 / 27 * 100%); }
+.fc-bar i { position: absolute; left: 0; right: 0; bottom: 0; background: var(--c); transition: height .6s ease; }
+.fc-cyl b { font-size: 17px; font-weight: 800; color: var(--paper); font-variant-numeric: tabular-nums; }
+.fc-cyl small { font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--paper); }
+.fc-cyl em { font-style: normal; font-size: 10px; line-height: 1.2; font-weight: 600; color: var(--c); }
+.fc-legend { margin: 0; display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12px; color: #B7B3A9; }
+.fc-legend span::before { content: ""; display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; vertical-align: 0; background: #C25A68; }
+.fc-legend .rough::before { background: var(--gold); }
+.fc-legend .clean::before { background: #4FB08A; }
+.fc-candor { --c: #C25A68; border-top: 1px solid #3A3A3F; padding-top: 14px; display: grid; gap: 8px; }
+.fc-candor.rough { --c: var(--gold); }
+.fc-candor.clean { --c: #4FB08A; }
+.fc-candor-top { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+.fc-candor-top b { color: var(--paper); font-size: 15px; }
+.fc-candor-top span { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--c); }
+.fc-meter { height: 8px; background: #2E2E32; border: 1px solid #3A3A3F; }
+.fc-meter i { display: block; height: 100%; background: var(--c); }
+.fc-candor p { margin: 0; font-size: 15px; line-height: 1.55; }
+.fc-enginepanel .fc-book { color: #B7B3A9; }
+.fc-book { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.fc-focus { border-left: 4px solid var(--gold); background: var(--paper-alt); padding: 22px 20px; display: grid; gap: 12px; }
+.fc-focus .eyebrow, .fc-lean .eyebrow { margin: 0; }
+.fc-focus p { margin: 0; line-height: 1.6; }
+.fc-focus ol { margin: 0; padding-left: 1.3em; display: grid; gap: 8px; line-height: 1.55; }
+.fc-startq { font-size: 18px; font-weight: 700; line-height: 1.45; color: var(--ink); }
+.fc-upstream { padding: 10px 14px; background: var(--paper); border: 1px solid var(--rule-2); font-size: 15px; }
+.fc-lean { border-left: 4px solid var(--green-rule); padding: 4px 0 4px 18px; display: grid; gap: 8px; }
+.fc-lean p { margin: 0; line-height: 1.6; }
+.fc-flags { display: grid; gap: 12px; }
+.fc-flag { border: 1px dashed var(--burgundy); padding: 14px 16px; display: grid; gap: 6px; font-size: 15px; line-height: 1.55; }
+.fc-flag strong { color: var(--ink); }
+.fc-qs { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.fc-qs li { font-size: 20px; font-weight: 700; line-height: 1.35; color: var(--ink); padding-left: 16px; border-left: 3px solid var(--gold); text-wrap: balance; }
+.fc-cta { background: var(--ink); color: #D9D6CE; padding: 26px 22px; display: grid; gap: 12px; justify-items: start; }
+.fc-cta h3 { color: var(--paper); font-size: 24px; }
+.fc-cta p { margin: 0; font-size: 17px; line-height: 1.55; }
+.fc-req { display: grid; gap: 14px; }
+.fc-req[hidden] { display: none; }
+.fc-field { display: grid; gap: 5px; }
+.fc-field label { font-size: 14px; font-weight: 700; color: var(--ink); }
+.fc-field input, .fc-field select { font: 500 16px Montserrat, sans-serif; padding: 12px; border: 1px solid var(--rule-2); background: #fff; color: var(--ink); border-radius: 0; width: 100%; }
+.fc-err { margin: 0; font-size: 14px; color: var(--burgundy); }
+.fc-done { margin: 0; font-size: 18px; font-weight: 700; color: var(--green); }
+.fc-how { font-size: 15px; color: var(--body); }
+.fc-how summary { cursor: pointer; font-weight: 700; color: var(--ink); }
+.fc-how p { margin: 10px 0 0; line-height: 1.6; }
+@media (max-width: 560px) {
+  .fc-engine { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px 10px; }
+}
+@media (max-width: 480px) {
+  .fc-bar { height: 112px; }
+  .fc-card { padding: 18px 16px; }
+}
+</style>
+<script src="../assets/gdc-analytics.js?v=12"></script>
+<script src="../assets/gdc-nav.js?v=18" defer></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <a class="brand" href="../">
+    <picture>
+      <source media="(max-width: 370px)" srcset="../assets/gdc/gdc-mark.svg">
+      <source media="(max-width: 519px)" srcset="../assets/gdc/gdc-lockup-short.svg">
+      <img src="../assets/gdc/gdc-lockup-header.svg" alt="Goode Design &amp; Consulting" width="269" height="52">
+    </picture>
+  </a>
+  <nav aria-label="Primary">
+    <a href="../system/">The system</a>
+    <div class="navmenu">
+      <button type="button" aria-expanded="false" aria-controls="menu-who">Who I help</button>
+      <ul class="navmenu-panel" id="menu-who" hidden>
+        <li><a href="../founders/">Founders and scaling firms<span>Coaching and fractional operations</span></a></li>
+        <li><a href="../schools/">Independent schools<span>Coaching, cohorts, in-service, advisory</span></a></li>
+        <li><a href="../nonprofits/">Nonprofit and public sector<span>Team development and facilitation</span></a></li>
+      </ul>
+    </div>
+    <div class="navmenu">
+      <button type="button" aria-expanded="false" aria-controls="menu-services">Services</button>
+      <ul class="navmenu-panel navmenu-wide" id="menu-services" hidden>
+        <li class="nmp-group">
+          <p class="nmp-head">For companies</p>
+          <ul>
+            <li><a href="../products/#services">What a company can buy<span>One list, diagnostic to retained</span></a></li>
+            <li><a href="../obd/">The On-Board Diagnostic<span>Two instruments, one written read</span></a></li>
+            <li><a href="../products/#why">Why this is different<span>Five structural differences, not adjectives</span></a></li>
+          </ul>
+        </li>
+        <li class="nmp-group">
+          <p class="nmp-head">For schools and nonprofits</p>
+          <ul>
+            <li><a href="../schools/#services">What a school can buy<span>Ten services, plainly named</span></a></li>
+            <li><a href="../schools/rates/">Published rates<span>Real numbers for a budget line</span></a></li>
+            <li><a href="../schools/#why">Why this is different<span>Twenty years inside a school</span></a></li>
+          </ul>
+        </li>
+        <li class="nmp-group">
+          <p class="nmp-head">Flagship programs</p>
+          <ul>
+            <li><a href="../goodestart/">GoodeStart<span>The first ninety days, on purpose</span></a></li>
+            <li><a href="../building-the-bench/">Building the Bench<span>A cohort for the next seat</span></a></li>
+            <li><a href="../know-thyself/">Know Thyself to Lead Others<span>A strengths workshop for a whole staff</span></a></li>
+            <li><a href="../owners-manual/">Owner&rsquo;s Manual<span>How each of us works, written down</span></a></li>
+            <li><a href="../executive-coaching/">Executive coaching<span>Six sessions, built on the OBD</span></a></li>
+          </ul>
+        </li>
+        <li class="nmp-foot">
+          <a href="../coaching-engagement/">How the engagement works<span>The terms, before you have to ask for them</span></a>
+        </li>
+        <li class="nmp-foot">
+          <a href="../diagnostic/">Start with the free diagnostic<span>A few short questions, about two minutes, five patterns</span></a>
+        </li>
+        <li class="nmp-foot">
+          <a href="../psychological-safety/">Psychological Safety Check, free<span>Is it safe to speak up on your team?</span></a>
+        </li>
+        <li class="nmp-foot">
+          <a href="../free/">Free tools<span>Diagnostics, templates and a free chapter</span></a>
+        </li>
+      </ul>
+    </div>
+    <a href="../books/">Books</a>
+    <a href="../writing/">Writing</a>
+    <a href="../about/">About</a>
+    <a class="btn btn-sm" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=engine-check-nav">Book a call</a>
+  </nav>
+</header>
+
+
+<main id="main">
+  <section class="fc-band">
+    <div id="fc-root" data-check="engine" data-icon="../assets/icons/icon-create-lit.svg" data-calendly="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt">
+      <noscript><p>The engine check needs JavaScript to run the clock and build your readout.</p></noscript>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="foot-in">
+    <div>
+      <img src="../assets/gdc/gdc-mark.svg" alt="" width="34" height="34">
+      <p class="foot-name">Goode Design &amp; Consulting</p>
+      <p class="foot-meta">Washington, DC · Baltimore · New York · Boston · Available globally</p>
+    <ul class="socials" aria-label="Elsewhere">
+      <li><a href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=engine-check-footer" title="Book a time"><img src="../assets/icon-calendly.png" alt="Book a time with Matt Goode"></a></li>
+      <li><a href="https://www.linkedin.com/in/goodematt/" title="LinkedIn"><img src="../assets/icon-linkedin.png" alt="Matt Goode on LinkedIn"></a></li>
+      <li><a href="https://thatsgoodedesign.substack.com/" title="The Leadership Lab on Substack"><img src="../assets/icon-substack.png" alt="The Leadership Lab on Substack"></a></li>
+      <li><a href="mailto:matt@thatsgoodedesign.com" title="Email"><img src="../assets/icon-email.png" alt="Email Matt Goode"></a></li>
+    </ul>
+    </div>
+    <nav aria-label="Footer">
+      <a href="../system/">The system</a>
+      <a href="../products/">Products</a>
+      <a href="../obd/">The OBD</a>
+      <a href="../schools/">Schools</a>
+      <a href="../coaching-engagement/">How it works</a>
+      <a href="../diagnostic/">Free diagnostic</a>
+      <a href="../free/">Free tools</a>
+      <a href="../books/">Books</a>
+      <a href="../writing/">Writing</a>
+      <a href="../about/">About</a>
+      <a href="mailto:matt@thatsgoodedesign.com">Contact</a>
+      <a href="../terms/">Terms</a>
+      <a href="../privacy/">Privacy</a>
+    </nav>
+  </div>
+  <p class="foot-legal">© 2026 Goode Design &amp; Consulting. CliftonStrengths®,
+    StrengthsFinder® and the 34 theme names are trademarks of Gallup, Inc.
+    EQ-i 2.0 is a trademark of Multi-Health Systems Inc. Matt Goode is a
+    Gallup-Certified Strengths Coach.
+    <br><br>
+    The non-Gallup information you are receiving has not been approved and is not
+    sanctioned or endorsed by Gallup in any way. Opinions, views and
+    interpretations of CliftonStrengths®, Clifton Youth StrengthsExplorer or
+    BP10 results are solely the beliefs of Goode Design &amp; Consulting.</p>
+</footer>
+<script src="../assets/flight-check/engine.js?v=1"></script>
+<script src="../assets/flight-check/flight-check.js?v=1"></script>
+</body>
+</html>

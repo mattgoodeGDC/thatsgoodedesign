@@ -110,7 +110,7 @@
   var SKIP = ['diagnostic', 'diagnostic/readout', 'diagnostic/share', 'booked', 'downloads',
     'privacy', 'terms', 'ps-tool', 'couldnt-have-been-an-email', 'couldnt-have-been-an-email/thanks',
     'field-tested/sampler', 'field-tested/sampler/thanks', 'no-average-brain/chapter',
-    'school-meeting-forms', 'eighth-idea', 'clutch/review', 'free'];
+    'school-meeting-forms', 'eighth-idea', 'clutch/review', 'free', 'engine-check'];
   function initActionBar() {
     if (document.querySelector('.m-cta')) return;
     var path = location.pathname.replace(/^\/+|\/+$/g, '').replace(/index\.html$/, '').replace(/\/$/, '');
