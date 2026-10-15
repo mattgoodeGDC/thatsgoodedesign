@@ -357,7 +357,7 @@
   function record(r, el, example) {
     var pairSkipped = r.tot[r.start] === r.tot[r.strong];
     var rec = {
-      event: "complete", recordId: rid("fc_"), flightId: flight().id, check: CFG.id,
+      event: "complete", recordId: rid(/[?&]test=1\b/.test(location.search) ? "TEST-fc_" : "fc_"), flightId: flight().id, check: CFG.id,
       copyVersion: CFG.copyVersion, source: "flight-check", completedAt: new Date().toISOString(),
       answers: CFG.items.map(function (it, i) { return two(i + 1) + ":" + score(i, ans[i]); }).join(" "),
       timings: CFG.items.map(function (it, i) { return two(i + 1) + ":" + Math.round(ms[i]); }).join(" "),
