@@ -22,24 +22,25 @@
   /* ---- Capture form: "GDC - Flight check - Capture (hidden)", from
      "handover - 2026-10-15 - DALE - Flight check capture form". One form for
      all four checks. Field names are DALE's (intake design v0.2, 2.1); the
-     input names are Jotform's own. Setting formId to null stops all posting
+     input names are read from the live form (q2_q2_textbox0 style, not the
+     q2_textbox0 in the handover). Setting formId to null stops all posting
      (records are still kept in window.FC_POSTS for checking). ---- */
   var FORM = {
     formId: "262873859807072",
     endpoint: "https://submit.jotform.com/submit/262873859807072/",
     fields: {
-      event: "q2_textbox0", recordId: "q3_textbox1", flightId: "q4_textbox2", check: "q5_textbox3",
-      copyVersion: "q6_textbox4", source: "q7_textbox5", completedAt: "q8_textbox6",
-      answers: "q9_textarea7", timings: "q10_textarea8", medianMs: "q11_textbox9", hesitationLimitMs: "q12_textbox10",
-      groupScores: "q13_textarea11", groupBands: "q14_textarea12", total: "q15_textbox13", scaled: "q16_textbox14",
-      pattern: "q17_textbox15", weakest: "q18_textbox16", ethicsOverride: "q19_textbox17", strongest: "q20_textbox18",
-      upstream: "q21_textbox19", hesitated: "q22_textarea20", hesitationCount: "q23_textbox21", mixed: "q24_textbox22",
-      candorScore: "q25_textbox23", candor: "q26_textbox24", homeGear: "q27_textbox25", stretchGear: "q28_textbox26",
-      checksInFlight: "q29_textbox27", flightSkip: "q30_textbox28", timeToFinishS: "q31_textbox29", underLimit: "q32_textbox30",
-      reportRequested: "q33_textbox31", requestedAt: "q34_textbox32", firstName: "q35_textbox33", email: "q36_textbox34",
-      organization: "q37_textbox35", orgType: "q38_textbox36", seat: "q39_textbox37", kitTags: "q40_textarea38",
-      rpt_pattern: "q41_textarea39", rpt_start: "q42_textarea40", rpt_cylinders: "q43_textarea41",
-      rpt_steps: "q44_textarea42", rpt_questions: "q45_textarea43", rpt_candor: "q46_textarea44"
+      event: "q2_q2_textbox0", recordId: "q3_q3_textbox1", flightId: "q4_q4_textbox2", check: "q5_q5_textbox3",
+      copyVersion: "q6_q6_textbox4", source: "q7_q7_textbox5", completedAt: "q8_q8_textbox6",
+      answers: "q9_q9_textarea7", timings: "q10_q10_textarea8", medianMs: "q11_q11_textbox9", hesitationLimitMs: "q12_q12_textbox10",
+      groupScores: "q13_q13_textarea11", groupBands: "q14_q14_textarea12", total: "q15_q15_textbox13", scaled: "q16_q16_textbox14",
+      pattern: "q17_q17_textbox15", weakest: "q18_q18_textbox16", ethicsOverride: "q19_q19_textbox17", strongest: "q20_q20_textbox18",
+      upstream: "q21_q21_textbox19", hesitated: "q22_q22_textarea20", hesitationCount: "q23_q23_textbox21", mixed: "q24_q24_textbox22",
+      candorScore: "q25_q25_textbox23", candor: "q26_q26_textbox24", homeGear: "q27_q27_textbox25", stretchGear: "q28_q28_textbox26",
+      checksInFlight: "q29_q29_textbox27", flightSkip: "q30_q30_textbox28", timeToFinishS: "q31_q31_textbox29", underLimit: "q32_q32_textbox30",
+      reportRequested: "q33_q33_textbox31", requestedAt: "q34_q34_textbox32", firstName: "q35_q35_textbox33", email: "q36_q36_textbox34",
+      organization: "q37_q37_textbox35", orgType: "q38_q38_textbox36", seat: "q39_q39_textbox37", kitTags: "q40_q40_textarea38",
+      rpt_pattern: "q41_q41_textarea39", rpt_start: "q42_q42_textarea40", rpt_cylinders: "q43_q43_textarea41",
+      rpt_steps: "q44_q44_textarea42", rpt_questions: "q45_q45_textarea43", rpt_candor: "q46_q46_textarea44"
     }
   };
 
@@ -410,6 +411,7 @@
     var t = reportText(R); for (k in t) rec[k] = t[k];
     if (!REC.example) post(rec);
     $("fc-req").hidden = true; $("fc-done").hidden = false;
+    $("fc-reqpanel").scrollIntoView({ block: "center" });
   }
 
   function post(rec) {
@@ -417,6 +419,8 @@
     if (!FORM.formId) { if (window.console) console.info("[flight-check] capture form off; record kept in FC_POSTS", rec.event); return; }
     var body = new URLSearchParams();
     body.append("formID", FORM.formId);
+    body.append("simple_spc", FORM.formId + "-" + FORM.formId);   /* Jotform's own anti-spam pair */
+    body.append("website", "");                                       /* its honeypot, left empty */
     for (var k in FORM.fields) if (rec[k] !== undefined && rec[k] !== null && rec[k] !== "") body.append(FORM.fields[k], String(rec[k]));
     try {
       fetch(FORM.endpoint || "https://submit.jotform.com/submit/" + FORM.formId + "/", { method: "POST", mode: "no-cors", body: body, keepalive: true })
