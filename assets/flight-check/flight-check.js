@@ -229,6 +229,9 @@
     $("fc-i-go").onclick = leaveInter;
     document.addEventListener("keydown", function (e) {
       if ($("fc-q").hidden || e.metaKey || e.ctrlKey || e.altKey) return;
+      /* Enter or Space on the timing toggle opens it; it must not leave the
+         rules screen and restart the clock. */
+      if (e.target && e.target.id === "fc-timing-btn") return;
       if (inInter && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); return leaveInter(); }
       var n = +e.key; if (n >= 1 && n <= 5) pick(n - 1);
     });
@@ -269,7 +272,21 @@
     $("fc-i-eyebrow").textContent = m.eyebrow; $("fc-i-head").textContent = m.head; $("fc-i-body").textContent = m.body;
     $("fc-i-eyebrow").hidden = !m.eyebrow; $("fc-i-head").hidden = !m.head; $("fc-i-body").hidden = !m.body;
     $("fc-i-rules").hidden = !rules;
-    $("fc-i-rules").innerHTML = rules ? CFG.start.rules.map(function (r) { return "<li>" + esc(r) + "</li>"; }).join("") : "";
+    var T = CFG.start.timing, last = CFG.start.rules ? CFG.start.rules.length - 1 : -1;
+    $("fc-i-rules").innerHTML = rules ? CFG.start.rules.map(function (r, i) {
+      /* start.timing: an in-place explainer under the last rule (rule 03).
+         It only shows and hides text; the clock stays paused throughout. */
+      var x = T && i === last ?
+        '<button type="button" class="fc-timing-btn" id="fc-timing-btn" aria-expanded="false" aria-controls="fc-timing">' + esc(T.label) + "</button>" +
+        '<div class="fc-timing" id="fc-timing" hidden>' + T.body.map(function (p) { return "<p>" + esc(p) + "</p>"; }).join("") + "</div>" : "";
+      return "<li>" + esc(r) + x + "</li>";
+    }).join("") : "";
+    var tb = $("fc-timing-btn");
+    if (rules && tb) tb.onclick = function () {
+      var open = tb.getAttribute("aria-expanded") !== "true";
+      tb.setAttribute("aria-expanded", open ? "true" : "false");
+      $("fc-timing").hidden = !open;
+    };
     setGauge(cur, rules ? 0 : -1); $("fc-arc-n").textContent = rules ? 1 : cur;
     $("fc-autobar").hidden = !m.auto;
     clearTimeout(autoT);

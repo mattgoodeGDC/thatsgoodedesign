@@ -165,6 +165,13 @@
    cta.web with cta.quote, hesitation list, confirm.next, example.end. */
 .fc-inter [hidden] { display: none; }
 .fc-inter .fc-rules li { font-size: 17px; color: var(--ink); }
+/* CLUTCH-84: "How does the timing work?" under rule 03, opens in place. */
+.fc-timing-btn { display: table; margin: 10px 0 0; padding: 4px 0; background: none; border: 0; border-bottom: 1px solid currentColor; border-radius: 0; font: 600 16px/1.4 Montserrat, sans-serif; color: var(--gold-ink); text-align: left; cursor: pointer; }
+.fc-timing-btn::after { content: " +"; content: " +" / ""; }
+.fc-timing-btn[aria-expanded="true"]::after { content: " \2212"; content: " \2212" / ""; }
+.fc-timing-btn:hover { color: var(--ink); }
+.fc-timing { margin-top: 10px; border-left: 3px solid var(--rule-2); padding-left: 14px; display: grid; gap: 10px; max-width: 60ch; }
+.fc-timing p { margin: 0; font-size: 16px; line-height: 1.55; color: var(--body); overflow-wrap: anywhere; }
 .fc-btnnote { margin-top: -8px; }
 .fc-snapshot { margin: 18px 0 0; font-size: 15px; line-height: 1.55; color: var(--body); max-width: 60ch; }
 .fc-cta { grid-template-columns: minmax(0, 1fr); gap: 20px; }
@@ -308,7 +315,7 @@
     interpretations of CliftonStrengths®, Clifton Youth StrengthsExplorer or
     BP10 results are solely the beliefs of Goode Design &amp; Consulting.</p>
 </footer>
-<script src="../assets/flight-check/engine.js?v=3"></script>
-<script src="../assets/flight-check/flight-check.js?v=6"></script>
+<script src="../assets/flight-check/engine.js?v=4"></script>
+<script src="../assets/flight-check/flight-check.js?v=7"></script>
 </body>
 </html>

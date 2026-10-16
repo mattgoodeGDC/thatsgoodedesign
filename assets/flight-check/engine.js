@@ -332,6 +332,19 @@ window.FLIGHT_CHECKS.engine = {
       "Think about this month, under pressure. Not your best week, not your worst.",
       "The count is a nudge, not a test. The check learns your own pace, so reading slowly never counts against you."
     ],
+    /* start.timing (CLUTCH-84, 16 Oct): a toggle under rule 03 that opens
+       this copy in place. The clock is already paused on the rules screen.
+       Plain words only; the scoring itself is R7 in flight-check.js
+       (over 1.75 x the person's median and at least 4 seconds). */
+    timing: {
+      label: "How does the timing work?",
+      body: [
+        "The check times every answer. At the end it works out your normal speed. A pause only counts if that answer took much longer than your normal, roughly twice as long.",
+        "So it compares you to you, never to other people.",
+        "If you take about 9 seconds on every answer, nothing counts unless one takes about 16. If you take about 3 seconds, a 6-second answer stands out.",
+        "The count on screen is just a reminder to go with your gut. It does not change your score."
+      ]
+    },
     counts: [["2 minutes", "most people finish"], ["18 statements", "on instinct"], ["Free readout", "no email needed"]],
     button: "Start the engine check",
     buttonNote: "Your readout is free and on screen straight away. Email only if you want the full report.",
