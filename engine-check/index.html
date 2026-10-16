@@ -161,6 +161,22 @@
 .fc-how { font-size: 15px; color: var(--body); }
 .fc-how summary { cursor: pointer; font-weight: 700; color: var(--ink); }
 .fc-how p { margin: 10px 0 0; line-height: 1.6; }
+/* 16 Oct revisions: rules before statement 1, button note, snapshot,
+   cta.web with cta.quote, hesitation list, confirm.next, example.end. */
+.fc-inter [hidden] { display: none; }
+.fc-inter .fc-rules li { font-size: 17px; color: var(--ink); }
+.fc-btnnote { margin-top: -8px; }
+.fc-snapshot { margin: 18px 0 0; font-size: 15px; line-height: 1.55; color: var(--body); max-width: 60ch; }
+.fc-cta { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+.fc-cta-ask { display: grid; gap: 12px; justify-items: start; }
+.fc-quote { margin: 0; border-left: 3px solid var(--gold); padding-left: 16px; display: grid; gap: 8px; }
+.fc-quote blockquote { margin: 0; font-size: 16px; line-height: 1.55; font-style: italic; color: var(--paper); }
+.fc-quote figcaption { font-size: 13px; color: #B7B3A9; }
+@media (min-width: 640px) { .fc-cta { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); align-items: center; } }
+.fc-slow { margin: 4px 0; padding-left: 1.2em; display: grid; gap: 4px; font-weight: 600; color: var(--ink); }
+.fc-next { display: grid; gap: 12px; justify-items: start; border-top: 1px solid var(--rule); padding-top: 14px; }
+.fc-next[hidden] { display: none; }
+.fc-next p, .fc-exend p { margin: 0; font-size: 17px; line-height: 1.55; color: var(--ink); }
 @media (max-width: 560px) {
   .fc-engine { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px 10px; }
 }
@@ -292,7 +308,7 @@
     interpretations of CliftonStrengths®, Clifton Youth StrengthsExplorer or
     BP10 results are solely the beliefs of Goode Design &amp; Consulting.</p>
 </footer>
-<script src="../assets/flight-check/engine.js?v=2"></script>
-<script src="../assets/flight-check/flight-check.js?v=5"></script>
+<script src="../assets/flight-check/engine.js?v=3"></script>
+<script src="../assets/flight-check/flight-check.js?v=6"></script>
 </body>
 </html>

@@ -2,14 +2,15 @@
  *
  * Configuration only. Every string below is copied word for word from
  * "CLUTCH - Engine check - Block library v0.2" (approved 14 Oct 2026, citation
- * fixes 15 Oct). Do not edit copy here; change the library first, then copy.
+ * fixes 15 Oct, Changes and Approved additions 16 Oct). Do not edit copy
+ * here; change the library first, then copy.
  * The runner in flight-check.js reads this object. Gear, compass and handoff
  * become gear.js, compass.js and handoff.js with the same shape.
  */
 window.FLIGHT_CHECKS = window.FLIGHT_CHECKS || {};
 window.FLIGHT_CHECKS.engine = {
   id: "engine",
-  copyVersion: "engine v0.2",   /* block library version this config copies */
+  copyVersion: "engine v0.2 (16 Oct)",   /* block library version this config copies */
   limitMs: 300000,          /* five-minute clock */
   nudgeMs: 8000,            /* the count on each statement; a nudge only */
   order: ["C", "R", "E", "A", "T", "X"],
@@ -25,26 +26,28 @@ window.FLIGHT_CHECKS.engine = {
   ],
   groupMin: 6, groupMax: 33,
 
-  /* Statements: [field, group, warning?, text] */
+  /* Statements: [Block ID, group, warning?, text], in statement.order
+     (Approved additions, 16 Oct): one fixed order, the same for everyone.
+     Records are keyed by Block ID, never by position. */
   items: [
-    ["A01", "C", 0, "My team could say what we stand for."],
-    ["A02", "R", 0, "Everyone knows who owns what."],
     ["A03", "E", 0, "Work gets done without me chasing it."],
-    ["A04", "A", 0, "We change course before a crisis makes us."],
-    ["A05", "T", 0, "Someone else could run my meeting tomorrow."],
-    ["A06", "X", 0, "People raise concerns openly, without fear."],
-    ["A07", "C", 1, "Our values are posted, not practiced."],
     ["A08", "R", 0, "People disagree with me in the room."],
-    ["A09", "E", 1, "Our deadlines run on heroics."],
-    ["A10", "A", 0, "Someone flags a failing plan before the deadline."],
-    ["A11", "T", 1, "Some work stops when one person is out."],
-    ["A12", "X", 0, "Our values settle the close calls."],
     ["A13", "C", 0, "Under pressure, we keep our norms."],
-    ["A14", "R", 1, "Handoffs get dropped between people."],
-    ["A15", "E", 0, "Our check-ins run when I'm away."],
     ["A16", "A", 1, "“That’s not how we do it” ends the debate."],
+    ["A05", "T", 0, "Someone else could run my meeting tomorrow."],
+    ["A12", "X", 0, "Our values settle the close calls."],
+    ["A02", "R", 0, "Everyone knows who owns what."],
+    ["A09", "E", 1, "Our deadlines run on heroics."],
+    ["A01", "C", 0, "My team could say what we stand for."],
+    ["A10", "A", 0, "Someone flags a failing plan before the deadline."],
+    ["A18", "X", 1, "Some rules don't apply at the top."],
     ["A17", "T", 0, "I explain why I decided, not just what."],
-    ["A18", "X", 1, "Some rules don't apply at the top."]
+    ["A04", "A", 0, "We change course before a crisis makes us."],
+    ["A07", "C", 1, "Our values are posted, not practiced."],
+    ["A06", "X", 0, "People raise concerns without fear."],
+    ["A11", "T", 1, "Some work stops when one person is out."],
+    ["A15", "E", 0, "Our check-ins run when I'm away."],
+    ["A14", "R", 1, "Handoffs get dropped between people."]
   ],
 
   /* Patterns, by count of misfiring and running-clean groups (R4). */
@@ -267,7 +270,37 @@ window.FLIGHT_CHECKS.engine = {
   },
 
   mixed: { head: "Mixed signals in {cylinder}.", line: "You strongly agreed with a strength and with its warning sign. That cylinder probably fires for some people and not for others." },
-  cta: { head: "Want to talk it through?", line: "Thirty minutes with Matt. Bring this readout and we will start with the cylinder carrying the most strain." },
+  /* flag.flat: all eighteen answers the same. */
+  flat: "You gave the same answer to all eighteen statements. This reading may say more about today than about your team. Take it again when you can go on instinct.",
+  /* pause rewrite: {n} is the count; the list of statements sits between head and line. */
+  pause: { head: "{n} statements took you longer.", headOne: "1 statement took you longer.", line: "A pause can mean a hard question, a careful read, or a phone buzzing. If one of these made you stop, ask your team how they would answer it." },
+  /* lean.none: shown when the strongest cylinder is misfiring. */
+  leanNone: "No cylinder is carrying the others yet. Pick the one you can move this month, and let the rest wait.",
+
+  /* readout.snapshot and readout.time */
+  snapshot: "This is your snapshot: your reading, the cylinder to start with, and where you hesitated. Your full report reads all six cylinders and comes by email.",
+  time: { slow: "to finish. {n} of 18 statements took you longer than your usual pace.", steady: "to finish, at a steady pace." },
+
+  /* cta.web, under the steps, with cta.quote beside it. Only two booking
+     asks on the page: this one and confirm.next. */
+  cta: {
+    head: "Start with {cylinder}.",
+    line: "Thirty minutes with me. Bring this readout. You'll leave with one move you can make this week, and who owns it, whether or not we work together.",
+    button: "Book 30 minutes with me"
+  },
+  /* cta.quote, chosen by the Start here cylinder (confirmed by Matt 16 Oct). */
+  quotes: {
+    E: ["“I thought I needed better time management. Turns out I needed to get out of my own way.”", "Founder and CEO, growing services business"],
+    T: ["“Our managers are getting better at letting their teams work through problems instead of jumping in with the answer.”", "Director of Engineering, manufacturing firm"],
+    C: ["“It’s refreshing when you leave a session with something you can actually use on Monday morning.”", "Division Head, independent school"],
+    R: ["“It’s refreshing when you leave a session with something you can actually use on Monday morning.”", "Division Head, independent school"],
+    A: ["“Our meetings are probably a little less comfortable than they used to be. They’re certainly more useful.”", "Managing Partner, professional services firm"],
+    X: ["“Our meetings are probably a little less comfortable than they used to be. They’re certainly more useful.”", "Managing Partner, professional services firm"]
+  },
+
+  /* how.method: the How the score works text, also linked from the start screen. */
+  howLabel: "How the score works",
+  method: "The engine check is a reflection tool, not a psychometric assessment. It hasn't been validated against outcomes, and it reads the team you lead as you see it this month. Eighteen statements, three for each of the six cylinders in CLUTCH, Chapter 3. Each answer is worth a prime: 2, 3, 5, 7, 11 from strongly disagree to strongly agree, so conviction counts for more than mild agreement. One statement per cylinder is a warning sign and scores in reverse. Each cylinder scores 6 to 33. Neutral all the way through leaves a cylinder at 15, still misfiring, because a cylinder only runs clean on conviction. Three statements also make up your candor reading. A statement counts as taking you longer when it took more than 1.75 times your own typical answer time, and at least four seconds, so reading speed never counts against you. Your answers are saved anonymously, and only Matt sees them.",
 
   /* Candor reading (R11): statements 06, 08 and 10, 6 to 33. */
   candor: {
@@ -287,41 +320,57 @@ window.FLIGHT_CHECKS.engine = {
     12: { eyebrow: "Two thirds done.", head: "Six to go.", body: "First reaction only.", auto: 3000 }
   },
 
-  /* Start screen: the prototype's, per the run:website brief. */
+  /* Start screen (Changes, 16 Oct). Title test: start.title.b against the
+     live title, 50/50, kept per browser; the shown title is sent as variant. */
   start: {
-    eyebrow: "CLUTCH · CREATE · Engine check · 1 of 4",
-    title: "Gut check your engine",
-    lede: "Eighteen statements about the team you lead, against the clock. You have five minutes. Most people need two.",
+    eyebrow: "Engine check · 1 of 4",
+    titles: ["Where does your team stall?", "Gut check your engine"],
+    lede: "Eighteen statements about the team you lead. Most people finish in two minutes. You'll see which cylinder is running clean, which one is running on you, and which statements took you longer to answer.",
+    /* start.rule.1 to 3, shown on the first statement screen, not here. */
     rules: [
-      "Answer with your first reaction. Don't think, don't fix the wording, don't go back.",
-      "Answer for this month under pressure, not for a good week.",
-      "A short count runs on each statement. It's a nudge, not a deadline. The check learns your pace, and notices where you slow down compared with your own rhythm."
+      "Go with your first reaction. It is usually the honest one.",
+      "Think about this month, under pressure. Not your best week, not your worst.",
+      "The count is a nudge, not a test. The check learns your own pace, so reading slowly never counts against you."
     ],
-    counts: [["3.8 trillion", "ways to answer"], ["113 million", "possible engine profiles"], ["191 million+", "possible readouts"]],
-    button: "Start the clock",
+    counts: [["2 minutes", "most people finish"], ["18 statements", "on instinct"], ["Free readout", "no email needed"]],
+    button: "Start the engine check",
+    buttonNote: "Your readout is free and on screen straight away. Email only if you want the full report.",
     example: "See an example readout"
   },
   /* A worked example for "See an example readout" (never posted). */
   example: {
-    answers: [3,4,1,2,1,3,3,3,4,2,4,4,3,2,1,3,3,0],
-    timings: [3100,1800,2600,4200,7400,2900,3300,2400,1500,3800,8200,2700,3500,2200,2900,6800,3100,4100]
+    /* Same example as before, listed in statement.order. */
+    answers: [1,3,3,3,1,4,4,4,3,2,0,3,2,3,3,4,1,2],
+    timings: [2600,2400,3500,6800,7400,2700,1800,1500,3100,3800,4100,3100,4200,3300,2900,8200,2900,2200]
   },
   unit: "cylinder",
   totalLabel: "engine score",
   readoutEyebrow: "Your engine reading",
 
   privacy: "Your answers are saved anonymously. Add your email at the end only if you want the full report. If you do, any other checks you took on this device are linked to your name too.",
+  privacyWho: "Only Matt sees your answers.",
 
   report: {
     org:  { label: "What kind of organization are you in? (optional)", options: ["Company", "School", "Nonprofit", "Government", "Other"] },
-    seat: { label: "Which best describes your role? (optional)", options: ["Founder or CEO", "Senior leader", "Head of School", "Other leader"] },
+    /* Options must match the Airtable Seat select exactly (run:dale, 16 Oct). */
+    seat: { label: "Which best describes your role? (optional)", options: ["Founder or CEO", "Head of School or Executive Director", "Senior executive (VP or C-suite)", "People, HR or operations lead", "Team or department lead", "Coach, consultant or adviser", "Something else"] },
+    /* report.promise */
+    promise: "All six cylinder reads, the statements that took you longer, and more questions to sit with.",
     /* confirm.auto, block library v0.2 (Additions, 15 Oct), word for word.
        {email} is filled with the address the person typed. */
-    confirm: "Done. Your full report is on its way to {email}. It comes from Matt Goode at matt@thatsgoodedesign.com. If it isn't in your inbox in ten minutes, check promotions or spam."
+    confirm: "Done. Your full report is on its way to {email}. It comes from Matt Goode at matt@thatsgoodedesign.com. If it isn't in your inbox in ten minutes, check promotions or spam.",
+    /* confirm.next, under confirm.auto, then cta.button. */
+    next: "While you wait: thirty minutes with me, starting with {cylinder}. You'll leave with one move you can make this week.",
+    /* rpt.hesitated when nothing took longer; the email recognises this line. */
+    steady: "You answered every statement at a steady pace."
   },
+  /* example.end: replaces the report form on the example readout only. */
+  exampleEnd: "This is an example. Take the check for your own readout.",
 
   /* Added to kitTags on the report request only (DALE's Zapier adds it anyway). */
   reportTag: "engine-check-report",
+  /* kit.tag.coach: added on the report request when the seat is this one. */
+  seatTags: { "Coach, consultant or adviser": "engine-check-seat-coach" },
 
   kitTags: function (r) {
     return ["engine-check-" + this.patterns[r.P].slug, "engine-check-weak-" + this.names[r.start].toLowerCase()];

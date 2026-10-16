@@ -1,4 +1,7 @@
-/* flight-check.js – the CLUTCH flight check runner (WEBSITE, 15 Oct 2026).
+/* flight-check.js – the CLUTCH flight check runner (WEBSITE, 15 Oct 2026;
+ * engine check revisions 16 Oct: title test, rules before statement 1,
+ * Block ID keys, no Back one, hesitation list, flat and lean.none, cta.web
+ * under the steps, rpt_hesitated, variant, seat tags, example.end).
  *
  * One runner, one config per check. The page sets data-check="engine" on
  * #fc-root and loads the matching config (engine.js) before this file.
@@ -40,7 +43,9 @@
       reportRequested: "q33_q33_textbox31", requestedAt: "q34_q34_textbox32", firstName: "q35_q35_textbox33", email: "q36_q36_textbox34",
       organization: "q37_q37_textbox35", orgType: "q38_q38_textbox36", seat: "q39_q39_textbox37", kitTags: "q40_q40_textarea38",
       rpt_pattern: "q41_q41_textarea39", rpt_start: "q42_q42_textarea40", rpt_cylinders: "q43_q43_textarea41",
-      rpt_steps: "q44_q44_textarea42", rpt_questions: "q45_q45_textarea43", rpt_candor: "q46_q46_textarea44"
+      rpt_steps: "q44_q44_textarea42", rpt_questions: "q45_q45_textarea43", rpt_candor: "q46_q46_textarea44",
+      /* Added by run:dale, 16 Oct ("Engine check revisions wired"). */
+      rpt_hesitated: "q48_rpt_hesitated", variant: "q49_variant"
     }
   };
 
@@ -80,6 +85,18 @@
   function bandOf(s) { for (var i = 0; i < CFG.bands.length; i++) if (s >= CFG.bands[i].min) return CFG.bands[i].key; }
   function bandLabel(k) { for (var i = 0; i < CFG.bands.length; i++) if (CFG.bands[i].key === k) return CFG.bands[i].label; }
   function score(i, v) { return CFG.items[i][2] ? PRIME[4 - v] : PRIME[v]; }
+  /* "A", "A and B", "A, B and C" */
+  function andList(a) { return a.length < 2 ? a.join("") : a.slice(0, -1).join(", ") + " and " + a[a.length - 1]; }
+  /* Title test: one of CFG.start.titles at random, kept per browser.
+     ?variant=1 or ?variant=2 forces one, for testing. */
+  function titleVariant() {
+    var T = CFG.start.titles || [CFG.start.title], key = "gdc-" + CFG.id + "-title", m = location.search.match(/[?&]variant=(\d)/), i;
+    if (m && T[+m[1] - 1]) return T[+m[1] - 1];
+    i = T.indexOf(store(key));
+    if (i < 0) { i = Math.floor(Math.random() * T.length); store(key, T[i]); }
+    return T[i];
+  }
+  var TITLE = titleVariant();
   function idxOf(field) { for (var i = 0; i < N; i++) if (CFG.items[i][0] === field) return i; return -1; }
 
   /* ---------- state ---------- */
@@ -129,6 +146,8 @@
       CFG.items.forEach(function (it, i) { if (it[1] === k && answers[i] === 4) { if (it[2]) w = true; else s = true; } });
       return s && w;
     });
+    var flat = answers.every(function (v) { return v === answers[0]; });
+    var slowAsked = slow.map(function (o) { return o.i; }).sort(function (a, b) { return a - b; });
     var paused = ORDER.filter(function (k) { return hes[k] > 0; })
       .sort(function (a, b) { return hes[b] - hes[a] || oi(a) - oi(b); }).slice(0, 2);
 
@@ -144,7 +163,7 @@
 
     return { med: med, limit: limit, tot: tot, hes: hes, bands: bands, sum: sum, P: P,
       weakest: weakest, start: start, startBlock: startBlock, override: !!(ov && start === ov.group && bands[ov.group] === ov.band), upstream: upstream, upstreamId: upstreamId, strong: strong,
-      mixed: mixed, slow: slow, paused: paused, candor: candor, cBand: cBand,
+      mixed: mixed, slow: slow, slowAsked: slowAsked, flat: flat, paused: paused, candor: candor, cBand: cBand,
       qsScreen: qsScreen, qsFull: qsFull };
   }
 
@@ -168,14 +187,15 @@
         '<div class="fc-hero">' +
           '<img class="fc-icon" src="' + root.getAttribute("data-icon") + '" alt="" width="72" height="72">' +
           '<p class="eyebrow">' + esc(S.eyebrow) + "</p>" +
-          "<h1>" + esc(S.title) + "</h1>" +
+          "<h1>" + esc(TITLE) + "</h1>" +
           '<p class="fc-lede">' + esc(S.lede) + "</p>" +
         "</div>" +
-        '<ol class="fc-rules">' + S.rules.map(function (r) { return "<li>" + esc(r) + "</li>"; }).join("") + "</ol>" +
         '<div class="fc-counts">' + S.counts.map(function (c) { return "<div><b>" + esc(c[0]) + "</b><span>" + esc(c[1]) + "</span></div>"; }).join("") + "</div>" +
-        '<p class="fc-privacy">' + esc(CFG.privacy) + "</p>" +
         '<div class="fc-row"><button class="btn btn-lg" type="button" id="fc-go">' + esc(S.button) + "</button>" +
         '<button class="fc-link" type="button" id="fc-sample">' + esc(S.example) + "</button></div>" +
+        (S.buttonNote ? '<p class="fc-note fc-btnnote">' + esc(S.buttonNote) + "</p>" : "") +
+        '<p class="fc-privacy">' + esc(CFG.privacy) + (CFG.privacyWho ? " " + esc(CFG.privacyWho) : "") + "</p>" +
+        (CFG.method ? '<details class="fc-how" id="fc-how-start"><summary>' + esc(CFG.howLabel) + "</summary><p>" + esc(CFG.method) + "</p></details>" : "") +
       "</section>" +
 
       '<section class="fc-screen" id="fc-q" hidden>' +
@@ -190,10 +210,11 @@
         "</div>" +
         '<div class="fc-inter" id="fc-inter" hidden aria-live="polite">' +
           '<p class="eyebrow" id="fc-i-eyebrow"></p><h2 id="fc-i-head"></h2><p id="fc-i-body"></p>' +
+          '<ol class="fc-rules" id="fc-i-rules" hidden></ol>' +
           '<div class="fc-autobar" id="fc-autobar" hidden><i></i></div>' +
           '<div class="fc-row"><button class="btn" id="fc-i-go" type="button">Keep going</button><span class="fc-note">The clock is paused.</span></div>' +
         "</div>" +
-        '<div class="fc-row fc-foot" id="fc-qfoot"><button class="fc-link" id="fc-back" type="button">Back one</button><span class="fc-note fc-keys">Keyboard: 1 to 5</span></div>' +
+        '<div class="fc-row fc-foot" id="fc-qfoot"><span class="fc-note fc-keys">Keyboard: 1 to 5</span></div>' +
       "</section>" +
 
       '<section class="fc-screen" id="fc-r" hidden></section>';
@@ -206,7 +227,6 @@
     };
     $("fc-answers").addEventListener("click", function (e) { var b = e.target.closest("button"); if (b) pick(+b.dataset.v); });
     $("fc-i-go").onclick = leaveInter;
-    $("fc-back").onclick = function () { if (cur > 0 && !inInter) { cur--; ask(); } };
     document.addEventListener("keydown", function (e) {
       if ($("fc-q").hidden || e.metaKey || e.ctrlKey || e.altKey) return;
       if (inInter && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); return leaveInter(); }
@@ -221,8 +241,11 @@
   /* ---------- the run ---------- */
   function begin() {
     ans = []; ms = []; cur = 0; pausedMs = 0; inInter = false; seen = {}; REC = null;
-    startAt = performance.now(); show("fc-q"); ask(); frame();
-    clearInterval(tick); tick = setInterval(frame, 200);
+    startAt = performance.now(); show("fc-q");
+    /* start.rule.1 to 3 sit on the first statement screen. The clock waits
+       until they are read, so reading them never counts as a hesitation. */
+    if (CFG.start.rules && CFG.start.rules.length) interstitial(0); else ask();
+    frame(); clearInterval(tick); tick = setInterval(frame, 200);
   }
   function setGauge(done, now) {
     Array.prototype.forEach.call(root.querySelectorAll(".fc-arc [data-seg]"), function (p, i) {
@@ -235,16 +258,19 @@
     $("fc-stmt").textContent = CFG.items[cur][3];
     setGauge(cur, cur);
     Array.prototype.forEach.call(root.querySelectorAll("#fc-answers button"), function (b) { b.classList.toggle("picked", +b.dataset.v === ans[cur]); });
-    $("fc-back").hidden = cur === 0;
     var n = $("fc-nudge"); n.classList.remove("run"); void n.offsetWidth; n.style.setProperty("--nudge", CFG.nudgeMs + "ms"); n.classList.add("run");
     var c = $("fc-card"); c.classList.remove("flash"); void c.offsetWidth; c.classList.add("flash");
     shownAt = performance.now(); locked = false;
   }
   function interstitial(at) {
-    var m = CFG.inter[at]; inInter = true; pauseAt = performance.now();
+    var rules = at === 0, m = rules ? { eyebrow: "", head: "", body: "", auto: 0 } : CFG.inter[at];
+    inInter = true; pauseAt = performance.now();
     $("fc-card").hidden = true; $("fc-qfoot").hidden = true; $("fc-inter").hidden = false;
     $("fc-i-eyebrow").textContent = m.eyebrow; $("fc-i-head").textContent = m.head; $("fc-i-body").textContent = m.body;
-    setGauge(cur, -1); $("fc-arc-n").textContent = cur;
+    $("fc-i-eyebrow").hidden = !m.eyebrow; $("fc-i-head").hidden = !m.head; $("fc-i-body").hidden = !m.body;
+    $("fc-i-rules").hidden = !rules;
+    $("fc-i-rules").innerHTML = rules ? CFG.start.rules.map(function (r) { return "<li>" + esc(r) + "</li>"; }).join("") : "";
+    setGauge(cur, rules ? 0 : -1); $("fc-arc-n").textContent = rules ? 1 : cur;
     $("fc-autobar").hidden = !m.auto;
     clearTimeout(autoT);
     if (m.auto) { var a = $("fc-autobar"); a.innerHTML = "<i></i>"; a.style.setProperty("--auto", m.auto + "ms"); autoT = setTimeout(leaveInter, m.auto); }
@@ -257,7 +283,7 @@
     ck.classList.toggle("low", left < 60000); ck.classList.toggle("paused", inInter);
     if (inInter) return;
     var per = Math.ceil((CFG.nudgeMs - (performance.now() - shownAt)) / 1000), el = $("fc-count");
-    if (per > 0) { el.textContent = per; el.classList.remove("over"); } else { el.textContent = "Over"; el.classList.add("over"); }
+    el.textContent = per > 0 ? per : "";
   }
   function pick(v) {
     if (locked || inInter || cur >= N) return; locked = true;
@@ -296,16 +322,32 @@
     if (r.bands[s] !== "miss") {
       lean = '<div class="fc-lean"><p class="eyebrow">Lean on this</p><p><strong>' + esc(NAME[s]) + " is your strongest " + esc(CFG.unit) + " at " + r.tot[s] + " of " + CFG.groupMax + ".</strong> " + esc(B[s].lean) + "</p>" +
         (r.tot[w] === r.tot[s] || !CFG.pairs[w + "." + s] ? "" : "<p>" + esc(CFG.pairs[w + "." + s]) + "</p>") + "</div>";
+    } else if (CFG.leanNone) {
+      /* lean.none: the strongest cylinder is misfiring. */
+      lean = '<div class="fc-lean"><p class="eyebrow">Lean on this</p><p>' + esc(CFG.leanNone) + "</p></div>";
     }
     var flags = [];
-    if (r.slow.length) flags.push('<div class="fc-flag"><strong>You hesitated on ' + (r.slow.length === 1 ? "one statement" : r.slow.length + " statements") + ".</strong>" +
-      r.paused.map(function (k) { return "<span>" + esc(B[k].pause) + "</span>"; }).join("") + "</div>");
-    if (r.mixed.length) flags.push('<div class="fc-flag"><strong>' + esc(CFG.mixed.head.replace("{cylinder}", r.mixed.map(function (k) { return NAME[k]; }).join(" and "))) + "</strong><span>" + esc(CFG.mixed.line) + "</span></div>");
+    /* flag.flat replaces the mixed flag: identical answers make every cylinder look mixed. */
+    if (r.flat && CFG.flat) flags.push('<div class="fc-flag"><span>' + esc(CFG.flat) + "</span></div>");
+    if (r.slow.length) {
+      var P0 = CFG.pause;
+      flags.push('<div class="fc-flag"><strong>' + esc(r.slow.length === 1 ? P0.headOne : P0.head.replace("{n}", r.slow.length)) + "</strong>" +
+        '<ul class="fc-slow">' + r.slowAsked.map(function (i) { return "<li>" + esc(CFG.items[i][3]) + "</li>"; }).join("") + "</ul>" +
+        "<span>" + esc(P0.line) + "</span></div>");
+    }
+    if (r.mixed.length && !r.flat) flags.push('<div class="fc-flag"><strong>' + esc(CFG.mixed.head.replace("{cylinder}", andList(r.mixed.map(function (k) { return NAME[k]; })))) + "</strong><span>" + esc(CFG.mixed.line) + "</span></div>");
 
     var R0 = CFG.report;
     REC = record(r, el, example);
     /* Record ID rides on the booking link so DALE can match a booking to its readout. */
     var calHref = CAL + "?utm_source=" + CFG.id + "-check&utm_content=" + encodeURIComponent(example ? "example" : REC.recordId);
+    var C = CFG.cta, q = CFG.quotes && CFG.quotes[w];
+    var bookBtn = '<a class="btn" href="' + esc(calHref) + '">' + esc(C.button) + "</a>";
+    /* cta.web with cta.quote, directly under the steps. */
+    var ctaWeb = '<div class="fc-cta"><div class="fc-cta-ask"><h3>' + esc(C.head.replace("{cylinder}", NAME[w])) + "</h3><p>" + esc(C.line) + "</p>" + bookBtn + "</div>" +
+      (q ? '<figure class="fc-quote"><blockquote>' + esc(q[0]) + "</blockquote><figcaption>" + esc(q[1]) + "</figcaption></figure>" : "") + "</div>";
+    var n = r.slow.length;
+    var timeLine = n ? CFG.time.slow.replace("{n}", n) : CFG.time.steady;
     var opt = function (o) { return '<option value="">Choose one</option>' + o.options.map(function (x) { return "<option>" + esc(x) + "</option>"; }).join(""); };
 
     $("fc-r").innerHTML =
@@ -314,7 +356,8 @@
         '<p class="eyebrow">' + esc(CFG.readoutEyebrow) + "</p>" +
         "<h2>" + esc(pat.head) + "</h2><p class=\"fc-patline\">" + esc(pat.line) + "</p>" +
         '<div class="fc-stats"><div><b>' + r.sum + "</b><span>of " + (CFG.groupMax * ORDER.length) + " " + esc(CFG.totalLabel) + '</span></div><div><b>' + fmt(el) + "</b><span>" +
-          (el <= CFG.limitMs ? "to finish, inside the five minutes" : "to finish, past the five minutes") + "</span></div></div>" +
+          esc(timeLine) + "</span></div></div>" +
+        (CFG.snapshot ? '<p class="fc-snapshot">' + esc(CFG.snapshot) + "</p>" : "") +
       "</div>" +
       '<div class="fc-panel fc-enginepanel"><ul class="fc-engine">' + engine + "</ul>" +
         '<p class="fc-legend"><span class="miss">Misfiring 6 to 15</span><span class="rough">Running rough 16 to 23</span><span class="clean">Running clean 24 to 33</span></p>' +
@@ -327,13 +370,16 @@
         '<p class="fc-startq">' + esc(r.startBlock) + "</p>" +
         (r.upstream ? '<p class="fc-upstream">' + esc(r.upstream) + "</p>" : "") +
         "<p><strong>Next steps this week</strong></p><ol>" + steps.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ol></div>" +
+      ctaWeb +
       lean +
       (flags.length ? '<div class="fc-flags">' + flags.join("") + "</div>" : "") +
       '<div class="fc-panel"><h3>A question to sit with</h3><ul class="fc-qs">' + r.qsScreen.map(function (q) { return "<li>" + esc(q) + "</li>"; }).join("") + "</ul></div>" +
-      '<div class="fc-cta"><h3>' + esc(CFG.cta.head) + "</h3><p>" + esc(CFG.cta.line) + '</p><a class="btn" href="' + esc(calHref) + '">Book a time with Matt</a></div>' +
 
+      (example ?
+      /* example.end: no report form on the example, so nothing false is confirmed. */
+      '<div class="fc-panel fc-exend"><p>' + esc(CFG.exampleEnd) + '</p><div class="fc-row"><button class="btn" type="button" id="fc-exgo">' + esc(CFG.start.button) + "</button></div></div>" :
       '<div class="fc-panel" id="fc-reqpanel"><h3>Send me the full report</h3>' +
-        '<p class="fc-note">All six cylinder reads, the statements you hesitated on and three more questions.</p>' +
+        '<p class="fc-note">' + esc(R0.promise) + "</p>" +
         '<form class="fc-req" id="fc-req" novalidate>' +
           '<div class="fc-field"><label for="fc-name">First name</label><input id="fc-name" autocomplete="given-name" required></div>' +
           '<div class="fc-field"><label for="fc-email">Email</label><input id="fc-email" type="email" autocomplete="email" required></div>' +
@@ -344,26 +390,38 @@
           '<div class="fc-row"><button class="btn" type="submit">Send the full report</button></div>' +
         "</form>" +
         '<p class="fc-done" id="fc-done" hidden role="status"></p>' +
+        /* confirm.next, shown with confirm.auto after the request. */
+        '<div class="fc-next" id="fc-next" hidden><p>' + esc(R0.next.replace("{cylinder}", NAME[w])) + "</p>" + bookBtn + "</div>" +
       "</div>" +
-      '<div class="fc-row"><button class="btn btn-ghost" type="button" id="fc-again">Take it again</button></div>' +
-      '<details class="fc-how"><summary>How the score works</summary><p>Each answer is worth a prime: 2, 3, 5, 7, 11 from strongly disagree to strongly agree, so conviction counts for more than mild agreement. One statement per cylinder is a warning sign and scores in reverse. Each cylinder scores 6 to 33, and because the steps are primes, only 22 of those scores can happen. Neutral all the way through leaves a cylinder at 15, still misfiring, because a cylinder only runs clean on conviction. Three statements also make up your candor reading. A hesitation is any answer that took more than 1.75 times your own typical answer time, and at least four seconds, so a careful reader is never marked down for reading speed.</p></details>';
+      '<div class="fc-row"><button class="btn btn-ghost" type="button" id="fc-again">Take it again</button></div>') +
+      '<details class="fc-how"><summary>' + esc(CFG.howLabel) + "</summary><p>" + esc(CFG.method) + "</p></details>";
 
-    $("fc-again").onclick = function () { show("fc-start"); };
-    $("fc-req").addEventListener("submit", requestReport);
+    if (example) { $("fc-exgo").onclick = begin; }
+    else {
+      $("fc-again").onclick = function () { show("fc-start"); };
+      $("fc-req").addEventListener("submit", requestReport);
+    }
 
     if (!example) post(REC);
     show("fc-r");
   }
 
   /* ---------- records (layer 3), in DALE's field names ---------- */
-  function two(n) { return String(n).padStart(2, "0"); }
+  function byId(val) {
+    return CFG.items.map(function (it, i) { return [it[0], i]; })
+      .sort(function (a, b) { return a[0] < b[0] ? -1 : 1; })
+      .map(function (p) { return p[0] + ":" + val(p[1]); }).join(" ");
+  }
   function record(r, el, example) {
     var pairSkipped = r.tot[r.start] === r.tot[r.strong];
     var rec = {
       event: "complete", recordId: rid(/[?&]test=1\b/.test(location.search) ? "TEST-fc_" : "fc_"), flightId: flight().id, check: CFG.id,
       copyVersion: CFG.copyVersion, source: "flight-check", completedAt: new Date().toISOString(),
-      answers: CFG.items.map(function (it, i) { return two(i + 1) + ":" + score(i, ans[i]); }).join(" "),
-      timings: CFG.items.map(function (it, i) { return two(i + 1) + ":" + Math.round(ms[i]); }).join(" "),
+      /* Keyed by Block ID, listed A01 to A18 (statement.order changed on 16 Oct;
+         before that, position 01 was A01, so old and new rows line up). */
+      answers: byId(function (i) { return score(i, ans[i]); }),
+      timings: byId(function (i) { return Math.round(ms[i]); }),
+      variant: TITLE,
       medianMs: Math.round(r.med), hesitationLimitMs: Math.round(r.limit),
       groupScores: ORDER.map(function (k) { return NAME[k] + " " + r.tot[k]; }).join(" \u00b7 "),
       groupBands: ORDER.map(function (k) { return bandLabel(r.bands[k]); }).join(" \u00b7 "),
@@ -394,7 +452,12 @@
       rpt_cylinders: ORDER.map(cyl).join("\n"),
       rpt_steps: B[w].step[r.bands[w]].map(function (x, i) { return (i + 1) + ". " + x; }).join("\n"),
       rpt_questions: r.qsFull.join("\n"),
-      rpt_candor: CFG.candor ? CFG.candor.read[r.cBand] : ""
+      rpt_candor: CFG.candor ? CFG.candor.read[r.cBand] : "",
+      /* One statement per line with its cylinder, or the steady-pace line.
+         Never empty: an empty field hides the email section. */
+      rpt_hesitated: r.slowAsked.length ?
+        r.slowAsked.map(function (i) { return NAME[CFG.items[i][1]] + ": " + CFG.items[i][3]; }).join("\n") :
+        CFG.report.steady
     };
   }
 
@@ -408,12 +471,15 @@
       reportRequested: 1, requestedAt: new Date().toISOString(),
       firstName: n, email: em, organization: $("fc-org").value.trim(),
       orgType: $("fc-orgtype").value, seat: $("fc-seat").value,
-      kitTags: CFG.reportTag ? REC.kitTags + ", " + CFG.reportTag : REC.kitTags, example: REC.example
+      kitTags: REC.kitTags + (CFG.reportTag ? ", " + CFG.reportTag : ""), variant: REC.variant, example: REC.example
     }, k;
+    var seatTag = CFG.seatTags && CFG.seatTags[rec.seat];
+    if (seatTag) rec.kitTags += ", " + seatTag;
     var t = reportText(R); for (k in t) rec[k] = t[k];
     if (!REC.example) post(rec);
     $("fc-done").textContent = CFG.report.confirm.replace("{email}", em);
     $("fc-req").hidden = true; $("fc-done").hidden = false;
+    if ($("fc-next")) $("fc-next").hidden = false;
     requestAnimationFrame(function () {
       var nav = document.querySelector(".nav"), h = nav && getComputedStyle(nav).position !== "static" ? nav.offsetHeight : 0;
       window.scrollTo(0, Math.max(0, $("fc-reqpanel").getBoundingClientRect().top + window.scrollY - h - 16));
