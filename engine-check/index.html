@@ -4,12 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Engine check v1 (WEBSITE, 15 Oct 2026, CLUTCH-84). Copy: "CLUTCH - Engine
-     check - Block library v0.2". Logic and records: assets/flight-check/. -->
+     check - Block library v0.3". Logic and records: assets/flight-check/.
+     16 Oct: start screen conversion pass (Launch sign-offs, 16 Oct). -->
 <title>The engine check – Goode Design &amp; Consulting</title>
-<meta name="description" content="Eighteen statements about the team you lead, against the clock.">
+<meta name="description" content="Find out where your team loses momentum and what to fix first.">
 <link rel="canonical" href="https://thatsgoodedesign.com/engine-check/">
 <meta property="og:title" content="The engine check">
-<meta property="og:description" content="Eighteen statements about the team you lead, against the clock.">
+<meta property="og:description" content="Find out where your team loses momentum and what to fix first.">
 <meta property="og:url" content="https://thatsgoodedesign.com/engine-check/">
 <meta property="og:type" content="website">
 <link rel="icon" href="../favicon.ico" sizes="any">
@@ -181,9 +182,6 @@
 .fc-timing-btn:hover { color: var(--ink); }
 .fc-timing { margin-top: 10px; border-left: 3px solid var(--rule-2); padding-left: 14px; display: grid; gap: 10px; max-width: 60ch; }
 .fc-timing p { margin: 0; font-size: 16px; line-height: 1.55; color: var(--body); overflow-wrap: anywhere; }
-/* Must fix 2: the note sits directly under the start button, the example link after it. */
-.fc-btnnote { margin-top: -12px; max-width: 60ch; }
-.fc-btnnote + .fc-link, #fc-start > .fc-link { justify-self: start; margin-top: -14px; }
 .fc-snapshot { margin: 18px 0 0; font-size: 15px; line-height: 1.55; color: var(--body); max-width: 60ch; }
 .fc-cta { grid-template-columns: minmax(0, 1fr); gap: 20px; }
 .fc-cta-ask { display: grid; gap: 12px; justify-items: start; }
@@ -197,18 +195,67 @@
 .fc-next { display: grid; gap: 12px; justify-items: start; border-top: 1px solid var(--rule); padding-top: 14px; }
 .fc-next[hidden] { display: none; }
 .fc-next p, .fc-exend p { margin: 0; font-size: 17px; line-height: 1.55; color: var(--ink); }
+
+/* Start screen conversion pass (16 Oct, block library v0.3 Launch sign-offs).
+   start.cred and start.quote sit in the dark panel under the promise; the
+   one-line start.privacy links to how.method; report.privacy sits above the
+   email field. */
+.fc-cred { margin: 14px 0 0; font-size: 15px; line-height: 1.5; color: #B7B3A9; max-width: 50ch; }
+.fc-startquote { margin-top: 18px; }
+.fc-startquote blockquote { font-size: 15px; color: #E7E4DC; }
+.fc-privacy a { color: var(--body); text-decoration-color: var(--gold-ink); text-underline-offset: 3px; white-space: nowrap; }
+#fc-start > .fc-link { justify-self: start; margin-top: -14px; }
+#fc-start > .fc-privacy { margin-top: -8px; }
+.fc-rprivacy { margin: 0; max-width: 60ch; }
+.fc-preview { display: none; }
+/* Desktop: the readout preview on the right of the dark panel, from the
+   example readout only. The start screen widens to make room; every other
+   screen keeps the 720 px column. */
+@media (min-width: 1024px) {
+  .fc-band:has(#fc-start:not([hidden])) { padding-inline: max(16px, var(--gut), calc((100% - 1000px) / 2)); }
+  #fc-root:has(#fc-start:not([hidden])) { max-width: 960px; }
+  .fc-hero { display: grid; grid-template-columns: minmax(0, 1fr) 236px; gap: 44px; align-items: center; }
+  .fc-preview { display: block; width: 100%; height: auto; border: 1px solid #3A3A3F; box-shadow: 0 18px 44px rgba(0,0,0,.45); }
+}
+/* Quiet the header booking ask on /engine-check/ only: a text link, so the
+   page's one job is the start button. */
+.nav nav a.nav-quiet, .has-navtoggle > nav > a.nav-quiet { background: none; border: 0; padding: 10px 2px; color: var(--body); font-weight: 700; text-decoration: underline; text-decoration-color: var(--gold); text-decoration-thickness: 1px; text-underline-offset: 5px; }
+.nav nav a.nav-quiet:hover { background: none; color: var(--ink); }
+/* Should fix 2 (VISUALS audit), done with the conversion pass to keep the
+   start button above the fold: on phones the header is one row at 64 px. */
+@media (max-width: 1024px) { .nav.has-navtoggle { padding-block: 13px; } }
+/* Above the fold at 375 x 812 and 1280 x 900, both titles. */
+.fc-band:has(#fc-start:not([hidden])) { padding-top: clamp(16px, 2.5vw, 32px); }
+@media (min-width: 1024px) {
+  #fc-start .fc-hero { padding-block: 32px; }
+  #fc-start .fc-icon { width: 48px; height: 48px; margin-bottom: 12px; }
+  #fc-start .fc-hero h1 { font-size: 50px; margin-bottom: 12px; }
+  #fc-start .fc-lede { font-size: 18px; max-width: 52ch; }
+  #fc-start .fc-cred { margin-top: 12px; }
+  #fc-start .fc-startquote { margin-top: 14px; }
+}
+@media (max-width: 480px) {
+  #fc-start .fc-hero { padding: 22px 20px; }
+  #fc-start .fc-icon { display: none; }
+  #fc-start .fc-hero .eyebrow { margin-bottom: 10px; }
+  #fc-start .fc-hero h1 { margin-bottom: 10px; }
+  #fc-start .fc-lede { font-size: 16px; line-height: 1.5; }
+  #fc-start .fc-cred { margin-top: 10px; font-size: 14px; }
+  #fc-start .fc-startquote { margin-top: 12px; padding-left: 12px; gap: 4px; }
+  #fc-start .fc-startquote blockquote { font-size: 14px; line-height: 1.5; }
+  #fc-start .fc-startquote figcaption { font-size: 12px; }
+}
 @media (max-width: 560px) {
   .fc-engine { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px 10px; }
 }
 @media (max-width: 480px) {
-  /* Must fix 2: keep start.button.note above the fold at 375 x 812 now the
-     stats stack. Tighter start-screen spacing on phones only. */
+  /* Tighter start-screen spacing on phones only, to keep the start
+     button above the fold at 375 x 812. */
   #fc-start { gap: 16px; }
   #fc-start .fc-icon { width: 52px; height: 52px; margin-bottom: 14px; }
   #fc-start .fc-counts { padding-block: 12px; }
   #fc-go { padding: 16px 24px; }
-  .fc-btnnote { margin-top: -6px; font-size: 13px; line-height: 1.5; }
-  .fc-btnnote + .fc-link, #fc-start > .fc-link { margin-top: -10px; }
+  #fc-start > .fc-link { margin-top: -10px; }
   .fc-bar { height: 112px; }
   .fc-card { padding: 18px 16px; }
 }
@@ -284,14 +331,14 @@
     <a href="../books/">Books</a>
     <a href="../writing/">Writing</a>
     <a href="../about/">About</a>
-    <a class="btn btn-sm" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=engine-check-nav">Book a call</a>
+    <a class="btn btn-sm nav-quiet" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=engine-check-nav">Book a call</a>
   </nav>
 </header>
 
 
 <main id="main">
   <section class="fc-band">
-    <div id="fc-root" data-check="engine" data-icon="../assets/icons/icon-create-lit.svg" data-calendly="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt">
+    <div id="fc-root" data-check="engine" data-icon="../assets/icons/icon-create-lit.svg" data-preview="../assets/flight-check/engine-check-readout-preview.png" data-calendly="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt">
       <noscript><p>The engine check needs JavaScript to run the clock and build your readout.</p></noscript>
     </div>
   </section>
@@ -336,7 +383,7 @@
     interpretations of CliftonStrengths®, Clifton Youth StrengthsExplorer or
     BP10 results are solely the beliefs of Goode Design &amp; Consulting.</p>
 </footer>
-<script src="../assets/flight-check/engine.js?v=4"></script>
-<script src="../assets/flight-check/flight-check.js?v=9"></script>
+<script src="../assets/flight-check/engine.js?v=5"></script>
+<script src="../assets/flight-check/flight-check.js?v=10"></script>
 </body>
 </html>

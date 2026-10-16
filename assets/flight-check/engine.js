@@ -321,11 +321,19 @@ window.FLIGHT_CHECKS.engine = {
   },
 
   /* Start screen (Changes, 16 Oct). Title test: start.title.b against the
-     live title, 50/50, kept per browser; the shown title is sent as variant. */
+     live title, 50/50, kept per browser; the shown title is sent as variant.
+     Conversion pass (block library v0.3, Launch sign-offs, 16 Oct): eyebrow,
+     promise, cred, quote and one-line privacy; start.button.note retired. */
   start: {
-    eyebrow: "Engine check · 1 of 4",
+    eyebrow: "For anyone who leads a team",
     titles: ["Where does your team stall?", "Gut check your engine"],
-    lede: "Eighteen statements about the team you lead. Most people finish in two minutes. You'll see which cylinder is running clean, which one is running on you, and which statements took you longer to answer.",
+    /* start.promise */
+    lede: "Find out where your team loses momentum and what to fix first. Eighteen statements about the team you lead, answered on instinct in about two minutes. Your readout also shows which ones made you pause.",
+    /* start.cred, under the promise, no link. */
+    cred: "From Matt Goode's book CLUTCH, now in paperback. Matt coaches founders and independent school leaders.",
+    /* start.quote, under start.cred. Placeholder approved by Matt 16 Oct
+       (cta.quote.execution); replace when a named or closer quote is cleared. */
+    quote: ["“I thought I needed better time management. Turns out I needed to get out of my own way.”", "Founder and CEO, growing services business"],
     /* start.rule.1 to 3, shown on the first statement screen, not here. */
     rules: [
       "Go with your first reaction. It is usually the honest one.",
@@ -346,9 +354,12 @@ window.FLIGHT_CHECKS.engine = {
       ]
     },
     counts: [["2 minutes", "most people finish"], ["18 statements", "on instinct"], ["Free readout", "no email needed"]],
-    button: "Start the engine check",
-    buttonNote: "Your readout is free and on screen straight away. Email only if you want the full report.",
-    example: "See an example readout"
+    /* start.button; example.end uses it too. */
+    button: "Start the check",
+    example: "See an example readout",
+    /* start.privacy, one line, linked to how.method. Replaces the full
+       privacy block and privacy.who on the start screen. */
+    privacy: "Your answers stay anonymous unless you add your email, and only Matt sees them."
   },
   /* A worked example for "See an example readout" (never posted). */
   example: {
@@ -360,13 +371,13 @@ window.FLIGHT_CHECKS.engine = {
   totalLabel: "engine score",
   readoutEyebrow: "Your engine reading",
 
-  privacy: "Your answers are saved anonymously. Add your email at the end only if you want the full report. If you do, any other checks you took on this device are linked to your name too.",
-  privacyWho: "Only Matt sees your answers.",
 
   report: {
     org:  { label: "What kind of organization are you in? (optional)", options: ["Company", "School", "Nonprofit", "Government", "Other"] },
     /* Options must match the Airtable Seat select exactly (run:dale, 16 Oct). */
     seat: { label: "Which best describes your role? (optional)", options: ["Founder or CEO", "Head of School or Executive Director", "Senior executive (VP or C-suite)", "People, HR or operations lead", "Team or department lead", "Coach, consultant or adviser", "Something else"] },
+    /* report.privacy, above the email field (16 Oct sign-offs). */
+    privacy: "Only Matt sees your answers. If you add your email, any other checks you took on this device are linked to your name too.",
     /* report.promise */
     promise: "All six cylinder reads, the statements that took you longer, and more questions to sit with.",
     /* confirm.auto, block library v0.2 (Additions, 15 Oct), word for word.

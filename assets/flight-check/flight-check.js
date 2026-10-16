@@ -184,11 +184,19 @@
     var S = CFG.start;
     root.innerHTML =
       '<section class="fc-screen" id="fc-start">' +
+        /* Conversion pass (16 Oct): start.promise, start.cred and start.quote in
+           the dark panel; on desktop a preview of the example readout sits on
+           the right (example data only, never a real record). */
         '<div class="fc-hero">' +
-          '<img class="fc-icon" src="' + root.getAttribute("data-icon") + '" alt="" width="72" height="72">' +
-          '<p class="eyebrow">' + esc(S.eyebrow) + "</p>" +
-          "<h1>" + esc(TITLE) + "</h1>" +
-          '<p class="fc-lede">' + esc(S.lede) + "</p>" +
+          '<div class="fc-hero-copy">' +
+            '<img class="fc-icon" src="' + root.getAttribute("data-icon") + '" alt="" width="72" height="72">' +
+            '<p class="eyebrow">' + esc(S.eyebrow) + "</p>" +
+            "<h1>" + esc(TITLE) + "</h1>" +
+            '<p class="fc-lede">' + esc(S.lede) + "</p>" +
+            (S.cred ? '<p class="fc-cred">' + esc(S.cred) + "</p>" : "") +
+            (S.quote ? '<figure class="fc-quote fc-startquote"><blockquote>' + esc(S.quote[0]) + "</blockquote><figcaption>" + esc(S.quote[1]) + "</figcaption></figure>" : "") +
+          "</div>" +
+          (root.getAttribute("data-preview") ? '<img class="fc-preview" src="' + root.getAttribute("data-preview") + '" alt="" width="396" height="753" loading="lazy" decoding="async">' : "") +
         "</div>" +
         /* start.numbers: the number on its own line over the word (VISUALS audit, must fix 1).
            Display split only; the copy is unchanged. */
@@ -197,11 +205,11 @@
           var head = i > 0 ? "<b>" + esc(h.slice(0, i)) + '</b><strong class="fc-w">' + esc(h.slice(i + 1)) + "</strong>" : "<b>" + esc(h) + "</b>";
           return "<div>" + head + "<span>" + esc(c[1]) + "</span></div>";
         }).join("") + "</div>" +
-        /* start.button.note directly under the start button, before the example link (must fix 2). */
+        /* The stats row sits directly over the button; start.button.note is retired. */
         '<div class="fc-row"><button class="btn btn-lg" type="button" id="fc-go">' + esc(S.button) + "</button></div>" +
-        (S.buttonNote ? '<p class="fc-note fc-btnnote">' + esc(S.buttonNote) + "</p>" : "") +
         '<button class="fc-link" type="button" id="fc-sample">' + esc(S.example) + "</button>" +
-        '<p class="fc-privacy">' + esc(CFG.privacy) + (CFG.privacyWho ? " " + esc(CFG.privacyWho) : "") + "</p>" +
+        /* start.privacy: one line, linked to how.method below it. */
+        '<p class="fc-privacy">' + esc(S.privacy) + (CFG.method ? ' <a href="#fc-how-start" id="fc-privlink">' + esc(CFG.howLabel) + "</a>" : "") + "</p>" +
         (CFG.method ? '<details class="fc-how" id="fc-how-start"><summary>' + esc(CFG.howLabel) + "</summary><p>" + esc(CFG.method) + "</p></details>" : "") +
       "</section>" +
 
@@ -227,6 +235,8 @@
       '<section class="fc-screen" id="fc-r" hidden></section>';
 
     $("fc-go").onclick = begin;
+    /* start.privacy link: open how.method in place rather than jump past it. */
+    if ($("fc-privlink")) $("fc-privlink").onclick = function (e) { e.preventDefault(); var d = $("fc-how-start"); d.open = true; d.scrollIntoView({ block: "nearest" }); };
     $("fc-sample").onclick = function () {
       var t = CFG.example.timings;
       ans = CFG.example.answers.slice(); ms = t.slice();
@@ -406,6 +416,8 @@
         '<p class="fc-note">' + esc(R0.promise) + "</p>" +
         '<form class="fc-req" id="fc-req" novalidate>' +
           '<div class="fc-field"><label for="fc-name">First name</label><input id="fc-name" autocomplete="given-name" required></div>' +
+          /* report.privacy, directly above the email field. */
+          (R0.privacy ? '<p class="fc-note fc-rprivacy">' + esc(R0.privacy) + "</p>" : "") +
           '<div class="fc-field"><label for="fc-email">Email</label><input id="fc-email" type="email" autocomplete="email" required></div>' +
           '<div class="fc-field"><label for="fc-org">Organization (optional)</label><input id="fc-org" autocomplete="organization"></div>' +
           '<div class="fc-field"><label for="fc-orgtype">' + esc(R0.org.label) + '</label><select id="fc-orgtype">' + opt(R0.org) + "</select></div>" +
