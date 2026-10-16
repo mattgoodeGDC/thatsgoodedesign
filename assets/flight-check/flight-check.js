@@ -501,7 +501,11 @@
     if (seatTag) rec.kitTags += ", " + seatTag;
     var t = reportText(R); for (k in t) rec[k] = t[k];
     if (!REC.example) post(rec);
-    $("fc-done").textContent = CFG.report.confirm.replace("{email}", em);
+    /* confirm.auto at body size: "Done." in bold green, each email address kept whole
+       (VISUALS audit should fix 5). Display only; the copy is unchanged. */
+    $("fc-done").innerHTML = esc(CFG.report.confirm.replace("{email}", em))
+      .replace(/^(Done\.)/, '<strong>$1</strong>')
+      .replace(/([^\s,;:()]+@[^\s,;:()]+?)(?=[.,;:)]?(\s|$))/g, function (m, a) { return '<span class="fc-addr">' + a.replace("@", "@<wbr>") + "</span>"; });
     $("fc-req").hidden = true; $("fc-done").hidden = false;
     if ($("fc-next")) $("fc-next").hidden = false;
     requestAnimationFrame(function () {
