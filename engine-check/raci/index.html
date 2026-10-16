@@ -34,8 +34,9 @@
 .raci-hero p { margin: 0; font-size: clamp(17px, 2.4vw, 20px); line-height: 1.5; color: #E7E4DC; max-width: 46ch; }
 .raci-row { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; }
 .raci-keys { list-style: none; margin: 0; padding: 16px 0; display: grid; gap: 10px; border-block: 1px solid var(--rule); }
-.raci-keys li { font-size: 16px; line-height: 1.55; color: var(--body); }
-.raci-keys b { color: var(--ink); display: inline-block; min-width: 1.6em; }
+.raci-keys li { display: grid; grid-template-columns: 1.6em minmax(0, 1fr); column-gap: 10px; font-size: 16px; line-height: 1.55; color: var(--body); }
+.raci-keys b { color: var(--ink); }
+@media (max-width: 560px) { .raci-row .btn { width: 100%; text-align: center; } }
 .raci-note { margin: 0; font-size: 14px; line-height: 1.55; color: var(--muted); border-left: 3px solid var(--rule-2); padding-left: 14px; max-width: 60ch; }
 .raci-back { font: 600 15px Montserrat, sans-serif; color: var(--body); text-decoration: underline; text-decoration-color: var(--gold-ink); text-underline-offset: 4px; }
 </style>
