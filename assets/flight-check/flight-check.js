@@ -190,10 +190,17 @@
           "<h1>" + esc(TITLE) + "</h1>" +
           '<p class="fc-lede">' + esc(S.lede) + "</p>" +
         "</div>" +
-        '<div class="fc-counts">' + S.counts.map(function (c) { return "<div><b>" + esc(c[0]) + "</b><span>" + esc(c[1]) + "</span></div>"; }).join("") + "</div>" +
-        '<div class="fc-row"><button class="btn btn-lg" type="button" id="fc-go">' + esc(S.button) + "</button>" +
-        '<button class="fc-link" type="button" id="fc-sample">' + esc(S.example) + "</button></div>" +
+        /* start.numbers: the number on its own line over the word (VISUALS audit, must fix 1).
+           Display split only; the copy is unchanged. */
+        '<div class="fc-counts">' + S.counts.map(function (c) {
+          var h = String(c[0]), i = h.indexOf(" ");
+          var head = i > 0 ? "<b>" + esc(h.slice(0, i)) + '</b><strong class="fc-w">' + esc(h.slice(i + 1)) + "</strong>" : "<b>" + esc(h) + "</b>";
+          return "<div>" + head + "<span>" + esc(c[1]) + "</span></div>";
+        }).join("") + "</div>" +
+        /* start.button.note directly under the start button, before the example link (must fix 2). */
+        '<div class="fc-row"><button class="btn btn-lg" type="button" id="fc-go">' + esc(S.button) + "</button></div>" +
         (S.buttonNote ? '<p class="fc-note fc-btnnote">' + esc(S.buttonNote) + "</p>" : "") +
+        '<button class="fc-link" type="button" id="fc-sample">' + esc(S.example) + "</button>" +
         '<p class="fc-privacy">' + esc(CFG.privacy) + (CFG.privacyWho ? " " + esc(CFG.privacyWho) : "") + "</p>" +
         (CFG.method ? '<details class="fc-how" id="fc-how-start"><summary>' + esc(CFG.howLabel) + "</summary><p>" + esc(CFG.method) + "</p></details>" : "") +
       "</section>" +

@@ -40,10 +40,17 @@
 .fc-rules { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; counter-reset: r; }
 .fc-rules li { position: relative; padding-left: 46px; font-size: 16px; line-height: 1.55; color: var(--body); counter-increment: r; }
 .fc-rules li::before { content: "0" counter(r); position: absolute; left: 0; top: 0; font-weight: 800; font-size: 14px; letter-spacing: .06em; color: var(--gold-ink); }
-.fc-counts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; border-block: 1px solid var(--rule); padding-block: 16px; }
-.fc-counts div { display: grid; gap: 4px; }
-.fc-counts b { font-size: clamp(19px, 4.6vw, 28px); font-weight: 800; letter-spacing: -.02em; line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; }
-.fc-counts span { font-size: 12px; line-height: 1.35; color: var(--muted); }
+/* Must fix 1 (VISUALS audit, 16 Oct): equal thirds, 14 px gap, number over word. */
+.fc-counts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 14px; border-block: 1px solid var(--rule); padding-block: 16px; }
+.fc-counts div { display: grid; align-content: start; min-width: 0; }
+.fc-counts b { font-size: 28px; font-weight: 800; letter-spacing: -.02em; line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; }
+.fc-counts .fc-w { font-size: 14px; font-weight: 800; line-height: 1.25; color: var(--ink); margin-top: 2px; }
+.fc-counts span { font-size: 12px; line-height: 1.35; color: var(--muted); margin-top: 3px; }
+@media (min-width: 561px) {
+  .fc-counts div { display: block; }
+  .fc-counts .fc-w { font-size: 28px; line-height: 1; letter-spacing: -.02em; margin: 0 0 0 .25em; }
+  .fc-counts span { display: block; }
+}
 .fc-privacy { margin: 0; font-size: 14px; line-height: 1.55; color: var(--muted); border-left: 3px solid var(--rule-2); padding-left: 14px; max-width: 60ch; }
 .fc-row { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; }
 .fc-root button { font-family: inherit; }
@@ -157,7 +164,7 @@
 .fc-field label { font-size: 14px; font-weight: 700; color: var(--ink); }
 .fc-field input, .fc-field select { font: 500 16px Montserrat, sans-serif; padding: 12px; border: 1px solid var(--rule-2); background: #fff; color: var(--ink); border-radius: 0; width: 100%; }
 .fc-err { margin: 0; font-size: 14px; color: var(--burgundy); }
-.fc-done { margin: 0; font-size: 18px; font-weight: 700; color: var(--green); }
+.fc-done { margin: 0; font-size: 18px; font-weight: 700; color: var(--green); overflow-wrap: anywhere; }
 .fc-how { font-size: 15px; color: var(--body); }
 .fc-how summary { cursor: pointer; font-weight: 700; color: var(--ink); }
 .fc-how p { margin: 10px 0 0; line-height: 1.6; }
@@ -172,7 +179,9 @@
 .fc-timing-btn:hover { color: var(--ink); }
 .fc-timing { margin-top: 10px; border-left: 3px solid var(--rule-2); padding-left: 14px; display: grid; gap: 10px; max-width: 60ch; }
 .fc-timing p { margin: 0; font-size: 16px; line-height: 1.55; color: var(--body); overflow-wrap: anywhere; }
-.fc-btnnote { margin-top: -8px; }
+/* Must fix 2: the note sits directly under the start button, the example link after it. */
+.fc-btnnote { margin-top: -12px; max-width: 60ch; }
+.fc-btnnote + .fc-link, #fc-start > .fc-link { justify-self: start; margin-top: -14px; }
 .fc-snapshot { margin: 18px 0 0; font-size: 15px; line-height: 1.55; color: var(--body); max-width: 60ch; }
 .fc-cta { grid-template-columns: minmax(0, 1fr); gap: 20px; }
 .fc-cta-ask { display: grid; gap: 12px; justify-items: start; }
@@ -180,6 +189,8 @@
 .fc-quote blockquote { margin: 0; font-size: 16px; line-height: 1.55; font-style: italic; color: var(--paper); }
 .fc-quote figcaption { font-size: 13px; color: #B7B3A9; }
 @media (min-width: 640px) { .fc-cta { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); align-items: center; } }
+/* Must fix 3: the booking button (cta.web and confirm.next) on one line. */
+#fc-root .fc-cta .btn, #fc-root .fc-next .btn { display: block; width: 100%; justify-self: stretch; padding: 16px 10px; font-size: 13px; letter-spacing: .08em; white-space: nowrap; text-align: center; }
 .fc-slow { margin: 4px 0; padding-left: 1.2em; display: grid; gap: 4px; font-weight: 600; color: var(--ink); }
 .fc-next { display: grid; gap: 12px; justify-items: start; border-top: 1px solid var(--rule); padding-top: 14px; }
 .fc-next[hidden] { display: none; }
@@ -188,6 +199,14 @@
   .fc-engine { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px 10px; }
 }
 @media (max-width: 480px) {
+  /* Must fix 2: keep start.button.note above the fold at 375 x 812 now the
+     stats stack. Tighter start-screen spacing on phones only. */
+  #fc-start { gap: 16px; }
+  #fc-start .fc-icon { width: 52px; height: 52px; margin-bottom: 14px; }
+  #fc-start .fc-counts { padding-block: 12px; }
+  #fc-go { padding: 16px 24px; }
+  .fc-btnnote { margin-top: -6px; font-size: 13px; line-height: 1.5; }
+  .fc-btnnote + .fc-link, #fc-start > .fc-link { margin-top: -10px; }
   .fc-bar { height: 112px; }
   .fc-card { padding: 18px 16px; }
 }
@@ -316,6 +335,6 @@
     BP10 results are solely the beliefs of Goode Design &amp; Consulting.</p>
 </footer>
 <script src="../assets/flight-check/engine.js?v=4"></script>
-<script src="../assets/flight-check/flight-check.js?v=7"></script>
+<script src="../assets/flight-check/flight-check.js?v=8"></script>
 </body>
 </html>
