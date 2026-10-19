@@ -101,11 +101,16 @@
 .fw-c { --fwc: #3E9B75; } .fw-v { --fwc: #3766A2; } .fw-6 { --fwc: #7B2481; } .fw-d { --fwc: #8D3E40; } .fw-eq { --fwc: var(--ink); } .fw-own { --fwc: var(--own); }
 @media (max-width: 700px) { .lu-fw li { grid-template-columns: minmax(0, 1fr); } }
 .lu-own { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); }
-.lu-own a { display: block; height: 100%; padding: 16px 18px; border: 1px solid var(--rule); border-radius: 10px; background: var(--paper); text-decoration: none; color: var(--body); font-size: 14px; }
+.lu-own a { display: flex; align-items: center; gap: 16px; height: 100%; padding: 14px 16px; border: 1px solid var(--rule); border-radius: 10px; background: var(--paper); text-decoration: none; color: var(--body); font-size: 14px; }
 .lu-own a:hover, .lu-own a:focus-visible { border-color: var(--gold-ink); }
 .lu-own strong { display: block; color: var(--ink); font-size: 17px; margin-bottom: 2px; }
 .lu-own li { background: none; border: 0; padding: 0; box-shadow: none; }
 .lu-own li::before { content: none; display: none; }
+/* Reading cards carry their cover; the Lab gets a cover-shaped tile in GDC ink. */
+.lu-thumb { width: 72px; height: 108px; flex: 0 0 72px; object-fit: cover; border-radius: 2px; box-shadow: 0 4px 10px rgba(36,36,39,.18); }
+.lu-thumb--lab { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; background: var(--ink); padding: 8px; box-sizing: border-box; }
+.lu-thumb--lab img { width: 30px; height: 30px; }
+.lu-thumb--lab em { font-style: normal; font-size: 9px; font-weight: 800; letter-spacing: .12em; line-height: 1.3; text-transform: uppercase; text-align: center; color: var(--gold); }
 /* Buyer pass (19 Oct 2026): a press in the hero, a problem picker, an action
    on every card, proof beside each group, and the book as the low rung. */
 .lu-jump { list-style: none; margin: 30px 0 0; padding: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); }
@@ -486,9 +491,9 @@
       </div>
     </div>
     <ul class="lu-own lu-also" aria-label="More to read">
-      <li><a href="../field-tested/"><strong>Field Tested</strong>Seventy-two facilitation methods, $45 ebook</a></li>
-      <li><a href="../no-average-brain/"><strong>No Average Brain</strong>Neuroinclusive leadership, coming early 2027</a></li>
-      <li><a href="../writing/"><strong>The Leadership Lab</strong>Three free pieces a week</a></li>
+      <li><a href="../field-tested/"><img class="lu-thumb" src="../assets/cover_field.jpg" alt="" width="72" height="108" loading="lazy"><span><strong>Field Tested</strong>Seventy-two facilitation methods, $45 ebook</span></a></li>
+      <li><a href="../no-average-brain/"><img class="lu-thumb" src="../assets/cover_noaveragebrain.jpg" alt="" width="72" height="108" loading="lazy"><span><strong>No Average Brain</strong>Neuroinclusive leadership, coming early 2027</span></a></li>
+      <li><a href="../writing/"><span class="lu-thumb lu-thumb--lab" aria-hidden="true"><img src="../assets/gdc/gdc-mark-dark.svg" alt="" width="34" height="34"><em>The Leadership Lab</em></span><span><strong>The Leadership Lab</strong>Three free pieces a week</span></a></li>
     </ul>
   </section>
 
