@@ -56,7 +56,7 @@
 .lu-card.product--engine { --c2: var(--engine-dark); }
 .lu-card--om .lu-band span:nth-child(1) { background: var(--c2); }
 .lu-card--om .lu-band span:nth-child(2) { background: var(--c); }
-.lu-card--core { --c: var(--ink); --c2: var(--gold); --c3: var(--rule-2); }
+.lu-card--core { --c: var(--ink); --c2: #9A978F; --c3: var(--rule-2); }
 .lu-card::before { content: none; display: none; }
 .band.alt .lu-card { background: #fff; }
 .lu-card .lockup { margin: 0 0 14px; align-items: flex-start; }
@@ -101,9 +101,15 @@
 .lu-jump strong { color: var(--ink); font-size: 17px; line-height: 1.3; }
 .lu-jump em { font-style: normal; font-weight: 700; font-size: 13px; color: var(--gold-ink); margin-top: auto; padding-top: 6px; }
 .lu-free { display: inline-block; margin-left: 6px; padding: 1px 7px; border-radius: 4px; background: var(--ink); color: var(--paper); font-size: 10px; font-weight: 800; letter-spacing: .14em; vertical-align: 2px; }
-.lu-act { margin-top: auto; display: flex; flex-direction: column-reverse; align-items: flex-start; gap: 14px; }
-.lu-act .btn { padding: 10px 16px; font-size: 13px; }
-.lu-act .link-arrow { margin-top: 0; }
+/* One action per card (19 Oct 2026, Matt): a full-width block in the
+   product's secondary colour that always opens the product's own page.
+   Gold is kept for booking a call with Matt. */
+.lu-go { margin-top: auto; display: block; padding: 13px 16px; border-radius: 8px; background: var(--c2); color: var(--ink); font-size: 13px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; text-align: center; transition: background .15s, color .15s; }
+.lu-go::after { content: " \2192"; }
+.lu-go:hover, .lu-go:focus-visible { background: var(--c); color: #fff; }
+.lu-go:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.lu-card--engine .lu-go:hover, .lu-card--engine .lu-go:focus-visible { background: var(--engine-text); }
+@media (prefers-reduced-motion: reduce) { .lu-go { transition: none; } }
 .lu-card .lu-rates { font-size: 13px; margin: -6px 0 14px; }
 .lu-card .lu-rates a { color: var(--ink); text-decoration-color: var(--gold-ink); }
 .lu-proof { margin: 26px 0 0; max-width: 720px; }
@@ -133,7 +139,7 @@
   .lu-card--core .lu-band { grid-column: 1 / -1; }
   .lu-card--core .lockup, .lu-card--core .lu-desc, .lu-card--core .lu-facts { margin: 0; }
   .lu-card--core .lu-facts { border-top: 0; border-left: 1px solid var(--rule); padding: 0 0 0 20px; }
-  .lu-card--core .lu-act { margin-top: 0; }
+  .lu-card--core .lu-go { margin-top: 0; min-width: 220px; }
   .lu-card--core .lockup-name { white-space: nowrap; }
 }
 </style>
@@ -262,7 +268,7 @@
             <li><b>Price</b><span>From $450 a person</span></li>
           </ul>
           <figure class="lu-cq"><blockquote>I thought I needed better time management. Turns out I needed to get out of my own way.</blockquote><figcaption>Founder and CEO, Services business</figcaption></figure>
-          <div class="lu-act"><a class="btn" href="../obd/">See OBD pricing</a><a class="link-arrow" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=lineup-obd">Talk about the OBD</a></div>
+          <a class="lu-go" href="../obd/">See the OBD</a>
         </li>
         <li class="lu-card product product--psc">
           <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -272,7 +278,7 @@
             <li><b>For</b><span>Any leader, or one team</span></li>
             <li><b>Price</b><span>Free, no email needed</span></li>
           </ul>
-          <div class="lu-act"><a class="btn" href="../ps-tool/?src=lineup">Take the Psychological Safety Check</a><a class="link-arrow" href="../psychological-safety/">Run it with your team</a></div>
+          <a class="lu-go" href="../psychological-safety/">See the Safety Check</a>
         </li>
         <li class="lu-card product product--engine lu-card--engine">
           <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -282,7 +288,7 @@
             <li><b>For</b><span>Anyone who leads a team</span></li>
             <li><b>Price</b><span>Free, in beta</span></li>
           </ul>
-          <div class="lu-act"><a class="btn" href="../engine-check/?src=lineup">Run the engine check</a></div>
+          <a class="lu-go" href="../engine-check/">See the engine check</a>
         </li>
         <li class="lu-note">Two free checks, about two minutes each. The diagnostic names the pattern you&rsquo;re in. The engine check reads the team you lead.</li>
         <li class="lu-card product lu-card--core">
@@ -293,7 +299,7 @@
             <li><b>For</b><span>One leader</span></li>
             <li><b>Price</b><span>Free, no email needed</span></li>
           </ul>
-          <div class="lu-act"><a class="btn" href="../diagnostic/?src=lineup#doors">Take the diagnostic</a></div>
+          <a class="lu-go" href="../diagnostic/">See the diagnostic</a>
         </li>
       </ul>
       <figure class="pullquote lu-proof">
@@ -315,7 +321,7 @@
             <li><b>Price</b><span>Priced on a call</span></li>
           </ul>
           <p class="lu-rates">Schools and nonprofits: <a href="../schools/rates/">see published rates</a></p>
-          <div class="lu-act"><a class="btn" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=lineup-gs">Talk about GoodeStart</a><a class="link-arrow" href="../goodestart/">Details</a></div>
+          <a class="lu-go" href="../goodestart/">See GoodeStart</a>
         </li>
         <li class="lu-card product product--bb">
           <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -326,7 +332,7 @@
             <li><b>Price</b><span>Priced on a call</span></li>
           </ul>
           <p class="lu-rates">Schools and nonprofits: <a href="../schools/rates/">see published rates</a></p>
-          <div class="lu-act"><a class="btn" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=lineup-bb">Talk about Building the Bench</a><a class="link-arrow" href="../building-the-bench/">Details</a></div>
+          <a class="lu-go" href="../building-the-bench/">See Building the Bench</a>
         </li>
         <li class="lu-card product product--ec">
           <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -338,7 +344,7 @@
           </ul>
           <p class="lu-rates">Schools and nonprofits: <a href="../schools/rates/">see published rates</a></p>
           <figure class="lu-cq"><blockquote>Matt called me on it. Not rudely, but he wasn&rsquo;t going to let me pretend the problem was my employees.</blockquote><figcaption>Founder and CEO, Services business</figcaption></figure>
-          <div class="lu-act"><a class="btn" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=lineup-ec">Talk about executive coaching</a><a class="link-arrow" href="../executive-coaching/">Details</a></div>
+          <a class="lu-go" href="../executive-coaching/">See executive coaching</a>
         </li>
       </ul>
       <figure class="pullquote lu-proof">
@@ -360,7 +366,7 @@
             <li><b>Price</b><span>Priced on a call</span></li>
           </ul>
           <p class="lu-rates">Schools and nonprofits: <a href="../schools/rates/">see published rates</a></p>
-          <div class="lu-act"><a class="btn" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=lineup-kt">Talk about Know Thyself</a><a class="link-arrow" href="../know-thyself/">Details</a></div>
+          <a class="lu-go" href="../know-thyself/">See Know Thyself</a>
         </li>
         <li class="lu-card product product--kt lu-card--om">
           <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -371,7 +377,7 @@
             <li><b>Price</b><span>Priced on a call</span></li>
           </ul>
           <p class="lu-rates">Schools and nonprofits: <a href="../schools/rates/">see published rates</a></p>
-          <div class="lu-act"><a class="btn" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=lineup-om">Talk about the Owner&rsquo;s Manual</a><a class="link-arrow" href="../owners-manual/">Details</a></div>
+          <a class="lu-go" href="../owners-manual/">See the Owner&rsquo;s Manual</a>
         </li>
         <li class="lu-card product product--own">
           <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -382,7 +388,7 @@
             <li><b>Price</b><span>Priced on a call</span></li>
           </ul>
           <p class="lu-rates">Schools and nonprofits: <a href="../schools/rates/">see published rates</a></p>
-          <div class="lu-act"><a class="btn" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=lineup-own">Talk about OWN</a><a class="link-arrow" href="../schools/#svc-advisory">Details</a></div>
+          <a class="lu-go" href="../schools/#svc-advisory">See OWN</a>
         </li>
       </ul>
       <figure class="pullquote lu-proof">
@@ -419,7 +425,7 @@
         <p>Want one framework first? CREATE, VOICES, the 6C Decision Compass and
           DELEGATE are each a $3.99 ebook.</p>
         <p class="cta-row">
-          <a class="btn" href="../clutch/">Get the paperback</a>
+          <a class="btn btn-ghost" href="../clutch/">Get the paperback</a>
           <a class="btn btn-ghost" href="../clutch/ebooks/">See the $3.99 ebooks</a>
         </p>
       </div>
