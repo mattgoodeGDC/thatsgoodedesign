@@ -604,7 +604,7 @@
     var X = CFG.report.extras || {};
     var bookPanel = function (o, foot) {
       if (!o) return "";
-      return '<aside class="rp-book"><p class="rp-bookhead">' + esc(X.bookHead) + "</p><blockquote>" + esc(o.quote) + "</blockquote>" +
+      return '<aside class="rp-book"><p class="rp-bookhead">' + esc(X.bookHead) + "</p><blockquote>\u201c" + esc(o.quote) + "\u201d</blockquote>" +
         '<p class="rp-bookref">' + esc(o.ref) + "</p>" +
         '<p class="rp-label">' + esc(X.bookCaseHead) + "</p><p>" + (o.caseTitle ? "<strong>" + esc(o.caseTitle) + ".</strong> " : "") + esc(o.caseSummary) + "</p>" +
         (foot ? '<p class="rp-booklink"><a href="' + esc(foot.href) + '">' + esc(foot.text) + "</a></p>" : "") + "</aside>";
