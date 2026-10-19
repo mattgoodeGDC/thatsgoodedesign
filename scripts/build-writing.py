@@ -209,7 +209,7 @@ def page(p, posts, i, header, footer):
         n = parts.index(p) + 1
         series = f"""
     <aside class="post-series" aria-label="{esc(p['series'])}">
-      <p class="eyebrow">{esc(p['series'])} &middot; part {n} of {len(parts)}</p>
+      <p class="eyebrow">{esc(p['series'])} &middot; part {n} of {max([q.get('series_total') or 0 for q in parts] + [len(parts)])}</p>
       <ol>{items}</ol>
     </aside>"""
     nav = ""
