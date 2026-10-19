@@ -310,7 +310,21 @@
   #fc-root { max-width: none; }
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .fc-enginepanel, .rp-cta, .fc-focus, .rp-block { break-inside: avoid; }
-  .rp-sec { break-before: page; }
+  .rp-sec { break-after: avoid; }
+  .rp, #fc-root[data-mode="report"] { display: block; }
+  .rp > * { margin: 0 0 12px; }
+  .rp-cyl, .fc-panel, .fc-focus { display: block; }
+  .rp-cyl > * + *, .fc-panel > * + *, .fc-focus > * + * { margin-top: 7px; }
+  .fc-bar { height: 110px; }
+  .fc-stats b { font-size: 34px; }
+  .rp-head h1 { font-size: 34px; }
+  .rp-cyl { padding: 14px 16px; gap: 7px; }
+  .rp-cyl p, .rp-cyl ol { font-size: 13.5px; line-height: 1.5; }
+  .rp-cyl .fc-qs { gap: 6px; }
+  .rp-cyl .fc-qs li { font-size: 14px; }
+  .rp-block .fc-qs li { font-size: 16px; }
+  .fc-panel, .fc-focus { padding: 16px; }
+  .rp-block p, .fc-focus p { font-size: 14px; }
   .fc-light { box-shadow: none !important; }
   a { color: inherit; text-decoration: none; }
 }
