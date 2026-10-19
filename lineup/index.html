@@ -35,14 +35,17 @@
    Product Family v1.3. Buyer-facing: colour names, not hex codes. The rule
    holds: product colour says which, gold says press. */
 .lu-grid { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
-/* Colour band (19 Oct 2026): four of the product's colours in golden-ratio
-   widths, each segment 1/phi of the one before it: 44.7, 27.6, 17.1, 10.6. */
-.lu-card { --c2: var(--c); --c3: var(--c-tint); --c4: var(--ink);
+/* Colour band (19 Oct 2026): the product's three main colours, deep, light
+   and tint, in golden-ratio widths (each 1/phi of the one before): 50, 30.9,
+   19.1. Deep enough to read as colour, not as a rule. */
+.lu-card { --c2: var(--c); --c3: var(--c-tint);
   display: flex; flex-direction: column; min-width: 0; box-shadow: none;
   border: 1px solid var(--rule); border-radius: 12px; overflow: hidden;
-  padding: 40px 22px 20px; background-color: var(--paper);
-  background-image: linear-gradient(to right, var(--c) 0 44.7%, var(--c2) 44.7% 72.3%, var(--c3) 72.3% 89.4%, var(--c4) 89.4% 100%);
-  background-size: 100% 16px; background-repeat: no-repeat; }
+  padding: 0 22px 20px; background: var(--paper); }
+.lu-band { display: grid; grid-template-columns: 50fr 30.9fr 19.1fr; height: 56px; margin: 0 -22px 22px; }
+.lu-band span:nth-child(1) { background: var(--c); }
+.lu-band span:nth-child(2) { background: var(--c2); }
+.lu-band span:nth-child(3) { background: var(--c3); }
 .lu-card.product--obd { --c2: var(--obd-dark); }
 .lu-card.product--psc { --c2: var(--psc-dark); }
 .lu-card.product--gs  { --c2: var(--gs-dark); }
@@ -50,8 +53,8 @@
 .lu-card.product--kt  { --c2: var(--kt-dark); }
 .lu-card.product--ec  { --c2: var(--ec-dark); }
 .lu-card.product--own { --c2: var(--own-dark); }
-.lu-card.product--engine { --c2: var(--engine-dark); --c4: var(--engine-text); }
-.lu-card--core { --c: var(--ink); --c2: #71706C; --c3: var(--rule-2); --c4: var(--gold); }
+.lu-card.product--engine { --c2: var(--engine-dark); }
+.lu-card--core { --c: var(--ink); --c2: var(--gold); --c3: var(--rule-2); }
 .lu-card::before { content: none; display: none; }
 .band.alt .lu-card { background: #fff; }
 .lu-card .lockup { margin: 0 0 14px; align-items: flex-start; }
@@ -202,6 +205,7 @@
       <p class="lu-group-line">Know what&rsquo;s actually wrong before anyone spends money fixing it.</p>
       <ul class="lu-grid">
         <li class="lu-card product product--obd">
+          <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
           <div class="lockup"><svg class="icon" aria-hidden="true"><use href="#m-obd"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">On-Board Diagnostic</h3><p class="product__tier">Core &middot; Leader &middot; Leader + Team</p></div></div>
           <p class="lu-desc">CliftonStrengths&reg; and EQ-i 2.0 read against each other, and written up as one document about how this leader works under pressure.</p>
           <ul class="lu-facts">
@@ -211,6 +215,7 @@
           <a class="link-arrow" href="../obd/">More about the OBD</a>
         </li>
         <li class="lu-card product product--psc">
+          <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
           <div class="lockup"><svg class="icon" aria-hidden="true"><use href="#m-psc"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Psychological Safety Check</h3><p class="product__tier">Team survey &middot; Leader view</p></div></div>
           <p class="lu-desc">Seven statements your team answers anonymously, built on Amy Edmondson&rsquo;s scale, with a second round at ninety days to show what moved.</p>
           <ul class="lu-facts">
@@ -220,6 +225,7 @@
           <a class="link-arrow" href="../psychological-safety/">How the Check works</a>
         </li>
         <li class="lu-card product product--engine lu-card--engine">
+          <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
           <div class="lockup"><svg class="icon" aria-hidden="true"><use href="#m-engine"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Engine check</h3><p class="product__tier">Free readout</p></div></div>
           <p class="lu-desc">Eighteen statements about the team you lead, answered on instinct in about two minutes, and a readout across the six cylinders of CREATE.</p>
           <ul class="lu-facts">
@@ -229,6 +235,7 @@
           <a class="link-arrow" href="../engine-check/?src=lineup">Run the engine check</a>
         </li>
         <li class="lu-card product lu-card--core">
+          <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
           <div class="lockup"><img src="../assets/gdc/gdc-mark.svg" alt="" width="40" height="40"><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Free diagnostic</h3><p class="product__tier">Five patterns</p></div></div>
           <p class="lu-desc">A few short questions, about two minutes, and which of five patterns is loudest for you right now: Bottleneck, Growth Gap, Drift, Stall or New Seat.</p>
           <ul class="lu-facts">
@@ -245,6 +252,7 @@
       <p class="lu-group-line">When one person&rsquo;s growth would change the whole organization.</p>
       <ul class="lu-grid">
         <li class="lu-card product product--gs">
+          <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
           <div class="lockup"><svg class="icon" aria-hidden="true"><use href="#m-gs"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">GoodeStart</h3><p class="product__tier">First ninety days &middot; Schools edition</p></div></div>
           <p class="lu-desc">The first ninety days in a new seat, done on purpose: an assessment baseline, four coaching sessions and a thirteen-week cohort.</p>
           <ul class="lu-facts">
@@ -254,6 +262,7 @@
           <a class="link-arrow" href="../goodestart/">More about GoodeStart</a>
         </li>
         <li class="lu-card product product--bb">
+          <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
           <div class="lockup"><svg class="icon" aria-hidden="true"><use href="#m-bb"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Building the Bench</h3><p class="product__tier">Emerging leaders &middot; Schools edition</p></div></div>
           <p class="lu-desc">Six months with a cohort of leaders at the same altitude, getting ready for the next seat and becoming each other&rsquo;s first call.</p>
           <ul class="lu-facts">
@@ -263,6 +272,7 @@
           <a class="link-arrow" href="../building-the-bench/">More about Building the Bench</a>
         </li>
         <li class="lu-card product product--ec">
+          <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
           <div class="lockup"><svg class="icon" aria-hidden="true"><use href="#m-ec"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Executive coaching</h3><p class="product__tier">Six sessions &middot; Schools edition &middot; Renewal</p></div></div>
           <p class="lu-desc">Six structured sessions built on your OBD, so session one starts from a read rather than an introduction. Coaching and consulting, named in the room.</p>
           <ul class="lu-facts">
@@ -279,6 +289,7 @@
       <p class="lu-group-line">When the team works hard, just not together.</p>
       <ul class="lu-grid">
         <li class="lu-card product product--kt">
+          <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
           <div class="lockup"><svg class="icon" aria-hidden="true"><use href="#m-kt"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Know Thyself to Lead Others</h3><p class="product__tier">Team workshop &middot; Schools edition &middot; Organizations edition</p></div></div>
           <p class="lu-desc">A three-hour strengths workshop built on everyone&rsquo;s CliftonStrengths report, so a whole staff learns how each person does their best work.</p>
           <ul class="lu-facts">
@@ -288,6 +299,7 @@
           <a class="link-arrow" href="../know-thyself/">More about Know Thyself</a>
         </li>
         <li class="lu-card product product--kt">
+          <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
           <div class="lockup"><svg class="icon" aria-hidden="true"><use href="#m-om"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Owner&rsquo;s Manual</h3><p class="product__tier">A Know Thyself to Lead Others module</p></div></div>
           <p class="lu-desc">Each person turns their OBD into a manual for how they work, then the team swaps, so nobody has to guess how anyone else operates.</p>
           <ul class="lu-facts">
@@ -297,6 +309,7 @@
           <a class="link-arrow" href="../owners-manual/">More about the Owner&rsquo;s Manual</a>
         </li>
         <li class="lu-card product product--own">
+          <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
           <div class="lockup"><svg class="icon" aria-hidden="true"><use href="#m-own"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">OWN</h3><p class="product__tier">Observe &middot; Wonder &middot; Navigate</p></div></div>
           <p class="lu-desc">Strengths-based advisory design for schools. Teachers and advisors learn to ask, so students OWN the meaning &ndash; not you.</p>
           <ul class="lu-facts">
