@@ -13,11 +13,16 @@
 <meta property="og:description" content="Find out where your team loses momentum and what to fix first.">
 <meta property="og:url" content="https://thatsgoodedesign.com/engine-check/">
 <meta property="og:type" content="website">
-<link rel="icon" href="../favicon.ico" sizes="any">
-<link rel="icon" href="../assets/favicon/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="../assets/favicon/favicon-32.png" type="image/png" sizes="32x32">
-<link rel="icon" href="../assets/favicon/icon-512.png" type="image/png" sizes="512x512">
-<link rel="apple-touch-icon" href="../assets/favicon/apple-touch-icon.png">
+<meta property="og:image" content="https://thatsgoodedesign.com/assets/flight-check/engine-check-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://thatsgoodedesign.com/assets/flight-check/engine-check-og.png">
+<!-- 19 Oct 2026 (run:os, CLUTCH-84): engine check mark (VISUALS, mark C). Favicon is the
+     chartreuse rounded avatar; link preview is the ink lockup. -->
+<link rel="icon" href="../assets/flight-check/engine-check-favicon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="../assets/flight-check/engine-check-icon-512.png" type="image/png" sizes="512x512">
+<link rel="apple-touch-icon" href="../assets/flight-check/engine-check-apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&amp;display=swap">
@@ -36,7 +41,8 @@
 .fc-hero { background: var(--ink); color: var(--paper); padding: clamp(24px, 5vw, 40px); margin-inline: calc(-1 * clamp(0px, 2vw, 16px)); }
 .fc-hero .eyebrow { color: var(--gold); margin-bottom: 12px; }
 .fc-hero h1 { color: var(--paper); font-size: clamp(34px, 7vw, 56px); font-weight: 800; line-height: 1.02; letter-spacing: -.028em; margin: 0 0 14px; }
-.fc-icon { width: 64px; height: 64px; margin: 0 0 18px; filter: drop-shadow(0 0 18px rgba(196,162,106,.5)); }
+.fc-icon { width: 64px; height: 64px; margin: 0 0 18px; filter: drop-shadow(0 0 18px rgba(202,215,63,.45)); }
+.fc-rmark { display: block; width: 40px; height: 40px; margin: 0 0 8px; }
 .fc-lede { margin: 0; font-size: clamp(17px, 2.4vw, 20px); line-height: 1.5; color: #E7E4DC; max-width: 46ch; }
 .fc-rules { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; counter-reset: r; }
 .fc-rules li { position: relative; padding-left: 46px; font-size: 16px; line-height: 1.55; color: var(--body); counter-increment: r; }
@@ -338,7 +344,7 @@
 
 <main id="main">
   <section class="fc-band">
-    <div id="fc-root" data-check="engine" data-icon="../assets/icons/icon-create-lit.svg" data-preview="../assets/flight-check/engine-check-readout-preview.png" data-calendly="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt">
+    <div id="fc-root" data-check="engine" data-icon="../assets/icons/product-engine-check-lit.svg" data-mark="../assets/icons/product-engine-check-mark-navy.svg" data-preview="../assets/flight-check/engine-check-readout-preview.png" data-calendly="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt">
       <noscript><p>The engine check needs JavaScript to run the clock and build your readout.</p></noscript>
     </div>
   </section>
@@ -384,6 +390,6 @@
     BP10 results are solely the beliefs of Goode Design &amp; Consulting.</p>
 </footer>
 <script src="../assets/flight-check/engine.js?v=6"></script>
-<script src="../assets/flight-check/flight-check.js?v=10"></script>
+<script src="../assets/flight-check/flight-check.js?v=11"></script>
 </body>
 </html>

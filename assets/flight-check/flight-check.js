@@ -387,6 +387,8 @@
     $("fc-r").innerHTML =
       (example ? '<p class="fc-tag">Example readout</p>' : "") +
       '<div class="fc-readhead">' +
+        /* 19 Oct 2026: product mark above the readout eyebrow, from data-mark (navy on paper). */
+        (root.getAttribute("data-mark") ? '<img class="fc-rmark" src="' + esc(root.getAttribute("data-mark")) + '" alt="" width="40" height="40">' : "") +
         '<p class="eyebrow">' + esc(CFG.readoutEyebrow) + "</p>" +
         "<h2>" + esc(pat.head) + "</h2><p class=\"fc-patline\">" + esc(pat.line) + "</p>" +
         '<div class="fc-stats"><div><b>' + r.sum + "</b><span>of " + (CFG.groupMax * ORDER.length) + " " + esc(CFG.totalLabel) + '</span></div><div><b>' + fmt(el) + "</b><span>" +
