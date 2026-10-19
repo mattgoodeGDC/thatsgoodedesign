@@ -586,7 +586,7 @@
     var engine = ORDER.map(function (k) {
       var sc = r.tot[k], b = r.bands[k], pct = (sc - CFG.groupMin) / (CFG.groupMax - CFG.groupMin) * 100;
       return '<li class="fc-cyl ' + tone[b] + '"><span class="fc-light" aria-hidden="true"></span>' +
-        '<span class="fc-bar" role="img" aria-label="' + esc(NAME[k] + " " + sc + " of " + CFG.groupMax + ", " + bandLabel(b)) + '"><i style="height:' + pct.toFixed(1) + '%"></i></span>' +
+        '<span class="fc-bar" role="img" aria-label="' + esc(NAME[k] + " " + sc + " of " + CFG.groupMax + ", " + bandLabel(b)) + '"><i style="--p:' + pct.toFixed(1) + '%"></i></span>' +
         "<b>" + sc + "</b><small>" + esc(NAME[k]) + "</small><em>" + esc(bandLabel(b)) + "</em></li>";
     }).join("");
     var candorHtml = "";
@@ -604,22 +604,31 @@
     var X = CFG.report.extras || {};
     var bookPanel = function (o, foot) {
       if (!o) return "";
-      return '<aside class="rp-book"><p class="rp-bookhead">' + esc(X.bookHead) + "</p><blockquote>\u201c" + esc(o.quote) + "\u201d</blockquote>" +
-        '<p class="rp-bookref">' + esc(o.ref) + "</p>" +
-        '<p class="rp-label">' + esc(X.bookCaseHead) + "</p><p>" + (o.caseTitle ? "<strong>" + esc(o.caseTitle) + ".</strong> " : "") + esc(o.caseSummary) + "</p>" +
-        (foot ? '<p class="rp-booklink"><a href="' + esc(foot.href) + '">' + esc(foot.text) + "</a></p>" : "") + "</aside>";
+      return '<aside class="rp-book"><div class="rp-bookq"><p class="rp-label rp-gold">' + esc(X.bookHead) + "</p><blockquote>\u201c" + esc(o.quote) + "\u201d</blockquote>" +
+        '<p class="rp-bookref">' + esc(o.ref) + "</p></div>" +
+        '<div class="rp-bookc"><p class="rp-label">' + esc(X.bookCaseHead) + '</p><p class="rp-case">' + (o.caseTitle ? "<strong>" + esc(o.caseTitle) + ".</strong> " : "") + esc(o.caseSummary) + "</p>" +
+        (foot ? '<p class="rp-booklink"><a href="' + esc(foot.href) + '">' + esc(foot.text) + "</a></p>" : "") + "</div></aside>";
     };
+    /* Start-here line (Publishing, 19 Oct): the override block or the upstream line, inside the start card. */
+    var startLines = [];
+    if (r.override) startLines.push(r.startBlock);
+    if (r.upstream) startLines.push(r.upstream);
     var cyls = [w].concat(ORDER.filter(function (k) { return k !== w; })).map(function (k) {
       var b = r.bands[k];
-      return '<section class="rp-cyl ' + tone[b] + '"><div class="rp-cylhead"><span class="fc-light" aria-hidden="true"></span><h3>' + esc(NAME[k]) + "</h3><span>" +
-        r.tot[k] + " of " + CFG.groupMax + " · " + esc(bandLabel(b)) + (k === w ? " · Start here" : "") + "</span></div>" +
-        "<p>" + esc(B[k].read[b]) + "</p>" +
+      return '<section class="rp-cyl ' + tone[b] + '"><div class="rp-cyltop"><div class="rp-cylhead"><span class="fc-light" aria-hidden="true"></span><h3>' + esc(NAME[k]) + '</h3><span class="rp-meta">' +
+        r.tot[k] + " of " + CFG.groupMax + ' · <span class="rp-band">' + esc(bandLabel(b)) + "</span>" + (k === w ? " · Start here" : "") + "</span></div>" +
+        '<p class="rp-lede">' + esc(B[k].read[b]) + "</p>" +
+        (k === w ? startLines.map(function (t) { return '<p class="rp-startline">' + esc(t) + "</p>"; }).join("") : "") + "</div>" +
         (X.clean && X.clean[k] ? '<p class="rp-label">' + esc(X.cleanHead) + '</p><p class="rp-clean">' + esc(X.clean[k]) + "</p>" : "") +
         '<p class="rp-label">Steps for this week</p><ol>' + li(B[k].step[b]) + "</ol>" +
         '<p class="rp-label">Questions to sit with</p><ul class="fc-qs">' + li(B[k].q) + "</ul>" +
         (X.bookPanels && X.bookPanels[k] ? bookPanel(X.bookPanels[k]) : '<p class="fc-book">In the book: CLUTCH, ' + esc(CFG.book[k]) + "</p>") + "</section>";
     }).join("");
 
+    var ctaHtml = function (qid, cls) {
+      return '<a class="rp-cta' + (cls ? " " + cls : "") + '" href="' + esc(cal) + '"><div><h2>' + esc(CFG.cta.head.replace("{cylinder}", NAME[w])) + "</h2><p>" + esc(CFG.cta.line) +
+        '</p><p class="rp-url"><span>' + esc(cal.replace(/^https:\/\//, "").replace(/\?.*$/, "")) + '</span></p></div><div class="rp-qr" id="' + qid + '" aria-hidden="true"></div></a>';
+    };
     /* Closing (19 Oct): one-line engine, first step, strength to lean on, retake, booking with QR. */
     var C = X.close, s2 = r.strong, closeHtml = "";
     if (C) {
@@ -631,29 +640,26 @@
         (r.bands[s2] !== "miss" ? row(C.leanLabel, "<strong>" + esc(NAME[s2]) + ", " + r.tot[s2] + " of " + CFG.groupMax + ".</strong> " + esc(B[s2].lean))
           : (CFG.leanNone ? row(C.leanLabel, esc(CFG.leanNone)) : "")) +
         row(C.againLabel, esc(C.again)) +
-        '<div class="rp-cta"><div><h2>' + esc(CFG.cta.head.replace("{cylinder}", NAME[w])) + "</h2><p>" + esc(CFG.cta.line) + '</p><p class="rp-url">' + esc(cal.replace(/^https:\/\//, "").replace(/\?.*$/, "")) + '</p></div><div class="rp-qr" id="rp-qr2" aria-hidden="true"></div></div>' +
+        ctaHtml("rp-qr2") +
         '<p class="rp-signoff">' + esc(C.signoff) + "<br><strong>" + esc(C.name) + "</strong></p></section>";
     }
 
     root.innerHTML =
       '<div class="rp-bar"><button class="btn" type="button" id="rp-print">Save as PDF or print</button><a class="btn btn-ghost" href="' + esc(cal) + '">' + esc(CFG.cta.button) + "</a></div>" +
       '<article class="rp">' +
-      '<header class="rp-head">' + (root.getAttribute("data-lockup") ? '<img class="rp-lockup" src="' + esc(root.getAttribute("data-lockup")) + '" alt="Goode Design engine check" width="320">' : "") +
+      '<header class="rp-head">' + (root.getAttribute("data-mark") ? '<div class="rp-lockup" role="img" aria-label="Goode Design engine check, free readout"><img src="' + esc(root.getAttribute("data-mark")) + '" alt="" width="44" height="44"><div><span class="rp-lk1">Goode Design</span><span class="rp-lk2">Engine check</span><span class="rp-lk3">Free readout</span></div></div>' : "") +
         '<p class="eyebrow">Your full report</p><h1>' + esc(pat.head) + '</h1><p class="fc-patline">' + esc(pat.line) + "</p>" +
-        '<div class="fc-stats"><div><b>' + r.sum + "</b><span>of " + (CFG.groupMax * ORDER.length) + " " + esc(CFG.totalLabel) + '</span></div><div><b>' + fmt(d.el) + "</b><span>" +
+        '<div class="fc-stats rp-stats"><div><b>' + r.sum + "</b><span>of " + (CFG.groupMax * ORDER.length) + " " + esc(CFG.totalLabel) + "</span>" +
+          (X.benchmark ? '<span class="rp-bench">' + esc(X.benchmark) + "</span>" : "") + '</div><div><b>' + fmt(d.el) + "</b><span>" +
           esc(n ? CFG.time.slow.replace("{n}", n) : CFG.time.steady) + "</span></div></div></header>" +
       (X.primer ? '<section class="rp-primer"><h2>' + esc(X.primer.head) + "</h2><p>" + esc(X.primer.text) + "</p></section>" : "") +
       '<div class="fc-panel fc-enginepanel"><ul class="fc-engine">' + engine + "</ul>" +
         '<p class="fc-legend"><span class="miss">Misfiring 6 to 15</span><span class="rough">Running rough 16 to 23</span><span class="clean">Running clean 24 to 33</span></p>' +
         candorHtml + '<p class="fc-book">In the book: CLUTCH, ' + esc(CFG.book.whole) + "</p></div>" +
-      '<div class="fc-focus"><p class="eyebrow">Start here</p><h2>' + esc(NAME[w]) + ", " + r.tot[w] + " of " + CFG.groupMax + "</h2>" +
-        "<p><strong>" + esc(bandLabel(r.bands[w])) + ".</strong> " + esc(B[w].read[r.bands[w]]) + "</p>" +
-        '<p class="fc-startq">' + esc(r.startBlock) + "</p>" + (r.upstream ? '<p class="fc-upstream">' + esc(r.upstream) + "</p>" : "") + "</div>" +
-      '<div class="rp-cta"><div><h2>' + esc(CFG.cta.head.replace("{cylinder}", NAME[w])) + "</h2><p>" + esc(CFG.cta.line) + '</p><p class="rp-url">' + esc(cal.replace(/^https:\/\//, "").replace(/\?.*$/, "")) + '</p></div><div class="rp-qr" id="rp-qr" aria-hidden="true"></div></div>' +
+      ctaHtml("rp-qr", "rp-cta-compact") +
       '<h2 class="rp-sec">Cylinder by cylinder</h2>' + cyls +
       (X.bookWhole ? '<section class="rp-whole"><h2 class="rp-sec">The whole engine</h2>' + bookPanel(X.bookWhole, X.bookLink) + "</section>" : "") +
       '<section class="fc-panel rp-block"><h2>Statements that took you longer</h2>' + slowHtml + "</section>" +
-      '<section class="fc-panel rp-block"><h2>Questions worth sitting with</h2><ul class="fc-qs">' + li(r.qsFull) + "</ul></section>" +
       closeHtml +
       (X.primer ? "" : '<section class="fc-panel rp-block"><h2>' + esc(CFG.howLabel) + "</h2><p>" + esc(CFG.method) + "</p></section>") +
       '<p class="rp-foot">Goode Design &amp; Consulting · thatsgoodedesign.com · matt@thatsgoodedesign.com</p>' +

@@ -486,3 +486,6 @@ window.FLIGHT_CHECKS.engine.report.extras.close = {
   signoff: "Whatever you pick, start this week. I would like to hear how it goes.",
   name: "Matt"
 };
+
+/* report.benchmark (Publishing, 19 Oct, "handover - 2026-10-19 - PUBLISHING - Engine check report cuts"). */
+window.FLIGHT_CHECKS.engine.report.extras.benchmark = "This score is read against the scale, not against other leaders. Once enough leaders have taken the check, I'll add typical ranges.";
