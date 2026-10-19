@@ -378,7 +378,7 @@ window.FLIGHT_CHECKS.engine = {
     /* Options must match the Airtable Seat select exactly (run:dale, 16 Oct). */
     seat: { label: "Which best describes your role? (optional)", options: ["Founder or CEO", "Head of School or Executive Director", "Senior executive (VP or C-suite)", "People, HR or operations lead", "Team or department lead", "Coach, consultant or adviser", "Something else"] },
     /* report.privacy, above the email field (16 Oct sign-offs). */
-    privacy: "Only Matt sees your answers. If you book a call, he uses an AI assistant to help him prepare for it. If you add your email, any other checks you took on this device are linked to your name too.",
+    privacy: "Only Matt sees your answers. If you book a call, he uses an AI assistant to help him prepare for it. If you add your email, any other checks you took on this device are linked to your name too. Your report email includes a private link to your full report; anyone you share that link with can open it.",
     /* report.promise */
     promise: "All six cylinder reads, the statements that took you longer, and more questions to sit with.",
     /* confirm.auto, block library v0.2 (Additions, 15 Oct), word for word.
