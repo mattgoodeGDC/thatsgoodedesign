@@ -600,14 +600,24 @@
     var slowHtml = n ?
       "<p><strong>" + esc(n === 1 ? P0.headOne : P0.head.replace("{n}", n)) + '</strong></p><ul class="fc-slow">' + li(r.slowAsked.map(function (i) { return NAME[CFG.items[i][1]] + ": " + CFG.items[i][3]; })) + "</ul><p>" + esc(P0.line) + "</p>" :
       "<p>" + esc(CFG.report.steady) + "</p>";
+    /* Full report extras (19 Oct): primer, clean lines, From CLUTCH panels. */
+    var X = CFG.report.extras || {};
+    var bookPanel = function (o, foot) {
+      if (!o) return "";
+      return '<aside class="rp-book"><p class="rp-bookhead">' + esc(X.bookHead) + "</p><blockquote>" + esc(o.quote) + "</blockquote>" +
+        '<p class="rp-bookref">' + esc(o.ref) + "</p>" +
+        '<p class="rp-label">' + esc(X.bookCaseHead) + "</p><p>" + (o.caseTitle ? "<strong>" + esc(o.caseTitle) + ".</strong> " : "") + esc(o.caseSummary) + "</p>" +
+        (foot ? '<p class="rp-booklink"><a href="' + esc(foot.href) + '">' + esc(foot.text) + "</a></p>" : "") + "</aside>";
+    };
     var cyls = [w].concat(ORDER.filter(function (k) { return k !== w; })).map(function (k) {
       var b = r.bands[k];
       return '<section class="rp-cyl ' + tone[b] + '"><div class="rp-cylhead"><span class="fc-light" aria-hidden="true"></span><h3>' + esc(NAME[k]) + "</h3><span>" +
         r.tot[k] + " of " + CFG.groupMax + " · " + esc(bandLabel(b)) + (k === w ? " · Start here" : "") + "</span></div>" +
         "<p>" + esc(B[k].read[b]) + "</p>" +
+        (X.clean && X.clean[k] ? '<p class="rp-label">' + esc(X.cleanHead) + '</p><p class="rp-clean">' + esc(X.clean[k]) + "</p>" : "") +
         '<p class="rp-label">Steps for this week</p><ol>' + li(B[k].step[b]) + "</ol>" +
         '<p class="rp-label">Questions to sit with</p><ul class="fc-qs">' + li(B[k].q) + "</ul>" +
-        '<p class="fc-book">In the book: CLUTCH, ' + esc(CFG.book[k]) + "</p></section>";
+        (X.bookPanels && X.bookPanels[k] ? bookPanel(X.bookPanels[k]) : '<p class="fc-book">In the book: CLUTCH, ' + esc(CFG.book[k]) + "</p>") + "</section>";
     }).join("");
 
     root.innerHTML =
@@ -617,6 +627,7 @@
         '<p class="eyebrow">Your full report</p><h1>' + esc(pat.head) + '</h1><p class="fc-patline">' + esc(pat.line) + "</p>" +
         '<div class="fc-stats"><div><b>' + r.sum + "</b><span>of " + (CFG.groupMax * ORDER.length) + " " + esc(CFG.totalLabel) + '</span></div><div><b>' + fmt(d.el) + "</b><span>" +
           esc(n ? CFG.time.slow.replace("{n}", n) : CFG.time.steady) + "</span></div></div></header>" +
+      (X.primer ? '<section class="rp-primer"><h2>' + esc(X.primer.head) + "</h2><p>" + esc(X.primer.text) + "</p></section>" : "") +
       '<div class="fc-panel fc-enginepanel"><ul class="fc-engine">' + engine + "</ul>" +
         '<p class="fc-legend"><span class="miss">Misfiring 6 to 15</span><span class="rough">Running rough 16 to 23</span><span class="clean">Running clean 24 to 33</span></p>' +
         candorHtml + '<p class="fc-book">In the book: CLUTCH, ' + esc(CFG.book.whole) + "</p></div>" +
@@ -625,9 +636,10 @@
         '<p class="fc-startq">' + esc(r.startBlock) + "</p>" + (r.upstream ? '<p class="fc-upstream">' + esc(r.upstream) + "</p>" : "") + "</div>" +
       '<div class="rp-cta"><div><h2>' + esc(CFG.cta.head.replace("{cylinder}", NAME[w])) + "</h2><p>" + esc(CFG.cta.line) + '</p><p class="rp-url">' + esc(cal.replace(/^https:\/\//, "").replace(/\?.*$/, "")) + '</p></div><div class="rp-qr" id="rp-qr" aria-hidden="true"></div></div>' +
       '<h2 class="rp-sec">Cylinder by cylinder</h2>' + cyls +
+      (X.bookWhole ? '<section class="rp-whole"><h2 class="rp-sec">The whole engine</h2>' + bookPanel(X.bookWhole, X.bookLink) + "</section>" : "") +
       '<section class="fc-panel rp-block"><h2>Statements that took you longer</h2>' + slowHtml + "</section>" +
       '<section class="fc-panel rp-block"><h2>Questions worth sitting with</h2><ul class="fc-qs">' + li(r.qsFull) + "</ul></section>" +
-      '<section class="fc-panel rp-block"><h2>' + esc(CFG.howLabel) + "</h2><p>" + esc(CFG.method) + "</p></section>" +
+      (X.primer ? "" : '<section class="fc-panel rp-block"><h2>' + esc(CFG.howLabel) + "</h2><p>" + esc(CFG.method) + "</p></section>") +
       '<p class="rp-foot">Goode Design &amp; Consulting · thatsgoodedesign.com · matt@thatsgoodedesign.com</p>' +
       "</article>";
 

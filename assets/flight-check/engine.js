@@ -401,3 +401,73 @@ window.FLIGHT_CHECKS.engine = {
     return ["engine-check-" + this.patterns[r.P].slug, "engine-check-weak-" + this.names[r.start].toLowerCase()];
   }
 };
+
+/* Full report extras (19 Oct 2026, CLUTCH-84), used on /engine-check/report/ only.
+   primer, cleanHead, clean: Block library v0.3, "Full report extras, 19 Oct" (Publishing).
+   book*: "handover - 2026-10-19 - CLUTCH - Engine check report quotes" (run:clutch).
+   Quotes are verbatim from CLUTCH v7-0; credit by v7-0 section, no pages (Matt). */
+window.FLIGHT_CHECKS.engine.report.extras = {
+  "primer": {
+    "head": "How to read this report",
+    "text": "Your engine has six cylinders. Each scores from 6 to 33, built from three of your answers, and the six add up to your total out of 198. Misfiring (6 to 15): the cylinder runs only when you push it. Running rough (16 to 23): it holds on good days and slips under pressure. Running clean (24 to 33): it runs without you holding it up. This is a snapshot of the system you lead this month, not a verdict on you."
+  },
+  "cleanHead": "When it runs clean",
+  "clean": {
+    "C": "Ask anyone on the team what you stand for and you get the same answer. When a deadline bites, the norms hold, and nobody has to guess what you would want.",
+    "R": "Every piece of live work has one owner, and everyone knows who it is. People argue in the room, settle it, and leave still trusting each other.",
+    "E": "The work runs on rhythms the team owns. Miss a week and you come back to find it further along, not waiting for you.",
+    "A": "Bad news arrives early and small, while there is still time to use it. Changing course feels routine, and old processes get retired on purpose.",
+    "T": "Your people make the calls you would have made, and they can tell you why. You are no longer the only one who can train the next person.",
+    "X": "The rules apply the same at every level, starting with you. People tell you no when it matters, and your values settle the close calls before anyone has to argue."
+  },
+  "bookHead": "From CLUTCH",
+  "bookCaseHead": "In the book",
+  "bookLink": {
+    "text": "CLUTCH is in paperback: thatsgoodedesign.com/clutch/",
+    "href": "https://thatsgoodedesign.com/clutch/"
+  },
+  "bookPanels": {
+    "C": {
+      "quote": "Leaders shape culture continuously through a thousand small cues: what they celebrate, what they tolerate, what they ignore, and what they model on their quietest days. Culture is never neutral – it's always tilting toward clarity or confusion, trust or fear.",
+      "ref": "Chapter 3, section 3.3",
+      "caseTitle": "Culture Under Pressure: NASA",
+      "caseSummary": "In 1986, Morton Thiokol engineers warned that the Challenger's O-rings had never been tested in such cold. Under schedule and political pressure, Thiokol leaders reversed their recommendation to postpone after NASA managers questioned their judgment. Nobody ordered silence; the culture did it. Seventy-three seconds after launch, the O-rings failed exactly as feared."
+    },
+    "R": {
+      "quote": "Leaders build relational equity the way banks build reserves: slowly, deliberately, through small deposits that accumulate long before they're needed. Not through grand gestures or annual offsites, but through the everyday acts of follow-through, the question asked when you didn't have to ask, the credit given when no one was watching.",
+      "ref": "Chapter 3, section 3.4",
+      "caseTitle": "Relationships Under Pressure: Zappos",
+      "caseSummary": "In 2009, Amazon offered nearly $1.2 billion for Zappos. Tony Hsieh saw a risk to the company's soul and its people. Instead of deciding behind closed doors, he wrote to employees, took questions and named his fears out loud. When he said yes, the deal protected the culture, guaranteed operational independence and wrote the core values into the agreement."
+    },
+    "E": {
+      "quote": "The hidden truth about execution is that it's mostly architecture. The leader who keeps pushing harder is treating a design problem as a willpower problem. The right cadence, the right tracker, the right who-owns-what – none of these are exciting, but together they do what no amount of hustle can do alone: they create a system that runs without heroics.",
+      "ref": "Chapter 3, section 3.5",
+      "caseTitle": "Execution Under Pressure: Toyota",
+      "caseSummary": "After the war, Toyota could not afford the buffer stock American carmakers relied on, and out of that constraint came the Toyota Production System. Any worker who spotted a defect could, and was expected to, stop the line. When someone pulled the andon cord, the team swarmed and the defect was fixed at its source instead of multiplying downstream."
+    },
+    "A": {
+      "quote": "The hidden cost of low agility isn't the missed pivot; it's the silenced signal. Long before any team fails to adapt, individual people stop saying what they see. They watch the warning lights, decide it's not worth the risk to mention them, and the organization loses the early intelligence that would have made the pivot easy.",
+      "ref": "Chapter 3, section 3.6",
+      "caseTitle": "Agility Under Pressure: Kodak",
+      "caseSummary": "Kodak invented the digital camera. In 1975 one of its engineers built a working prototype, and executives shelved it, afraid digital would cannibalize film. Engineers and marketers saw the shift coming, but leadership held to the story that film was who they were. By the time Kodak pivoted, the world had moved on without it."
+    },
+    "T": {
+      "quote": "The defining choice in teaching isn't whether to develop people; it's whether to develop them on purpose. Most leaders teach by accident – through the questions they happen to ask, the feedback they happen to give, the moments they happen to coach.",
+      "ref": "Chapter 3, section 3.7",
+      "caseTitle": "Teaching Under Pressure: Dr. Gawande and Checklists",
+      "caseSummary": "Atul Gawande knew surgeons' expertise was not the problem, so he borrowed from aviation. Rather than impose a checklist, he co-designed one, watching surgeries, listening to nurses and anesthesiologists, and testing prototypes. Piloted worldwide with the World Health Organization, the minute-long pause cut complications, infections and deaths, and became a global standard."
+    },
+    "X": {
+      "quote": "Before committing to a significant call, write the headline as if it appeared tomorrow. Would you feel proud, or need to explain it away? The test costs five minutes upfront and saves you the regret of explaining things later. If the headline embarrasses you, the decision isn't done yet.",
+      "ref": "Chapter 3, section 3.8",
+      "caseTitle": "Ethics Under Pressure: Johnson & Johnson",
+      "caseSummary": "In 1982 seven people died after taking Tylenol capsules laced with cyanide. Johnson & Johnson did not wait for perfect information. Guided by its credo, it recalled 31 million bottles, halted advertising and offered full refunds. CEO James Burke spoke openly, and the company went on to pioneer tamper-evident packaging."
+    }
+  },
+  "bookWhole": {
+    "quote": "You don't need to fix everything at once. Start where the impact is highest. One well-tuned cylinder often improves the performance of the others, because in a system, everything connects.",
+    "ref": "Chapter 3, section 3.9",
+    "caseTitle": "",
+    "caseSummary": "The six cylinders did not fail in isolation. A team struggling with Execution often had an upstream Relationships problem, and a team that could not adapt often had a Culture problem, with safety too fragile to surface early warnings. The advice was to start where the impact was highest, because one well-tuned cylinder often lifted the others."
+  }
+};
