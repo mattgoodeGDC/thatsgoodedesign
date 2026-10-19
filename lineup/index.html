@@ -53,10 +53,16 @@
 .lu-card.product--kt  { --c2: var(--kt-dark); }
 .lu-card.product--ec  { --c2: var(--ec-dark); }
 .lu-card.product--own { --c2: var(--own-dark); }
-.lu-card.product--engine { --c2: var(--engine-dark); }
+/* Engine check wears its launch campaign colours on this page (Matt, 19 Oct
+   2026): Gulf blue #A6D0EA, chartreuse #CAD73F, navy #0E1B2A. Only the
+   tested pairs: navy on paper for the tier word, ink #161717 on chartreuse
+   for the button, chartreuse on ink for its hover. */
+.lu-card.product--engine { --c: #A6D0EA; --c2: #CAD73F; --c3: #0E1B2A; }
+.lu-card--engine .lu-go { color: #161717; }
 .lu-card--om .lu-band span:nth-child(1) { background: var(--c2); }
 .lu-card--om .lu-band span:nth-child(2) { background: var(--c); }
-.lu-card--core { --c: var(--ink); --c2: #9A978F; --c3: var(--rule-2); }
+.lu-card--core { --c: var(--ink); --c2: var(--gold); --c3: var(--rule-2); }
+.lu-card--core .lu-go { background: #9A978F; }
 .lu-card::before { content: none; display: none; }
 .band.alt .lu-card { background: #fff; }
 .lu-card .lockup { margin: 0 0 14px; align-items: flex-start; }
@@ -64,7 +70,7 @@
 .lu-card .lockup img { width: 40px; height: 40px; flex: 0 0 auto; margin-top: 2px; }
 .lu-card .lockup-name { font-size: 20px; }
 .lu-card .product__tier { line-height: 1.35; }
-.lu-card--engine .product__tier { color: var(--engine-text); }
+.lu-card--engine .product__tier { color: #0E1B2A; }
 .lu-card--core .product__tier { color: var(--muted); }
 .lu-desc { font-size: 15px; line-height: 1.55; margin: 0 0 14px; color: var(--body); }
 .lu-facts { list-style: none; margin: 0 0 14px; padding: 12px 0 0; border-top: 1px solid var(--rule); display: grid; gap: 6px; font-size: 14px; }
@@ -108,7 +114,7 @@
 .lu-go::after { content: " \2192"; }
 .lu-go:hover, .lu-go:focus-visible { background: var(--c); color: #fff; }
 .lu-go:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
-.lu-card--engine .lu-go:hover, .lu-card--engine .lu-go:focus-visible { background: var(--engine-text); }
+.lu-card--engine .lu-go:hover, .lu-card--engine .lu-go:focus-visible { background: #161717; color: #CAD73F; }
 @media (prefers-reduced-motion: reduce) { .lu-go { transition: none; } }
 .lu-card .lu-rates { font-size: 13px; margin: -6px 0 14px; }
 .lu-card .lu-rates a { color: var(--ink); text-decoration-color: var(--gold-ink); }
