@@ -104,10 +104,15 @@
    viewport, where Books, About and Book a call already sit. */
 @media (min-width:1025px){
   .navmenu-panel.navmenu-wide:not([hidden]){
-    width:min(92vw,780px);max-width:min(92vw,780px);
-    grid-template-columns:repeat(3,minmax(0,1fr));
+    width:min(96vw,980px);max-width:min(96vw,980px);
+    grid-template-columns:repeat(4,minmax(0,1fr));
     left:auto;right:0;transform:none;
   }
+  /* 19 Oct 2026: the seven product badges take two columns, so the panel
+     reads companies | schools | products, with the four no-commitment
+     entries in one row across the foot. */
+  .navmenu-panel.navmenu-wide .nmp-products{grid-column:3 / span 2}
+  .navmenu-panel.navmenu-wide .nmp-products > ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:4px}
 }
 .navmenu-panel.navmenu-wide{min-width:0}
 .navmenu-panel.navmenu-wide .nmp-group{min-width:0}
@@ -126,6 +131,17 @@
   border-top:1px solid #DDDAD1;
 }
 .navmenu ul.navmenu-panel.navmenu-wide .nmp-foot a{font-weight:700}
+/* Desktop, four columns: the four foot entries sit side by side in one row. */
+@media (min-width:1025px){.navmenu-panel.navmenu-wide .nmp-foot{grid-column:auto}}
+
+/* Product glyphs (19 Oct 2026, product family v1.3). Muted at rest, gold ink
+   with the label on hover: the product colour never goes on anything you
+   press. Glyphs come from the shared sprite, 18 px on the 24 grid. */
+.navmenu ul.navmenu-panel .nmp-products li a{position:relative;padding-left:40px}
+.navmenu-panel .nmp-ic{position:absolute;left:12px;top:10px;width:18px;height:18px;color:#71706C}
+.navmenu ul.navmenu-panel .nmp-products li a:hover .nmp-ic,
+.navmenu ul.navmenu-panel .nmp-products li a:focus-visible .nmp-ic,
+.navmenu ul.navmenu-panel .nmp-products li a[aria-current="page"] .nmp-ic{color:#856521}
 
 /* The nowrap that keeps single-column items on one line would force this panel
    wider than the viewport, so inside the wide panel labels may wrap. */
