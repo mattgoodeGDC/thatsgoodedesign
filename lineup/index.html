@@ -14,14 +14,14 @@
 <meta property="og:site_name" content="Goode Design &amp; Consulting">
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="website">
-<meta property="og:title" content="The lineup: every product on one floor">
+<meta property="og:title" content="The lineup: everything I offer, and where to start">
 <meta property="og:description" content="Every Goode Design &amp; Consulting product on one page: the On-Board Diagnostic, the free engine check and Psychological Safety Check, GoodeStart, Building the Bench, executive coaching, Know Thyself to Lead Others and the Owner's Manual.">
 <meta property="og:url" content="https://thatsgoodedesign.com/lineup/">
 <meta property="og:image" content="https://thatsgoodedesign.com/assets/og/og-products.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="The lineup: every product on one floor">
+<meta name="twitter:title" content="The lineup: everything I offer, and where to start">
 <meta name="twitter:description" content="Every Goode Design &amp; Consulting product on one page: the On-Board Diagnostic, the free engine check and Psychological Safety Check, GoodeStart, Building the Bench, executive coaching, Know Thyself to Lead Others and the Owner's Manual.">
 <meta name="twitter:image" content="https://thatsgoodedesign.com/assets/og/og-products.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -114,6 +114,13 @@
 .lu-book p { margin: 0 0 14px; }
 .lu-book .cta-row { margin: 18px 0 0; }
 .lu-also { margin: 34px 0 0; }
+/* Copy pass (19 Oct 2026, PUBLISHING): reassurance under the hero buttons,
+   schools rates line, and the which-check note inside See it clearly. */
+.lu-hero-note { margin: 14px 0 0; font-size: 14px; color: var(--muted); }
+.lu-rates-line { margin: 10px 0 0; font-size: 15px; }
+.lu-rates-line a { color: var(--ink); text-decoration-color: var(--gold-ink); }
+.lu-grid > li.lu-note { grid-column: 1 / -1; background: none; border: 0; box-shadow: none; padding: 0; margin: 0; font-size: 15px; color: var(--body); }
+.lu-grid > li.lu-note::before { content: none; display: none; }
 @media (max-width: 600px) { .lu-book { grid-template-columns: minmax(0, 1fr); } .lu-book img { max-width: 180px; } }
 @media (prefers-reduced-motion: reduce) { .lu-jump a { transition: none; } .lu-jump a:hover { transform: none; } }
 /* The free diagnostic spans the row on wide screens, so See it clearly
@@ -124,6 +131,7 @@
   .lu-card--core .lockup, .lu-card--core .lu-desc, .lu-card--core .lu-facts { margin: 0; }
   .lu-card--core .lu-facts { border-top: 0; border-left: 1px solid var(--rule); padding: 0 0 0 20px; }
   .lu-card--core .lu-act { margin-top: 0; }
+  .lu-card--core .lockup-name { white-space: nowrap; }
 }
 </style>
 
@@ -214,31 +222,33 @@
 
   <section class="hero hero-sub">
     <p class="eyebrow">The lineup</p>
-    <h1>Every product, <span class="accent">on one floor</span>.</h1>
+    <h1>Everything I offer, and <span class="accent">where to start</span>.</h1>
     <p class="lede">
-      Everything I make, side by side: what each one is, who it is for, and
-      where to start.
+      Diagnostics, coaching, workshops and talks for leaders of growing firms,
+      schools and nonprofits. Start with your problem, not the product.
     </p>
     <p class="cta-row">
       <a class="btn" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=lineup-hero">Book thirty minutes</a>
-      <a class="btn btn-ghost" href="../diagnostic/?src=lineup-hero#doors">Not sure where you fit? Take the 2-minute diagnostic</a>
+      <a class="btn btn-ghost" href="../diagnostic/?src=lineup-hero#doors">Not sure? Take the two-minute diagnostic</a>
     </p>
+    <p class="lu-hero-note">Thirty minutes to work out whether it&rsquo;s a people problem or a design problem. No pitch, no follow-up sequence.</p>
     <ul class="lu-jump" aria-label="Start with the problem">
-      <li><a href="#see"><strong>Something&rsquo;s off and I can&rsquo;t name it</strong>Free checks and the OBD<em>See it clearly</em></a></li>
-      <li><a href="#leader"><strong>One person needs to grow</strong>Coaching and cohorts<em>Develop one leader</em></a></li>
-      <li><a href="#team"><strong>The team isn&rsquo;t working together</strong>Workshops for a staff or a team<em>Develop the team</em></a></li>
+      <li><a href="#see"><strong>Something&rsquo;s off, and I can&rsquo;t name it</strong>Find it free, or go deep with the OBD<em>See it clearly</em></a></li>
+      <li><a href="#leader"><strong>One leader needs to grow into the job</strong>Coaching, or a cohort for a new seat<em>Develop one leader</em></a></li>
+      <li><a href="#team"><strong>Good people, pulling in different directions</strong>Workshops for one team or a whole staff<em>Develop the team</em></a></li>
     </ul>
   </section>
 
   <section class="band" id="lineup" aria-labelledby="lineup-h">
     <p class="eyebrow">The products</p>
-    <h2 class="section-h" id="lineup-h">Grouped by how deep the work goes</h2>
-    <p class="lede">Start with a free check, or go straight to the
-      work. Not sure where you fit? <a href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=lineup-1">Book thirty minutes</a>.</p>
+    <h2 class="section-h" id="lineup-h">From a free check to a full engagement</h2>
+    <p class="lede">The free checks show you where to look. The paid work
+      fixes it. Not sure which you need? <a href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=lineup-1">Book thirty minutes</a>.</p>
+    <p class="lu-rates-line">Leading a school or nonprofit? <a href="../schools/rates/">See my published rates.</a></p>
 
     <div class="lu-group" id="see">
       <h3 class="lu-group-h">See it clearly</h3>
-      <p class="lu-group-line">Know what&rsquo;s actually wrong before anyone spends money fixing it.</p>
+      <p class="lu-group-line">Find out what&rsquo;s actually broken before you pay to fix it.</p>
       <ul class="lu-grid">
         <li class="lu-card product product--obd">
           <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -248,28 +258,29 @@
             <li><b>For</b><span>One leader</span></li>
             <li><b>Price</b><span>From $450 a person</span></li>
           </ul>
-          <div class="lu-act"><a class="btn" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=lineup-obd">Talk about the OBD</a><a class="link-arrow" href="../obd/">Details and prices</a></div>
+          <div class="lu-act"><a class="btn" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=lineup-obd">See OBD pricing</a><a class="link-arrow" href="../obd/">Details and prices</a></div>
         </li>
         <li class="lu-card product product--psc">
           <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
-          <div class="lockup"><svg class="icon" aria-hidden="true"><use href="#m-psc"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Psychological Safety Check<span class="lu-free">FREE</span></h3><p class="product__tier">Team survey &middot; Leader view</p></div></div>
-          <p class="lu-desc">Take the leader view yourself in about two minutes, then run it with your team: seven anonymous statements on Amy Edmondson&rsquo;s scale, and a second round at ninety days.</p>
+          <div class="lockup"><svg class="icon" aria-hidden="true"><use href="#m-psc"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Psychological Safety Check<span class="lu-free">FREE</span></h3><p class="product__tier">Leader self-check &middot; Team survey</p></div></div>
+          <p class="lu-desc">Seven statements built on Amy Edmondson&rsquo;s scale. Take it yourself or send it to your team, free and with no email needed. Inside the OBD, it becomes a 360 on how safe your team feels with you.</p>
           <ul class="lu-facts">
-            <li><b>For</b><span>Any leader, then their team of up to fifteen</span></li>
-            <li><b>Price</b><span>Free</span></li>
+            <li><b>For</b><span>Any leader, or one team</span></li>
+            <li><b>Price</b><span>Free, no email needed</span></li>
           </ul>
-          <div class="lu-act"><a class="btn" href="../ps-tool/?src=lineup">Take it free</a><a class="link-arrow" href="../psychological-safety/">Run it with your team</a></div>
+          <div class="lu-act"><a class="btn" href="../ps-tool/?src=lineup">Take the Psychological Safety Check</a><a class="link-arrow" href="../psychological-safety/">Run it with your team</a></div>
         </li>
         <li class="lu-card product product--engine lu-card--engine">
           <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
-          <div class="lockup"><svg class="icon" aria-hidden="true"><use href="#m-engine"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Engine check<span class="lu-free">FREE</span></h3><p class="product__tier">Free readout</p></div></div>
+          <div class="lockup"><svg class="icon" aria-hidden="true"><use href="#m-engine"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Engine check<span class="lu-free">FREE</span></h3><p class="product__tier">Free readout &middot; Beta</p></div></div>
           <p class="lu-desc">Eighteen statements about the team you lead, answered on instinct in about two minutes, and a readout across the six cylinders of CREATE.</p>
           <ul class="lu-facts">
             <li><b>For</b><span>Anyone who leads a team</span></li>
-            <li><b>Price</b><span>Free</span></li>
+            <li><b>Price</b><span>Free, in beta</span></li>
           </ul>
-          <div class="lu-act"><a class="btn" href="../engine-check/?src=lineup">Run it now</a></div>
+          <div class="lu-act"><a class="btn" href="../engine-check/?src=lineup">Run the engine check</a></div>
         </li>
+        <li class="lu-note">Two free checks, about two minutes each. The diagnostic names the pattern you&rsquo;re in. The engine check reads the team you lead.</li>
         <li class="lu-card product lu-card--core">
           <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
           <div class="lockup"><img src="../assets/gdc/gdc-mark.svg" alt="" width="40" height="40"><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Free diagnostic<span class="lu-free">FREE</span></h3><p class="product__tier">Five patterns</p></div></div>
@@ -278,7 +289,7 @@
             <li><b>For</b><span>One leader</span></li>
             <li><b>Price</b><span>Free, no email needed</span></li>
           </ul>
-          <div class="lu-act"><a class="btn" href="../diagnostic/?src=lineup#doors">Run it now</a></div>
+          <div class="lu-act"><a class="btn" href="../diagnostic/?src=lineup#doors">Take the diagnostic</a></div>
         </li>
       </ul>
       <figure class="pullquote lu-proof">
@@ -289,7 +300,7 @@
 
     <div class="lu-group" id="leader">
       <h3 class="lu-group-h">Develop one leader</h3>
-      <p class="lu-group-line">When one person&rsquo;s growth would change the whole organization.</p>
+      <p class="lu-group-line">When one leader&rsquo;s next step would move the whole organization.</p>
       <ul class="lu-grid">
         <li class="lu-card product product--gs">
           <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -322,7 +333,7 @@
             <li><b>Price</b><span>Priced on a call</span></li>
           </ul>
           <p class="lu-rates">Schools and nonprofits: <a href="../schools/rates/">see published rates</a></p>
-          <div class="lu-act"><a class="btn" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=lineup-ec">Talk about coaching</a><a class="link-arrow" href="../executive-coaching/">Details</a></div>
+          <div class="lu-act"><a class="btn" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=lineup-ec">Talk about executive coaching</a><a class="link-arrow" href="../executive-coaching/">Details</a></div>
         </li>
       </ul>
       <figure class="pullquote lu-proof">
@@ -333,7 +344,7 @@
 
     <div class="lu-group" id="team">
       <h3 class="lu-group-h">Develop the team</h3>
-      <p class="lu-group-line">When the team works hard, just not together.</p>
+      <p class="lu-group-line">When everyone works hard, just not in the same direction.</p>
       <ul class="lu-grid">
         <li class="lu-card product product--kt">
           <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -379,8 +390,8 @@
   <section class="band alt" id="frameworks" aria-labelledby="fw-h">
     <p class="eyebrow">Talks, seminars and consulting</p>
     <h2 class="section-h" id="fw-h">For a room, a senior team or the whole system</h2>
-    <p class="lede">Each one runs on the CLUTCH framework it teaches.
-      <a href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=lineup-talks">Book thirty minutes</a> to scope one.</p>
+    <p class="lede">Each one teaches a part of CLUTCH, and runs on it too.
+      <a href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=lineup-talks">Book thirty minutes</a> to scope one for your group.</p>
     <ul class="lu-fw">
       <li><span class="lu-fw-name">Seminars<span>Ninety minutes, one idea. Delegation is available now</span></span><span class="lu-chips"><span class="lu-chip fw-d">DELEGATE</span><span class="lu-chip fw-c">CREATE</span><span class="lu-chip fw-v">VOICES</span><span class="lu-chip fw-6">6C</span><span class="lu-chip fw-eq">EQ</span></span><a class="link-arrow" href="../products/#svc-seminars">Details</a></li>
       <li><span class="lu-fw-name">Keynotes<span>Eight talks built on the book</span></span><span class="lu-chips"><span class="lu-chip fw-c">CREATE</span><span class="lu-chip fw-v">VOICES</span><span class="lu-chip fw-6">6C</span><span class="lu-chip fw-eq">EQ</span><span class="lu-chip fw-d">DELEGATE</span></span><a class="link-arrow" href="../products/#keynotes">Details</a></li>
@@ -392,19 +403,19 @@
   </section>
 
   <section class="band" id="the-book" aria-labelledby="book-h">
-    <p class="eyebrow">Not ready to talk?</p>
+    <p class="eyebrow">Not ready for a call?</p>
     <h2 class="section-h" id="book-h">Start with the book</h2>
     <div class="lu-book">
       <a href="../clutch/"><img src="../assets/clutch_cover.jpg" alt="CLUTCH, the leadership operating system, front cover" width="400" height="600"></a>
       <div>
         <h3>CLUTCH: How Leaders Build Systems That Run Without Them</h3>
-        <p>The whole operating system in one volume, in paperback, with a
-          diagnostic for every part of it. Everything on this page runs on it.</p>
-        <p>Want one framework first? Each one is a $3.99 ebook: CREATE,
-          VOICES, the 6C Compass and DELEGATE.</p>
+        <p>The whole operating system in one paperback, with a diagnostic for
+          every part. Everything on this page is built on it.</p>
+        <p>Want one framework first? CREATE, VOICES, the 6C Decision Compass and
+          DELEGATE are each a $3.99 ebook.</p>
         <p class="cta-row">
-          <a class="btn" href="https://www.amazon.com/dp/B0HHFGV2MT">Buy on Amazon</a>
-          <a class="btn btn-ghost" href="../clutch/ebooks/">The $3.99 ebooks</a>
+          <a class="btn" href="../clutch/">Get the paperback</a>
+          <a class="btn btn-ghost" href="../clutch/ebooks/">See the $3.99 ebooks</a>
         </p>
       </div>
     </div>
