@@ -35,7 +35,23 @@
    Product Family v1.3. Buyer-facing: colour names, not hex codes. The rule
    holds: product colour says which, gold says press. */
 .lu-grid { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
-.lu-card { display: flex; flex-direction: column; background: var(--paper); border: 1px solid var(--rule); border-top: 6px solid var(--c); border-radius: 12px; padding: 22px 22px 20px; min-width: 0; box-shadow: none; }
+/* Colour band (19 Oct 2026): four of the product's colours in golden-ratio
+   widths, each segment 1/phi of the one before it: 44.7, 27.6, 17.1, 10.6. */
+.lu-card { --c2: var(--c); --c3: var(--c-tint); --c4: var(--ink);
+  display: flex; flex-direction: column; min-width: 0; box-shadow: none;
+  border: 1px solid var(--rule); border-radius: 12px; overflow: hidden;
+  padding: 40px 22px 20px; background-color: var(--paper);
+  background-image: linear-gradient(to right, var(--c) 0 44.7%, var(--c2) 44.7% 72.3%, var(--c3) 72.3% 89.4%, var(--c4) 89.4% 100%);
+  background-size: 100% 16px; background-repeat: no-repeat; }
+.lu-card.product--obd { --c2: var(--obd-dark); }
+.lu-card.product--psc { --c2: var(--psc-dark); }
+.lu-card.product--gs  { --c2: var(--gs-dark); }
+.lu-card.product--bb  { --c2: var(--bb-dark); }
+.lu-card.product--kt  { --c2: var(--kt-dark); }
+.lu-card.product--ec  { --c2: var(--ec-dark); }
+.lu-card.product--own { --c2: var(--own-dark); }
+.lu-card.product--engine { --c2: var(--engine-dark); --c4: var(--engine-text); }
+.lu-card--core { --c: var(--ink); --c2: #71706C; --c3: var(--rule-2); --c4: var(--gold); }
 .lu-card::before { content: none; display: none; }
 .band.alt .lu-card { background: #fff; }
 .lu-card .lockup { margin: 0 0 14px; align-items: flex-start; }
@@ -44,14 +60,12 @@
 .lu-card .lockup-name { font-size: 20px; }
 .lu-card .product__tier { line-height: 1.35; }
 .lu-card--engine .product__tier { color: var(--engine-text); }
-.lu-card--core { --c: var(--ink); }
 .lu-card--core .product__tier { color: var(--muted); }
 .lu-desc { font-size: 15px; line-height: 1.55; margin: 0 0 14px; color: var(--body); }
 .lu-facts { list-style: none; margin: 0 0 14px; padding: 12px 0 0; border-top: 1px solid var(--rule); display: grid; gap: 6px; font-size: 14px; }
 .lu-facts li { display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 10px; background: none; border: 0; padding: 0; box-shadow: none; }
 .lu-facts li::before { content: none; display: none; }
 .lu-facts b { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); padding-top: 2px; }
-.lu-sw { display: inline-block; width: 12px; height: 12px; border-radius: 3px; background: var(--c); vertical-align: -1px; margin-right: 6px; }
 .lu-card .link-arrow { margin-top: auto; align-self: flex-start; }
 .lu-group { margin-top: 44px; }
 .lu-group:first-of-type { margin-top: 26px; }
@@ -168,8 +182,8 @@
     <h1>Every product, <span class="accent">on one floor</span>.</h1>
     <p class="lede">
       Everything I make, side by side: what each one is, who it is for, and
-      the mark and colour it wears on every page, report and slide, so you
-      can tell them apart at a glance.
+      the colours it wears on every page, report and slide, so you can tell
+      them apart at a glance.
     </p>
     <div class="lu-rule">
       <div><strong>The colour tells you which</strong>Each product has its own colour, carried on its page, its report and its deck.</div>
@@ -193,7 +207,6 @@
           <ul class="lu-facts">
             <li><b>For</b><span>One leader</span></li>
             <li><b>Price</b><span>From $450 a person</span></li>
-            <li><b>Mark</b><span><span class="lu-sw" aria-hidden="true"></span>OBD green &middot; the diagnostic port</span></li>
           </ul>
           <a class="link-arrow" href="../obd/">More about the OBD</a>
         </li>
@@ -203,7 +216,6 @@
           <ul class="lu-facts">
             <li><b>For</b><span>One intact team, up to fifteen</span></li>
             <li><b>Price</b><span>Free</span></li>
-            <li><b>Mark</b><span><span class="lu-sw" aria-hidden="true"></span>Gauge teal &middot; the tire pressure warning</span></li>
           </ul>
           <a class="link-arrow" href="../psychological-safety/">How the Check works</a>
         </li>
@@ -213,7 +225,6 @@
           <ul class="lu-facts">
             <li><b>For</b><span>Anyone who leads a team</span></li>
             <li><b>Price</b><span>Free</span></li>
-            <li><b>Mark</b><span><span class="lu-sw" aria-hidden="true"></span>CREATE green &middot; the car on the lift</span></li>
           </ul>
           <a class="link-arrow" href="../engine-check/?src=lineup">Run the engine check</a>
         </li>
@@ -223,7 +234,6 @@
           <ul class="lu-facts">
             <li><b>For</b><span>One leader</span></li>
             <li><b>Price</b><span>Free, no email needed</span></li>
-            <li><b>Mark</b><span><span class="lu-sw" aria-hidden="true"></span>Goode Design ink and gold</span></li>
           </ul>
           <a class="link-arrow" href="../diagnostic/?src=lineup#doors">Take the diagnostic</a>
         </li>
@@ -240,7 +250,6 @@
           <ul class="lu-facts">
             <li><b>For</b><span>The newly promoted</span></li>
             <li><b>Price</b><span>Priced on a call</span></li>
-            <li><b>Mark</b><span><span class="lu-sw" aria-hidden="true"></span>Ignition copper &middot; the start button</span></li>
           </ul>
           <a class="link-arrow" href="../goodestart/">More about GoodeStart</a>
         </li>
@@ -250,7 +259,6 @@
           <ul class="lu-facts">
             <li><b>For</b><span>Emerging leaders</span></li>
             <li><b>Price</b><span>Priced on a call</span></li>
-            <li><b>Mark</b><span><span class="lu-sw" aria-hidden="true"></span>Pit-lane moss &middot; the next seat</span></li>
           </ul>
           <a class="link-arrow" href="../building-the-bench/">More about Building the Bench</a>
         </li>
@@ -260,7 +268,6 @@
           <ul class="lu-facts">
             <li><b>For</b><span>One leader, with a completed OBD</span></li>
             <li><b>Price</b><span>Priced on a call</span></li>
-            <li><b>Mark</b><span><span class="lu-sw" aria-hidden="true"></span>Co-driver plum &middot; the wheel</span></li>
           </ul>
           <a class="link-arrow" href="../executive-coaching/">More about executive coaching</a>
         </li>
@@ -277,7 +284,6 @@
           <ul class="lu-facts">
             <li><b>For</b><span>A department or whole staff, up to fifty</span></li>
             <li><b>Price</b><span>Priced on a call</span></li>
-            <li><b>Mark</b><span><span class="lu-sw" aria-hidden="true"></span>Manual indigo &middot; the Temple at Delphi</span></li>
           </ul>
           <a class="link-arrow" href="../know-thyself/">More about Know Thyself</a>
         </li>
@@ -287,7 +293,6 @@
           <ul class="lu-facts">
             <li><b>For</b><span>A small daily team, up to fifteen</span></li>
             <li><b>Price</b><span>Priced on a call</span></li>
-            <li><b>Mark</b><span><span class="lu-sw" aria-hidden="true"></span>Manual indigo &middot; the glovebox manual</span></li>
           </ul>
           <a class="link-arrow" href="../owners-manual/">More about the Owner&rsquo;s Manual</a>
         </li>
@@ -297,7 +302,6 @@
           <ul class="lu-facts">
             <li><b>For</b><span>Teachers and advisors</span></li>
             <li><b>Price</b><span>Priced on a call</span></li>
-            <li><b>Mark</b><span><span class="lu-sw" aria-hidden="true"></span>Satchel brown &middot; the other side of the question</span></li>
           </ul>
           <a class="link-arrow" href="../schools/#svc-advisory">See it on the schools page</a>
         </li>
