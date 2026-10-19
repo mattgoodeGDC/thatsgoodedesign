@@ -359,7 +359,8 @@ window.FLIGHT_CHECKS.engine = {
     example: "See an example readout",
     /* start.privacy, one line, linked to how.method. Replaces the full
        privacy block and privacy.who on the start screen. */
-    privacy: "Your answers stay anonymous unless you add your email, and only Matt sees them."
+    /* 19 Oct 2026 (run:os, Matt approved): AI-assist line for the pre-call brief. */
+    privacy: "Your answers stay anonymous unless you add your email. Only Matt sees them, and he uses an AI assistant to help him prepare for any call you book."
   },
   /* A worked example for "See an example readout" (never posted). */
   example: {
@@ -377,7 +378,7 @@ window.FLIGHT_CHECKS.engine = {
     /* Options must match the Airtable Seat select exactly (run:dale, 16 Oct). */
     seat: { label: "Which best describes your role? (optional)", options: ["Founder or CEO", "Head of School or Executive Director", "Senior executive (VP or C-suite)", "People, HR or operations lead", "Team or department lead", "Coach, consultant or adviser", "Something else"] },
     /* report.privacy, above the email field (16 Oct sign-offs). */
-    privacy: "Only Matt sees your answers. If you add your email, any other checks you took on this device are linked to your name too.",
+    privacy: "Only Matt sees your answers. If you book a call, he uses an AI assistant to help him prepare for it. If you add your email, any other checks you took on this device are linked to your name too.",
     /* report.promise */
     promise: "All six cylinder reads, the statements that took you longer, and more questions to sit with.",
     /* confirm.auto, block library v0.2 (Additions, 15 Oct), word for word.
