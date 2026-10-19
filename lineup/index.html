@@ -61,6 +61,15 @@
 .lu-card--engine .lu-go { color: #161717; }
 .lu-card--om .lu-band span:nth-child(1) { background: var(--c2); }
 .lu-card--om .lu-band span:nth-child(2) { background: var(--c); }
+/* Framework-keyed workshops (Matt, 19 Oct 2026): no badge of their own,
+   so they wear their framework's colours. Field Tested keeps its book look. */
+.lu-card--hotk { --c: #8D3E40; --c2: #D07A7C; --c3: #F3E4E4; }
+.lu-card--hotk .product__tier { color: #8D3E40; }
+.lu-card--sixc { --c: #7B2481; --c2: #B08AD6; --c3: #EFE6F5; }
+.lu-card--sixc .product__tier { color: #7B2481; }
+.lu-card--ft { --c: #3A3835; --c2: #7A9E9F; --c3: #EDE5D6; }
+.lu-card--ft .product__tier { color: #3A3835; }
+.lu-card .lockup .lu-cover { width: 28px; height: 42px; object-fit: cover; border-radius: 2px; margin-top: 2px; flex: 0 0 auto; }
 .lu-card--core { --c: var(--ink); --c2: var(--gold); --c3: var(--rule-2); }
 .lu-card--core .lu-go { background: #9A978F; }
 .lu-card::before { content: none; display: none; }
@@ -405,6 +414,38 @@
           <p class="lu-rates">Schools and nonprofits: <a href="../schools/rates/">see published rates</a></p>
           <a class="lu-go" href="../schools/#svc-advisory">See OWN</a>
         </li>
+        <li class="lu-card lu-card--hotk">
+          <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="lockup"><svg class="icon" aria-hidden="true"><use href="../assets/icons/icons-clutch-sprite.svg#icon-delegate"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Hand Over the Keys</h3><p class="product__tier">DELEGATE seminar</p></div></div>
+          <p class="lu-desc">Ninety minutes on how to hand work over so it stays handed over: the eight steps of DELEGATE, and one change your team can make on Monday.</p>
+          <ul class="lu-facts">
+            <li><b>For</b><span>Up to three hundred, virtual</span></li>
+            <li><b>Price</b><span>Priced on a call</span></li>
+          </ul>
+          <p class="lu-rates">Schools and nonprofits: <a href="../schools/rates/">see published rates</a></p>
+          <a class="lu-go" href="../products/#svc-seminars">See Hand Over the Keys</a>
+        </li>
+        <li class="lu-card lu-card--sixc">
+          <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="lockup"><svg class="icon" aria-hidden="true"><use href="../assets/icons/icons-clutch-sprite.svg#icon-6c"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Decision rights</h3><p class="product__tier">6C working session</p></div></div>
+          <p class="lu-desc">A working session, then a written map of which decisions belong where. Decided before the meeting rather than during it.</p>
+          <ul class="lu-facts">
+            <li><b>For</b><span>A senior team</span></li>
+            <li><b>Price</b><span>Priced on a call</span></li>
+          </ul>
+          <p class="lu-rates">Schools and nonprofits: <a href="../schools/rates/">see published rates</a></p>
+          <a class="lu-go" href="../schools/#svc-decisions">See the 6C session</a>
+        </li>
+        <li class="lu-card lu-card--ft">
+          <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="lockup"><img src="../assets/cover_field.jpg" alt="" width="28" height="42" class="lu-cover"><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Field Tested</h3><p class="product__tier">Train-the-trainer</p></div></div>
+          <p class="lu-desc">A half or full day in person with your facilitators, modelling the methods from Field Tested, with a sixty-day lead-up and follow-up at thirty and ninety days.</p>
+          <ul class="lu-facts">
+            <li><b>For</b><span>Up to twenty facilitators</span></li>
+            <li><b>Price</b><span>From $4,500, license included</span></li>
+          </ul>
+          <a class="lu-go" href="../field-tested/#team-licenses">See Field Tested</a>
+        </li>
       </ul>
       <figure class="pullquote lu-proof">
         <blockquote>Most people assume you can hire fast and fire decisively. My world can&rsquo;t. What I appreciated is that the core framework still held up once I did the translation myself, and Matt&rsquo;s workshop does that translation for you.</blockquote>
@@ -423,7 +464,6 @@
       <li><span class="lu-fw-name">Keynotes<span>Eight talks built on the book</span></span><span class="lu-chips"><span class="lu-chip fw-c">CREATE</span><span class="lu-chip fw-v">VOICES</span><span class="lu-chip fw-6">6C</span><span class="lu-chip fw-eq">EQ</span><span class="lu-chip fw-d">DELEGATE</span></span><a class="link-arrow" href="../products/#keynotes">Details</a></li>
       <li><span class="lu-fw-name">Executive team consulting<span>The table that sets direction</span></span><span class="lu-chips"><span class="lu-chip fw-6">6C</span><span class="lu-chip fw-d">DELEGATE</span></span><a class="link-arrow" href="../products/#door-system">Details</a></li>
       <li><span class="lu-fw-name">System-wide consulting<span>A diagnostic, then a year</span></span><span class="lu-chips"><span class="lu-chip fw-c">CREATE</span><span class="lu-chip fw-v">VOICES</span><span class="lu-chip fw-6">6C</span><span class="lu-chip fw-d">DELEGATE</span></span><a class="link-arrow" href="../products/#door-system">Details</a></li>
-      <li><span class="lu-fw-name">Decision rights and delegation for schools<span>A 6C working session and a DELEGATE seminar</span></span><span class="lu-chips"><span class="lu-chip fw-6">6C</span><span class="lu-chip fw-d">DELEGATE</span></span><a class="link-arrow" href="../schools/#svc-decisions">Details</a></li>
       <li><span class="lu-fw-name">The four framework ebooks<span>One chapter each, $3.99</span></span><span class="lu-chips"><span class="lu-chip fw-c">CREATE</span><span class="lu-chip fw-v">VOICES</span><span class="lu-chip fw-6">6C</span><span class="lu-chip fw-d">DELEGATE</span></span><a class="link-arrow" href="../clutch/ebooks/">Details</a></li>
     </ul>
   </section>
