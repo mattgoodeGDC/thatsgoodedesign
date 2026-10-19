@@ -620,6 +620,21 @@
         (X.bookPanels && X.bookPanels[k] ? bookPanel(X.bookPanels[k]) : '<p class="fc-book">In the book: CLUTCH, ' + esc(CFG.book[k]) + "</p>") + "</section>";
     }).join("");
 
+    /* Closing (19 Oct): one-line engine, first step, strength to lean on, retake, booking with QR. */
+    var C = X.close, s2 = r.strong, closeHtml = "";
+    if (C) {
+      var row = function (label, body) { return '<div class="rp-crow"><p class="rp-label">' + esc(label) + "</p><p>" + body + "</p></div>"; };
+      var stepsW = B[w].step[r.bands[w]];
+      closeHtml = '<section class="rp-close"><h2 class="rp-sec">' + esc(C.head) + '</h2><p class="rp-clead">' + esc(C.lead) + "</p>" +
+        row(C.engineLabel, "<strong>" + r.sum + " of " + (CFG.groupMax * ORDER.length) + ".</strong> " + esc(pat.head)) +
+        row(C.startLabel, "<strong>" + esc(NAME[w]) + ", " + r.tot[w] + " of " + CFG.groupMax + ".</strong> " + esc(stepsW[0])) +
+        (r.bands[s2] !== "miss" ? row(C.leanLabel, "<strong>" + esc(NAME[s2]) + ", " + r.tot[s2] + " of " + CFG.groupMax + ".</strong> " + esc(B[s2].lean))
+          : (CFG.leanNone ? row(C.leanLabel, esc(CFG.leanNone)) : "")) +
+        row(C.againLabel, esc(C.again)) +
+        '<div class="rp-cta"><div><h2>' + esc(CFG.cta.head.replace("{cylinder}", NAME[w])) + "</h2><p>" + esc(CFG.cta.line) + '</p><p class="rp-url">' + esc(cal.replace(/^https:\/\//, "").replace(/\?.*$/, "")) + '</p></div><div class="rp-qr" id="rp-qr2" aria-hidden="true"></div></div>' +
+        '<p class="rp-signoff">' + esc(C.signoff) + "<br><strong>" + esc(C.name) + "</strong></p></section>";
+    }
+
     root.innerHTML =
       '<div class="rp-bar"><button class="btn" type="button" id="rp-print">Save as PDF or print</button><a class="btn btn-ghost" href="' + esc(cal) + '">' + esc(CFG.cta.button) + "</a></div>" +
       '<article class="rp">' +
@@ -639,13 +654,14 @@
       (X.bookWhole ? '<section class="rp-whole"><h2 class="rp-sec">The whole engine</h2>' + bookPanel(X.bookWhole, X.bookLink) + "</section>" : "") +
       '<section class="fc-panel rp-block"><h2>Statements that took you longer</h2>' + slowHtml + "</section>" +
       '<section class="fc-panel rp-block"><h2>Questions worth sitting with</h2><ul class="fc-qs">' + li(r.qsFull) + "</ul></section>" +
+      closeHtml +
       (X.primer ? "" : '<section class="fc-panel rp-block"><h2>' + esc(CFG.howLabel) + "</h2><p>" + esc(CFG.method) + "</p></section>") +
       '<p class="rp-foot">Goode Design &amp; Consulting · thatsgoodedesign.com · matt@thatsgoodedesign.com</p>' +
       "</article>";
 
     $("rp-print").onclick = function () { window.print(); };
     /* QR to the booking page, drawn when the qrcode library is on the page. */
-    if (window.QRCode) { try { new window.QRCode($("rp-qr"), { text: cal, width: 120, height: 120, colorDark: "#161717", colorLight: "#ffffff" }); } catch (e) {} }
+    if (window.QRCode) { ["rp-qr", "rp-qr2"].forEach(function (id) { if ($(id)) { try { new window.QRCode($(id), { text: cal, width: 120, height: 120, colorDark: "#161717", colorLight: "#ffffff" }); } catch (e) {} } }); }
     document.title = "Your " + CFG.id + " check report – Goode Design & Consulting";
   }
 

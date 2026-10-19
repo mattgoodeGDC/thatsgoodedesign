@@ -312,6 +312,14 @@
 .rp-booklink a { font-weight: 700; color: var(--ink); text-decoration-color: var(--gold-ink); text-underline-offset: 3px; }
 .rp-whole { display: grid; gap: 10px; break-inside: avoid; }
 .rp-whole .rp-book { margin-top: 0; }
+.rp-close { display: grid; gap: 12px; border-top: 3px solid var(--ink); padding-top: 14px; break-before: page; break-inside: avoid; }
+.rp-close .rp-sec { margin: 0; }
+.rp-clead { margin: 0; font-size: 18px; line-height: 1.5; color: var(--ink); max-width: 56ch; }
+.rp-crow { display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: 4px 16px; padding: 10px 0; border-bottom: 1px solid var(--rule); align-items: baseline; }
+.rp-crow p { margin: 0; line-height: 1.55; }
+.rp-crow strong { color: var(--ink); }
+.rp-signoff { margin: 4px 0 0; font-size: 17px; line-height: 1.6; color: var(--ink); }
+@media (max-width: 480px) { .rp-crow { grid-template-columns: minmax(0, 1fr); } }
 .rp-foot { margin: 8px 0 0; font-size: 13px; color: var(--muted); }
 @media (max-width: 480px) { .rp-cta { grid-template-columns: minmax(0, 1fr); } }
 @media print {
@@ -474,7 +482,7 @@
     BP10 results are solely the beliefs of Goode Design &amp; Consulting.</p>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script src="../../assets/flight-check/engine.js?v=9"></script>
-<script src="../../assets/flight-check/flight-check.js?v=15"></script>
+<script src="../../assets/flight-check/engine.js?v=10"></script>
+<script src="../../assets/flight-check/flight-check.js?v=16"></script>
 </body>
 </html>

@@ -471,3 +471,18 @@ window.FLIGHT_CHECKS.engine.report.extras = {
     "caseSummary": "The six cylinders did not fail in isolation. A team struggling with Execution often had an upstream Relationships problem, and a team that could not adapt often had a Culture problem, with safety too fragile to surface early warnings. The advice was to start where the impact was highest, because one well-tuned cylinder often lifted the others."
   }
 };
+
+/* Report closing, "Where to go from here" (19 Oct 2026, run:os, Matt approved the structure).
+   head, lead and signoff are new (draft for Publishing to log in Block library v0.3);
+   again is the Full report email P.S., word for word. */
+window.FLIGHT_CHECKS.engine.report.extras.close = {
+  head: "Where to go from here",
+  lead: "You have read all six cylinders. Here is the short version, and the one move to make first.",
+  engineLabel: "Your engine",
+  startLabel: "Start here",
+  leanLabel: "Lean on",
+  againLabel: "Check again",
+  again: "Take the check again in a month. Watching a cylinder move is the best evidence that a change is working.",
+  signoff: "Whatever you pick, start this week. I would like to hear how it goes.",
+  name: "Matt"
+};
