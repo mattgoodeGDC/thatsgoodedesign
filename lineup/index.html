@@ -93,7 +93,7 @@
 .lu-own li::before { content: none; display: none; }
 /* Buyer pass (19 Oct 2026): a press in the hero, a problem picker, an action
    on every card, proof beside each group, and the book as the low rung. */
-.lu-jump { list-style: none; margin: 30px 0 0; padding: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+.lu-jump { list-style: none; margin: 30px 0 0; padding: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); }
 .lu-jump li { background: none; border: 0; padding: 0; box-shadow: none; }
 .lu-jump li::before { content: none; display: none; }
 .lu-jump a { display: flex; flex-direction: column; gap: 4px; height: 100%; padding: 16px 18px; background: var(--paper-alt); border: 1px solid var(--rule); border-top: 3px solid var(--gold); text-decoration: none; color: var(--body); font-size: 14px; transition: background .18s, transform .18s; }
@@ -128,19 +128,20 @@
 .lu-hero-note { margin: 14px 0 0; font-size: 14px; color: var(--muted); }
 .lu-rates-line { margin: 10px 0 0; font-size: 15px; }
 .lu-rates-line a { color: var(--ink); text-decoration-color: var(--gold-ink); }
-.lu-grid > li.lu-note { grid-column: 1 / -1; background: none; border: 0; box-shadow: none; padding: 0; margin: 0; font-size: 15px; color: var(--body); }
-.lu-grid > li.lu-note::before { content: none; display: none; }
+.lu-note { margin: 8px 0 0; font-size: 15px; color: var(--body); }
+.lu-grid--2 { grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 700px) { .lu-grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 600px) { .lu-book { grid-template-columns: minmax(0, 1fr); } .lu-book img { max-width: 180px; } }
 @media (prefers-reduced-motion: reduce) { .lu-jump a { transition: none; } .lu-jump a:hover { transform: none; } }
-/* The free diagnostic spans the row on wide screens, so See it clearly
-   doesn't leave one card alone on a second line. */
+/* The Psychological Safety Check spans the row under the two primary free
+   checks, so it reads as the third way in. */
 @media (min-width: 980px) {
-  .lu-card--core { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr) minmax(0, 1fr) auto; column-gap: 28px; align-items: center; padding-bottom: 22px; }
-  .lu-card--core .lu-band { grid-column: 1 / -1; }
-  .lu-card--core .lockup, .lu-card--core .lu-desc, .lu-card--core .lu-facts { margin: 0; }
-  .lu-card--core .lu-facts { border-top: 0; border-left: 1px solid var(--rule); padding: 0 0 0 20px; }
-  .lu-card--core .lu-go { margin-top: 0; min-width: 220px; }
-  .lu-card--core .lockup-name { white-space: nowrap; }
+  .lu-card--wide { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.4fr) minmax(0, 0.85fr) auto; column-gap: 28px; align-items: center; padding-bottom: 22px; }
+  .lu-card--wide .lu-band { grid-column: 1 / -1; }
+  .lu-card--wide .lockup, .lu-card--wide .lu-desc, .lu-card--wide .lu-facts { margin: 0; }
+  .lu-card--wide .lu-facts { border-top: 0; border-left: 1px solid var(--rule); padding: 0 0 0 20px; }
+  .lu-card--wide .lu-go { margin-top: 0; min-width: 220px; }
+  .lu-card--wide .lu-band { height: 28px; }
 }
 </style>
 
@@ -242,9 +243,10 @@
     </p>
     <p class="lu-hero-note">Thirty minutes to work out whether it&rsquo;s a people problem or a design problem. No pitch, no follow-up sequence.</p>
     <ul class="lu-jump" aria-label="Start with the problem">
-      <li><a href="#see"><strong>Something&rsquo;s off, and I can&rsquo;t name it</strong>Find it free, or go deep with the OBD<em>See it clearly</em></a></li>
-      <li><a href="#leader"><strong>One leader needs to grow into the job</strong>Coaching, or a cohort for a new seat<em>Develop one leader</em></a></li>
-      <li><a href="#team"><strong>Good people, pulling in different directions</strong>Workshops for one team or a whole staff<em>Develop the team</em></a></li>
+      <li><a href="#see"><strong>Something&rsquo;s off, and I can&rsquo;t name it</strong>Two free checks, about two minutes each<em>See it clearly</em></a></li>
+      <li><a href="#leader"><strong>One leader needs to grow into the job</strong>The OBD, then coaching<em>Develop one leader</em></a></li>
+      <li><a href="#cohort"><strong>Several people stepping up at once</strong>A cohort for a new seat or the next one<em>Grow a cohort</em></a></li>
+      <li><a href="#team"><strong>Good people, pulling in different directions</strong>Workshops for one team or a whole staff<em>Workshops for the team</em></a></li>
     </ul>
   </section>
 
@@ -258,27 +260,17 @@
     <div class="lu-group" id="see">
       <h3 class="lu-group-h">See it clearly</h3>
       <p class="lu-group-line">Find out what&rsquo;s actually broken before you pay to fix it.</p>
-      <ul class="lu-grid">
-        <li class="lu-card product product--obd">
+      <p class="lu-note">Two free checks, about two minutes each. The diagnostic names the pattern you&rsquo;re in. The engine check reads the team you lead.</p>
+      <ul class="lu-grid lu-grid--2">
+        <li class="lu-card product lu-card--core">
           <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
-          <div class="lockup"><svg class="icon" aria-hidden="true"><use href="#m-obd"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">On-Board Diagnostic</h3><p class="product__tier">Core &middot; Leader &middot; Leader + Team</p></div></div>
-          <p class="lu-desc">CliftonStrengths&reg; and EQ-i 2.0 read against each other, and written up as one document about how this leader works under pressure.</p>
+          <div class="lockup"><img src="../assets/gdc/gdc-mark.svg" alt="" width="40" height="40"><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Free diagnostic<span class="lu-free">FREE</span></h3><p class="product__tier">Five patterns</p></div></div>
+          <p class="lu-desc">A few short questions, about two minutes, and which of five patterns is loudest for you right now: Bottleneck, Growth Gap, Drift, Stall or New Seat.</p>
           <ul class="lu-facts">
             <li><b>For</b><span>One leader</span></li>
-            <li><b>Price</b><span>From $450 a person</span></li>
-          </ul>
-          <figure class="lu-cq"><blockquote>I thought I needed better time management. Turns out I needed to get out of my own way.</blockquote><figcaption>Founder and CEO, Services business</figcaption></figure>
-          <a class="lu-go" href="../obd/">See the OBD</a>
-        </li>
-        <li class="lu-card product product--psc">
-          <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
-          <div class="lockup"><svg class="icon" aria-hidden="true"><use href="#m-psc"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Psychological Safety Check<span class="lu-free">FREE</span></h3><p class="product__tier">Leader self-check &middot; Team survey</p></div></div>
-          <p class="lu-desc">Seven statements built on Amy Edmondson&rsquo;s scale. Take it yourself or send it to your team, free and with no email needed. Inside the OBD, it becomes a 360 on how safe your team feels with you.</p>
-          <ul class="lu-facts">
-            <li><b>For</b><span>Any leader, or one team</span></li>
             <li><b>Price</b><span>Free, no email needed</span></li>
           </ul>
-          <a class="lu-go" href="../psychological-safety/">See the Safety Check</a>
+          <a class="lu-go" href="../diagnostic/">See the diagnostic</a>
         </li>
         <li class="lu-card product product--engine lu-card--engine">
           <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -290,16 +282,15 @@
           </ul>
           <a class="lu-go" href="../engine-check/">See the engine check</a>
         </li>
-        <li class="lu-note">Two free checks, about two minutes each. The diagnostic names the pattern you&rsquo;re in. The engine check reads the team you lead.</li>
-        <li class="lu-card product lu-card--core">
+        <li class="lu-card product product--psc lu-card--wide">
           <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
-          <div class="lockup"><img src="../assets/gdc/gdc-mark.svg" alt="" width="40" height="40"><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Free diagnostic<span class="lu-free">FREE</span></h3><p class="product__tier">Five patterns</p></div></div>
-          <p class="lu-desc">A few short questions, about two minutes, and which of five patterns is loudest for you right now: Bottleneck, Growth Gap, Drift, Stall or New Seat.</p>
+          <div class="lockup"><svg class="icon" aria-hidden="true"><use href="#m-psc"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Psychological Safety Check<span class="lu-free">FREE</span></h3><p class="product__tier">Leader self-check &middot; Team survey</p></div></div>
+          <p class="lu-desc">Seven statements built on Amy Edmondson&rsquo;s scale. Take it yourself or send it to your team, free and with no email needed. Inside the OBD, it becomes a 360 on how safe your team feels with you.</p>
           <ul class="lu-facts">
-            <li><b>For</b><span>One leader</span></li>
+            <li><b>For</b><span>Any leader, or one team</span></li>
             <li><b>Price</b><span>Free, no email needed</span></li>
           </ul>
-          <a class="lu-go" href="../diagnostic/">See the diagnostic</a>
+          <a class="lu-go" href="../psychological-safety/">See the Safety Check</a>
         </li>
       </ul>
       <figure class="pullquote lu-proof">
@@ -311,7 +302,37 @@
     <div class="lu-group" id="leader">
       <h3 class="lu-group-h">Develop one leader</h3>
       <p class="lu-group-line">When one leader&rsquo;s next step would move the whole organization.</p>
-      <ul class="lu-grid">
+      <ul class="lu-grid lu-grid--2">
+        <li class="lu-card product product--obd">
+          <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="lockup"><svg class="icon" aria-hidden="true"><use href="#m-obd"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">On-Board Diagnostic</h3><p class="product__tier">Core &middot; Leader &middot; Leader + Team</p></div></div>
+          <p class="lu-desc">CliftonStrengths&reg; and EQ-i 2.0 read against each other, and written up as one document about how this leader works under pressure.</p>
+          <ul class="lu-facts">
+            <li><b>For</b><span>One leader</span></li>
+            <li><b>Price</b><span>From $450 a person</span></li>
+          </ul>
+          <figure class="lu-cq"><blockquote>I thought I needed better time management. Turns out I needed to get out of my own way.</blockquote><figcaption>Founder and CEO, Services business</figcaption></figure>
+          <a class="lu-go" href="../obd/">See the OBD</a>
+        </li>
+        <li class="lu-card product product--ec">
+          <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="lockup"><svg class="icon" aria-hidden="true"><use href="#m-ec"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Executive coaching</h3><p class="product__tier">Six sessions &middot; Schools edition &middot; Renewal</p></div></div>
+          <p class="lu-desc">Six structured sessions built on your OBD, so session one starts from a read rather than an introduction. Coaching and consulting, named in the room.</p>
+          <ul class="lu-facts">
+            <li><b>For</b><span>One leader, with a completed OBD</span></li>
+            <li><b>Price</b><span>Priced on a call</span></li>
+          </ul>
+          <p class="lu-rates">Schools and nonprofits: <a href="../schools/rates/">see published rates</a></p>
+          <figure class="lu-cq"><blockquote>Matt called me on it. Not rudely, but he wasn&rsquo;t going to let me pretend the problem was my employees.</blockquote><figcaption>Founder and CEO, Services business</figcaption></figure>
+          <a class="lu-go" href="../executive-coaching/">See executive coaching</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="lu-group" id="cohort">
+      <h3 class="lu-group-h">Grow a cohort</h3>
+      <p class="lu-group-line">When several people are stepping into bigger seats at once.</p>
+      <ul class="lu-grid lu-grid--2">
         <li class="lu-card product product--gs">
           <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
           <div class="lockup"><svg class="icon" aria-hidden="true"><use href="#m-gs"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">GoodeStart</h3><p class="product__tier">First ninety days &middot; Schools edition</p></div></div>
@@ -334,18 +355,6 @@
           <p class="lu-rates">Schools and nonprofits: <a href="../schools/rates/">see published rates</a></p>
           <a class="lu-go" href="../building-the-bench/">See Building the Bench</a>
         </li>
-        <li class="lu-card product product--ec">
-          <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
-          <div class="lockup"><svg class="icon" aria-hidden="true"><use href="#m-ec"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Executive coaching</h3><p class="product__tier">Six sessions &middot; Schools edition &middot; Renewal</p></div></div>
-          <p class="lu-desc">Six structured sessions built on your OBD, so session one starts from a read rather than an introduction. Coaching and consulting, named in the room.</p>
-          <ul class="lu-facts">
-            <li><b>For</b><span>One leader, with a completed OBD</span></li>
-            <li><b>Price</b><span>Priced on a call</span></li>
-          </ul>
-          <p class="lu-rates">Schools and nonprofits: <a href="../schools/rates/">see published rates</a></p>
-          <figure class="lu-cq"><blockquote>Matt called me on it. Not rudely, but he wasn&rsquo;t going to let me pretend the problem was my employees.</blockquote><figcaption>Founder and CEO, Services business</figcaption></figure>
-          <a class="lu-go" href="../executive-coaching/">See executive coaching</a>
-        </li>
       </ul>
       <figure class="pullquote lu-proof">
         <blockquote>His work reinforced something fundamental: a strong school isn&rsquo;t built around a handful of exceptional leaders, but around a culture where leadership can flourish at every level.</blockquote>
@@ -354,9 +363,9 @@
     </div>
 
     <div class="lu-group" id="team">
-      <h3 class="lu-group-h">Develop the team</h3>
+      <h3 class="lu-group-h">Workshops for the team</h3>
       <p class="lu-group-line">When everyone works hard, just not in the same direction.</p>
-      <ul class="lu-grid">
+      <ul class="lu-grid ">
         <li class="lu-card product product--kt">
           <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
           <div class="lockup"><svg class="icon" aria-hidden="true"><use href="#m-kt"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Know Thyself to Lead Others</h3><p class="product__tier">Team workshop &middot; Schools edition &middot; Organizations edition</p></div></div>
