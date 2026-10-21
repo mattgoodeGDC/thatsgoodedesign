@@ -489,3 +489,28 @@ window.FLIGHT_CHECKS.engine.report.extras.close = {
 
 /* report.benchmark (Publishing, 19 Oct, "handover - 2026-10-19 - PUBLISHING - Engine check report cuts"). */
 window.FLIGHT_CHECKS.engine.report.extras.benchmark = "This score is read against the scale, not against other leaders. Once enough leaders have taken the check, I'll add typical ranges.";
+
+/* Report additions (21 Oct 2026, run:visuals, Matt approved: "yes do it now").
+   From the VISUALS report mock-up (CLUTCH - Engine check - Report redesign):
+   a rev-counter gauge for the engine score, Lean on and Start here tiles on
+   page 1, a printable "My first move" page, and Matt's photo, credentials and
+   the start-here quote in the closing booking panel. Tiles reuse close labels,
+   .lean lines and the cylinder readings. The move page lines below are new:
+   draft for Publishing to log in Block library v0.3. */
+window.FLIGHT_CHECKS.engine.report.extras.move = {
+  eyebrow: "My first move",
+  head: "Write it down. Start this week.",
+  lead: "{cylinder} is where you start, at {score} of {max}. Fill this page in by hand, put it where you will see it, and come back to it in a month.",
+  stepLabel: "Your first step",
+  fields: ["My first move, in my own words", "Who owns it", "Done by", "Who I will ask how it is going"],
+  checkHead: "Check again",
+  colGroup: "Cylinder",
+  colToday: "Today",
+  colMonth: "In a month",
+  retake: "Retake on"
+};
+window.FLIGHT_CHECKS.engine.report.extras.who = {
+  photo: "../../assets/flight-check/matt-goode-face.jpg",
+  name: "Matt Goode",
+  creds: "Gallup-Certified Strengths Coach · EQ-i 2.0 certified · Author of CLUTCH"
+};

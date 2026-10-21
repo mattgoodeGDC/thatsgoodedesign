@@ -387,7 +387,84 @@ a.rp-cta:hover h2 { text-decoration: underline; text-underline-offset: 4px; }
 @media (max-width: 520px) { .rp-crow { grid-template-columns: minmax(0, 1fr); padding: 10px 0; } .rp-crow .rp-label { margin-bottom: 2px !important; } }
 .rp-foot { margin: 8px 0 0; font-size: 13px; color: var(--muted); }
 
+/* 21 Oct 2026 (VISUALS report mock-up, Matt approved): gauge, tiles, chart chips,
+   My first move page, photo and quote in the closing booking panel. */
+.rp-gaugebox { border-top: 0 !important; padding-top: 0 !important; }
+.rp-gauge { display: block; width: 100%; max-width: 340px; height: auto; overflow: visible; }
+.rp-z { fill: none; stroke-width: 18; }
+.rp-z-miss { stroke: #E9B7BD; } .rp-z-rough { stroke: #EBD8AE; } .rp-z-fire { stroke: #B9DDCB; }
+.rp-tick { stroke: #9A9890; stroke-width: 1.4; }
+.rp-gz { font: 700 8.5px Montserrat, sans-serif; letter-spacing: .12em; text-transform: uppercase; fill: #71706C; }
+.rp-needle { stroke: #242427; stroke-width: 4; stroke-linecap: round; }
+.rp-pivot { fill: #C4A26A; stroke: #242427; stroke-width: 2; }
+.rp-gnum { font: 800 46px Montserrat, sans-serif; letter-spacing: -.03em; fill: #242427; }
+.rp-gof { font: 500 12px Montserrat, sans-serif; fill: #71706C; }
+.rp-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 18px; }
+.rp-tile { --c: #C25A68; --t: #A3424F; border: 1px solid var(--rule); border-left: 5px solid var(--c); padding: 14px 16px; background: var(--paper); }
+.rp-tile.rough { --c: #C4A26A; --t: #856521; } .rp-tile.clean { --c: #4FB08A; --t: #2F7A5C; }
+.rp-tile .rp-label { margin: 0 0 4px !important; color: var(--t); }
+.rp-tile p { margin: 0; line-height: 1.5; font-size: 15px; }
+.rp-tv { margin: 0 0 6px !important; }
+.rp-tv strong { font-size: 19px; font-weight: 800; color: var(--ink); }
+.rp-tv span { font-size: 13px; color: #71706C; }
+@media (max-width: 560px) { .rp-tiles { grid-template-columns: minmax(0, 1fr); } }
+.rp-chip { display: inline-block; margin-top: 2px; padding: 2px 7px; font-size: 9px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; border-radius: 9px; }
+.rp-chip-start { background: var(--paper); color: #242427; }
+.rp-chip-lean { border: 1px solid #4FB08A; color: #4FB08A; }
+@media (max-width: 560px) { .rp .fc-cyl .rp-chip { grid-area: band; justify-self: end; } }
+.rp-move { display: grid; gap: 10px; border-top: 3px solid var(--ink); padding-top: 14px; }
+.rp-move .eyebrow { margin: 0; color: var(--gold-ink); }
+.rp-move h2 { margin: 0; font-size: clamp(26px, 5vw, 34px); font-weight: 800; line-height: 1.08; letter-spacing: -.02em; color: var(--ink); }
+.rp-mbox { border: 1.5px solid var(--ink); padding: 6px 20px 18px; }
+.rp-mstep { margin: 0; font-size: 16px; font-weight: 700; line-height: 1.45; color: var(--ink); }
+.rp-mf { padding-top: 12px; }
+.rp-mq { margin: 0; display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: var(--ink); }
+.rp-mn { display: inline-flex; width: 20px; height: 20px; border-radius: 50%; background: var(--ink); color: var(--paper); font-size: 11px; font-weight: 800; align-items: center; justify-content: center; flex: none; }
+.rp-wl { height: 28px; border-bottom: 1px solid #AEB7C0; }
+.rp-mcheck { max-width: 360px; }
+.rp-mcheck table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.rp-mcheck th { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: #71706C; text-align: left; padding: 0 0 5px; border-bottom: 1.5px solid var(--ink); }
+.rp-mcheck th + th, .rp-mcheck td + td { text-align: right; }
+.rp-mcheck td { padding: 5px 0; border-bottom: 1px solid var(--rule); }
+.rp-mcheck td.rp-blank { width: 96px; border-bottom-color: #AEB7C0; }
+.rp-mtot td { font-weight: 800; color: var(--ink); }
+.rp-who { margin-top: 16px; display: grid; gap: 14px; }
+.rp-quote { margin: 0; border-left: 3px solid var(--gold); padding-left: 14px; }
+.rp-quote blockquote { margin: 0; font-style: italic; font-size: 15px; line-height: 1.5; color: var(--paper); }
+.rp-quote figcaption { margin-top: 4px; font-size: 12px; color: #B7B3A9; }
+.rp-whorow { display: flex; gap: 12px; align-items: center; border-top: 1px solid #3A3A3F; padding-top: 14px; }
+.rp-whorow img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; flex: none; }
+.rp-whorow p { margin: 0 !important; font-size: 13px; line-height: 1.45; }
+.rp-whorow strong { color: var(--paper); font-size: 14px; }
+
 @media print {
+  /* 21 Oct additions. Page 1 in print: gauge and time on the left, tiles on the right,
+     so the chart stays on page 1. */
+  .rp-head { display: grid; grid-template-columns: 250px minmax(0, 1fr); column-gap: 22px; align-items: start; }
+  .rp-head > * { grid-column: 1 / -1; }
+  .rp-head > .rp-stats { grid-column: 1; grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .rp-head > .rp-tiles { grid-column: 2; grid-template-columns: minmax(0, 1fr); gap: 8px; margin-top: 0; }
+  .rp-head .fc-patline { margin-bottom: 10px; font-size: 15px; }
+  .rp-stats > div:last-child { border-top: 0; padding-top: 0; }
+  .rp-stats > div:last-child b { font-size: 16px; }
+  .rp-bench { font-size: 10.5px; margin-top: 2px; }
+  .rp-gauge { max-width: 250px; }
+  .rp-tile { padding: 9px 12px; }
+  .fc-enginepanel .fc-bar { height: 76px !important; }
+  .fc-enginepanel { padding: 12px 14px !important; }
+  .fc-enginepanel > * + * { margin-top: 5px !important; }
+  .rp-tiles { break-inside: avoid; margin-top: 12px; }
+  .rp-tile p { font-size: 12.5px; }
+  .rp-tv strong { font-size: 16px; }
+  .rp-chip-start { background: #242427; color: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .rp-chip-lean { color: #2F7A5C; border-color: #2F7A5C; }
+  .rp-move { break-before: page; break-inside: avoid; }
+  .rp-primer, .rp-block { break-inside: avoid; }
+  .rp-move .rp-clead { font-size: 14px; }
+  .rp-wl { height: 26px; }
+  .rp-quote blockquote, .rp-whorow strong { color: #242427 !important; }
+  .rp-quote figcaption { color: #4B4B50; }
+  .rp-whorow { border-top-color: #D9D6CE; }
   /* S7: running footer and page numbers (Chrome 131+). */
   @page {
     size: letter; margin: 0.5in 0.55in 0.6in;
@@ -587,7 +664,7 @@ a.rp-cta:hover h2 { text-decoration: underline; text-underline-offset: 4px; }
     BP10 results are solely the beliefs of Goode Design &amp; Consulting.</p>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script src="../../assets/flight-check/engine.js?v=11"></script>
-<script src="../../assets/flight-check/flight-check.js?v=17"></script>
+<script src="../../assets/flight-check/engine.js?v=12"></script>
+<script src="../../assets/flight-check/flight-check.js?v=18"></script>
 </body>
 </html>

@@ -587,7 +587,10 @@
       var sc = r.tot[k], b = r.bands[k], pct = (sc - CFG.groupMin) / (CFG.groupMax - CFG.groupMin) * 100;
       return '<li class="fc-cyl ' + tone[b] + '"><span class="fc-light" aria-hidden="true"></span>' +
         '<span class="fc-bar" role="img" aria-label="' + esc(NAME[k] + " " + sc + " of " + CFG.groupMax + ", " + bandLabel(b)) + '"><i style="--p:' + pct.toFixed(1) + '%"></i></span>' +
-        "<b>" + sc + "</b><small>" + esc(NAME[k]) + "</small><em>" + esc(bandLabel(b)) + "</em></li>";
+        "<b>" + sc + "</b><small>" + esc(NAME[k]) + "</small><em>" + esc(bandLabel(b)) + "</em>" +
+        /* 21 Oct: Start here and Lean on chips on the chart. */
+        (k === w ? '<span class="rp-chip rp-chip-start">' + esc((CFG.report.extras && CFG.report.extras.close && CFG.report.extras.close.startLabel) || "Start here") + "</span>" :
+          (k === r.strong && b !== "miss" ? '<span class="rp-chip rp-chip-lean">' + esc((CFG.report.extras && CFG.report.extras.close && CFG.report.extras.close.leanLabel) || "Lean on") + "</span>" : "")) + "</li>";
     }).join("");
     var candorHtml = "";
     if (CFG.candor) {
@@ -625,10 +628,58 @@
         (X.bookPanels && X.bookPanels[k] ? bookPanel(X.bookPanels[k]) : '<p class="fc-book">In the book: CLUTCH, ' + esc(CFG.book[k]) + "</p>") + "</section>";
     }).join("");
 
-    var ctaHtml = function (qid, cls) {
+    /* 21 Oct: the closing booking panel carries Matt's photo, credentials and the start-here quote. */
+    var WHO = X.who, Q = CFG.quotes && CFG.quotes[w];
+    var whoHtml = WHO ? '<div class="rp-who">' + (Q ? '<figure class="rp-quote"><blockquote>' + esc(Q[0]) + "</blockquote><figcaption>" + esc(Q[1]) + "</figcaption></figure>" : "") +
+      '<div class="rp-whorow"><img src="' + esc(WHO.photo) + '" alt="' + esc(WHO.name) + '" width="56" height="56"><p><strong>' + esc(WHO.name) + "</strong><br>" + esc(WHO.creds) + "</p></div></div>" : "";
+    var ctaHtml = function (qid, cls, who) {
       return '<a class="rp-cta' + (cls ? " " + cls : "") + '" href="' + esc(cal) + '"><div><h2>' + esc(CFG.cta.head.replace("{cylinder}", NAME[w])) + "</h2><p>" + esc(CFG.cta.line) +
-        '</p><p class="rp-url"><span>' + esc(cal.replace(/^https:\/\//, "").replace(/\?.*$/, "")) + '</span></p></div><div class="rp-qr" id="' + qid + '" aria-hidden="true"></div></a>';
+        '</p><p class="rp-url"><span>' + esc(cal.replace(/^https:\/\//, "").replace(/\?.*$/, "")) + "</span></p>" + (who || "") + '</div><div class="rp-qr" id="' + qid + '" aria-hidden="true"></div></a>';
     };
+    /* 21 Oct: rev-counter gauge for the engine score (36 to 198), zones at the cylinder bands times six. */
+    var gauge = function () {
+      var lo = CFG.groupMin * ORDER.length, hi = CFG.groupMax * ORDER.length, cx = 170, cy = 168, rr = 136;
+      var bnd = CFG.bands.slice().sort(function (a, b) { return a.min - b.min; });
+      var pt = function (v, rad) { var a = Math.PI * (1 - (v - lo) / (hi - lo)); return [cx + rad * Math.cos(a), cy - rad * Math.sin(a)]; };
+      var arc = function (v0, v1) { var p0 = pt(v0, rr), p1 = pt(v1, rr); return "M" + p0[0].toFixed(1) + " " + p0[1].toFixed(1) + " A" + rr + " " + rr + " 0 0 1 " + p1[0].toFixed(1) + " " + p1[1].toFixed(1); };
+      var cut = bnd.map(function (b) { return Math.max(lo, b.min * ORDER.length - 0.5 * ORDER.length); });
+      var zones = bnd.map(function (b, i) { return [i ? cut[i] : lo, i < bnd.length - 1 ? cut[i + 1] : hi, b.key]; });
+      var s = '<svg class="rp-gauge" viewBox="0 0 340 204" role="img" aria-label="' + esc(r.sum + " of " + hi + " " + CFG.totalLabel) + '">';
+      zones.forEach(function (z) { s += '<path class="rp-z rp-z-' + z[2] + '" d="' + arc(z[0] + 0.8, z[1] - 0.8) + '"/>'; });
+      for (var v = lo; v <= hi; v += 18) { var a0 = pt(v, rr - 16), a1 = pt(v, rr - 24); s += '<line class="rp-tick" x1="' + a0[0].toFixed(1) + '" y1="' + a0[1].toFixed(1) + '" x2="' + a1[0].toFixed(1) + '" y2="' + a1[1].toFixed(1) + '"/>'; }
+      var lab = function (k) { return esc(bandLabel(k)); };
+      s += '<text class="rp-gz" x="' + (cx - rr - 9) + '" y="' + (cy + 24) + '" text-anchor="start">' + lab(bnd[0].key) + "</text>" +
+        '<text class="rp-gz" x="' + cx + '" y="' + (cy - rr - 16) + '" text-anchor="middle">' + lab(bnd[1].key) + "</text>" +
+        '<text class="rp-gz" x="' + (cx + rr + 9) + '" y="' + (cy + 24) + '" text-anchor="end">' + lab(bnd[bnd.length - 1].key) + "</text>";
+      var n0 = pt(r.sum, rr - 46), n1 = pt(r.sum, rr + 10);
+      s += '<line class="rp-needle" x1="' + n0[0].toFixed(1) + '" y1="' + n0[1].toFixed(1) + '" x2="' + n1[0].toFixed(1) + '" y2="' + n1[1].toFixed(1) + '"/>' +
+        '<circle class="rp-pivot" cx="' + n0[0].toFixed(1) + '" cy="' + n0[1].toFixed(1) + '" r="4.5"/>' +
+        '<text class="rp-gnum" x="' + cx + '" y="' + (cy - 18) + '" text-anchor="middle">' + r.sum + "</text>" +
+        '<text class="rp-gof" x="' + cx + '" y="' + (cy + 4) + '" text-anchor="middle">' + esc("of " + hi + " " + CFG.totalLabel) + "</text></svg>";
+      return s;
+    };
+    /* 21 Oct: Lean on and Start here tiles on page 1 (close labels, .lean lines, cylinder readings). */
+    var C0 = X.close || {}, s1 = r.strong;
+    var tile = function (cls, label, k, body) {
+      return '<div class="rp-tile ' + cls + '"><p class="rp-label">' + esc(label) + "</p><p class=\"rp-tv\"><strong>" + esc(NAME[k]) + "</strong> <span>" + r.tot[k] + " of " + CFG.groupMax + " · " + esc(bandLabel(r.bands[k])) + "</span></p><p>" + esc(body) + "</p></div>";
+    };
+    var tilesHtml = '<div class="rp-tiles">' +
+      (r.bands[s1] !== "miss" ? tile("rp-tile-lean " + tone[r.bands[s1]], C0.leanLabel || "Lean on", s1, B[s1].lean)
+        : (CFG.leanNone ? '<div class="rp-tile rp-tile-lean miss"><p class="rp-label">' + esc(C0.leanLabel || "Lean on") + "</p><p>" + esc(CFG.leanNone) + "</p></div>" : "")) +
+      tile("rp-tile-start " + tone[r.bands[w]], C0.startLabel || "Start here", w, B[w].read[r.bands[w]]) + "</div>";
+    /* 21 Oct: printable "My first move" page, before the closing. */
+    var M = X.move, moveHtml = "";
+    if (M) {
+      moveHtml = '<section class="rp-move"><p class="eyebrow">' + esc(M.eyebrow) + "</p><h2>" + esc(M.head) + '</h2><p class="rp-clead">' +
+        esc(M.lead.replace("{cylinder}", NAME[w]).replace("{score}", r.tot[w]).replace("{max}", CFG.groupMax)) + "</p>" +
+        '<div class="rp-mbox"><p class="rp-label">' + esc(M.stepLabel) + '</p><p class="rp-mstep">' + esc(B[w].step[r.bands[w]][0]) + "</p>" +
+        M.fields.map(function (f, i) { return '<div class="rp-mf"><p class="rp-mq"><span class="rp-mn">' + (i + 1) + "</span>" + esc(f) + '</p><div class="rp-wl"></div>' + (i === 0 ? '<div class="rp-wl"></div>' : "") + "</div>"; }).join("") + "</div>" +
+        '<div class="rp-mcheck"><p class="rp-label">' + esc(M.checkHead) + '</p><table><thead><tr><th>' + esc(M.colGroup) + "</th><th>" + esc(M.colToday) + "</th><th>" + esc(M.colMonth) + "</th></tr></thead><tbody>" +
+        '<tr class="rp-mtot"><td>' + esc(C0.engineLabel || "Your engine") + "</td><td>" + r.sum + " of " + (CFG.groupMax * ORDER.length) + '</td><td class="rp-blank"></td></tr>' +
+        ORDER.map(function (k) { return "<tr><td>" + esc(NAME[k]) + "</td><td>" + r.tot[k] + '</td><td class="rp-blank"></td></tr>'; }).join("") +
+        (CFG.candor ? "<tr><td>Candor</td><td>" + r.candor + '</td><td class="rp-blank"></td></tr>' : "") +
+        '</tbody></table><div class="rp-mf rp-retake"><p class="rp-mq">' + esc(M.retake) + '</p><div class="rp-wl"></div></div></div></section>';
+    }
     /* Closing (19 Oct): one-line engine, first step, strength to lean on, retake, booking with QR. */
     var C = X.close, s2 = r.strong, closeHtml = "";
     if (C) {
@@ -640,7 +691,7 @@
         (r.bands[s2] !== "miss" ? row(C.leanLabel, "<strong>" + esc(NAME[s2]) + ", " + r.tot[s2] + " of " + CFG.groupMax + ".</strong> " + esc(B[s2].lean))
           : (CFG.leanNone ? row(C.leanLabel, esc(CFG.leanNone)) : "")) +
         row(C.againLabel, esc(C.again)) +
-        ctaHtml("rp-qr2") +
+        ctaHtml("rp-qr2", "rp-cta-close", whoHtml) +
         '<p class="rp-signoff">' + esc(C.signoff) + "<br><strong>" + esc(C.name) + "</strong></p></section>";
     }
 
@@ -649,18 +700,19 @@
       '<article class="rp">' +
       '<header class="rp-head">' + (root.getAttribute("data-mark") ? '<div class="rp-lockup" role="img" aria-label="Goode Design engine check, free readout"><img src="' + esc(root.getAttribute("data-mark")) + '" alt="" width="44" height="44"><div><span class="rp-lk1">Goode Design</span><span class="rp-lk2">Engine check</span><span class="rp-lk3">Free readout</span></div></div>' : "") +
         '<p class="eyebrow">Your full report</p><h1>' + esc(pat.head) + '</h1><p class="fc-patline">' + esc(pat.line) + "</p>" +
-        '<div class="fc-stats rp-stats"><div><b>' + r.sum + "</b><span>of " + (CFG.groupMax * ORDER.length) + " " + esc(CFG.totalLabel) + "</span>" +
+        '<div class="fc-stats rp-stats"><div class="rp-gaugebox">' + gauge() +
           (X.benchmark ? '<span class="rp-bench">' + esc(X.benchmark) + "</span>" : "") + '</div><div><b>' + fmt(d.el) + "</b><span>" +
-          esc(n ? CFG.time.slow.replace("{n}", n) : CFG.time.steady) + "</span></div></div></header>" +
-      (X.primer ? '<section class="rp-primer"><h2>' + esc(X.primer.head) + "</h2><p>" + esc(X.primer.text) + "</p></section>" : "") +
+          esc(n ? CFG.time.slow.replace("{n}", n) : CFG.time.steady) + "</span></div></div>" + tilesHtml + "</header>" +
       '<div class="fc-panel fc-enginepanel"><ul class="fc-engine">' + engine + "</ul>" +
         '<p class="fc-legend"><span class="miss">Misfiring 6 to 15</span><span class="rough">Running rough 16 to 23</span><span class="clean">Running clean 24 to 33</span></p>' +
         candorHtml + '<p class="fc-book">In the book: CLUTCH, ' + esc(CFG.book.whole) + "</p></div>" +
+      /* 21 Oct: primer moved under the chart so the chart stays on page 1 in print. */
+      (X.primer ? '<section class="rp-primer"><h2>' + esc(X.primer.head) + "</h2><p>" + esc(X.primer.text) + "</p></section>" : "") +
       ctaHtml("rp-qr", "rp-cta-compact") +
       '<h2 class="rp-sec">Cylinder by cylinder</h2>' + cyls +
       (X.bookWhole ? '<section class="rp-whole"><h2 class="rp-sec">The whole engine</h2>' + bookPanel(X.bookWhole, X.bookLink) + "</section>" : "") +
       '<section class="fc-panel rp-block"><h2>Statements that took you longer</h2>' + slowHtml + "</section>" +
-      closeHtml +
+      moveHtml + closeHtml +
       (X.primer ? "" : '<section class="fc-panel rp-block"><h2>' + esc(CFG.howLabel) + "</h2><p>" + esc(CFG.method) + "</p></section>") +
       '<p class="rp-foot">Goode Design &amp; Consulting · thatsgoodedesign.com · matt@thatsgoodedesign.com</p>' +
       "</article>";
