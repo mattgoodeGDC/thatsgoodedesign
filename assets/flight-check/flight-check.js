@@ -628,13 +628,14 @@
         (X.bookPanels && X.bookPanels[k] ? bookPanel(X.bookPanels[k]) : '<p class="fc-book">In the book: CLUTCH, ' + esc(CFG.book[k]) + "</p>") + "</section>";
     }).join("");
 
-    /* 21 Oct: the closing booking panel carries Matt's photo, credentials and the start-here quote. */
+    /* 21 Oct: the booking panels show the QR code, not the written Calendly address (Matt, 21 Oct).
+       The closing booking panel carries Matt's photo, credentials and the start-here quote. */
     var WHO = X.who, Q = CFG.quotes && CFG.quotes[w];
     var whoHtml = WHO ? '<div class="rp-who">' + (Q ? '<figure class="rp-quote"><blockquote>' + esc(Q[0]) + "</blockquote><figcaption>" + esc(Q[1]) + "</figcaption></figure>" : "") +
       '<div class="rp-whorow"><img src="' + esc(WHO.photo) + '" alt="' + esc(WHO.name) + '" width="56" height="56"><p><strong>' + esc(WHO.name) + "</strong><br>" + esc(WHO.creds) + "</p></div></div>" : "";
     var ctaHtml = function (qid, cls, who) {
       return '<a class="rp-cta' + (cls ? " " + cls : "") + '" href="' + esc(cal) + '"><div><h2>' + esc(CFG.cta.head.replace("{cylinder}", NAME[w])) + "</h2><p>" + esc(CFG.cta.line) +
-        '</p><p class="rp-url"><span>' + esc(cal.replace(/^https:\/\//, "").replace(/\?.*$/, "")) + "</span></p>" + (who || "") + '</div><div class="rp-qr" id="' + qid + '" aria-hidden="true"></div></a>';
+        "</p>" + (who || "") + '</div><div class="rp-qr" id="' + qid + '" aria-hidden="true"></div></a>';
     };
     /* 21 Oct: rev-counter gauge for the engine score (36 to 198), zones at the cylinder bands times six. */
     var gauge = function () {
@@ -719,7 +720,10 @@
 
     $("rp-print").onclick = function () { window.print(); };
     /* QR to the booking page, drawn when the qrcode library is on the page. */
-    if (window.QRCode) { ["rp-qr", "rp-qr2"].forEach(function (id) { if ($(id)) { try { new window.QRCode($(id), { text: cal, width: 120, height: 120, colorDark: "#161717", colorLight: "#ffffff" }); } catch (e) {} } }); }
+    /* 21 Oct: a static QR file for the report link (no CDN needed); the library stays as the fallback. */
+    var QF = root.getAttribute("data-qr");
+    if (QF && cal === CAL + "?utm_source=" + CFG.id + "-check&utm_content=report") { ["rp-qr", "rp-qr2"].forEach(function (id) { if ($(id)) $(id).innerHTML = '<img src="' + esc(QF) + '" alt="" width="120" height="120">'; }); }
+    else if (window.QRCode) { ["rp-qr", "rp-qr2"].forEach(function (id) { if ($(id)) { try { new window.QRCode($(id), { text: cal, width: 120, height: 120, colorDark: "#161717", colorLight: "#ffffff" }); } catch (e) {} } }); }
     document.title = "Your " + CFG.id + " check report – Goode Design & Consulting";
   }
 
