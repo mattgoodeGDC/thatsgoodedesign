@@ -163,6 +163,10 @@
   .lu-card--wide .lu-go { margin-top: 0; min-width: 220px; }
   .lu-card--wide .lu-band { height: 28px; }
 }
+.lu-pdf { display: block; margin-top: 10px; text-align: center; font-size: 13px; font-weight: 600; color: var(--ink-2, #4B4B50); text-decoration: underline; text-decoration-color: var(--c); text-underline-offset: 3px; }
+.lu-pdf:hover { color: var(--ink); }
+.lu-fw li:has(.lu-fw-pdf) { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) auto auto; }
+@media (max-width: 700px) { .lu-fw li:has(.lu-fw-pdf) { grid-template-columns: minmax(0, 1fr); } }
 </style>
 
 
@@ -203,6 +207,7 @@
           <ul>
             <li><a href="../products/#services">What a company can buy<span>One list, diagnostic to retained</span></a></li>
             <li><a href="../lineup/" aria-current="page">The lineup<span>Every product, side by side</span></a></li>
+            <li><a href="../one-pagers/">One-pagers<span>Every service as a PDF</span></a></li>
             <li><a href="../products/#why">Why this is different<span>Five structural differences, not adjectives</span></a></li>
           </ul>
         </li>
@@ -278,6 +283,7 @@
     <p class="lede">The free checks show you where to look. The paid work
       fixes it. Not sure which you need? <a href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=lineup-1">Book thirty minutes</a>.</p>
     <p class="lu-rates-line">Leading a school or nonprofit? <a href="../schools/rates/">See my published rates.</a></p>
+    <p class="lu-rates-line">Need it on paper? <a href="../one-pagers/">Download a one-pager for any of these</a>, or the whole pack.</p>
 
     <!-- build-lineup:groups -->
     <div class="lu-group" id="see">
@@ -336,6 +342,7 @@
           </ul>
           <figure class="lu-cq"><blockquote>I thought I needed better time management. Turns out I needed to get out of my own way.</blockquote><figcaption>Founder and CEO, Services business</figcaption></figure>
           <a class="lu-go" href="../obd/">See the OBD</a>
+          <a class="lu-pdf" href="../assets/one-pagers/gdc-company-the-on-board-diagnostic.pdf" download>Download the one-pager (PDF)</a>
         </li>
         <li class="lu-card product product--ec">
           <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -348,6 +355,7 @@
           <p class="lu-rates">Schools and nonprofits: <a href="../schools/rates/">see published rates</a></p>
           <figure class="lu-cq"><blockquote>Matt called me on it. Not rudely, but he wasn&rsquo;t going to let me pretend the problem was my employees.</blockquote><figcaption>Founder and CEO, Services business</figcaption></figure>
           <a class="lu-go" href="../executive-coaching/">See executive coaching</a>
+          <a class="lu-pdf" href="../assets/one-pagers/gdc-company-executive-coaching.pdf" download>Download the one-pager (PDF)</a>
         </li>
       </ul>
     </div>
@@ -366,6 +374,7 @@
           </ul>
           <p class="lu-rates">Schools and nonprofits: <a href="../schools/rates/">see published rates</a></p>
           <a class="lu-go" href="../goodestart/">See GoodeStart</a>
+          <a class="lu-pdf" href="../assets/one-pagers/gdc-company-goodestart.pdf" download>Download the one-pager (PDF)</a>
         </li>
         <li class="lu-card product product--bb">
           <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -377,6 +386,7 @@
           </ul>
           <p class="lu-rates">Schools and nonprofits: <a href="../schools/rates/">see published rates</a></p>
           <a class="lu-go" href="../building-the-bench/">See Building the Bench</a>
+          <a class="lu-pdf" href="../assets/one-pagers/gdc-company-building-the-bench.pdf" download>Download the one-pager (PDF)</a>
         </li>
       </ul>
       <figure class="pullquote lu-proof">
@@ -410,6 +420,7 @@
           </ul>
           <p class="lu-rates">Schools and nonprofits: <a href="../schools/rates/">see published rates</a></p>
           <a class="lu-go" href="../owners-manual/">See the Owner&rsquo;s Manual</a>
+          <a class="lu-pdf" href="../assets/one-pagers/gdc-company-the-owners-manual-workshop.pdf" download>Download the one-pager (PDF)</a>
         </li>
         <li class="lu-card product product--own">
           <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -421,6 +432,7 @@
           </ul>
           <p class="lu-rates">Schools and nonprofits: <a href="../schools/rates/">see published rates</a></p>
           <a class="lu-go" href="../schools/#svc-advisory">See OWN</a>
+          <a class="lu-pdf" href="../assets/one-pagers/gdc-schools-strengths-based-advisory-design.pdf" download>Download the one-pager (PDF)</a>
         </li>
         <li class="lu-card lu-card--hotk">
           <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -432,6 +444,7 @@
           </ul>
           <p class="lu-rates">Schools and nonprofits: <a href="../schools/rates/">see published rates</a></p>
           <a class="lu-go" href="../products/#svc-seminars">See Hand Over the Keys</a>
+          <a class="lu-pdf" href="../assets/one-pagers/gdc-company-hand-over-the-keys.pdf" download>Download the one-pager (PDF)</a>
         </li>
         <li class="lu-card lu-card--sixc">
           <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -443,6 +456,7 @@
           </ul>
           <p class="lu-rates">Schools and nonprofits: <a href="../schools/rates/">see published rates</a></p>
           <a class="lu-go" href="../schools/#svc-decisions">See the 6C session</a>
+          <a class="lu-pdf" href="../assets/one-pagers/gdc-schools-decision-rights-and-governance.pdf" download>Download the one-pager (PDF)</a>
         </li>
         <li class="lu-card lu-card--ft">
           <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -470,9 +484,9 @@
       <a href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=lineup-talks">Book thirty minutes</a> to scope one for your group.</p>
     <ul class="lu-fw">
       <li><span class="lu-fw-name">Seminars<span>Ninety minutes, one idea. Hand Over the Keys is available now</span></span><span class="lu-chips"><span class="lu-chip fw-d">DELEGATE</span><span class="lu-chip fw-c">CREATE</span><span class="lu-chip fw-v">VOICES</span><span class="lu-chip fw-6">6C</span><span class="lu-chip fw-eq">EQ</span></span><a class="link-arrow" href="../products/#svc-seminars">Details</a></li>
-      <li><span class="lu-fw-name">Keynotes<span>Eight talks built on the book</span></span><span class="lu-chips"><span class="lu-chip fw-c">CREATE</span><span class="lu-chip fw-v">VOICES</span><span class="lu-chip fw-6">6C</span><span class="lu-chip fw-eq">EQ</span><span class="lu-chip fw-d">DELEGATE</span></span><a class="link-arrow" href="../products/#keynotes">Details</a></li>
-      <li><span class="lu-fw-name">Executive team consulting<span>The table that sets direction</span></span><span class="lu-chips"><span class="lu-chip fw-6">6C</span><span class="lu-chip fw-d">DELEGATE</span></span><a class="link-arrow" href="../products/#door-system">Details</a></li>
-      <li><span class="lu-fw-name">System-wide consulting<span>A diagnostic, then a year</span></span><span class="lu-chips"><span class="lu-chip fw-c">CREATE</span><span class="lu-chip fw-v">VOICES</span><span class="lu-chip fw-6">6C</span><span class="lu-chip fw-d">DELEGATE</span></span><a class="link-arrow" href="../products/#door-system">Details</a></li>
+      <li><span class="lu-fw-name">Keynotes<span>Eight talks built on the book</span></span><span class="lu-chips"><span class="lu-chip fw-c">CREATE</span><span class="lu-chip fw-v">VOICES</span><span class="lu-chip fw-6">6C</span><span class="lu-chip fw-eq">EQ</span><span class="lu-chip fw-d">DELEGATE</span></span><a class="link-arrow" href="../products/#keynotes">Details</a><a class="link-arrow lu-fw-pdf" href="../assets/one-pagers/gdc-company-keynotes.pdf" download>One-pager</a></li>
+      <li><span class="lu-fw-name">Executive team consulting<span>The table that sets direction</span></span><span class="lu-chips"><span class="lu-chip fw-6">6C</span><span class="lu-chip fw-d">DELEGATE</span></span><a class="link-arrow" href="../products/#door-system">Details</a><a class="link-arrow lu-fw-pdf" href="../assets/one-pagers/gdc-company-executive-team-consulting.pdf" download>One-pager</a></li>
+      <li><span class="lu-fw-name">System-wide consulting<span>A diagnostic, then a year</span></span><span class="lu-chips"><span class="lu-chip fw-c">CREATE</span><span class="lu-chip fw-v">VOICES</span><span class="lu-chip fw-6">6C</span><span class="lu-chip fw-d">DELEGATE</span></span><a class="link-arrow" href="../products/#door-system">Details</a><a class="link-arrow lu-fw-pdf" href="../assets/one-pagers/gdc-company-system-wide-consulting.pdf" download>One-pager</a></li>
       <li><span class="lu-fw-name">The four framework ebooks<span>One chapter each, $3.99</span></span><span class="lu-chips"><span class="lu-chip fw-c">CREATE</span><span class="lu-chip fw-v">VOICES</span><span class="lu-chip fw-6">6C</span><span class="lu-chip fw-d">DELEGATE</span></span><a class="link-arrow" href="../clutch/ebooks/">Details</a></li>
     </ul>
   </section>
