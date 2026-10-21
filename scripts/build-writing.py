@@ -301,8 +301,8 @@ def page(p, posts, i, header, footer):
     <section class="post-next">
       <div>
         <p class="eyebrow">Where is your system slipping?</p>
-        <p>A few short questions, about two minutes, and you will know which of five patterns you are in. No email needed.</p>
-        <p class="cta-row"><a class="btn" href="../../diagnostic/?src=writing-{p['slug'][:24]}#doors">Run the free diagnostic</a>
+        <p>Eighteen statements about the team you lead, answered on instinct. Your readout comes up on screen, with steps for this week. No email needed.</p>
+        <p class="cta-row"><a class="btn" href="../../engine-check/?utm_source=site&amp;utm_content=writing-{p['slug'][:24]}">Check your engine, free</a>
         <a class="btn btn-ghost" href="{CALENDLY}?utm_content=writing-post">Book a 30-minute call</a></p>
       </div>
     </section>

@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="../assets/style.css?v=17">
 <link rel="stylesheet" href="../assets/gdc-nav.css?v=18">
 <script src="../assets/gdc-analytics.js?v=12"></script>
-<script src="../assets/gdc-nav.js?v=17" defer></script>
+<script src="../assets/gdc-nav.js?v=18" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://thatsgoodedesign.com/#org","name":"Goode Design & Consulting","alternateName":"GDC","url":"https://thatsgoodedesign.com/","logo":"https://thatsgoodedesign.com/assets/favicon/icon-512.png","image":"https://thatsgoodedesign.com/assets/og-default.jpg","email":"matt@thatsgoodedesign.com","description":"Leadership coaching and consulting for growth-stage founders, independent schools, and nonprofit and public-sector teams. Assessment-led engagements built on CliftonStrengths and EQ-i 2.0.","founder":{"@id":"https://thatsgoodedesign.com/#matt"},"areaServed":[{"@type":"City","name":"Washington, DC"},{"@type":"City","name":"Baltimore"},{"@type":"City","name":"New York"},{"@type":"City","name":"Boston"},{"@type":"AdministrativeArea","name":"Worldwide"}],"serviceType":["Executive coaching","Leadership development","Organizational consulting","Leadership assessment","Keynote speaking","Professional development for schools"],"knowsAbout":["Executive coaching","Leadership development","CliftonStrengths","EQ-i 2.0","Emotional intelligence","Delegation","Decision rights","Organizational design","Independent school leadership","Succession planning","Neuroinclusive leadership"],"sameAs":["https://www.linkedin.com/in/goodematt/","https://thatsgoodedesign.substack.com/"]},{"@type":"Person","@id":"https://thatsgoodedesign.com/#matt","name":"Matt Goode","jobTitle":"Leadership coach and consultant","url":"https://thatsgoodedesign.com/about/","image":"https://thatsgoodedesign.com/assets/matt-bowtie.jpg","worksFor":{"@id":"https://thatsgoodedesign.com/#org"},"description":"Founder of Goode Design & Consulting. Seventeen years at McDonogh School as teacher, coach, dean of students and administrator, then three years of leadership and team development at USAID's Bureau for Humanitarian Assistance. Author of CLUTCH.","alumniOf":[{"@type":"CollegeOrUniversity","name":"The London School of Economics and Political Science"},{"@type":"CollegeOrUniversity","name":"Johns Hopkins University"}],"hasCredential":[{"@type":"EducationalOccupationalCredential","name":"Gallup-Certified Strengths Coach","credentialCategory":"certification","recognizedBy":{"@type":"Organization","name":"Gallup, Inc."}},{"@type":"EducationalOccupationalCredential","name":"EQ-i 2.0 Certified Practitioner","credentialCategory":"certification","recognizedBy":{"@type":"Organization","name":"Multi-Health Systems Inc."}},{"@type":"EducationalOccupationalCredential","name":"MSc in Sociology","credentialCategory":"degree","recognizedBy":{"@type":"CollegeOrUniversity","name":"The London School of Economics and Political Science"}},{"@type":"EducationalOccupationalCredential","name":"MA in Education","credentialCategory":"degree","recognizedBy":{"@type":"CollegeOrUniversity","name":"Johns Hopkins University"}}],"knowsAbout":["Executive coaching","Leadership development","CliftonStrengths","EQ-i 2.0","Delegation","Decision rights","Independent school leadership","Neuroinclusive leadership"],"sameAs":["https://www.linkedin.com/in/goodematt/","https://thatsgoodedesign.substack.com/"]},{"@type":"WebSite","@id":"https://thatsgoodedesign.com/#website","url":"https://thatsgoodedesign.com/","name":"Goode Design & Consulting","publisher":{"@id":"https://thatsgoodedesign.com/#org"},"inLanguage":"en-US"},{"@type":"BreadcrumbList","@id":"https://thatsgoodedesign.com/diagnostic/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thatsgoodedesign.com/"},{"@type":"ListItem","position":2,"name":"Free diagnostic","item":"https://thatsgoodedesign.com/diagnostic/"}]},{"@type":"WebPage","@id":"https://thatsgoodedesign.com/diagnostic/#webpage","url":"https://thatsgoodedesign.com/diagnostic/","name":"Where is your leadership system breaking?","description":"A free leadership diagnostic. A few short questions, about two minutes, and which of five patterns you are in, why it keeps happening and the first move that usually fixes it. No email needed to see your result.","isPartOf":{"@id":"https://thatsgoodedesign.com/#website"},"about":{"@id":"https://thatsgoodedesign.com/#org"},"inLanguage":"en-US","breadcrumb":{"@id":"https://thatsgoodedesign.com/diagnostic/#breadcrumb"}}]}</script>
 <meta name="tdm-reservation" content="1">
 <meta name="tdm-policy" content="https://thatsgoodedesign.com/terms/">
@@ -93,7 +93,7 @@
           <a href="../coaching-engagement/">How the engagement works<span>The terms, before you have to ask</span></a>
         </li>
         <li class="nmp-foot">
-          <a href="../diagnostic/" aria-current="page">Start with the free diagnostic<span>About two minutes, five patterns</span></a>
+          <a href="../diagnostic/" aria-current="page">School and nonprofit diagnostics<span>About two minutes, no email needed</span></a>
         </li>
         <li class="nmp-foot">
           <a href="../engine-check/">Engine check, free<span>Your team on the lift, in two minutes</span></a>
@@ -214,7 +214,7 @@
     <div class="dx-start" id="doors">
       <p class="dx-doors-q" id="doors-q">Where do you lead?</p>
       <div class="dx-doors" role="group" aria-labelledby="doors-q">
-        <a class="dx-door" data-route="company" href="https://form.jotform.com/262713215187052">A company</a>
+        <a class="dx-door" data-route="company" href="/engine-check/?utm_source=site&amp;utm_content=diagnostic-door">A company</a>
         <a class="dx-door" data-route="school" href="https://form.jotform.com/262853412698063">A school</a>
         <a class="dx-door" data-route="nonprofit" href="https://form.jotform.com/262852888637072">A nonprofit or public agency</a>
       </div>
@@ -255,7 +255,7 @@
 
   <!-- Screen 3. Short titles match the result card and the email subjects;
        Kit tags and path numbers are unchanged. -->
-  <section class="band">
+  <section class="band" id="dx-patterns" hidden>
     <p class="eyebrow">The five patterns</p>
     <h2 class="section-h">Already know which one sounds like you? Start there</h2>
     <ul class="dx-patterns">
@@ -337,7 +337,7 @@
        the company route. */
     (function () {
       var FORMS = {
-        company:   "https://form.jotform.com/262713215187052",
+        company:   "/engine-check/",
         school:    "https://form.jotform.com/262853412698063",
         nonprofit: "https://form.jotform.com/262852888637072"
       };
@@ -363,7 +363,11 @@
       var route = (qs.get("route") || "").toLowerCase();
       if (!FORMS[route]) route = /^schools?-/.test(src) ? "school" : /^nonprofits?-/.test(src) ? "nonprofit" : "";
 
-      function link(r, s) { return FORMS[r] + "?src=" + encodeURIComponent(s || ("diagnostic-door-" + r)); }
+      function link(r, s) {
+        /* 21 Oct 2026 (CLUTCH-84): companies take the engine check. */
+        if (r === "company") return FORMS.company + "?utm_source=site&utm_content=" + encodeURIComponent(s || "diagnostic-door");
+        return FORMS[r] + "?src=" + encodeURIComponent(s || ("diagnostic-door-" + r));
+      }
 
       document.querySelectorAll("a.dx-door[data-route]").forEach(function (a) {
         var r = a.dataset.route;
@@ -374,6 +378,7 @@
         a.href = route ? link(route, src) : "#doors";
       });
       if (route && Q1[route]) {
+        var pats = document.getElementById("dx-patterns"); if (pats) pats.hidden = false;
         document.querySelectorAll("a.dx-pat").forEach(function (a) {
           var m = a.href.match(/diagnostic-card-([a-z-]+)/), slug = m && m[1], line = slug && Q1[route][slug];
           if (!line) return;

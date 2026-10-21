@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="assets/style.css?v=17">
 <link rel="stylesheet" href="assets/gdc-nav.css?v=18">
 <script src="assets/gdc-analytics.js?v=12"></script>
-<script src="assets/gdc-nav.js?v=17" defer></script>
+<script src="assets/gdc-nav.js?v=18" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://thatsgoodedesign.com/#org","name":"Goode Design & Consulting","alternateName":"GDC","url":"https://thatsgoodedesign.com/","logo":"https://thatsgoodedesign.com/assets/favicon/icon-512.png","image":"https://thatsgoodedesign.com/assets/og-default.jpg","email":"matt@thatsgoodedesign.com","description":"Leadership coaching and consulting for growth-stage founders, independent schools, and nonprofit and public-sector teams. Assessment-led engagements built on CliftonStrengths and EQ-i 2.0.","founder":{"@id":"https://thatsgoodedesign.com/#matt"},"areaServed":[{"@type":"City","name":"Washington, DC"},{"@type":"City","name":"Baltimore"},{"@type":"City","name":"New York"},{"@type":"City","name":"Boston"},{"@type":"AdministrativeArea","name":"Worldwide"}],"serviceType":["Executive coaching","Leadership development","Organizational consulting","Leadership assessment","Keynote speaking","Professional development for schools"],"knowsAbout":["Executive coaching","Leadership development","CliftonStrengths","EQ-i 2.0","Emotional intelligence","Delegation","Decision rights","Organizational design","Independent school leadership","Succession planning","Neuroinclusive leadership"],"sameAs":["https://www.linkedin.com/in/goodematt/","https://thatsgoodedesign.substack.com/"]},{"@type":"Person","@id":"https://thatsgoodedesign.com/#matt","name":"Matt Goode","jobTitle":"Leadership coach and consultant","url":"https://thatsgoodedesign.com/about/","image":"https://thatsgoodedesign.com/assets/matt-bowtie.jpg","worksFor":{"@id":"https://thatsgoodedesign.com/#org"},"description":"Founder of Goode Design & Consulting. Seventeen years at McDonogh School as teacher, coach, dean of students and administrator, then three years of leadership and team development at USAID's Bureau for Humanitarian Assistance. Author of CLUTCH.","alumniOf":[{"@type":"CollegeOrUniversity","name":"The London School of Economics and Political Science"},{"@type":"CollegeOrUniversity","name":"Johns Hopkins University"}],"hasCredential":[{"@type":"EducationalOccupationalCredential","name":"Gallup-Certified Strengths Coach","credentialCategory":"certification","recognizedBy":{"@type":"Organization","name":"Gallup, Inc."}},{"@type":"EducationalOccupationalCredential","name":"EQ-i 2.0 Certified Practitioner","credentialCategory":"certification","recognizedBy":{"@type":"Organization","name":"Multi-Health Systems Inc."}},{"@type":"EducationalOccupationalCredential","name":"MSc in Sociology","credentialCategory":"degree","recognizedBy":{"@type":"CollegeOrUniversity","name":"The London School of Economics and Political Science"}},{"@type":"EducationalOccupationalCredential","name":"MA in Education","credentialCategory":"degree","recognizedBy":{"@type":"CollegeOrUniversity","name":"Johns Hopkins University"}}],"knowsAbout":["Executive coaching","Leadership development","CliftonStrengths","EQ-i 2.0","Delegation","Decision rights","Independent school leadership","Neuroinclusive leadership"],"sameAs":["https://www.linkedin.com/in/goodematt/","https://thatsgoodedesign.substack.com/"]},{"@type":"WebSite","@id":"https://thatsgoodedesign.com/#website","url":"https://thatsgoodedesign.com/","name":"Goode Design & Consulting","publisher":{"@id":"https://thatsgoodedesign.com/#org"},"inLanguage":"en-US"},{"@type":"WebPage","@id":"https://thatsgoodedesign.com/#webpage","url":"https://thatsgoodedesign.com/","name":"Leadership infrastructure for founders and school leaders","description":"Matt Goode builds neuroinclusive leadership systems that keep working when you leave the room. Executive coaching, fractional operations, and leadership infrastructure for growth-stage founders, independent schools, and mission-driven teams.","isPartOf":{"@id":"https://thatsgoodedesign.com/#website"},"about":{"@id":"https://thatsgoodedesign.com/#org"},"inLanguage":"en-US"}]}</script>
 <meta name="tdm-reservation" content="1">
 <meta name="tdm-policy" content="https://thatsgoodedesign.com/terms/">
@@ -93,7 +93,7 @@
           <a href="coaching-engagement/">How the engagement works<span>The terms, before you have to ask</span></a>
         </li>
         <li class="nmp-foot">
-          <a href="diagnostic/">Start with the free diagnostic<span>About two minutes, five patterns</span></a>
+          <a href="diagnostic/">School and nonprofit diagnostics<span>About two minutes, no email needed</span></a>
         </li>
         <li class="nmp-foot">
           <a href="engine-check/">Engine check, free<span>Your team on the lift, in two minutes</span></a>
@@ -252,24 +252,11 @@
         Because nobody designed it at all.
       </p>
       <p class="cta-row">
-        <a class="btn" id="hero-doors-btn" href="diagnostic/?src=home-hero#doors" aria-expanded="false" aria-controls="hero-doors">Run the free diagnostic</a>
+        <a class="btn" href="engine-check/?utm_source=site&amp;utm_content=home-hero">Check your engine, free</a>
         <a class="btn btn-ghost" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=home-1">Book a 30-minute call</a>
       </p>
       <p class="hero-note">About 2 minutes, no email needed.</p>
-      <!-- 19 Oct 2026 (run:os, CLUTCH-84): engine check offered as the deeper option; the diagnostic stays primary. -->
-      <p class="hero-note hero-lab">Want a deeper read? <a href="engine-check/?utm_source=home&amp;utm_medium=hero">Try the new engine check</a>, eighteen statements in under five minutes. It is brand new, so I may still be working out the kinks.</p>
       <p class="hero-note hero-lab">Not ready for either? <a href="writing/">Read the Leadership Lab</a>, three free pieces a week.</p>
-      <!-- Three doors (13 Oct 2026). The hero button opens these in place, so
-           there is no extra page between the homepage and the quiz. Without
-           JavaScript the button goes to /diagnostic/#doors instead. -->
-      <div class="hero-doors" id="hero-doors" hidden>
-        <p class="hero-doors-q" id="hero-doors-q">Where do you lead?</p>
-        <div class="hero-doors-row" role="group" aria-labelledby="hero-doors-q">
-          <a class="hero-door" href="https://form.jotform.com/262713215187052?src=home-hero">A company</a>
-          <a class="hero-door" href="https://form.jotform.com/262853412698063?src=home-hero">A school</a>
-          <a class="hero-door" href="https://form.jotform.com/262852888637072?src=home-hero">A nonprofit or public agency</a>
-        </div>
-      </div>
       <div class="hero-route">
         <p class="hero-route-q">Leading a school or a mission-driven team?</p>
         <div class="hero-route-row">
@@ -319,53 +306,18 @@
     </figure>
   </section>
 
-  <!-- Pick the one = question 1 of the diagnostic (BUSINESS-176, 30 Sept;
-       one click from 11 Oct). Each card is a link straight into the Jotform
-       with Q1 prefilled, so the pick is the first answer. Nothing here asks
-       for personal details. -->
+  <!-- 21 Oct 2026 (CLUTCH-84): the engine check replaces the company
+       diagnostic, so the five pattern cards that pre-answered its first
+       question are retired. Copy word for word from the launch creative copy. -->
   <section class="band alt" id="pick">
-    <h2 class="section-h">Pick the one that sounds most like you</h2>
-    <p class="signals-lede">Which one is loudest right now? It&rsquo;s the first
-      question of the diagnostic, so your answer carries over.</p>
-    <div class="signals pcs" id="signals">
-      <a class="signal pc" href="diagnostic/?src=home-card-bottleneck#doors" data-pattern="bottleneck">
-        <span class="pc-light" aria-hidden="true"><img src="assets/lights/light-bottleneck-unlit.svg" alt="" width="44" height="44"><img class="on" src="assets/lights/light-bottleneck-lit.svg" alt="" width="44" height="44"></span>
-        <span class="pc-name">The Bottleneck</span>
-        <h3>Everything still runs through you</h3>
-        <p>Ask where a project stands and you get three answers. All three end up on your desk.</p>
-        <span class="pc-go">Start here</span>
-      </a>
-      <a class="signal pc" href="diagnostic/?src=home-card-growth-gap#doors" data-pattern="growth-gap">
-        <span class="pc-light" aria-hidden="true"><img src="assets/lights/light-growth-gap-unlit.svg" alt="" width="44" height="44"><img class="on" src="assets/lights/light-growth-gap-lit.svg" alt="" width="44" height="44"></span>
-        <span class="pc-name">The Growth Gap</span>
-        <h3>Growing faster than it&rsquo;s getting clearer</h3>
-        <p>Headcount keeps climbing. The number of people who could name this quarter&rsquo;s top priorities doesn&rsquo;t.</p>
-        <span class="pc-go">Start here</span>
-      </a>
-      <a class="signal pc" href="diagnostic/?src=home-card-drift#doors" data-pattern="drift">
-        <span class="pc-light" aria-hidden="true"><img src="assets/lights/light-drift-unlit.svg" alt="" width="44" height="44"><img class="on" src="assets/lights/light-drift-lit.svg" alt="" width="44" height="44"></span>
-        <span class="pc-name">The Drift</span>
-        <h3>The culture is drifting</h3>
-        <p>Nothing has broken. You just hear about problems later than you used to.</p>
-        <span class="pc-go">Start here</span>
-      </a>
-      <a class="signal pc" href="diagnostic/?src=home-card-stall#doors" data-pattern="stall">
-        <span class="pc-light" aria-hidden="true"><img src="assets/lights/light-stall-unlit.svg" alt="" width="44" height="44"><img class="on" src="assets/lights/light-stall-lit.svg" alt="" width="44" height="44"></span>
-        <span class="pc-name">The Stall</span>
-        <h3>Winning still feels like a near miss</h3>
-        <p>The goals are clear and the plan is sound. It just doesn&rsquo;t run unless someone pushes.</p>
-        <span class="pc-go">Start here</span>
-      </a>
-      <a class="signal pc" href="diagnostic/?src=home-card-new-seat#doors" data-pattern="new-seat">
-        <span class="pc-light" aria-hidden="true"><img src="assets/lights/light-new-seat-unlit.svg" alt="" width="44" height="44"><img class="on" src="assets/lights/light-new-seat-lit.svg" alt="" width="44" height="44"></span>
-        <span class="pc-name">The New Seat</span>
-        <h3>Your role is changing, and nobody has said into what</h3>
-        <p>Stepping up, stepping back or redesigning the job. What&rsquo;s asked of you moved before the title did.</p>
-        <span class="pc-go">Start here</span>
-      </a>
-    </div>
-    <p class="pc-meta">About 2 minutes, no email needed.</p>
-    <p class="pc-other"><a href="https://form.jotform.com/262713215187052?src=home-cards-other">None of these, or answering about someone else? Start the diagnostic</a></p>
+    <p class="eyebrow">Free engine check</p>
+    <h2 class="section-h">Where does your team stall?</h2>
+    <p class="signals-lede">Eighteen statements about the team you lead, answered
+      on instinct. Your readout comes up on screen: the cylinder running on you,
+      the steps for this week, and the statements that slowed you down.</p>
+    <p class="cta-row"><a class="btn" href="engine-check/?utm_source=site&amp;utm_content=home-pick">Check your engine, free</a></p>
+    <p class="pc-meta">No email needed.</p>
+    <p class="pc-other">Leading a school or a nonprofit? <a href="diagnostic/?src=home-pick">Take the diagnostic built for you</a></p>
     <p class="pc-other pc-team">Want your team&rsquo;s view, not just yours? <a href="psychological-safety/?src=home-cards">Run the free Psychological Safety Check</a></p>
   </section>
 
@@ -558,7 +510,7 @@
     </figure>
     <p class="cta-row center">
       <a class="btn btn-lg" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=home-2">Book a 30-minute call</a>
-      <a class="btn btn-lg btn-ghost" href="diagnostic/?src=home-close#doors">Run the free diagnostic first</a>
+      <a class="btn btn-lg btn-ghost" href="engine-check/?utm_source=site&amp;utm_content=home-close">Check your engine first</a>
     </p>
     <p class="fineprint"><strong>If it is not a fit I will say so on the call</strong> and send you the chapter that is. No deck, no follow-up sequence, no second call you did not ask for.<br>Prefer email? <a href="mailto:matt@thatsgoodedesign.com">matt@thatsgoodedesign.com</a></p>
   </section>
@@ -677,7 +629,7 @@
       <a href="obd/">The OBD</a>
       <a href="schools/">Schools</a>
       <a href="coaching-engagement/">How it works</a>
-      <a href="diagnostic/">Free diagnostic</a>
+      <a href="engine-check/">Free engine check</a>
       <a href="free/">Free tools</a>
       <a href="books/">Books</a>
       <a href="writing/">Writing</a>

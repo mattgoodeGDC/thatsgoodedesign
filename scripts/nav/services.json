@@ -35,7 +35,7 @@
   ],
   "foot": [
     {"href": "coaching-engagement/", "label": "How the engagement works", "sub": "The terms, before you have to ask"},
-    {"href": "diagnostic/", "label": "Start with the free diagnostic", "sub": "About two minutes, five patterns"},
+    {"href": "diagnostic/", "label": "School and nonprofit diagnostics", "sub": "About two minutes, no email needed"},
     {"href": "engine-check/", "label": "Engine check, free", "sub": "Your team on the lift, in two minutes"},
     {"href": "free/", "label": "Free tools", "sub": "Diagnostics, templates and a chapter"}
   ]

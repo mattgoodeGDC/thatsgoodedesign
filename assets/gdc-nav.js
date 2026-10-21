@@ -101,12 +101,11 @@
      once the visitor has scrolled past the opening screen and hidden again
      when the page's own closing call to action or the footer is in view.
      The action follows the visitor's temperature: reading pages offer the
-     free diagnostic, buying pages offer the call. Pages that already carry
+     free engine check (school and nonprofit pages: the diagnostic), buying pages offer the call. Pages that already carry
      their own bar (.m-cta) or have one job of their own are skipped. */
   var BUY = ['obd', 'executive-coaching', 'coaching-engagement', 'schools', 'schools/rates',
     'products', 'goodestart', 'building-the-bench', 'know-thyself', 'owners-manual',
-    'psychological-safety', 'diagnostic/bottleneck', 'diagnostic/drift', 'diagnostic/growth-gap',
-    'diagnostic/stall', 'diagnostic/new-seat'];
+    'psychological-safety'];
   var SKIP = ['diagnostic', 'diagnostic/readout', 'diagnostic/share', 'booked', 'downloads',
     'privacy', 'terms', 'ps-tool', 'couldnt-have-been-an-email', 'couldnt-have-been-an-email/thanks',
     'field-tested/sampler', 'field-tested/sampler/thanks', 'no-average-brain/chapter',
@@ -122,7 +121,9 @@
     bar.setAttribute('aria-hidden', 'true');
     bar.innerHTML = buy
       ? '<span>Thirty minutes, then decide.</span><a class="btn" tabindex="-1" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=' + slug + '-sticky">Book a call</a>'
-      : '<span>Where is your system slipping?</span><a class="btn" tabindex="-1" href="/diagnostic/?src=' + slug + '-sticky#doors">Free diagnostic</a>';
+      : /^(schools|nonprofits)(\/|$)/.test(path)
+        ? '<span>Where is your system slipping?</span><a class="btn" tabindex="-1" href="/diagnostic/?src=' + slug + '-sticky#doors">Free diagnostic</a>'
+        : '<span>Where does your team stall?</span><a class="btn" tabindex="-1" href="/engine-check/?utm_source=site&utm_content=' + slug + '-sticky">Free engine check</a>';
     document.body.appendChild(bar);
     if (!('IntersectionObserver' in window)) return;
     var stops = [].slice.call(document.querySelectorAll('.book-call, .lab, footer, .hero-doors'));
