@@ -1,5 +1,5 @@
 /* GDC product family, web layer. Source: STYLE GUIDE - GDC Product Family v1.3
-   (approved 11 Oct 2026, engine check added 19 Oct) and its Web tokens file. Loaded after style.css on
+   (v1.4, 19 Oct 2026: engine check in its own Gulf blue and chartreuse) and its Web tokens file. Loaded after style.css on
    product pages and on any page that shows product cards.
    The rule: product colour says WHICH product; gold says PRESS. Product colours
    never go on buttons, links, lit icons or selected states. */
@@ -12,8 +12,12 @@
   --kt:  #575897;  --kt-tint:  #E6E6F0;  --kt-dark:  #9A9EDB;
   --ec:  #9A3B6A;  --ec-tint:  #F3E4EB;  --ec-dark:  #D77FA8;
   --own: #6B4A2E;  --own-tint: #EFE8E1;  --own-dark: #C99C74;
-  /* Engine check wears CREATE (framework-keyed, v1.3 decision 22). Text value #2C7355. */
-  --engine: #3E9B75; --engine-text: #2C7355; --engine-tint: #E1F0E9; --engine-dark: #5BB892;
+  /* Engine check: its own colours since 19 Oct 2026 (Product Family v1.4).
+     Gulf blue and chartreuse are fills only: never type or glyph on paper.
+     Tested pairs: navy on Gulf blue, ink on chartreuse, chartreuse on ink,
+     Gulf blue on ink, navy on paper. On paper the tier word is Gulf text. */
+  --engine: #A6D0EA; --engine-text: #33607F; --engine-tint: #E6F1F8; --engine-dark: #A6D0EA;
+  --engine-lit: #CAD73F; --engine-navy: #0E1B2A; --engine-ink: #161717;
 }
 .product { --c: var(--ink); --c-tint: var(--paper-alt); }
 .product--obd { --c: var(--obd); --c-tint: var(--obd-tint); }
@@ -24,6 +28,9 @@
 .product--ec  { --c: var(--ec);  --c-tint: var(--ec-tint); }
 .product--own { --c: var(--own); --c-tint: var(--own-tint); }
 .product--engine { --c: var(--engine); --c-tint: var(--engine-tint); }
+/* Gulf blue is too pale for a glyph or tier word on paper: navy and Gulf text instead. */
+.product--engine .svc-icon { color: var(--engine-navy); }
+.product--engine .product__tier { color: var(--engine-text); }
 
 /* The 6 px rule: full bleed, directly under the site nav. */
 .product__rule { height: 6px; background: var(--c); margin-inline: calc(50% - 50vw); }

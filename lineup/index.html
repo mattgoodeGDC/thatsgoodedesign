@@ -29,7 +29,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap">
 <link rel="stylesheet" href="../assets/style.css?v=17">
 <link rel="stylesheet" href="../assets/gdc-nav.css?v=18">
-<link rel="stylesheet" href="../assets/products.css?v=5">
+<link rel="stylesheet" href="../assets/products.css?v=6">
 <style>
 /* The lineup (19 Oct 2026). Every product on one page, per STYLE GUIDE GDC
    Product Family v1.3. Buyer-facing: colour names, not hex codes. The rule
@@ -57,8 +57,8 @@
    2026): Gulf blue #A6D0EA, chartreuse #CAD73F, navy #0E1B2A. Only the
    tested pairs: navy on paper for the tier word, ink #161717 on chartreuse
    for the button, chartreuse on ink for its hover. */
-.lu-card.product--engine { --c: #A6D0EA; --c2: #CAD73F; --c3: #0E1B2A; }
-.lu-card--engine .lu-go { color: #161717; }
+.lu-card.product--engine { --c: var(--engine); --c2: var(--engine-lit); --c3: var(--engine-navy); }
+.lu-card--engine .lu-go { color: var(--engine-ink); }
 .lu-card--om .lu-band span:nth-child(1) { background: var(--c2); }
 .lu-card--om .lu-band span:nth-child(2) { background: var(--c); }
 /* Framework-keyed workshops (Matt, 19 Oct 2026): no badge of their own,
@@ -79,7 +79,7 @@
 .lu-card .lockup img { width: 40px; height: 40px; flex: 0 0 auto; margin-top: 2px; }
 .lu-card .lockup-name { font-size: 20px; }
 .lu-card .product__tier { line-height: 1.35; }
-.lu-card--engine .product__tier { color: #0E1B2A; }
+.lu-card--engine .product__tier { color: var(--engine-text); }
 .lu-card--core .product__tier { color: var(--muted); }
 .lu-desc { font-size: 15px; line-height: 1.55; margin: 0 0 14px; color: var(--body); }
 .lu-facts { list-style: none; margin: 0 0 14px; padding: 12px 0 0; border-top: 1px solid var(--rule); display: grid; gap: 6px; font-size: 14px; }
@@ -128,7 +128,7 @@
 .lu-go::after { content: " \2192"; }
 .lu-go:hover, .lu-go:focus-visible { background: var(--c); color: #fff; }
 .lu-go:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
-.lu-card--engine .lu-go:hover, .lu-card--engine .lu-go:focus-visible { background: #161717; color: #CAD73F; }
+.lu-card--engine .lu-go:hover, .lu-card--engine .lu-go:focus-visible { background: var(--engine-ink); color: var(--engine-lit); }
 @media (prefers-reduced-motion: reduce) { .lu-go { transition: none; } }
 .lu-card .lu-rates { font-size: 13px; margin: -6px 0 14px; }
 .lu-card .lu-rates a { color: var(--ink); text-decoration-color: var(--gold-ink); }
@@ -262,12 +262,14 @@
       <a class="btn btn-ghost" href="../diagnostic/?src=lineup-hero#doors">Not sure? Take the two-minute diagnostic</a>
     </p>
     <p class="lu-hero-note">Thirty minutes to work out whether it&rsquo;s a people problem or a design problem. No pitch, no follow-up sequence.</p>
+    <!-- build-lineup:picker -->
     <ul class="lu-jump" aria-label="Start with the problem">
       <li><a href="#see"><strong>Something&rsquo;s off, and I can&rsquo;t name it</strong>Two free checks, about two minutes each<em>See it clearly</em></a></li>
       <li><a href="#leader"><strong>One leader needs to grow into the job</strong>The OBD, then coaching<em>Develop one leader</em></a></li>
       <li><a href="#cohort"><strong>Several people stepping up at once</strong>A cohort for a new seat or the next one<em>Grow a cohort</em></a></li>
       <li><a href="#team"><strong>Good people, pulling in different directions</strong>Workshops for one team or a whole staff<em>Workshops for the team</em></a></li>
     </ul>
+<!-- /build-lineup:picker -->
   </section>
 
   <section class="band" id="lineup" aria-labelledby="lineup-h">
@@ -277,6 +279,7 @@
       fixes it. Not sure which you need? <a href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=lineup-1">Book thirty minutes</a>.</p>
     <p class="lu-rates-line">Leading a school or nonprofit? <a href="../schools/rates/">See my published rates.</a></p>
 
+    <!-- build-lineup:groups -->
     <div class="lu-group" id="see">
       <h3 class="lu-group-h">See it clearly</h3>
       <p class="lu-group-line">Find out what&rsquo;s actually broken before you pay to fix it.</p>
@@ -385,7 +388,7 @@
     <div class="lu-group" id="team">
       <h3 class="lu-group-h">Workshops for the team</h3>
       <p class="lu-group-line">When everyone works hard, just not in the same direction.</p>
-      <ul class="lu-grid ">
+      <ul class="lu-grid">
         <li class="lu-card product product--kt">
           <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
           <div class="lockup"><svg class="icon" aria-hidden="true"><use href="#m-kt"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Know Thyself to Lead Others</h3><p class="product__tier">Team workshop &middot; Schools edition &middot; Organizations edition</p></div></div>
@@ -457,6 +460,7 @@
         <figcaption class="attrib">CEO, Professional Services</figcaption>
       </figure>
     </div>
+<!-- /build-lineup:groups -->
   </section>
 
   <section class="band alt" id="frameworks" aria-labelledby="fw-h">
