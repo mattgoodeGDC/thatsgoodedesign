@@ -317,7 +317,7 @@ function howBlock(id){
     ${g.pics.length?`<div class="pics">${g.pics.map(([f,cap,ok])=>`<figure><img src="img/${f}.jpg" alt="${esc(cap)}" loading="lazy"><figcaption><span class="badge ${ok?"ok":"buy"}">${ok?"Good":"Not yet"}</span>${esc(cap.replace(/^[^:]+: (.)/,(_,c)=>c.toUpperCase()))}</figcaption></figure>`).join("")}</div>`:""}`).join("")}</div>`;
 }
 const state={items:{},meals:{},plan:[],tab:"week",loc:"all",open:{},active:null,asking:null,showHold:false,ready:{items:false,meals:false}};
-const API=(location.hostname==="localhost"&&new URLSearchParams(location.search).get("api"))||"https://evan-kitchen.matt-b2b.workers.dev/emily";
+const API=(location.hostname==="localhost"&&new URLSearchParams(location.search).get("api"))||"https://emily-kitchen.matt-b2b.workers.dev";
 const TK="emilyKitchenToken", BK="emilyKitchenBase";
 let token=null, readOnly=false, pending=[], timer=null, sending=Promise.resolve(), basePref={};
 try{ token=localStorage.getItem(TK); }catch(_){}
