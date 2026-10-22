@@ -447,7 +447,7 @@ function compute(){
   const active=Object.keys(state.meals).filter(m=>!state.meals[m].hold&&m!=="eatout");
   const direct=new Set(), viaPrep=new Set();
   for(const m of active) for(const u of (state.meals[m].uses||[]).concat(...(state.meals[m].bases||[]).map(x=>x.uses||[]))) direct.add(u.id);
-  for(const id of direct){ const it=state.items[id]; if(it&&it.kind==="prep") for(const u of it.prep&&it.prep.uses||[]) viaPrep.add(u.id); }
+  for(const id of direct){ const it=state.items[id]; if(it&&it.kind==="prep"&&have(it)<=0) for(const u of it.prep&&it.prep.uses||[]) viaPrep.add(u.id); }
   const listed=new Set(shop.map(r=>r.id));
   for(const [id,it] of Object.entries(state.items)){
     if(it.kind==="prep"||listed.has(id)||have(it)>0) continue;
@@ -670,7 +670,7 @@ function shopView(c){
     rows.sort((a,b)=>a.it.name.localeCompare(b.it.name));
     for(const r of rows){
       const reasons=[...(r.why||[])].slice(0,3).join(", ");
-      h+=`<div class="item"><div class="grow"><b>${esc(r.it.name)}</b>${r.label?` · ${esc(r.label)}`:""}<div class="why">For ${esc(reasons)}</div></div>
+      h+=`<div class="item"><div class="grow"><b>${esc(r.it.name)}</b>${r.label?` · ${esc(r.label)}`:""}<div class="why">${reasons==="Ran out"||reasons==="Running low"?esc(reasons):"For "+esc(reasons)}</div></div>
         <button class="btn primary" data-act="got" data-id="${r.id}" ${readOnly?"disabled":""}>Got it</button></div>`;
       text+=`- ${r.it.name}${r.label?" ("+r.label+")":""}\n`;
     }
