@@ -102,6 +102,33 @@ form.pin input{font:inherit;font-size:40px;letter-spacing:.5em;text-align:center
 form.pin .btn{display:block;width:220px;margin:0 auto;padding:12px}
 .hint{color:var(--muted);font-size:15px;margin:4px 0 12px}
 textarea.copy{width:100%;min-height:160px;font:inherit;font-size:15px;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px;margin-top:8px}
+.nights{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:4px 0 8px}
+.night{border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;border-radius:12px;padding:8px 4px;min-height:86px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;text-align:center}
+.night .d{font-weight:700;font-size:15px}
+.night .m{font-size:13px;line-height:1.25;color:var(--muted)}
+.night.full{background:var(--accent-soft)}
+.night.full .m{color:var(--ink);font-weight:700}
+.night .b{font-size:12px;color:var(--muted)}
+.night.on{outline:3px solid var(--accent);outline-offset:1px}
+.bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:0 0 12px;font-size:16px}
+.row.top{align-items:flex-start}
+.pick{width:48px;height:48px;flex:none;border:2px solid var(--muted);background:var(--card);border-radius:12px;cursor:pointer;font:inherit;font-size:26px;font-weight:700;color:var(--accent-ink);display:flex;align-items:center;justify-content:center;padding:0}
+.pick[aria-pressed="true"]{background:var(--accent);border-color:var(--accent)}
+.meal.picked{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.meal.dim{opacity:.6}
+.when{font-size:15px;color:var(--accent);font-weight:700;margin-top:4px}
+.soon{font-size:15px;color:var(--warn);font-weight:700;margin-top:4px}
+.bases{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 2px}
+.bases button{font:inherit;font-size:15px;padding:5px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.bases button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tips{font-size:15px;color:var(--muted);margin-top:6px;display:grid;gap:3px}
+.swap{border:0;background:none;color:var(--accent);font:inherit;font-weight:700;text-decoration:underline;cursor:pointer;padding:0;text-align:left}
+.ask{margin-top:10px;padding:10px;border-radius:12px;background:var(--chip)}
+.askrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.askrow .btn{display:flex;flex-direction:column;align-items:flex-start}
+.swaps{font-size:13px;font-weight:400;opacity:.85}
+.usefirst{background:var(--warn-soft);border-color:transparent;padding:12px 14px;display:grid;gap:6px}
+@media (max-width:600px){.nights{grid-template-columns:repeat(4,1fr)}}
 @media (max-width:480px){
   form.add{grid-template-columns:1fr}
   .stat b{font-size:22px}
@@ -127,7 +154,29 @@ textarea.copy{width:100%;min-height:160px;font:inherit;font-size:15px;background
 <script>
 const LOCS=[["fridge","Fridge"],["freezer","Freezer"],["pantry","Pantry"],["counter","Counter"]];
 const SECTIONS=["Produce","Meat & Fish","Dairy & Eggs","Frozen","Bakery","Pantry","Drinks","Household"];
-const GROUPS=["Cook and eat","Cook and refrigerate","Cook and freeze"];
+const GROUPS=["Chicken","Beef and pork bowls","Fish and shrimp","Soups and noodles","Potatoes and backups"];
+const GROUP_NOTE={
+  "Chicken":"Cooked chicken from the freezer. Move the bag to the fridge the night before.",
+  "Beef and pork bowls":"One frozen cup per bowl. Pick a base.",
+  "Fish and shrimp":"Thaw fish in the fridge overnight. Shrimp thaws in 5 minutes.",
+  "Soups and noodles":"Good for using up leftover rice or pasta.",
+  "Potatoes and backups":"For nights when nothing else is ready."
+};
+const GROUND=[
+  {title:"Ground pork (blush sauce cups)",time:"10 to 12 minutes in the pan. 1 lb makes about 4 cups.",steps:[
+    "Induction burner and flat pan. Set the burner to 7. No spray needed.",
+    "Break the meat into the pan in a few big chunks. Cook without moving for 2 minutes.",
+    "Chop into smaller pieces with the spatula, flip, and cook another minute or two.",
+    "Repeat until the pieces are small and slightly browned, with no pink left (160°F).",
+    "Tip onto paper towels to drain. Keep the pan on the burner.",
+    "Mix with blush sauce, about 2 tbsp per 1/2 cup of meat. Pack 1/2 cup into each foil cup. Cool, label, freeze."],pics:[]},
+  {title:"Ground beef (Korean BBQ, marinara or plain)",time:"8 to 10 minutes in the pan. 1 lb of 93% lean makes about 4 half cups.",steps:[
+    "Cook like the pork above until no pink is left (160°F). Drain on paper towels.",
+    "Korean BBQ cups: 2 tbsp Korean BBQ sauce per 1/2 cup of meat.",
+    "Marinara cups: 2 tbsp marinara per 1/2 cup of meat.",
+    "Plain: no sauce, 1 cup per cup. Sauce goes on when you reheat.",
+    "Pack into foil cups. Cool, label the tops (KBBQ, Marinara, Plain), freeze."],pics:[]}
+];
 const HOWTO={
   thin:[
     {title:"Thin chicken breasts",time:"About 8 minutes in the grill pan, plus 5 to rest. One breast makes one bag.",steps:[
@@ -135,46 +184,66 @@ const HOWTO={
       "Spray the pan with Prime and let it heat for 1 minute.",
       "Lay in 2 or 3 breasts. Leave space between them.",
       "Cook without moving them, 4 to 5 minutes, until the white has crept almost to the top edge.",
-      "Flip. Cook 2 to 3 minutes more, until the middle is white, not pink (165°F if you have a thermometer).",
-      "Rest 5 minutes, then slice. One breast per bag. Let them cool before the fridge."],
+      "Flip. Cook 2 to 3 minutes more, until the middle is white, not pink (165°F).",
+      "Rest 5 minutes, then slice. One breast per bag. Let them cool before the freezer."],
      pics:[["thin-done","Done: white all the way through.",true]]},
-    {title:"Regular chicken breasts",time:"20 minutes in the grill pan, plus 10 to rest. One breast makes about 1½ bags.",steps:[
+    {title:"Regular chicken breasts",time:"20 minutes in the grill pan, plus 10 to rest. One breast makes 2 bags.",steps:[
       "Induction burner and grill pan. Set the burner to 7.",
       "Spray the pan with Prime and let it heat for 1 minute.",
       "Lay in the breasts with space between them.",
       "Cook without moving them, 10 minutes.",
-      "Flip and cook 7 more minutes. Cut each breast in half through the thickest part. If the middle is still pink, stand the halves cut side down and cook 3 more minutes.",
-      "Rest 10 minutes, then slice across the grain, about 1/4 inch thick. About 4 oz per bag. Let them cool before the fridge."],
+      "Flip and cook 7 more minutes. Cut each breast in half through the thickest part. If the middle is still pink, stand the halves cut side down and cook 3 more minutes (165°F).",
+      "Rest 10 minutes, then slice across the grain, about 1/4 inch thick. One half breast per bag. Let them cool before the freezer."],
      pics:[["breast-halved","Cut in half at minute 17. Cut side down to finish.",true],["breast-not-yet","Not done yet: pink and shiny inside. Keep cooking.",false]]}
   ],
   tender:[
-    {title:"Chicken tenders",time:"10 minutes in the grill pan, plus 5 to rest. Two tenders make one bag.",steps:[
+    {title:"Chicken tenders",time:"10 minutes in the grill pan, plus 5 to rest. Three tenders make one bag.",steps:[
       "Induction burner and grill pan. Set the burner to 7.",
       "Spray the pan with Prime and let it heat for 1 minute.",
       "Shake Old Bay on the tenders. Lay them in with space between them.",
       "Cook without moving them, about 5 minutes, until the white has crept a little past halfway up the sides.",
-      "Flip. Cook about 5 minutes more, until the middle is white, not pink (165°F if you have a thermometer).",
-      "Rest 5 minutes. Two tenders per bag. Let them cool before the fridge."],
+      "Flip. Cook about 5 minutes more, until the middle is white, not pink (165°F).",
+      "Rest 5 minutes. Three tenders per bag. Let them cool before the freezer."],
      pics:[["tenders-not-yet","Not done yet: pink still showing at the sides.",false],["tenders-done","Done: white all the way through.",true]]}
-  ]
+  ],
+  rice:[{title:"Rice in the rice cooker",time:"About 40 minutes, 5 of them hands-on. Makes 3 portions.",steps:[
+    "Measure 1 cup jasmine rice with a regular measuring cup, not the rice cooker's cup.",
+    "Rinse it in a bowl of cold water and pour off the water. Repeat 2 or 3 times.",
+    "Put the rice in the cooker with 1 1/4 cups water.",
+    "Close the lid and press cook. Leave it 10 minutes after it clicks to warm.",
+    "Fluff with a fork and split into 3 glass containers.",
+    "Cool up to an hour, then into the fridge. Eat within 3 to 4 days."],pics:[]}],
+  pastap:[{title:"Short pasta",time:"About 15 minutes: 7 to boil the water, 8 to cook. Makes 3 portions.",steps:[
+    "Induction burner and saucepan. Fill the pan two-thirds with water and a pinch of salt. Boil on 8.",
+    "Add 6 oz dry pasta: penne, rotini or any short shape.",
+    "Boil for the time on the box, stirring now and then.",
+    "Drain, then toss with a few drops of oil so it doesn't stick.",
+    "Split into 3 glass containers. Cool, then into the fridge. Eat within 3 to 4 days."],pics:[]}],
+  sausagecup:GROUND, kbeef:GROUND, marinaracup:GROUND, pbeef:GROUND,
+  tpeanuttin:[{title:"Thai peanut chicken tins",time:"5 minutes, from cooked chicken. One half breast makes one tin.",steps:[
+    "Slice a cooked half breast (see Cooked sliced chicken).",
+    "Toss with 2 tbsp Thai peanut sauce.",
+    "Pack into a foil loaf tin, label it, and freeze."],pics:[]}],
+  soupbase:[{title:"Chicken soup base",time:"About 20 minutes. Makes 2 tins.",steps:[
+    "Induction burner and saucepan. Spray with Prime.",
+    "Add 1 cup carrots, 1 container diced celery and 1 container diced onion.",
+    "Cook slowly on 3 or 4, stirring now and then, until soft, about 15 minutes.",
+    "Stir in 1 cooked chicken breast, shredded with two forks.",
+    "Split between 2 foil loaf tins. Cool, label \"Soup\", and freeze."],pics:[]}]
 };
-function howBtn(id){ return HOWTO[id]?`<button class="btn small" data-act="how" data-id="${id}" aria-expanded="${!!state.open["how:"+id]}">${state.open["how:"+id]?"Hide steps":"How to cook"}</button>`:""; }
+function howBtn(id){ return HOWTO[id]?`<button class="btn small" data-act="how" data-id="${id}" aria-expanded="${!!state.open["how:"+id]}">${state.open["how:"+id]?"Hide steps":"How to make it"}</button>`:""; }
 function howBlock(id){
   if(!HOWTO[id]||!state.open["how:"+id]) return "";
   return `<div class="how">${HOWTO[id].map(g=>`<h3>${esc(g.title)}</h3><p class="time">${esc(g.time)}</p>
     <ol>${g.steps.map(s=>`<li>${esc(s)}</li>`).join("")}</ol>
-    <div class="pics">${g.pics.map(([f,cap,ok])=>`<figure><img src="img/${f}.jpg" alt="${esc(cap)}" loading="lazy"><figcaption><span class="badge ${ok?"ok":"buy"}">${ok?"Good":"Not yet"}</span>${esc(cap.replace(/^[^:]+: (.)/,(_,c)=>c.toUpperCase()))}</figcaption></figure>`).join("")}</div>`).join("")}</div>`;
+    ${g.pics.length?`<div class="pics">${g.pics.map(([f,cap,ok])=>`<figure><img src="img/${f}.jpg" alt="${esc(cap)}" loading="lazy"><figcaption><span class="badge ${ok?"ok":"buy"}">${ok?"Good":"Not yet"}</span>${esc(cap.replace(/^[^:]+: (.)/,(_,c)=>c.toUpperCase()))}</figcaption></figure>`).join("")}</div>`:""}`).join("")}</div>`;
 }
-const GROUP_NOTE={
-  "Cook and eat":"Cook it and eat it the same day.",
-  "Cook and refrigerate":"Made on prep day. Keeps 3 to 4 days in the fridge.",
-  "Cook and freeze":"Made on prep day. Keeps up to 2 months frozen. Reheat from frozen."
-};
-const state={items:{},meals:{},picks:{},tab:"week",loc:"all",open:{},ready:{items:false,meals:false,plan:false}};
+const state={items:{},meals:{},plan:[],tab:"week",loc:"all",open:{},active:null,asking:null,showHold:false,ready:{items:false,meals:false}};
 const API=(location.hostname==="localhost"&&new URLSearchParams(location.search).get("api"))||"https://evan-kitchen.matt-b2b.workers.dev";
-const TK="evanKitchenToken";
-let token=null, readOnly=false, pending=[], timer=null, sending=Promise.resolve();
+const TK="evanKitchenToken", BK="evanKitchenBase";
+let token=null, readOnly=false, pending=[], timer=null, sending=Promise.resolve(), basePref={};
 try{ token=localStorage.getItem(TK); }catch(_){}
+try{ basePref=JSON.parse(localStorage.getItem(BK)||"{}")||{}; }catch(_){}
 async function api(path,opts={}){
   const r=await fetch(API+path,{...opts,headers:{"Content-Type":"application/json",...(token?{Authorization:"Bearer "+token}:{})}});
   const j=await r.json().catch(()=>({}));
@@ -195,8 +264,8 @@ function flush(){
 async function load(){
   try{
     const s=await api("/state");
-    state.items=s.items||{}; state.meals=s.meals||{}; state.picks=s.picks||{};
-    state.ready.items=state.ready.meals=state.ready.plan=true; render();
+    state.items=s.items||{}; state.meals=s.meals||{}; state.plan=Array.isArray(s.plan)?s.plan:[];
+    state.ready.items=state.ready.meals=true; render();
   }catch(e){ if(e.auth) signOut(); else { document.getElementById("view").innerHTML=`<div class="empty">Can't reach the kitchen list right now. Check your connection and reload.</div>`; } }
 }
 
@@ -204,8 +273,71 @@ function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const fmt=n=>Number.isInteger(n)?String(n):String(Math.round(n*10)/10);
 
-// ---------- planning maths ----------
+// ---------- dates ----------
+const iso=d=>new Date(d.getTime()-d.getTimezoneOffset()*6e4).toISOString().slice(0,10);
+const today=()=>iso(new Date());
+const dayOf=k=>new Date(k+"T12:00:00");
+const daysBetween=(a,b)=>Math.round((dayOf(b)-dayOf(a))/864e5);
+const weekday=(k,long)=>dayOf(k).toLocaleDateString("en-US",{weekday:long?"long":"short"});
+function nights(){
+  const d=new Date(), out=[];
+  for(let i=0;i<7;i++){const x=new Date(d.getFullYear(),d.getMonth(),d.getDate()+i); out.push({key:iso(x),label:i===0?"Tonight":weekday(iso(x)),date:x.getDate()});}
+  return out;
+}
+function nightName(k){ return k===today()?"tonight":weekday(k,true); }
+
+// ---------- meals and amounts ----------
 function have(it){return (it&&Number(it.qty))||0;}
+function daysLeft(it){ if(!it||!it.keeps||!it.since||have(it)<=0) return null; return it.keeps-daysBetween(it.since,today()); }
+function isOff(it){ const l=daysLeft(it); return l!=null&&l<0; }
+function baseOf(mid){ const m=state.meals[mid]; if(!m||!m.bases) return 0; return Math.min(Number(basePref[mid])||0,m.bases.length-1); }
+function usesFor(mid,b){ const m=state.meals[mid]; if(!m) return []; const extra=(m.bases&&m.bases[b]&&m.bases[b].uses)||[]; return (m.uses||[]).concat(extra); }
+function infoFor(mid,b){ const m=state.meals[mid], x=(m.bases&&m.bases[b])||{}; return {kcal:x.kcal||m.kcal,protein:x.protein||m.protein,minutes:x.minutes||m.minutes,label:x.label,step:x.step}; }
+function planNow(){ const t=today(), ks=nights().map(n=>n.key); return state.plan.filter(p=>p.night>=t&&ks.includes(p.night)&&state.meals[p.meal]); }
+function reserved(skip){
+  const r={};
+  for(const p of planNow()){ if(p===skip) continue; for(const u of usesFor(p.meal,p.base)) r[u.id]=(r[u.id]||0)+(u.n||1); }
+  return r;
+}
+// What one serving of a meal needs, after servings already held by other planned nights.
+function status(mid,b,skip){
+  const res=reserved(skip), prep=[], buy=[], off=[];
+  for(const u of usesFor(mid,b)){
+    const it=state.items[u.id]; if(!it) continue;
+    const n=u.n||1, free=have(it)-(res[u.id]||0);
+    if(isOff(it)){ off.push(it); continue; }
+    if(it.kind==="staple"){ if(have(it)<=0) buy.push(it); continue; }
+    if(free>=n-1e-9) continue;
+    if(it.kind==="prep"){
+      const raw=(it.prep&&it.prep.uses||[]).map(p=>state.items[p.id]).filter(r=>r&&have(r)<=0);
+      if(raw.length) buy.push(...raw); else prep.push(it);
+    } else buy.push(it);
+  }
+  const base=infoFor(mid,b).minutes||0, extra=prep.reduce((a,it)=>a+(it.mins||0),0);
+  const unsure=!!off.length, cls=buy.length||unsure?"buy":prep.length?"prep":"ok";
+  return {cls,prep,buy,off,minutes:base,total:base+extra,ok:cls==="ok"};
+}
+function statusLines(s,mid,b){
+  const lines=[];
+  if(s.off.length) lines.push(`Check ${s.off.map(i=>esc(i.name.toLowerCase())).join(", ")}: may be past its best.`);
+  if(s.buy.length) lines.push(`Need to buy: ${[...new Set(s.buy.map(i=>i.name))].map(esc).join(", ")}.`);
+  for(const it of s.prep) lines.push(it.mins?`Make ${esc(it.name.toLowerCase())} first: about ${it.mins} minutes.`:`Make ${esc(it.name.toLowerCase())} on prep day first.`);
+  if(!s.buy.length&&!s.off.length&&s.prep.length&&s.prep.every(i=>i.mins)) lines.push(`Ready in about ${s.total} minutes.`);
+  const m=state.meals[mid];
+  if(!s.ok&&m.bases){
+    let best=null;
+    m.bases.forEach((x,j)=>{ if(j===b) return; const t=status(mid,j); if(t.ok&&(!best||t.total<best.t.total)) best={j,t,x}; });
+    if(best) lines.push(`<button class="swap" data-act="base" data-id="${mid}" data-b="${best.j}">Or swap to ${esc(best.x.label.toLowerCase())}: ready in ${best.t.total} minutes</button>`);
+  }
+  return lines;
+}
+function useSoon(){
+  const rows=[];
+  for(const [id,it] of Object.entries(state.items)){ const l=daysLeft(it); if(l!=null&&l<=2) rows.push({id,it,l}); }
+  return rows.sort((a,b)=>a.l-b.l);
+}
+function usesItem(mid,id){ const m=state.meals[mid]; return (m.uses||[]).some(u=>u.id===id)||(m.bases||[]).some(x=>(x.uses||[]).some(u=>u.id===id)); }
+
 function compute(){
   const need={}, why={}, staples=new Set();
   const add=(id,n,reason)=>{
@@ -213,10 +345,7 @@ function compute(){
     (why[id]=why[id]||new Set()).add(reason);
     if(it.kind==="staple") staples.add(id); else need[id]=(need[id]||0)+n;
   };
-  for(const [mid,count] of Object.entries(state.picks)){
-    const m=state.meals[mid]; if(!m||!count) continue;
-    for(const u of m.uses||[]) add(u.id,(u.n||1)*count,m.name);
-  }
+  for(const p of planNow()){ const m=state.meals[p.meal]; for(const u of usesFor(p.meal,p.base)) add(u.id,u.n||1,m.name); }
   const batches={};
   const prepItems=Object.entries(state.items).filter(([,it])=>it.kind==="prep"&&it.prep&&it.prep.makes>0);
   for(let pass=0;pass<6;pass++){
@@ -250,37 +379,56 @@ function compute(){
   const prep=Object.entries(batches).map(([id,b])=>({id,it:state.items[id],batches:b}));
   return {shop,prep,need};
 }
-function readiness(m){
-  let prep=false,buy=false; const miss=new Set();
-  for(const u of m.uses||[]){
-    const it=state.items[u.id]; if(!it) continue;
-    const n=u.n||1;
-    if(it.kind==="staple"){ if(have(it)<=0){buy=true;miss.add(u.id);} }
-    else if(have(it)<n){
-      miss.add(u.id);
-      if(it.kind==="prep"){
-        prep=true;
-        for(const p of it.prep?.uses||[]){const r=state.items[p.id]; if(r&&have(r)<=0) buy=true;}
-      } else buy=true;
-    }
-  }
-  return {cls:buy?"buy":prep?"prep":"ok",text:buy?"Needs shopping":prep?"Needs prep":"Ready now",miss};
-}
 
 // ---------- actions ----------
-function setPick(mid,delta){
+function savePlan(plan){
+  state.plan=plan.slice().sort((a,b)=>a.night<b.night?-1:1);
+  render(); queueOp({t:"plan",plan:state.plan});
+}
+function pick(mid){
   if(readOnly) return;
-  const picks={...state.picks}; const n=Math.max(0,(picks[mid]||0)+delta);
-  if(n) picks[mid]=n; else delete picks[mid];
-  state.picks=picks; render();
-  queueOp({t:"picks",picks});
+  const m=state.meals[mid], ks=nights().map(n=>n.key), b=baseOf(mid);
+  let plan=planNow();
+  if(state.active){
+    const k=state.active, here=plan.find(p=>p.night===k);
+    if(here&&here.meal===mid){ plan=plan.filter(p=>p!==here); savePlan(plan); toast(`${m.name} is off ${nightName(k)}.`); return; }
+    plan=plan.filter(p=>p.night!==k); plan.push({night:k,meal:mid,base:b});
+    state.active=ks.find(x=>x>k&&!plan.some(p=>p.night===x))||null;
+    savePlan(plan); toast(`${m.name} is on for ${nightName(k)}.`); return;
+  }
+  const mine=plan.filter(p=>p.meal===mid);
+  if(mine.length){
+    const last=mine.sort((a,c)=>a.night<c.night?1:-1)[0];
+    state.asking=null;
+    savePlan(plan.filter(p=>p!==last)); toast(`${m.name} is off ${nightName(last.night)}.`); return;
+  }
+  state.asking=state.asking===mid?null:mid; render();
+}
+function pickFor(mid,k){
+  if(readOnly) return;
+  const m=state.meals[mid], b=baseOf(mid);
+  const plan=planNow().filter(p=>p.night!==k); plan.push({night:k,meal:mid,base:b});
+  state.asking=null; savePlan(plan); toast(`${m.name} is on for ${nightName(k)}.`);
+}
+function whenChooser(mid){
+  const plan=planNow(), ns=nights();
+  const btn=(n,big)=>{const p=plan.find(x=>x.night===n.key), other=p&&state.meals[p.meal];
+    return `<button class="${big?"btn primary":"btn"}" data-act="when" data-id="${mid}" data-night="${n.key}">${n.label==="Tonight"?"Tonight":big?"Tomorrow":weekday(n.key)}${other?`<span class="swaps">swaps out ${esc(other.name)}</span>`:""}</button>`;};
+  return `<div class="ask"><b>When?</b><div class="askrow">${btn(ns[0],true)}${btn(ns[1],true)}</div><div class="askrow">${ns.slice(2).map(n=>btn(n,false)).join("")}<button class="btn" data-act="askcancel">Not now</button></div></div>`;
+}
+function setBase(mid,b){
+  basePref[mid]=b; try{localStorage.setItem(BK,JSON.stringify(basePref));}catch(_){}
+  const plan=planNow(), mine=plan.filter(p=>p.meal===mid);
+  if(mine.length&&!readOnly){ mine.forEach(p=>p.base=b); savePlan(plan); } else render();
 }
 function setQty(id,qty){
   if(readOnly) return;
   const it=state.items[id]; if(!it) return;
   qty=Math.max(0,Math.round(qty*10)/10);
-  state.items[id]={...it,qty}; render();
-  queueOp({t:"item",id,patch:{qty}});
+  const patch={qty};
+  if(it.keeps&&(it.kind==="prep")){ if(have(it)<=0&&qty>0) patch.since=today(); if(qty<=0) patch.since=""; }
+  state.items[id]={...it,...patch}; if(patch.since==="") delete state.items[id].since;
+  render(); queueOp({t:"item",id,patch});
 }
 function setField(id,patch){
   if(readOnly) return;
@@ -289,8 +437,10 @@ function setField(id,patch){
 }
 function ateIt(mid){
   const m=state.meals[mid]; if(!m||readOnly) return;
-  for(const u of m.uses||[]){const it=state.items[u.id]; if(it&&it.kind!=="staple") setQty(u.id,have(it)-(u.n||1));}
-  if(state.picks[mid]) setPick(mid,-1);
+  const plan=planNow(), entry=plan.filter(p=>p.meal===mid).sort((a,b)=>a.night<b.night?-1:1)[0];
+  const b=entry?entry.base:baseOf(mid);
+  for(const u of usesFor(mid,b)){const it=state.items[u.id]; if(it&&it.kind!=="staple") setQty(u.id,have(it)-(u.n||1));}
+  if(entry) savePlan(plan.filter(p=>p!==entry));
   toast("Enjoy. "+m.name+" is crossed off.");
 }
 function madeBatch(id){
@@ -321,42 +471,84 @@ function render(){
   document.querySelectorAll("nav button").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===state.tab));
   v.innerHTML=state.tab==="week"?weekView(c):state.tab==="shop"?shopView(c):kitchenView();
 }
+function nightsView(){
+  const plan=planNow();
+  let h=`<div class="nights">${nights().map(nt=>{
+    const p=plan.find(x=>x.night===nt.key), m=p&&state.meals[p.meal];
+    const lab=m&&m.bases&&m.bases[p.base]?m.bases[p.base].label:"";
+    return `<button class="night${state.active===nt.key?" on":""}${m?" full":""}" data-act="night" data-night="${nt.key}" aria-pressed="${state.active===nt.key}"><span class="d">${nt.label}</span><span class="m">${m?esc(m.name):"Open"}</span>${lab?`<span class="b">${esc(lab)}</span>`:""}</button>`;
+  }).join("")}</div>`;
+  if(state.active){
+    const p=plan.find(x=>x.night===state.active);
+    h+=`<div class="bar"><b>Picking for ${nightName(state.active)}.</b> Tap a meal below.${p?` <button class="btn small" data-act="nightclear">Clear ${weekday(state.active)}</button>`:""} <button class="btn small" data-act="nightdone">Done</button></div>`;
+  } else h+=`<p class="hint">Tap the box on a meal to pick it, then choose tonight, tomorrow or another day. Or tap a night first, then a meal.</p>`;
+  return h;
+}
+function mealCard(id,m){
+  const b=baseOf(id), info=infoFor(id,b), mine=planNow().filter(p=>p.meal===id);
+  const s=status(id,b,mine[0]), picked=mine.length>0;
+  const soon=useSoon().filter(r=>usesItem(id,r.id)).map(r=>r.it.name.toLowerCase());
+  const meta=[`<span class="badge ${s.cls}">${s.ok?"Ready":s.cls==="prep"?"Needs prep":s.off.length&&!s.buy.length?"Check first":"Needs shopping"}</span>`,info.minutes?info.minutes+" min":"",info.kcal?"about "+info.kcal+" cal":"",info.protein?info.protein+" g protein":""].filter(Boolean).join(" · ");
+  let h=`<div class="card meal${s.cls==="buy"&&!picked?" dim":""}${picked?" picked":""}" id="meal-${id}"><div class="row top">
+    <button class="pick" data-act="pick" data-id="${id}" aria-pressed="${picked}" aria-label="${picked?"Unpick":"Pick"} ${esc(m.name)}">${picked?"✓":""}</button>
+    <div class="grow"><button class="name" data-act="open" data-id="${id}" aria-expanded="${!!state.open[id]}">${esc(m.name)}</button>
+      <div class="meta">${meta}</div>
+      ${picked?`<div class="when">Picked for ${mine.map(p=>nightName(p.night)).join(", ")}</div>`:""}
+      ${soon.length?`<div class="soon">Uses up ${esc(soon.join(", "))}</div>`:""}
+      ${m.bases?`<div class="bases" role="group" aria-label="Base">${m.bases.map((x,j)=>`<button data-act="base" data-id="${id}" data-b="${j}" aria-pressed="${j===b}">${esc(x.label)}</button>`).join("")}</div>`:""}
+      ${s.ok?"":`<div class="tips">${statusLines(s,id,b).map(l=>`<div>${l}</div>`).join("")}</div>`}
+      ${state.asking===id?whenChooser(id):""}
+    </div></div>`;
+  if(state.open[id]){
+    const res=reserved(mine[0]);
+    h+=`<div class="detail"><div class="uses">${usesFor(id,b).map(u=>{const it=state.items[u.id]; if(!it) return ""; const short=it.kind!=="staple"&&have(it)-(res[u.id]||0)<(u.n||1); return `<span class="${short||isOff(it)||(it.kind==="staple"&&have(it)<=0)?"miss":""}">${esc(it.name)}${it.kind!=="staple"&&(u.n||1)!==1?" ×"+fmt(u.n):""}</span>`;}).join("")}</div>
+      ${info.step?`<p><b>${esc(info.label)}:</b> ${esc(info.step)}</p>`:""}
+      ${(m.steps||[]).length?`<ol>${m.steps.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>`:""}
+      ${m.note?`<p class="why">${esc(m.note)}</p>`:""}
+      <button class="btn primary" data-act="ate" data-id="${id}" ${readOnly?"disabled":""}>I made this</button>
+      <span class="why"> takes the servings out of the kitchen list</span></div>`;
+  }
+  return h+`</div>`;
+}
 function weekView(c){
   const meals=Object.entries(state.meals);
   if(!meals.length) return `<div class="empty">No meals yet.</div>`;
-  const picked=Object.values(state.picks).reduce((a,b)=>a+b,0);
+  const planned=planNow().length;
   let h=`<div class="summary">
-    <div class="stat"><b>${picked}</b><span>meals picked</span></div>
+    <div class="stat"><b>${planned} of 7</b><span>nights planned</span></div>
     <div class="stat"><b>${c.prep.length}</b><span>things to prep</span></div>
     <div class="stat"><b>${c.shop.length}</b><span>things to buy</span></div></div>`;
-  if(picked) h+=`<button class="btn" data-act="clear">Start a new week</button>`;
+  h+=nightsView();
+  if(planned) h+=`<button class="btn" data-act="clear">Clear the week</button>`;
+  const soon=useSoon();
+  if(soon.length){
+    h+=`<h2>Use these first</h2><div class="card usefirst">`;
+    for(const r of soon){
+      const when=r.l<0?"may be past its best":r.l===0?"use today":r.l===1?"use by tomorrow":"use by "+weekday(iso(new Date(Date.now()+r.l*864e5)),true);
+      const opts=meals.filter(([id,m])=>!m.hold&&usesItem(id,r.id)).slice(0,4);
+      h+=`<div class="sooner"><b>${esc(r.it.name)}</b>: ${when}.${opts.length?` Try ${opts.map(([id,m])=>`<button class="swap" data-act="pick" data-id="${id}">${esc(m.name)}</button>`).join(", ")}.`:""}</div>`;
+    }
+    h+=`</div>`;
+  }
   if(c.prep.length){
-    h+=`<h2>Prep first <small>make these before the week starts</small></h2><div class="card list">`;
+    h+=`<h2>Prep first <small>for the meals you picked</small></h2><div class="card list">`;
     for(const p of c.prep){
       const uses=(p.it.prep.uses||[]).map(u=>state.items[u.id]?.name).filter(Boolean).join(", ");
-      h+=`<div class="item"><div class="grow"><div><b>${esc(p.it.name)}</b> · ${p.batches} batch${p.batches>1?"es":""} (makes ${p.it.prep.makes*p.batches})</div><div class="why">Uses ${esc(uses)}</div>${howBtn(p.id)}</div>
+      h+=`<div class="item"><div class="grow"><div><b>${esc(p.it.name)}</b> · ${p.batches} batch${p.batches>1?"es":""} (makes ${p.it.prep.makes*p.batches})${p.it.mins?` · about ${p.it.mins} min`:""}</div><div class="why">Uses ${esc(uses)}</div>${howBtn(p.id)}</div>
         <button class="btn primary" data-act="made" data-id="${p.id}" ${readOnly?"disabled":""}>Made it</button></div>${howBlock(p.id)}`;
     }
     h+=`</div>`;
   }
   for(const g of GROUPS.concat(["Other"])){
-    const list=meals.filter(([,m])=>(GROUPS.includes(m.group)?m.group:"Other")===g).sort((a,b)=>(a[1].order||0)-(b[1].order||0));
+    const list=meals.filter(([,m])=>!m.hold&&(GROUPS.includes(m.group)?m.group:"Other")===g).sort((a,b)=>(a[1].order||0)-(b[1].order||0));
     if(!list.length) continue;
     h+=`<h2>${g} <small>${esc(GROUP_NOTE[g]||"")}</small></h2>`;
-    for(const [id,m] of list){
-      const r=readiness(m), n=state.picks[id]||0, open=state.open[id];
-      h+=`<div class="card meal"><div class="row"><div class="grow">
-        <button class="name" data-act="open" data-id="${id}" aria-expanded="${!!open}">${esc(m.name)}</button>
-        <div class="meta"><span class="badge ${r.cls}">${r.text}</span>${m.minutes?m.minutes+" min":""}</div></div>
-        <div class="step"><button data-act="minus" data-id="${id}" aria-label="One less" ${readOnly||!n?"disabled":""}>−</button><output>${n}</output><button data-act="plus" data-id="${id}" aria-label="One more" ${readOnly?"disabled":""}>+</button></div></div>`;
-      if(open){
-        h+=`<div class="detail"><div class="uses">${(m.uses||[]).map(u=>{const it=state.items[u.id];return it?`<span class="${r.miss.has(u.id)?"miss":""}">${esc(it.name)}${it.kind!=="staple"&&(u.n||1)!==1?" ×"+fmt(u.n):""}</span>`:""}).join("")}</div>
-        ${(m.steps||[]).length?`<ol>${m.steps.map(s=>`<li>${esc(s)}</li>`).join("")}</ol>`:""}
-        <button class="btn primary" data-act="ate" data-id="${id}" ${readOnly?"disabled":""}>I made this</button>
-        <span class="why"> takes the portions out of the kitchen list</span></div>`;
-      }
-      h+=`</div>`;
-    }
+    for(const [id,m] of list) h+=mealCard(id,m);
+  }
+  const held=meals.filter(([,m])=>m.hold);
+  if(held.length){
+    h+=`<h2>On hold <small>need a prep day first</small></h2><button class="btn" data-act="hold">${state.showHold?"Hide":"Show"} ${held.length} meals on hold</button>`;
+    if(state.showHold) for(const [id,m] of held) h+=mealCard(id,m);
   }
   return h;
 }
@@ -374,7 +566,7 @@ function shopView(c){
     rows.sort((a,b)=>a.it.name.localeCompare(b.it.name));
     for(const r of rows){
       const reasons=[...(r.why||[])].slice(0,3).join(", ");
-      h+=`<div class="item"><div class="grow"><b>${esc(r.it.name)}</b>${r.label?` · ${esc(r.label)}`:""}${r.it.note?`<div class="why">${esc(r.it.note)}</div>`:""}<div class="why">For ${esc(reasons)}</div></div>
+      h+=`<div class="item"><div class="grow"><b>${esc(r.it.name)}</b>${r.label?` · ${esc(r.label)}`:""}<div class="why">For ${esc(reasons)}</div></div>
         <button class="btn primary" data-act="got" data-id="${r.id}" ${readOnly?"disabled":""}>Got it</button></div>`;
       text+=`- ${r.it.name}${r.label?" ("+r.label+")":""}\n`;
     }
@@ -384,16 +576,18 @@ function shopView(c){
   return h;
 }
 function kitchenView(){
-  const items=Object.entries(state.items);
+  const items=Object.entries(state.items), res=reserved();
   let h=`<div class="chips">${[["all","Everything"]].concat(LOCS).map(([k,l])=>`<button data-act="loc" data-loc="${k}" aria-pressed="${state.loc===k}">${l}</button>`).join("")}</div>
-  <p class="hint">Use − and + for portions you count. For everything else, tap to switch between <b>Have</b> and <b>Out</b>, and mark <b>Low</b> to add it to the list.</p>`;
+  <p class="hint">Use − and + for servings you count. For everything else, tap to switch between <b>Have</b> and <b>Out</b>, and mark <b>Low</b> to add it to the list.</p>`;
   for(const [k,l] of LOCS){
     if(state.loc!=="all"&&state.loc!==k) continue;
     const list=items.filter(([,it])=>it.loc===k).sort((a,b)=>(a[1].kind==="prep"?0:1)-(b[1].kind==="prep"?0:1)||a[1].name.localeCompare(b[1].name));
     if(!list.length) continue;
     h+=`<h2>${l} <small>${list.length} items</small></h2><div class="card list">`;
     for(const [id,it] of list){
-      h+=`<div class="item"><div class="grow"><b>${esc(it.name)}</b><div class="why">${it.kind==="prep"?"Made at home":esc(it.section||"")}${it.kind!=="staple"&&it.unit?" · "+esc(it.unit):""}</div>${howBtn(id)}</div>`;
+      const left=daysLeft(it), held=res[id]||0;
+      const sub=[it.kind==="prep"?"Made at home":esc(it.section||""), it.kind!=="staple"&&it.unit?esc(it.unit):"", held&&it.kind!=="staple"?`${fmt(held)} held for meals picked`:"", left!=null?(left<0?"may be past its best":left===0?"use today":`use within ${left} day${left>1?"s":""}`):""].filter(Boolean).join(" · ");
+      h+=`<div class="item"><div class="grow"><b>${esc(it.name)}</b><div class="why">${sub}</div>${it.note?`<div class="why">${esc(it.note)}</div>`:""}${howBtn(id)}</div>`;
       if(it.kind==="staple"){
         h+=`<button class="toggle ${have(it)>0?"on":"out"}" data-act="have" data-id="${id}" ${readOnly?"disabled":""}>${have(it)>0?"Have":"Out"}</button>`;
       }else{
@@ -411,9 +605,10 @@ function kitchenView(){
       <label>Store section<select name="section">${SECTIONS.map(s=>`<option>${s}</option>`).join("")}</select></label>
       <label>Kind<select name="kind"><option value="staple">Have or out</option><option value="count">Count it</option></select></label>
       <label>Count in<input name="unit" maxlength="20" placeholder="e.g. bags"></label>
+      <label>How many<input name="qty" type="number" min="0" step="0.5" value="1"></label>
       <button class="btn primary full" type="submit">Add to kitchen</button></form>`;
   }
-  h+=`<h2>Export</h2><p class="hint">Saves the meals, kitchen list and this week's picks as one file, for another app or a backup.</p><button class="btn" data-act="export">Save a copy</button> <button class="btn" data-act="signout">Lock this device</button>`;
+  h+=`<h2>Export</h2><p class="hint">Saves the meals, kitchen list and this week's plan as one file, for another app or a backup.</p><button class="btn" data-act="export">Save a copy</button> <button class="btn" data-act="signout">Lock this device</button>`;
   return h;
 }
 
@@ -424,11 +619,17 @@ document.addEventListener("click",e=>{
   const id=t.dataset.id, a=t.dataset.act;
   if(a==="open"){state.open[id]=!state.open[id];render();}
   else if(a==="how"){state.open["how:"+id]=!state.open["how:"+id];render();}
-  else if(a==="plus") setPick(id,1);
-  else if(a==="minus") setPick(id,-1);
+  else if(a==="pick") pick(id);
+  else if(a==="when") pickFor(id,t.dataset.night);
+  else if(a==="askcancel"){state.asking=null;render();}
+  else if(a==="base") setBase(id,Number(t.dataset.b)||0);
+  else if(a==="night"){const k=t.dataset.night; state.active=state.active===k?null:k; render();}
+  else if(a==="nightclear"){ if(readOnly||!state.active) return; const k=state.active; savePlan(planNow().filter(p=>p.night!==k)); }
+  else if(a==="nightdone"){state.active=null;render();}
+  else if(a==="hold"){state.showHold=!state.showHold;render();}
   else if(a==="ate") ateIt(id);
   else if(a==="made") madeBatch(id);
-  else if(a==="clear"){ if(readOnly) return; state.picks={}; render(); queueOp({t:"picks",picks:{}}); }
+  else if(a==="clear"){ if(readOnly) return; state.active=null; savePlan([]); }
   else if(a==="got"){const row=compute().shop.find(r=>r.id===id); if(row) gotIt(row);}
   else if(a==="loc"){state.loc=t.dataset.loc;render();}
   else if(a==="qplus") setQty(id,have(state.items[id])+1);
@@ -436,7 +637,7 @@ document.addEventListener("click",e=>{
   else if(a==="have") setField(id,{qty:have(state.items[id])>0?0:1,low:false});
   else if(a==="low") setField(id,{low:!state.items[id].low});
   else if(a==="export"){
-    const data=JSON.stringify({exported:new Date().toISOString(),meals:state.meals,items:state.items,picks:state.picks},null,2);
+    const data=JSON.stringify({exported:new Date().toISOString(),meals:state.meals,items:state.items,plan:state.plan},null,2);
     const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([data],{type:"application/json"})); a.download="evans-kitchen.json"; document.body.appendChild(a); a.click(); a.remove(); toast("Saved.");
   }
   else if(a==="signout") signOut();
@@ -467,7 +668,8 @@ document.addEventListener("submit",async e=>{
   const f=new FormData(e.target), name=String(f.get("name")||"").trim(); if(!name) return;
   let id=name.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,40)||"item";
   while(state.items[id]) id+="-x";
-  const body={name,loc:f.get("loc"),section:f.get("section"),kind:f.get("kind"),qty:1,unit:String(f.get("unit")||""),low:false};
+  const qty=Math.max(0,Number(f.get("qty"))||0);
+  const body={name,loc:f.get("loc"),section:f.get("section"),kind:f.get("kind"),qty:f.get("kind")==="staple"?1:qty,unit:String(f.get("unit")||""),low:false};
   state.items[id]=body; render();
   queueOp({t:"itemAdd",id,body}); toast(name+" added.");
 });
