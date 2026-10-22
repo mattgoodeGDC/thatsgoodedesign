@@ -299,7 +299,7 @@ function weekView(c){
       const r=readiness(m), n=state.picks[id]||0, open=state.open[id];
       h+=`<div class="card meal"><div class="row"><div class="grow">
         <button class="name" data-act="open" data-id="${id}" aria-expanded="${!!open}">${esc(m.name)}</button>
-        <div class="meta"><span class="badge ${r.cls}">${r.text}</span>${m.minutes?m.minutes+" min":""}</div></div>
+        <div class="meta"><span class="badge ${r.cls}">${r.text}</span>${[m.minutes?m.minutes+" min":"",m.kcal?"about "+m.kcal+" cal":"",m.protein?m.protein+" g protein":""].filter(Boolean).join(" · ")}</div></div>
         <div class="step"><button data-act="minus" data-id="${id}" aria-label="One less" ${readOnly||!n?"disabled":""}>−</button><output>${n}</output><button data-act="plus" data-id="${id}" aria-label="One more" ${readOnly?"disabled":""}>+</button></div></div>`;
       if(open){
         h+=`<div class="detail"><div class="uses">${(m.uses||[]).map(u=>{const it=state.items[u.id];return it?`<span class="${r.miss.has(u.id)?"miss":""}">${esc(it.name)}${it.kind!=="staple"&&(u.n||1)!==1?" ×"+fmt(u.n):""}</span>`:""}).join("")}</div>
