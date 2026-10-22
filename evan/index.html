@@ -379,7 +379,9 @@ function useSoon(){
 // A measured amount for one ingredient line, from the item's serving unit.
 function amount(it,n){
   if(it.kind==="staple") return "";
-  const u=it.unit||"", times=(q,word)=>{const x=Number(q); return Number.isFinite(x)&&String(x)===q?`${fmt(x*n)} ${word}${x*n>1&&!/s$/.test(word)?"s":""}`:(n===1?`${q} ${word}`:`${fmt(n)} × ${q} ${word}`);};
+  const frac=v=>({0.25:"1/4",0.5:"1/2",0.75:"3/4"}[Math.round(v*100)/100])||fmt(v);
+  const one=w=>w.replace(/oes$/,"o").replace(/ies$/,"y").replace(/s$/,"");
+  const u=it.unit||"", times=(q,word)=>{const x=Number(q); return Number.isFinite(x)&&String(x)===q?`${frac(x*n)} ${word}${x*n>1&&word==="cup"?"s":""}`:(n===1?`${q} ${word}`:`${frac(n)} × ${q} ${word}`);};
   let m=u.match(/^([\d\/]+)[- ](cup|tbsp|tsp|oz)\b.*servings$/); if(m) return times(m[1],m[2]==="cup"?"cup":m[2]);
   m=u.match(/^servings of (.+)$/); if(m) return n===1?m[1]:`${fmt(n)} × ${m[1]}`;
   if(/^portions/.test(u)) return n===1?"1 portion (1 cup)":`${fmt(n)} portions`;
@@ -389,7 +391,7 @@ function amount(it,n){
   if(/packs?$/.test(u)&&n<1) return n===0.5?"half a pack":`${fmt(n)} pack`;
   const word=u.replace(/^single-serve /,"").replace(/ \(.*\)$/,"");
   if(!word) return n===1?"":fmt(n);
-  return `${fmt(n)} ${n===1?word.replace(/s$/,""):word}`;
+  return `${frac(n)} ${n<=1?one(word):word}`;
 }
 function ingList(mid,b,skip){
   const res=reserved(skip), seen={};
