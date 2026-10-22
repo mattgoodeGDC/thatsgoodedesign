@@ -155,7 +155,9 @@ textarea.copy{width:100%;min-height:160px;font:inherit;font-size:15px;background
 
 <script>
 const LOCS=[["fridge","Fridge"],["freezer","Freezer"],["pantry","Pantry"],["counter","Supplies"]];
-const SECTIONS=["Produce","Meat & Fish","Dairy & Eggs","Frozen","Bakery","Pantry","Drinks","Household"];
+const SECTIONS=["Produce","Meat & Fish","Dairy & Eggs","Frozen","Bakery","Pantry","Spices","Drinks","Household"];
+const VIEWS=[["fridge","Fridge"],["freezer","Freezer"],["pantry","Pantry"],["spices","Spices"],["counter","Supplies"]];
+const inView=(it,k)=>k==="spices"?it.loc==="pantry"&&it.section==="Spices":k==="pantry"?it.loc==="pantry"&&it.section!=="Spices":it.loc===k;
 const OPEN_KEEPS={cstock:5,tstock:5,tbsauce:7,blush:7,tikka:7,pesto:7,pineapple:5,mexcheese:5,sourcream:10,springmix:5,thaipeanut:30,kbbq:30,ranch:30,bouillon:90,pjuice:7,tomatoes:6,blackberries:3};
 const GROUPS=["Chicken","Beef and pork bowls","Fish and shrimp","Soups and noodles","Potatoes and backups"];
 const GROUP_NOTE={
@@ -596,13 +598,13 @@ function shopView(c){
 }
 function kitchenView(){
   const items=Object.entries(state.items), res=reserved();
-  let h=`<div class="chips">${[["all","Everything"]].concat(LOCS).map(([k,l])=>`<button data-act="loc" data-loc="${k}" aria-pressed="${state.loc===k}">${l}</button>`).join("")}</div>
+  let h=`<div class="chips">${[["all","Everything"]].concat(VIEWS).map(([k,l])=>`<button data-act="loc" data-loc="${k}" aria-pressed="${state.loc===k}">${l}</button>`).join("")}</div>
   <p class="hint">Use − and + for servings you count. For everything else, tap to switch between <b>Have</b> and <b>Out</b>, and mark <b>Low</b> to add it to the list.</p>`;
-  for(const [k,l] of LOCS){
+  for(const [k,l] of VIEWS){
     if(state.loc!=="all"&&state.loc!==k) continue;
     const active=Object.entries(state.meals).filter(([,m])=>!m.hold).map(([mid])=>mid);
     const inUse=id=>active.some(mid=>usesItem(mid,id))||Object.values(state.items).some(x=>x.kind==="prep"&&have(x)>0&&(x.prep&&x.prep.uses||[]).some(u=>u.id===id));
-    const all=items.filter(([id,it])=>it.loc===k&&!(it.kind==="prep"&&have(it)<=0&&!inUse(id)));
+    const all=items.filter(([id,it])=>inView(it,k)&&!(it.kind==="prep"&&have(it)<=0&&!inUse(id)));
     const notMade=all.filter(([,it])=>it.kind==="prep"&&have(it)<=0).sort((a,b)=>a[1].name.localeCompare(b[1].name));
     const list=all.filter(([,it])=>!(it.kind==="prep"&&have(it)<=0)).sort((a,b)=>(a[1].kind==="prep"?0:1)-(b[1].kind==="prep"?0:1)||a[1].name.localeCompare(b[1].name));
     if(!all.length) continue;
