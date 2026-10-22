@@ -443,6 +443,18 @@ function compute(){
       }else if(it.low) shop.push({id,it,label:"",why:new Set(["Running low"])});
     }
   }
+  // Anything the menu uses that has run out goes on the list too, even with no meal picked.
+  const active=Object.keys(state.meals).filter(m=>!state.meals[m].hold&&m!=="eatout");
+  const direct=new Set(), viaPrep=new Set();
+  for(const m of active) for(const u of (state.meals[m].uses||[]).concat(...(state.meals[m].bases||[]).map(x=>x.uses||[]))) direct.add(u.id);
+  for(const id of direct){ const it=state.items[id]; if(it&&it.kind==="prep") for(const u of it.prep&&it.prep.uses||[]) viaPrep.add(u.id); }
+  const listed=new Set(shop.map(r=>r.id));
+  for(const [id,it] of Object.entries(state.items)){
+    if(it.kind==="prep"||listed.has(id)||have(it)>0) continue;
+    if(!direct.has(id)&&!viaPrep.has(id)) continue;
+    const pack=Number(it.pack)||0;
+    shop.push({id,it,label:pack>1?`1 ${it.packName||"pack"}`:"",why:new Set(["Ran out"])});
+  }
   const prep=Object.entries(batches).map(([id,b])=>({id,it:state.items[id],batches:b}));
   return {shop,prep,need};
 }
@@ -646,7 +658,7 @@ function menuView(){
 }
 function shopView(c){
   if(!c.shop.length) return `<div class="empty">Nothing to buy. Pick meals on This week, or mark items low in Kitchen.</div>`;
-  let h=`<p class="hint">Tap <b>Got it</b> as things go in the cart. They move into the kitchen list.</p>`;
+  let h=`<p class="hint">Meals you picked, things marked Low, and anything on the menu that has run out. Tap <b>Got it</b> as things go in the cart.</p>`;
   const bySec={};
   for(const r of c.shop){(bySec[r.it.section||"Pantry"]=bySec[r.it.section||"Pantry"]||[]).push(r);}
   const order=SECTIONS.concat(Object.keys(bySec).filter(s=>!SECTIONS.includes(s)));
