@@ -119,6 +119,12 @@ textarea.copy{width:100%;min-height:160px;font:inherit;font-size:15px;background
 .meal.dim{opacity:.6}
 .cooked{font-size:15px;color:var(--accent);font-weight:700;margin-top:2px}
 .macros{font-size:15px;color:var(--muted);margin-top:2px}
+.menu-meal{padding:12px 14px}
+.mname{font-weight:700;font-size:19px}
+.combos{display:grid;gap:8px;margin-top:8px}
+.combo{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:10px;background:var(--chip)}
+.combo.dim{opacity:.6}
+nav button{padding:10px 4px}
 .drops{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
 .inglist{list-style:none;margin:10px 0 4px;padding:0;display:grid;gap:6px}
 .inglist li{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:6px 10px;border-radius:10px;background:var(--chip);font-size:16px}
@@ -150,6 +156,7 @@ textarea.copy{width:100%;min-height:160px;font:inherit;font-size:15px;background
   </header>
   <nav role="tablist">
     <button role="tab" data-tab="week" aria-selected="true">This week</button>
+    <button role="tab" data-tab="menu" aria-selected="false">The menu</button>
     <button role="tab" data-tab="shop" aria-selected="false">Shop<span class="n" id="shopN" hidden></span></button>
     <button role="tab" data-tab="kitchen" aria-selected="false">Kitchen</button>
   </nav>
@@ -529,7 +536,7 @@ function render(){
   const n=c.shop.length, sn=document.getElementById("shopN");
   sn.hidden=!n; sn.textContent=n;
   document.querySelectorAll("nav button").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===state.tab));
-  v.innerHTML=state.tab==="week"?weekView(c):state.tab==="shop"?shopView(c):kitchenView();
+  v.innerHTML=state.tab==="week"?weekView(c):state.tab==="menu"?menuView():state.tab==="shop"?shopView(c):kitchenView();
 }
 function nightsView(){
   const plan=planNow();
@@ -611,6 +618,29 @@ function weekView(c){
   if(held.length){
     h+=`<h2>On hold <small>need a prep day first</small></h2><button class="btn" data-act="hold">${state.showHold?"Hide":"Show"} ${held.length} meals on hold</button>`;
     if(state.showHold) for(const [id,m] of held) h+=mealCard(id,m);
+  }
+  return h;
+}
+function menuView(){
+  const meals=Object.entries(state.meals).filter(([,m])=>!m.hold);
+  const planned=planNow();
+  let h=`<p class="hint">Every meal and every way to make it. Tap <b>Pick</b> to put one on a night.</p>`;
+  for(const g of GROUPS.concat(["Other"])){
+    const list=meals.filter(([,m])=>(GROUPS.includes(m.group)?m.group:"Other")===g).sort((a,b)=>(a[1].order||0)-(b[1].order||0));
+    if(!list.length) continue;
+    h+=`<h2>${g}</h2>`;
+    for(const [id,m] of list){
+      const combos=m.bases?m.bases.map((x,j)=>[j,x.label]):[[0,id==="eatout"?"Night off":"As written"]];
+      h+=`<div class="card menu-meal"><div class="mname">${esc(m.name)}</div>${m.note?`<div class="why">${esc(m.note)}</div>`:""}<div class="combos">`;
+      for(const [j,label] of combos){
+        const s=id==="eatout"?{ok:true,cls:"ok",total:0}:status(id,j), mm=infoFor(id,j).minutes, on=planned.filter(p=>p.meal===id&&(p.base||0)===j);
+        const facts=[id==="eatout"?"":macroText(id,j), mm?mm+" min":""].filter(Boolean).join(" · ");
+        const st=s.ok?"Ready":s.cls==="prep"?`Needs prep, about ${s.total} min`:"Needs shopping";
+        h+=`<div class="combo${s.cls==="buy"?" dim":""}"><div class="grow"><b>${esc(label)}</b>${facts?`<div class="why">${facts}</div>`:""}<div><span class="badge ${s.cls}">${st}</span>${on.length?`<span class="when"> On ${on.map(p=>nightName(p.night)).join(", ")}</span>`:""}</div></div>
+          <button class="btn small" data-act="menupick" data-id="${id}" data-b="${j}" ${readOnly?"disabled":""}>Pick</button></div>`;
+      }
+      h+=`</div>${state.asking===id?whenChooser(id):""}</div>`;
+    }
   }
   return h;
 }
@@ -704,6 +734,7 @@ document.addEventListener("click",e=>{
   else if(a==="night"){const k=t.dataset.night; state.active=state.active===k?null:k; render();}
   else if(a==="nightclear"){ if(readOnly||!state.active) return; const k=state.active; savePlan(planNow().filter(p=>p.night!==k)); }
   else if(a==="nightdone"){state.active=null;render();}
+  else if(a==="menupick"){ const b=Number(t.dataset.b)||0; basePref[id]=b; try{localStorage.setItem(BK,JSON.stringify(basePref));}catch(_){} state.asking=id; render(); }
   else if(a==="ing"){state.open["ing:"+id]=!state.open["ing:"+id];render();}
   else if(a==="hold"){state.showHold=!state.showHold;render();}
   else if(a==="notmade"){state.open["notmade:"+id]=!state.open["notmade:"+id];render();}
