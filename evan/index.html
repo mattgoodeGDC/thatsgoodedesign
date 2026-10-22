@@ -118,6 +118,10 @@ textarea.copy{width:100%;min-height:160px;font:inherit;font-size:15px;background
 .meal.picked{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
 .meal.dim{opacity:.6}
 .cooked{font-size:15px;color:var(--accent);font-weight:700;margin-top:2px}
+.macros{font-size:15px;color:var(--muted);margin-top:2px}
+.drops{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.inglist{list-style:none;margin:10px 0 4px;padding:0;display:grid;gap:6px}
+.inglist li{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:6px 10px;border-radius:10px;background:var(--chip);font-size:16px}
 .when{font-size:15px;color:var(--accent);font-weight:700;margin-top:4px}
 .soon{font-size:15px;color:var(--warn);font-weight:700;margin-top:4px}
 .bases{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 2px}
@@ -297,6 +301,26 @@ function have(it){return (it&&Number(it.qty))||0;}
 function daysLeft(it){ if(!it||!it.keeps||!it.since||have(it)<=0) return null; return it.keeps-daysBetween(it.since,today()); }
 function isOff(it){ const l=daysLeft(it); return l!=null&&l<0; }
 function baseOf(mid){ const m=state.meals[mid]; if(!m||!m.bases) return 0; return Math.min(Number(basePref[mid])||0,m.bases.length-1); }
+// Rough nutrition for ONE serving of each item, as the kitchen list counts it: [calories, protein g, carbs g, fat g].
+// Staples count the amount a recipe step uses (1 tsp oil, 1 tbsp ranch, 1/4 cup croutons...).
+const NUTR={
+  rice:[205,4,45,0.5], pastap:[200,7,42,1], rotinip:[200,7,42,1], rnoodles:[200,2,46,0], naan:[130,4,22,3], potato:[165,4,37,0],
+  ramen:[380,8,52,14], dumplings:[1400,70,200,35], digiorno:[800,34,96,30], progresso:[100,8,11,2.5],
+  thin:[185,35,0,4], tender:[190,32,0,5], tpeanuttin:[285,36,8,11], soupbase:[170,26,8,3], shred:[140,26,0,3],
+  kbeef:[200,20,14,7], marinaracup:[155,20,3,6], sausagecup:[230,12,2,19], pbeef:[280,40,0,12],
+  shrimp:[110,24,0,1], rawtilapia:[120,26,0,2], eggs:[70,6,0,5], meatballs:[1000,60,30,70],
+  broc:[40,3,7,0.5], gbeans:[35,2,8,0], springmix:[15,1,3,0], tomatoes:[15,1,3,0], carrots:[10,0,2,0], carrotchips:[10,0,2,0],
+  pineapple:[60,0,15,0], blackberries:[30,1,7,0],
+  kbbq:[35,0,8,0], thaipeanut:[100,2,8,6], tikka:[120,2,10,8], pesto:[80,1,1,8], tbsauce:[420,12,60,12], blush:[840,24,48,60],
+  mexcheese:[55,3,0,4.5], bacon:[30,3,0,2], sourcream:[50,1,1,5], butter:[810,1,0,92], cstock:[40,6,2,0],
+  oil:[40,0,0,4.5], ranch:[65,0,1,7], croutons:[30,1,5,1], oyster:[60,1,10,1.5], cornstarch:[30,0,7,0], bouillon:[10,1,1,0]
+};
+function macros(mid,b){
+  const t=[0,0,0,0];
+  for(const u of usesFor(mid,b)){ const v=NUTR[u.id]; if(v) for(let i=0;i<4;i++) t[i]+=v[i]*(u.n||1); }
+  return {kcal:Math.round(t[0]/10)*10, protein:Math.round(t[1]), carbs:Math.round(t[2]), fat:Math.round(t[3])};
+}
+function macroText(mid,b){ const x=macros(mid,b); return x.kcal?`about ${x.kcal} cal · ${x.protein} g protein · ${x.carbs} g carbs · ${x.fat} g fat`:""; }
 function usesFor(mid,b){ const m=state.meals[mid]; if(!m) return []; const extra=(m.bases&&m.bases[b]&&m.bases[b].uses)||[]; return (m.uses||[]).concat(extra); }
 function infoFor(mid,b){ const m=state.meals[mid], x=(m.bases&&m.bases[b])||{}; return {kcal:x.kcal||m.kcal,protein:x.protein||m.protein,minutes:x.minutes||m.minutes,label:x.label,step:x.step}; }
 function planNow(){ const t=today(), ks=nights().map(n=>n.key); return state.plan.filter(p=>p.night>=t&&ks.includes(p.night)&&state.meals[p.meal]); }
@@ -356,6 +380,19 @@ function amount(it,n){
   const word=u.replace(/^single-serve /,"").replace(/ \(.*\)$/,"");
   if(!word) return n===1?"":fmt(n);
   return `${fmt(n)} ${n===1?word.replace(/s$/,""):word}`;
+}
+function ingList(mid,b,skip){
+  const res=reserved(skip), seen={};
+  const rows=usesFor(mid,b).filter(u=>{const k=u.id; if(seen[k]){seen[k].n=(seen[k].n||1)+(u.n||1); return false;} seen[k]={...u}; return true;}).map(u=>{
+    const it=state.items[u.id]; if(!it) return "";
+    const n=seen[u.id].n||1, am=amount(it,n);
+    let st="have", tx="have it";
+    if(isOff(it)){st="buy";tx="check it first";}
+    else if(it.kind==="staple"){ if(have(it)<=0){st="buy";tx="need to buy";} }
+    else if(have(it)-(res[u.id]||0)<n){ st=it.kind==="prep"?"prep":"buy"; tx=it.kind==="prep"?(it.mins?`cook first, about ${it.mins} min`:"make on prep day"):"need to buy"; }
+    return `<li><span>${esc(it.name)}${am?`: <b>${esc(am)}</b>`:""}</span><span class="badge ${st==="have"?"ok":st}">${tx}</span></li>`;
+  }).join("");
+  return `<ul class="inglist">${rows}</ul><p class="why">Spices, oil and sauces without an amount here are measured in the steps.</p>`;
 }
 function usesItem(mid,id){ const m=state.meals[mid]; return (m.uses||[]).some(u=>u.id===id)||(m.bases||[]).some(x=>(x.uses||[]).some(u=>u.id===id)); }
 
@@ -509,7 +546,7 @@ function mealCard(id,m){
   const b=baseOf(id), info=infoFor(id,b), mine=planNow().filter(p=>p.meal===id);
   const s=status(id,b,mine[0]), picked=mine.length>0;
   const soon=useSoon().filter(r=>usesItem(id,r.id)).map(r=>r.it.name.toLowerCase());
-  const meta=[`<span class="badge ${s.cls}">${s.ok?"Ready":s.cls==="prep"?"Needs prep":s.off.length&&!s.buy.length?"Check first":"Needs shopping"}</span>`,info.minutes?info.minutes+" min":"",info.kcal?"about "+info.kcal+" cal":"",info.protein?info.protein+" g protein":""].filter(Boolean).join(" · ");
+  const meta=[`<span class="badge ${s.cls}">${s.ok?"Ready":s.cls==="prep"?"Needs prep":s.off.length&&!s.buy.length?"Check first":"Needs shopping"}</span>`,info.minutes?info.minutes+" min":""].filter(Boolean).join(" · ")+`<div class="macros">${macroText(id,b)}</div>`;
   let h=`<div class="card meal${s.cls==="buy"&&!picked?" dim":""}${picked?" picked":""}" id="meal-${id}"><div class="row top">
     <button class="pick" data-act="pick" data-id="${id}" aria-pressed="${picked}" aria-label="${picked?"Unpick":"Pick"} ${esc(m.name)}">${picked?"✓":""}</button>
     <div class="grow"><button class="name" data-act="open" data-id="${id}" aria-expanded="${!!state.open[id]}">${esc(m.name)}</button>
@@ -518,11 +555,13 @@ function mealCard(id,m){
       ${soon.length?`<div class="soon">Uses up ${esc(soon.join(", "))}</div>`:""}
       ${m.bases?`<div class="bases" role="group" aria-label="Base">${m.bases.map((x,j)=>`<button data-act="base" data-id="${id}" data-b="${j}" aria-pressed="${j===b}">${esc(x.label)}</button>`).join("")}</div>`:""}
       ${s.ok?"":`<div class="tips">${statusLines(s,id,b).map(l=>`<div>${l}</div>`).join("")}</div>`}
+      <div class="drops"><button class="btn small" data-act="ing" data-id="${id}" aria-expanded="${!!state.open["ing:"+id]}">Ingredients ${state.open["ing:"+id]?"▴":"▾"}</button><button class="btn small" data-act="open" data-id="${id}" aria-expanded="${!!state.open[id]}">Steps ${state.open[id]?"▴":"▾"}</button></div>
+      ${state.open["ing:"+id]?ingList(id,b,mine[0]):""}
       ${state.asking===id?whenChooser(id):""}
     </div></div>`;
   if(state.open[id]){
     const res=reserved(mine[0]);
-    h+=`<div class="detail"><div class="uses">${usesFor(id,b).map(u=>{const it=state.items[u.id]; if(!it) return ""; const short=it.kind!=="staple"&&have(it)-(res[u.id]||0)<(u.n||1); const am=amount(it,u.n||1); return `<span class="${short||isOff(it)||(it.kind==="staple"&&have(it)<=0)?"miss":""}">${esc(it.name)}${am?": "+esc(am):""}</span>`;}).join("")}</div>
+    h+=`<div class="detail">
       ${info.step?`<p><b>${esc(info.label)}:</b> ${esc(info.step)}</p>`:""}
       ${(m.steps||[]).length?`<ol>${m.steps.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>`:""}
       ${m.note?`<p class="why">${esc(m.note)}</p>`:""}
@@ -663,6 +702,7 @@ document.addEventListener("click",e=>{
   else if(a==="night"){const k=t.dataset.night; state.active=state.active===k?null:k; render();}
   else if(a==="nightclear"){ if(readOnly||!state.active) return; const k=state.active; savePlan(planNow().filter(p=>p.night!==k)); }
   else if(a==="nightdone"){state.active=null;render();}
+  else if(a==="ing"){state.open["ing:"+id]=!state.open["ing:"+id];render();}
   else if(a==="hold"){state.showHold=!state.showHold;render();}
   else if(a==="notmade"){state.open["notmade:"+id]=!state.open["notmade:"+id];render();}
   else if(a==="ate") ateIt(id);
