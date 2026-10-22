@@ -163,13 +163,14 @@ const SECTIONS=["Produce","Meat & Fish","Dairy & Eggs","Frozen","Bakery","Pantry
 const VIEWS=[["fridge","Fridge"],["freezer","Freezer"],["pantry","Pantry"],["spices","Spices"],["counter","Supplies"]];
 const inView=(it,k)=>k==="spices"?it.loc==="pantry"&&it.section==="Spices":k==="pantry"?it.loc==="pantry"&&it.section!=="Spices":it.loc===k;
 const OPEN_KEEPS={cstock:5,tstock:5,tbsauce:7,blush:7,tikka:7,pesto:7,pineapple:5,mexcheese:5,sourcream:10,springmix:5,thaipeanut:30,kbbq:30,ranch:30,bouillon:90,pjuice:7,tomatoes:6,blackberries:3};
-const GROUPS=["Chicken","Beef and pork bowls","Fish and shrimp","Soups and noodles","Potatoes and backups"];
+const GROUPS=["Chicken","Beef and pork bowls","Fish and shrimp","Soups and noodles","Potatoes and backups","Eating out"];
 const GROUP_NOTE={
   "Chicken":"Cooked chicken from the freezer. Move the bag to the fridge the night before.",
   "Beef and pork bowls":"One frozen cup per bowl. Pick a base.",
   "Fish and shrimp":"Thaw fish in the fridge overnight. Shrimp thaws in 5 minutes.",
   "Soups and noodles":"Good for using up leftover rice or pasta.",
-  "Potatoes and backups":"For nights when nothing else is ready."
+  "Potatoes and backups":"For nights when nothing else is ready.",
+  "Eating out":"A night off. Nothing to cook or buy."
 };
 const GROUND=[
   {title:"Ground pork (blush sauce cups)",time:"10 to 12 minutes in the pan. 1 lb makes about 4 cups.",steps:[
@@ -539,7 +540,7 @@ function nightsView(){
   }).join("")}</div>`;
   if(state.active){
     const p=plan.find(x=>x.night===state.active);
-    h+=`<div class="bar"><b>Picking for ${nightName(state.active)}.</b> Tap a meal below.${p?` <button class="btn small" data-act="nightclear">Clear ${weekday(state.active)}</button>`:""} <button class="btn small" data-act="nightdone">Done</button></div>`;
+    h+=`<div class="bar"><b>Picking for ${nightName(state.active)}.</b> Tap a meal below, or <button class="btn small" data-act="when" data-id="eatout" data-night="${state.active}">Eat out</button>${p?` <button class="btn small" data-act="nightclear">Clear ${weekday(state.active)}</button>`:""} <button class="btn small" data-act="nightdone">Done</button></div>`;
   } else h+=`<p class="hint">Tap the box on a meal to pick it, then choose tonight, tomorrow or another day. Or tap a night first, then a meal.</p>`;
   return h;
 }
@@ -547,7 +548,7 @@ function mealCard(id,m){
   const b=baseOf(id), info=infoFor(id,b), mine=planNow().filter(p=>p.meal===id);
   const s=status(id,b,mine[0]), picked=mine.length>0;
   const soon=useSoon().filter(r=>usesItem(id,r.id)).map(r=>r.it.name.toLowerCase());
-  const meta=[`<span class="badge ${s.cls}">${s.ok?"Ready":s.cls==="prep"?"Needs prep":s.off.length&&!s.buy.length?"Check first":"Needs shopping"}</span>`,info.minutes?info.minutes+" min":""].filter(Boolean).join(" · ")+`<div class="macros">${macroText(id,b)}</div>`;
+  const meta=id==="eatout"?`<span class="badge ok">Night off</span>`:[`<span class="badge ${s.cls}">${s.ok?"Ready":s.cls==="prep"?"Needs prep":s.off.length&&!s.buy.length?"Check first":"Needs shopping"}</span>`,info.minutes?info.minutes+" min":""].filter(Boolean).join(" · ")+`<div class="macros">${macroText(id,b)}</div>`;
   let h=`<div class="card meal${s.cls==="buy"&&!picked?" dim":""}${picked?" picked":""}" id="meal-${id}"><div class="row top">
     <button class="pick" data-act="pick" data-id="${id}" aria-pressed="${picked}" aria-label="${picked?"Unpick":"Pick"} ${esc(m.name)}">${picked?"✓":""}</button>
     <div class="grow"><button class="name" data-act="open" data-id="${id}" aria-expanded="${!!state.open[id]}">${esc(m.name)}</button>
@@ -556,7 +557,7 @@ function mealCard(id,m){
       ${soon.length?`<div class="soon">Uses up ${esc(soon.join(", "))}</div>`:""}
       ${m.bases?`<div class="bases" role="group" aria-label="Base">${m.bases.map((x,j)=>`<button data-act="base" data-id="${id}" data-b="${j}" aria-pressed="${j===b}">${esc(x.label)}</button>`).join("")}</div>`:""}
       ${s.ok?"":`<div class="tips">${statusLines(s,id,b).map(l=>`<div>${l}</div>`).join("")}</div>`}
-      <div class="drops"><button class="btn small" data-act="ing" data-id="${id}" aria-expanded="${!!state.open["ing:"+id]}">Ingredients ${state.open["ing:"+id]?"▴":"▾"}</button><button class="btn small" data-act="open" data-id="${id}" aria-expanded="${!!state.open[id]}">Steps ${state.open[id]?"▴":"▾"}</button></div>
+      ${id==="eatout"?"":`<div class="drops"><button class="btn small" data-act="ing" data-id="${id}" aria-expanded="${!!state.open["ing:"+id]}">Ingredients ${state.open["ing:"+id]?"▴":"▾"}</button><button class="btn small" data-act="open" data-id="${id}" aria-expanded="${!!state.open[id]}">Steps ${state.open[id]?"▴":"▾"}</button></div>`}
       ${state.open["ing:"+id]?ingList(id,b,mine[0]):""}
       ${state.asking===id?whenChooser(id):""}
     </div></div>`;
