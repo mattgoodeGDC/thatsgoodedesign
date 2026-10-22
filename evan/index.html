@@ -374,6 +374,7 @@ function amount(it,n){
   let m=u.match(/^([\d\/]+)[- ](cup|tbsp|tsp|oz)\b.*servings$/); if(m) return times(m[1],m[2]==="cup"?"cup":m[2]);
   m=u.match(/^servings of (.+)$/); if(m) return n===1?m[1]:`${fmt(n)} × ${m[1]}`;
   if(/^portions/.test(u)) return n===1?"1 portion (1 cup)":`${fmt(n)} portions`;
+  if(/sticks?$/.test(u)&&n<1) return n<=0.15?"1 tsp":n<=0.3?"2 tsp":"1 tbsp";
   if(/jars?$/.test(u)&&n<1) return `${n<=0.15?"1/4":n<=0.3?"1/2":"1"} cup`;
   if(/bags?$/.test(u)&&n<1) return it.id==="dumplings"||/dumpling/i.test(it.name)?"8 dumplings":`about ${Math.round(n*100)}% of a bag`;
   if(/packs?$/.test(u)&&n<1) return n===0.5?"half a pack":`${fmt(n)} pack`;
