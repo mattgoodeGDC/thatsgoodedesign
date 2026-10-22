@@ -321,7 +321,8 @@ function statusLines(s,mid,b){
   const lines=[];
   if(s.off.length) lines.push(`Check ${s.off.map(i=>esc(i.name.toLowerCase())).join(", ")}: may be past its best.`);
   if(s.buy.length) lines.push(`Need to buy: ${[...new Set(s.buy.map(i=>i.name))].map(esc).join(", ")}.`);
-  for(const it of s.prep) lines.push(it.mins?`Make ${esc(it.name.toLowerCase())} first: about ${it.mins} minutes.`:`Make ${esc(it.name.toLowerCase())} on prep day first.`);
+  const short=it=>esc(it.name.replace(/^Cooked /,"").replace(/ portion$/,"").replace(/^short /,"").toLowerCase());
+  for(const it of s.prep) lines.push(it.mins?`Cook ${short(it)} first: about ${it.mins} minutes.`:`Make ${short(it)} on prep day first.`);
   if(!s.buy.length&&!s.off.length&&s.prep.length&&s.prep.every(i=>i.mins)) lines.push(`Ready in about ${s.total} minutes.`);
   const m=state.meals[mid];
   if(!s.ok&&m.bases){
