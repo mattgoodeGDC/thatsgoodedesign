@@ -59,6 +59,7 @@ h2 small{font-weight:400;color:var(--muted);font-size:15px;margin-left:6px}
 .step{display:flex;align-items:center;gap:4px}
 .step button,.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-weight:700;border-radius:10px;cursor:pointer}
 .step button{width:42px;height:42px;font-size:22px;line-height:1}
+.step output small.of{display:block;font-size:12px;font-weight:400;color:var(--muted);line-height:1.1}
 .step output{min-width:28px;text-align:center;font-weight:700;font-size:20px}
 .btn{padding:8px 14px}
 .btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
@@ -271,6 +272,7 @@ async function load(){
 
 function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove("show"),2600);}
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const qtyText=n=>{const w=Math.floor(n),f=Math.round((n-w)*100)/100,F={0.25:"¼",0.5:"½",0.75:"¾"}[f];return F?(w?w:"")+F:fmt(n);};
 const fmt=n=>Number.isInteger(n)?String(n):String(Math.round(n*10)/10);
 
 // ---------- dates ----------
@@ -619,7 +621,7 @@ function kitchenView(){
       if(it.kind==="staple"){
         h+=`<button class="toggle ${have(it)>0?"on":"out"}" data-act="have" data-id="${id}" ${readOnly?"disabled":""}>${have(it)>0?"Have":"Out"}</button>`;
       }else{
-        h+=`<div class="step"><button data-act="qminus" data-id="${id}" aria-label="One less" ${readOnly||have(it)<=0?"disabled":""}>−</button><output>${fmt(have(it))}</output><button data-act="qplus" data-id="${id}" aria-label="One more" ${readOnly?"disabled":""}>+</button></div>`;
+        h+=`<div class="step"><button data-act="qminus" data-id="${id}" aria-label="One less" ${readOnly||have(it)<=0?"disabled":""}>−</button><output>${qtyText(have(it))}${Number(it.pack)>1?`<small class="of">of ${it.pack}</small>`:""}</output><button data-act="qplus" data-id="${id}" aria-label="One more" ${readOnly?"disabled":""}>+</button></div>`;
       }
       if(it.kind!=="prep") h+=`<button class="toggle ${it.low?"low":""}" data-act="low" data-id="${id}" ${readOnly?"disabled":""}>Low</button>`;
       h+=`</div>${howBlock(id)}`;
