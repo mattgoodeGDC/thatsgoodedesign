@@ -170,9 +170,9 @@ nav button{padding:10px 4px}
 
 <script>
 const LOCS=[["fridge","Fridge"],["freezer","Freezer"],["pantry","Pantry"],["counter","Supplies"]];
-const SECTIONS=["Produce","Meat & Fish","Dairy & Eggs","Frozen","Bakery","Pantry","Spices","Drinks","Household"];
-const VIEWS=[["fridge","Fridge"],["freezer","Freezer"],["pantry","Pantry"],["spices","Spices"],["counter","Supplies"]];
-const inView=(it,k)=>k==="spices"?it.loc==="pantry"&&it.section==="Spices":k==="pantry"?it.loc==="pantry"&&it.section!=="Spices":it.loc===k;
+const SECTIONS=["Produce","Meat & Fish","Dairy & Eggs","Frozen","Bakery","Pantry","Jars","Spices","Drinks","Household"];
+const VIEWS=[["fridge","Fridge"],["freezer","Freezer"],["pantry","Pantry"],["jars","Jars"],["spices","Spices"],["counter","Supplies"]];
+const inView=(it,k)=>k==="spices"?it.loc==="pantry"&&it.section==="Spices":k==="jars"?it.loc==="pantry"&&it.section==="Jars":k==="pantry"?it.loc==="pantry"&&it.section!=="Spices"&&it.section!=="Jars":it.loc===k;
 const OPEN_KEEPS={cstock:5,tstock:5,tbsauce:7,blush:7,tikka:7,pesto:7,pineapple:5,mexcheese:5,sourcream:10,springmix:5,thaipeanut:30,kbbq:30,ranch:30,bouillon:90,pjuice:7,tomatoes:6,blackberries:3};
 const GROUPS=["Chicken","Beef and pork bowls","Fish and shrimp","Soups and noodles","Potatoes and backups","Eating out"];
 const GROUP_NOTE={
