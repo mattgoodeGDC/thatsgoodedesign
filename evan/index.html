@@ -50,6 +50,7 @@ h2 small{font-weight:400;color:var(--muted);font-size:15px;margin-left:6px}
 .meal{padding:12px 14px}
 .row{display:flex;align-items:center;gap:12px}
 .grow{flex:1;min-width:0}
+.meal div.name{font-weight:700;font-size:19px}
 .meal .name{font-weight:700;font-size:19px;background:none;border:0;padding:0;color:inherit;font:inherit;font-weight:700;text-align:left;cursor:pointer}
 .meta{color:var(--muted);font-size:15px}
 .badge{display:inline-block;font-size:14px;font-weight:700;padding:2px 9px;border-radius:999px;margin-right:6px}
@@ -119,7 +120,7 @@ textarea.copy{width:100%;min-height:160px;font:inherit;font-size:15px;background
 .meal.dim{opacity:.6}
 .cooked{font-size:15px;color:var(--accent);font-weight:700;margin-top:2px}
 .macros{font-size:15px;color:var(--muted);margin-top:2px}
-.menu-meal{padding:12px 14px}
+.combo-label{font-size:16px;font-weight:700;color:var(--accent);margin-top:2px}
 .mname{font-weight:700;font-size:19px}
 .combos{display:grid;gap:8px;margin-top:8px}
 .combo{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:10px;background:var(--chip)}
@@ -489,7 +490,7 @@ function pickFor(mid,k){
   const plan=planNow().filter(p=>p.night!==k); plan.push({night:k,meal:mid,base:b});
   state.asking=null; savePlan(plan); toast(`${m.name} is on for ${nightName(k)}.`);
 }
-function whenChooser(mid){
+function whenChooser(mid,key){
   const plan=planNow(), ns=nights();
   const btn=(n,big)=>{const p=plan.find(x=>x.night===n.key), other=p&&state.meals[p.meal];
     return `<button class="${big?"btn primary":"btn"}" data-act="when" data-id="${mid}" data-night="${n.key}">${n.label==="Tonight"?"Tonight":big?"Tomorrow":weekday(n.key)}${other?`<span class="swaps">swaps out ${esc(other.name)}</span>`:""}</button>`;};
@@ -633,26 +634,34 @@ function weekView(c){
   }
   return h;
 }
+function comboCard(id,j){
+  const m=state.meals[id], key=id+"~"+j, info=infoFor(id,j), label=m.bases&&m.bases[j]?m.bases[j].label:"";
+  const on=planNow().filter(p=>p.meal===id&&(p.base||0)===j), picked=on.length>0;
+  const s=id==="eatout"?{ok:true,cls:"ok",total:0,prep:[],buy:[],off:[]}:status(id,j,on[0]);
+  const badge=id==="eatout"?`<span class="badge ok">Night off</span>`:`<span class="badge ${s.cls}">${s.ok?"Ready":s.cls==="prep"?"Needs prep":s.off.length&&!s.buy.length?"Check first":"Needs shopping"}</span>`;
+  const meta=[badge,info.minutes?info.minutes+" min":""].filter(Boolean).join(" · ");
+  const lines=s.ok?[]:statusLines(s,id,j).filter(l=>!l.startsWith("<button"));
+  let h=`<div class="card meal${s.cls==="buy"&&!picked?" dim":""}${picked?" picked":""}"><div class="row top">
+    <button class="pick" data-act="mpick" data-id="${id}" data-b="${j}" aria-pressed="${picked}" aria-label="${picked?"Unpick":"Pick"} ${esc(m.name)} ${esc(label)}">${picked?"✓":""}</button>
+    <div class="grow"><div class="name">${esc(m.name)}</div>${label?`<div class="combo-label">${esc(label)}</div>`:""}
+      <div class="meta">${meta}</div>${id==="eatout"?"":`<div class="macros">${macroText(id,j)}</div>`}
+      ${picked?`<div class="when">Picked for ${on.map(p=>nightName(p.night)).join(", ")}</div>`:""}
+      ${lines.length?`<div class="tips">${lines.map(l=>`<div>${l}</div>`).join("")}</div>`:""}
+      ${id==="eatout"?"":`<div class="drops"><button class="btn small" data-act="ing" data-id="${key}" aria-expanded="${!!state.open["ing:"+key]}">Ingredients ${state.open["ing:"+key]?"▴":"▾"}</button><button class="btn small" data-act="open" data-id="${key}" aria-expanded="${!!state.open[key]}">Steps ${state.open[key]?"▴":"▾"}</button></div>`}
+      ${state.open["ing:"+key]?ingList(id,j,on[0]):""}
+      ${state.open[key]?`<div class="detail">${info.step?`<p><b>${esc(info.label)}:</b> ${esc(info.step)}</p>`:""}${(m.steps||[]).length?`<ol>${m.steps.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>`:""}${m.note?`<p class="why">${esc(m.note)}</p>`:""}</div>`:""}
+      ${state.asking===key?whenChooser(id,key):""}
+    </div></div></div>`;
+  return h;
+}
 function menuView(){
   const meals=Object.entries(state.meals).filter(([,m])=>!m.hold);
-  const planned=planNow();
-  let h=`<p class="hint">Every meal and every way to make it. Tap <b>Pick</b> to put one on a night.</p>`;
+  let h=`<p class="hint">Every meal and every way to make it. Tap the box to pick one, then choose the night.</p>`;
   for(const g of GROUPS.concat(["Other"])){
     const list=meals.filter(([,m])=>(GROUPS.includes(m.group)?m.group:"Other")===g).sort((a,b)=>(a[1].order||0)-(b[1].order||0));
     if(!list.length) continue;
     h+=`<h2>${g}</h2>`;
-    for(const [id,m] of list){
-      const combos=m.bases?m.bases.map((x,j)=>[j,x.label]):[[0,id==="eatout"?"Night off":"As written"]];
-      h+=`<div class="card menu-meal"><div class="mname">${esc(m.name)}</div>${m.note?`<div class="why">${esc(m.note)}</div>`:""}<div class="combos">`;
-      for(const [j,label] of combos){
-        const s=id==="eatout"?{ok:true,cls:"ok",total:0}:status(id,j), mm=infoFor(id,j).minutes, on=planned.filter(p=>p.meal===id&&(p.base||0)===j);
-        const facts=[id==="eatout"?"":macroText(id,j), mm?mm+" min":""].filter(Boolean).join(" · ");
-        const st=s.ok?"Ready":s.cls==="prep"?`Needs prep, about ${s.total} min`:"Needs shopping";
-        h+=`<div class="combo${s.cls==="buy"?" dim":""}"><div class="grow"><b>${esc(label)}</b>${facts?`<div class="why">${facts}</div>`:""}<div><span class="badge ${s.cls}">${st}</span>${on.length?`<span class="when"> On ${on.map(p=>nightName(p.night)).join(", ")}</span>`:""}</div></div>
-          <button class="btn small" data-act="menupick" data-id="${id}" data-b="${j}" ${readOnly?"disabled":""}>Pick</button></div>`;
-      }
-      h+=`</div>${state.asking===id?whenChooser(id):""}</div>`;
-    }
+    for(const [id,m] of list){ const n=m.bases?m.bases.length:1; for(let j=0;j<n;j++) h+=comboCard(id,j); }
   }
   return h;
 }
@@ -746,7 +755,9 @@ document.addEventListener("click",e=>{
   else if(a==="night"){const k=t.dataset.night; state.active=state.active===k?null:k; render();}
   else if(a==="nightclear"){ if(readOnly||!state.active) return; const k=state.active; savePlan(planNow().filter(p=>p.night!==k)); }
   else if(a==="nightdone"){state.active=null;render();}
-  else if(a==="menupick"){ const b=Number(t.dataset.b)||0; basePref[id]=b; try{localStorage.setItem(BK,JSON.stringify(basePref));}catch(_){} state.asking=id; render(); }
+  else if(a==="mpick"){ const b=Number(t.dataset.b)||0, key=id+"~"+b, mine=planNow().filter(p=>p.meal===id&&(p.base||0)===b);
+    if(mine.length&&!readOnly){ const last=mine.sort((x,y)=>x.night<y.night?1:-1)[0]; state.asking=null; savePlan(planNow().filter(p=>p!==last)); toast(`${state.meals[id].name} is off ${nightName(last.night)}.`); }
+    else { basePref[id]=b; try{localStorage.setItem(BK,JSON.stringify(basePref));}catch(_){} state.asking=state.asking===key?null:key; render(); } }
   else if(a==="ing"){state.open["ing:"+id]=!state.open["ing:"+id];render();}
   else if(a==="hold"){state.showHold=!state.showHold;render();}
   else if(a==="notmade"){state.open["notmade:"+id]=!state.open["notmade:"+id];render();}
