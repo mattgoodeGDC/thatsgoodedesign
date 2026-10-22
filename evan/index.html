@@ -337,6 +337,20 @@ function useSoon(){
   for(const [id,it] of Object.entries(state.items)){ const l=daysLeft(it); if(l!=null&&l<=2) rows.push({id,it,l}); }
   return rows.sort((a,b)=>a.l-b.l);
 }
+// A measured amount for one ingredient line, from the item's serving unit.
+function amount(it,n){
+  if(it.kind==="staple") return "";
+  const u=it.unit||"", times=(q,word)=>{const x=Number(q); return Number.isFinite(x)&&String(x)===q?`${fmt(x*n)} ${word}${x*n>1&&!/s$/.test(word)?"s":""}`:(n===1?`${q} ${word}`:`${fmt(n)} × ${q} ${word}`);};
+  let m=u.match(/^([\d\/]+)[- ](cup|tbsp|tsp|oz)\b.*servings$/); if(m) return times(m[1],m[2]==="cup"?"cup":m[2]);
+  m=u.match(/^servings of (.+)$/); if(m) return n===1?m[1]:`${fmt(n)} × ${m[1]}`;
+  if(/^portions/.test(u)) return n===1?"1 portion (1 cup)":`${fmt(n)} portions`;
+  if(/jars?$/.test(u)&&n<1) return `${n<=0.15?"1/4":n<=0.3?"1/2":"1"} cup`;
+  if(/bags?$/.test(u)&&n<1) return it.id==="dumplings"||/dumpling/i.test(it.name)?"8 dumplings":`about ${Math.round(n*100)}% of a bag`;
+  if(/packs?$/.test(u)&&n<1) return n===0.5?"half a pack":`${fmt(n)} pack`;
+  const word=u.replace(/^single-serve /,"").replace(/ \(.*\)$/,"");
+  if(!word) return n===1?"":fmt(n);
+  return `${fmt(n)} ${n===1?word.replace(/s$/,""):word}`;
+}
 function usesItem(mid,id){ const m=state.meals[mid]; return (m.uses||[]).some(u=>u.id===id)||(m.bases||[]).some(x=>(x.uses||[]).some(u=>u.id===id)); }
 
 function compute(){
@@ -502,7 +516,7 @@ function mealCard(id,m){
     </div></div>`;
   if(state.open[id]){
     const res=reserved(mine[0]);
-    h+=`<div class="detail"><div class="uses">${usesFor(id,b).map(u=>{const it=state.items[u.id]; if(!it) return ""; const short=it.kind!=="staple"&&have(it)-(res[u.id]||0)<(u.n||1); return `<span class="${short||isOff(it)||(it.kind==="staple"&&have(it)<=0)?"miss":""}">${esc(it.name)}${it.kind!=="staple"&&(u.n||1)!==1?" ×"+fmt(u.n):""}</span>`;}).join("")}</div>
+    h+=`<div class="detail"><div class="uses">${usesFor(id,b).map(u=>{const it=state.items[u.id]; if(!it) return ""; const short=it.kind!=="staple"&&have(it)-(res[u.id]||0)<(u.n||1); const am=amount(it,u.n||1); return `<span class="${short||isOff(it)||(it.kind==="staple"&&have(it)<=0)?"miss":""}">${esc(it.name)}${am?": "+esc(am):""}</span>`;}).join("")}</div>
       ${info.step?`<p><b>${esc(info.label)}:</b> ${esc(info.step)}</p>`:""}
       ${(m.steps||[]).length?`<ol>${m.steps.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>`:""}
       ${m.note?`<p class="why">${esc(m.note)}</p>`:""}
@@ -582,9 +596,22 @@ function kitchenView(){
   <p class="hint">Use − and + for servings you count. For everything else, tap to switch between <b>Have</b> and <b>Out</b>, and mark <b>Low</b> to add it to the list.</p>`;
   for(const [k,l] of LOCS){
     if(state.loc!=="all"&&state.loc!==k) continue;
-    const list=items.filter(([,it])=>it.loc===k).sort((a,b)=>(a[1].kind==="prep"?0:1)-(b[1].kind==="prep"?0:1)||a[1].name.localeCompare(b[1].name));
-    if(!list.length) continue;
+    const active=Object.entries(state.meals).filter(([,m])=>!m.hold).map(([mid])=>mid);
+    const inUse=id=>active.some(mid=>usesItem(mid,id))||Object.values(state.items).some(x=>x.kind==="prep"&&have(x)>0&&(x.prep&&x.prep.uses||[]).some(u=>u.id===id));
+    const all=items.filter(([id,it])=>it.loc===k&&!(it.kind==="prep"&&have(it)<=0&&!inUse(id)));
+    const notMade=all.filter(([,it])=>it.kind==="prep"&&have(it)<=0).sort((a,b)=>a[1].name.localeCompare(b[1].name));
+    const list=all.filter(([,it])=>!(it.kind==="prep"&&have(it)<=0)).sort((a,b)=>(a[1].kind==="prep"?0:1)-(b[1].kind==="prep"?0:1)||a[1].name.localeCompare(b[1].name));
+    if(!all.length) continue;
     h+=`<h2>${l} <small>${list.length} items</small></h2><div class="card list">`;
+    if(notMade.length){
+      const open=state.open["notmade:"+k];
+      h+=`<div class="item"><div class="grow"><b>Not made yet</b><div class="why">${notMade.length} things you make at home, none made right now</div></div><button class="btn small" data-act="notmade" data-id="${k}" aria-expanded="${!!open}">${open?"Hide":"Show"}</button></div>`;
+      if(open) for(const [id,it] of notMade){
+        const from=(it.prep&&it.prep.uses||[]).map(u=>state.items[u.id]).filter(r=>r&&r.kind!=="staple").map(r=>`${esc(r.name)} (${fmt(have(r))} ${esc(r.unit||"")} in the ${esc(r.loc)})`);
+        h+=`<div class="item notmade"><div class="grow"><b>${esc(it.name)}</b><div class="why">None made yet.${from.length?" Made from "+from.join(", ")+".":""}${it.mins?` Takes about ${it.mins} minutes.`:""}</div>${howBtn(id)}</div>
+          <div class="step"><button data-act="qminus" data-id="${id}" aria-label="One less" disabled>−</button><output>0</output><button data-act="qplus" data-id="${id}" aria-label="One more" ${readOnly?"disabled":""}>+</button></div></div>${howBlock(id)}`;
+      }
+    }
     for(const [id,it] of list){
       const left=daysLeft(it), held=res[id]||0;
       const sub=[it.kind==="prep"?"Made at home":esc(it.section||""), it.kind!=="staple"&&it.unit?esc(it.unit):"", held&&it.kind!=="staple"?`${fmt(held)} held for meals picked`:"", left!=null?(left<0?"may be past its best":left===0?"use today":`use within ${left} day${left>1?"s":""}`):""].filter(Boolean).join(" · ");
@@ -628,6 +655,7 @@ document.addEventListener("click",e=>{
   else if(a==="nightclear"){ if(readOnly||!state.active) return; const k=state.active; savePlan(planNow().filter(p=>p.night!==k)); }
   else if(a==="nightdone"){state.active=null;render();}
   else if(a==="hold"){state.showHold=!state.showHold;render();}
+  else if(a==="notmade"){state.open["notmade:"+id]=!state.open["notmade:"+id];render();}
   else if(a==="ate") ateIt(id);
   else if(a==="made") madeBatch(id);
   else if(a==="clear"){ if(readOnly) return; state.active=null; savePlan([]); }
