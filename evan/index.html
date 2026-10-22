@@ -55,6 +55,10 @@
 :root[data-palette="classic"] header p{color:var(--muted)}
 :root[data-palette="classic"] nav button[aria-selected="true"]{background:var(--card);color:var(--ink)}
 .looks{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 12px}
+.lookbtn{position:absolute;top:12px;right:12px;font:inherit;font-size:14px;font-weight:700;padding:5px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.12);color:#fff;cursor:pointer}
+.lookpanel{margin:10px 0 0;padding:12px 14px}
+header h1{padding-right:70px}
+:root[data-palette="classic"] .lookbtn{color:var(--ink);border-color:var(--line);background:var(--card)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Atkinson Hyperlegible",system-ui,sans-serif;font-size:18px;line-height:1.55;letter-spacing:.01em}
 .wrap{max-width:760px;margin:0 auto;padding:16px 16px 96px}
@@ -183,7 +187,9 @@ nav button{padding:10px 4px}
   <header>
     <h1>Evan's <span>Kitchen</span></h1>
     <p>Pick this week's meals. The app checks the fridge, freezer and pantry, then builds the shopping list.</p>
+    <button class="lookbtn" data-act="lookpanel" aria-expanded="false" aria-controls="lookpanel">Look</button>
   </header>
+  <div id="lookpanel" class="card lookpanel" hidden></div>
   <nav role="tablist">
     <button role="tab" data-tab="week" aria-selected="true">This week</button>
     <button role="tab" data-tab="menu" aria-selected="false">The menu</button>
@@ -721,13 +727,19 @@ function shopView(c){
   h+=`<h2>Copy the list</h2><p class="hint">For texting or pasting into Todoist.</p><button class="btn" data-act="copy">Copy</button><textarea class="copy" id="copyText" readonly>${esc(text)}</textarea>`;
   return h;
 }
+function lookPanel(){
+  const el=document.getElementById("lookpanel"); if(!el) return; const look=getLook();
+  el.innerHTML=`<div class="why">Colours</div><div class="chips looks">${[["empire","Empire"],["classic","Classic"]].map(([k,l])=>`<button data-act="look" data-k="palette" data-v="${k}" aria-pressed="${look.palette===k}">${l}</button>`).join("")}</div>
+    <div class="why">Mode</div><div class="chips looks">${[["auto","Auto"],["light","Light"],["dark","Dark"]].map(([k,l])=>`<button data-act="look" data-k="mode" data-v="${k}" aria-pressed="${look.mode===k}">${l}</button>`).join("")}</div>
+    <p class="why">Saved on this device only.</p>`;
+}
 function getLook(){ let L={}; try{L=JSON.parse(localStorage.getItem("evanKitchenLook")||"{}")||{};}catch(_){} return {palette:L.palette||"empire",mode:L.mode||"auto"}; }
 function setLook(k,v){
   const L=getLook(); L[k]=v; try{localStorage.setItem("evanKitchenLook",JSON.stringify(L));}catch(_){}
   const d=document.documentElement;
   if(L.palette==="classic") d.setAttribute("data-palette","classic"); else d.removeAttribute("data-palette");
   if(L.mode==="auto") d.removeAttribute("data-theme"); else d.setAttribute("data-theme",L.mode);
-  render();
+  lookPanel(); render();
 }
 function kitchenView(){
   const items=Object.entries(state.items), res=reserved();
@@ -778,10 +790,6 @@ function kitchenView(){
       <label>How many<input name="qty" type="number" min="0" step="0.5" value="1"></label>
       <button class="btn primary full" type="submit">Add to kitchen</button></form>`;
   }
-  const look=getLook();
-  h+=`<h2>Look <small>this device only</small></h2>
-    <div class="why">Colours</div><div class="chips looks">${[["empire","Empire"],["classic","Classic"]].map(([k,l])=>`<button data-act="look" data-k="palette" data-v="${k}" aria-pressed="${look.palette===k}">${l}</button>`).join("")}</div>
-    <div class="why">Mode</div><div class="chips looks">${[["auto","Auto"],["light","Light"],["dark","Dark"]].map(([k,l])=>`<button data-act="look" data-k="mode" data-v="${k}" aria-pressed="${look.mode===k}">${l}</button>`).join("")}</div>`;
   h+=`<h2>Export</h2><p class="hint">Saves the meals, kitchen list and this week's plan as one file, for another app or a backup.</p><button class="btn" data-act="export">Save a copy</button> <button class="btn" data-act="signout">Lock this device</button>`;
   return h;
 }
@@ -804,6 +812,7 @@ document.addEventListener("click",e=>{
     if(mine.length&&!readOnly){ const last=mine.sort((x,y)=>x.night<y.night?1:-1)[0]; state.asking=null; savePlan(planNow().filter(p=>p!==last)); toast(`${state.meals[id].name} is off ${nightName(last.night)}.`); }
     else { basePref[id]=b; try{localStorage.setItem(BK,JSON.stringify(basePref));}catch(_){} state.asking=state.asking===key?null:key; render(); } }
   else if(a==="look") setLook(t.dataset.k,t.dataset.v);
+  else if(a==="lookpanel"){ const el=document.getElementById("lookpanel"), open=el.hidden; el.hidden=!open; t.setAttribute("aria-expanded",open); if(open) lookPanel(); }
   else if(a==="ing"){state.open["ing:"+id]=!state.open["ing:"+id];render();}
   else if(a==="hold"){state.showHold=!state.showHold;render();}
   else if(a==="notmade"){state.open["notmade:"+id]=!state.open["notmade:"+id];render();}
