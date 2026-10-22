@@ -1,0 +1,42 @@
+{
+  "_readme": "The Services menu in the site header, on every page. Edit here, then run python3 scripts/update-nav.py. Paths are from the site root, no leading slash. Text is HTML: &rsquo; for apostrophes, never an em dash. Icons name a symbol in assets/icons/icons-clutch-sprite.svg.",
+  "groups": [
+    {
+      "class": "nmp-co",
+      "head": "For companies",
+      "links": [
+        {"href": "products/#services", "label": "What a company can buy", "sub": "One list, diagnostic to retained"},
+        {"href": "lineup/", "label": "The lineup", "sub": "Every product, side by side"},
+        {"href": "products/#why", "label": "Why this is different", "sub": "Five structural differences, not adjectives"}
+      ]
+    },
+    {
+      "class": "nmp-sc",
+      "head": "For schools and nonprofits",
+      "links": [
+        {"href": "schools/#services", "label": "What a school can buy", "sub": "Ten services, plainly named"},
+        {"href": "schools/rates/", "label": "Published rates", "sub": "Real numbers for a budget line"},
+        {"href": "schools/#why", "label": "Why this is different", "sub": "Twenty years inside a school"}
+      ]
+    },
+    {
+      "class": "nmp-products",
+      "head": "Products",
+      "links": [
+        {"href": "obd/", "icon": "product-obd", "label": "On-Board Diagnostic", "sub": "Core, Leader, Leader + Team"},
+        {"href": "psychological-safety/", "icon": "product-psc", "label": "Psychological Safety Check", "sub": "Free, for one team"},
+        {"href": "goodestart/", "icon": "product-goodestart", "label": "GoodeStart", "sub": "The first ninety days, on purpose"},
+        {"href": "building-the-bench/", "icon": "product-bench", "label": "Building the Bench", "sub": "A cohort for the next seat"},
+        {"href": "know-thyself/", "icon": "product-know-thyself", "label": "Know Thyself to Lead Others", "sub": "A strengths workshop for a whole staff"},
+        {"href": "owners-manual/", "icon": "product-owners-manual", "label": "Owner&rsquo;s Manual", "sub": "How each of us works, written down"},
+        {"href": "executive-coaching/", "icon": "product-coaching", "label": "Executive coaching", "sub": "Six sessions, built on the OBD"}
+      ]
+    }
+  ],
+  "foot": [
+    {"href": "coaching-engagement/", "label": "How the engagement works", "sub": "The terms, before you have to ask"},
+    {"href": "diagnostic/", "label": "School and nonprofit diagnostics", "sub": "About two minutes, no email needed"},
+    {"href": "engine-check/", "label": "Engine check, free", "sub": "Your team on the lift, in two minutes"},
+    {"href": "free/", "label": "Free tools", "sub": "Diagnostics, templates and a chapter"}
+  ]
+}

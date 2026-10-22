@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Owner&rsquo;s Manual: team workshop – Goode Design &amp; Consulting</title>
+<meta name="description" content="Owner's Manual: a three-hour workshop where a small team turns each person's OBD into a manual for how they work, then swaps. Up to 15 people.">
+<link rel="canonical" href="https://thatsgoodedesign.com/owners-manual/">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" href="../assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="../assets/favicon/icon-512.png" type="image/png" sizes="512x512">
+<link rel="apple-touch-icon" href="../assets/favicon/apple-touch-icon.png">
+<meta property="og:site_name" content="Goode Design &amp; Consulting">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Owner&rsquo;s Manual: team workshop">
+<meta property="og:description" content="Owner's Manual: a three-hour workshop where a small team turns each person's OBD into a manual for how they work, then swaps. Up to 15 people.">
+<meta property="og:url" content="https://thatsgoodedesign.com/owners-manual/">
+<meta property="og:image" content="https://thatsgoodedesign.com/assets/om/om-workbook-og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Owner&rsquo;s Manual: team workshop">
+<meta name="twitter:description" content="Owner's Manual: a three-hour workshop where a small team turns each person's OBD into a manual for how they work, then swaps. Up to 15 people.">
+<meta name="twitter:image" content="https://thatsgoodedesign.com/assets/om/om-workbook-og.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&amp;display=swap">
+<link rel="stylesheet" href="../assets/style.css?v=17">
+<link rel="stylesheet" href="../assets/gdc-nav.css?v=18">
+<link rel="stylesheet" href="../assets/products.css?v=6">
+<script src="../assets/gdc-analytics.js?v=12"></script>
+<script src="../assets/gdc-nav.js?v=18" defer></script>
+<style>
+  /* Owner's Manual page (13 Oct 2026): content drawn from the workshop's
+     template, facilitator guide and pre-work pack. */
+  .om-sections { list-style: none; margin: 26px 0 0; padding: 0; display: grid; gap: 14px; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  @media (max-width: 1100px) { .om-sections { grid-template-columns: repeat(2, minmax(0, 1fr)); } .om-sections li:last-child { grid-column: 1 / -1; } }
+  @media (max-width: 620px) { .om-sections { grid-template-columns: minmax(0, 1fr); } }
+  .om-sections li { background: var(--paper); border: 1px solid var(--rule); border-top: 3px solid var(--gold); padding: 18px 20px; }
+  .om-sections .n { display: block; font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-ink); margin: 0 0 6px; }
+  .om-sections h3 { font-size: 18px; margin: 0 0 8px; color: var(--ink); }
+  .om-sections .stem { font-size: 15px; color: var(--muted); margin: 0 0 10px; font-style: italic; }
+  .om-sections .ex { font-size: 15px; line-height: 1.5; color: var(--ink); margin: 0; }
+  .om-tests { margin: 18px 0 0; display: grid; gap: 14px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .om-tests div { border-left: 3px solid var(--gold); padding: 2px 0 2px 16px; }
+  .om-tests b { display: block; color: var(--ink); font-size: 17px; margin-bottom: 4px; }
+  .om-tests span { font-size: 15px; color: var(--body); }
+  .om-arc { display: grid; gap: 28px; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 26px; }
+  .om-arc h3 { font-size: 20px; margin: 0 0 4px; color: var(--ink); }
+  .om-arc .when { font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-ink); margin: 0 0 6px; }
+  .om-arc ul { margin: 12px 0 0; padding-left: 18px; font-size: 15px; line-height: 1.5; color: var(--body); }
+  .om-arc li { margin: 0 0 8px; }
+  .om-arc li b { color: var(--ink); }
+  .om-rules { margin: 24px 0 0; padding: 0; list-style: none; display: grid; gap: 16px 28px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .om-rules li { font-size: 16px; line-height: 1.5; color: var(--body); }
+  .om-rules b { display: block; color: var(--ink); font-size: 17px; margin-bottom: 4px; }
+  @media (max-width: 860px) { .om-arc, .om-tests, .om-rules { grid-template-columns: minmax(0, 1fr); } }
+  /* Worked example, shown as a sheet of paper (mirrors the OBD sample). */
+  .om-gap { margin-top: clamp(40px, 5vw, 56px); }
+  .om-h3 { font-size: 20px; font-weight: 700; line-height: 1.3; color: var(--ink); margin: 0 0 14px; }
+  .om-cover { margin: 0 0 22px; }
+  .om-cover.om-wb { margin: 26px 0 0; }
+  .om-cover img { display: block; width: 100%;  height: auto; border: 1px solid var(--rule-2); box-shadow: 0 18px 40px -24px rgba(36,36,39,.35); }
+  .om-cover figcaption { font-size: 13px; color: var(--muted); margin-top: 8px; }
+  .om-sample { position: relative; background: #fff; border: 1px solid var(--rule-2);
+    box-shadow: 0 18px 40px -24px rgba(36,36,39,.35); padding: 30px 30px 0;
+    max-height: 520px; overflow: hidden; transition: max-height .4s ease; }
+  .om-sample::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+    height: 120px; background: linear-gradient(rgba(255,255,255,0), #fff); }
+  .om-sample-tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--gold-ink); border: 1px solid var(--gold); padding: 4px 8px; margin: 0 0 18px; }
+  .om-sample h3 { font-size: 20px; font-weight: 800; color: var(--ink); margin: 0 0 4px; }
+  .om-sample .om-sample-who { font-size: 13px; color: var(--muted); margin: 0 0 18px;
+    padding-bottom: 14px; border-bottom: 1px solid var(--rule); }
+  .om-sample h4 { display: flex; gap: 10px; align-items: baseline; font-size: 12px; font-weight: 700;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--ink); margin: 18px 0 6px; }
+  .om-sample h4 span { color: var(--gold-ink); }
+  .om-sample p { font-size: 15px; line-height: 1.6; margin: 0 0 6px; color: var(--body); }
+  .om-sample .from { font-size: 12px; color: var(--muted); margin: 0 0 4px; }
+  .om-sample .from b { font-weight: 700; color: var(--gold-ink); letter-spacing: .06em; text-transform: uppercase; font-size: 11px; margin-right: 6px; }
+  .om-three { margin: 22px 0 0; padding: 14px 16px; background: var(--paper); border-left: 3px solid var(--gold); }
+  .om-three p { font-size: 14px; margin: 0; }
+  .om-sample .om-sample-end { font-size: 13px; color: var(--muted); font-style: italic;
+    margin: 18px 0 0; padding-top: 12px; border-top: 1px solid var(--rule); }
+  .om-sample.is-open { max-height: none; padding-bottom: 26px; }
+  .om-sample.is-open::after { display: none; }
+  .om-sample-more { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 2;
+    cursor: pointer; font: inherit; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--ink); background: var(--gold); border: 1px solid var(--gold); padding: 11px 20px; white-space: nowrap; }
+  .om-sample-more:hover { background: var(--gold-hi); border-color: var(--gold-hi); }
+  .om-sample-more:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 3px; }
+  .om-sample.is-open .om-sample-more { position: static; transform: none; margin-top: 10px; background: transparent; border-color: var(--rule-2); }
+  @media (max-width: 520px) { .om-sample { padding: 24px 20px 0; } .om-sample-tag { letter-spacing: .1em; font-size: 10px; } }
+  /* The four-step arc (from the LinkedIn feature graphic, 13 Oct 2026). */
+  .om-steps { list-style: none; margin: 26px 0 0; padding: 0; display: grid; gap: 0; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--rule); }
+  .om-steps li { position: relative; padding: 26px 22px 6px; border-left: 1px solid var(--rule); }
+  .om-steps li:first-child { border-left: 0; padding-left: 0; }
+  .om-steps li::before { content: ""; position: absolute; top: -5px; left: 22px; width: 9px; height: 9px; background: var(--gold); transform: rotate(45deg); }
+  .om-steps li:first-child::before { left: 0; }
+  .om-steps .k { display: block; font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-ink); margin: 0 0 8px; }
+  .om-steps h3 { font-size: 19px; margin: 0 0 8px; color: var(--ink); }
+  .om-steps p { font-size: 15px; line-height: 1.5; color: var(--body); margin: 0; }
+  @media (max-width: 860px) {
+    .om-steps { grid-template-columns: minmax(0, 1fr); border-top: 0; border-left: 1px solid var(--rule); margin-left: 4px; }
+    .om-steps li, .om-steps li:first-child { border-left: 0; padding: 0 0 22px 22px; }
+    .om-steps li::before, .om-steps li:first-child::before { top: 6px; left: -5px; }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <a class="brand" href="../">
+    <picture>
+      <source media="(max-width: 370px)" srcset="../assets/gdc/gdc-mark.svg">
+      <source media="(max-width: 519px)" srcset="../assets/gdc/gdc-lockup-short.svg">
+      <img src="../assets/gdc/gdc-lockup-header.svg" alt="Goode Design &amp; Consulting" width="269" height="52">
+    </picture>
+  </a>
+  <nav aria-label="Primary">
+    <a href="../system/">The system</a>
+    <div class="navmenu">
+      <button type="button" aria-expanded="false" aria-controls="menu-who">Who I help</button>
+      <ul class="navmenu-panel" id="menu-who" hidden>
+        <li><a href="../founders/">Founders and scaling firms<span>Coaching and fractional operations</span></a></li>
+        <li><a href="../schools/">Independent schools<span>Coaching, cohorts, in-service, advisory</span></a></li>
+        <li><a href="../nonprofits/">Nonprofit and public sector<span>Team development and facilitation</span></a></li>
+      </ul>
+    </div>
+    <div class="navmenu">
+      <button type="button" aria-expanded="false" aria-controls="menu-services">Services</button>
+      <ul class="navmenu-panel navmenu-wide" id="menu-services" hidden>
+        <li class="nmp-group nmp-co">
+          <p class="nmp-head">For companies</p>
+          <ul>
+            <li><a href="../products/#services">What a company can buy<span>One list, diagnostic to retained</span></a></li>
+            <li><a href="../lineup/">The lineup<span>Every product, side by side</span></a></li>
+            <li><a href="../one-pagers/">One-pagers<span>Every service as a PDF</span></a></li>
+            <li><a href="../products/#why">Why this is different<span>Five structural differences, not adjectives</span></a></li>
+          </ul>
+        </li>
+        <li class="nmp-group nmp-sc">
+          <p class="nmp-head">For schools and nonprofits</p>
+          <ul>
+            <li><a href="../schools/#services">What a school can buy<span>Ten services, plainly named</span></a></li>
+            <li><a href="../schools/rates/">Published rates<span>Real numbers for a budget line</span></a></li>
+            <li><a href="../schools/#why">Why this is different<span>Twenty years inside a school</span></a></li>
+          </ul>
+        </li>
+        <li class="nmp-group nmp-products">
+          <p class="nmp-head">Products</p>
+          <ul>
+            <li><a href="../obd/"><svg class="nmp-ic" aria-hidden="true"><use href="../assets/icons/icons-clutch-sprite.svg#product-obd"/></svg>On-Board Diagnostic<span>Core, Leader, Leader + Team</span></a></li>
+            <li><a href="../psychological-safety/"><svg class="nmp-ic" aria-hidden="true"><use href="../assets/icons/icons-clutch-sprite.svg#product-psc"/></svg>Psychological Safety Check<span>Free, for one team</span></a></li>
+            <li><a href="../goodestart/"><svg class="nmp-ic" aria-hidden="true"><use href="../assets/icons/icons-clutch-sprite.svg#product-goodestart"/></svg>GoodeStart<span>The first ninety days, on purpose</span></a></li>
+            <li><a href="../building-the-bench/"><svg class="nmp-ic" aria-hidden="true"><use href="../assets/icons/icons-clutch-sprite.svg#product-bench"/></svg>Building the Bench<span>A cohort for the next seat</span></a></li>
+            <li><a href="../know-thyself/"><svg class="nmp-ic" aria-hidden="true"><use href="../assets/icons/icons-clutch-sprite.svg#product-know-thyself"/></svg>Know Thyself to Lead Others<span>A strengths workshop for a whole staff</span></a></li>
+            <li><a href="../owners-manual/" aria-current="page"><svg class="nmp-ic" aria-hidden="true"><use href="../assets/icons/icons-clutch-sprite.svg#product-owners-manual"/></svg>Owner&rsquo;s Manual<span>How each of us works, written down</span></a></li>
+            <li><a href="../executive-coaching/"><svg class="nmp-ic" aria-hidden="true"><use href="../assets/icons/icons-clutch-sprite.svg#product-coaching"/></svg>Executive coaching<span>Six sessions, built on the OBD</span></a></li>
+          </ul>
+        </li>
+        <li class="nmp-foot">
+          <a href="../coaching-engagement/">How the engagement works<span>The terms, before you have to ask</span></a>
+        </li>
+        <li class="nmp-foot">
+          <a href="../diagnostic/">School and nonprofit diagnostics<span>About two minutes, no email needed</span></a>
+        </li>
+        <li class="nmp-foot">
+          <a href="../engine-check/">Engine check, free<span>Your team on the lift, in two minutes</span></a>
+        </li>
+        <li class="nmp-foot">
+          <a href="../free/">Free tools<span>Diagnostics, templates and a chapter</span></a>
+        </li>
+      </ul>
+    </div>
+    <a href="../books/">Books</a>
+    <a href="../writing/">Writing</a>
+    <a href="../about/">About</a>
+    <a class="btn btn-sm" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=owners-manual-nav">Book a call</a>
+  </nav>
+</header>
+
+<main id="main" class="product product--kt">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="m-om" viewBox="0 0 24 24"><path d="M12 6.5 C10 5 6.5 4.5 3.5 5.5 V18.5 C6.5 17.5 10 18 12 19.5 C14 18 17.5 17.5 20.5 18.5 V5.5 C17.5 4.5 14 5 12 6.5 Z M12 6.5 V19.5"/></symbol><symbol id="m-obd" viewBox="0 0 24 24"><path d="M3 6.5 Q3 5 4.5 5 H19.5 Q21 5 21 6.5 L19 17.5 Q18.7 19 17.2 19 H6.8 Q5.3 19 5 17.5 Z M7 9.5 V10 M10.3 9.5 V10 M13.7 9.5 V10 M17 9.5 V10 M8.7 14 V14.5 M12 14 V14.5 M15.3 14 V14.5"/></symbol></svg>
+  <div class="product__rule" aria-hidden="true"></div>
+
+  <section class="hero hero-sub">
+    <div class="lockup">
+      <svg class="icon" aria-hidden="true"><use href="#m-om"/></svg>
+      <div>
+        <p class="lockup-ey">GOODE DESIGN</p>
+        <p class="lockup-name">Owner&rsquo;s Manual</p>
+        <p class="product__tier">Team workshop &middot; built on the OBD</p>
+      </div>
+    </div>
+    <h1>Write the manual for how you work. Then swap.</h1>
+    <p class="lede">A three-hour workshop for a small team that works together every
+      day. Each person turns their OBD into an Owner&rsquo;s Manual: how they lead,
+      what they need from colleagues, where their edges are. Then the team swaps, so
+      nobody has to guess how anyone else works.</p>
+    <p class="cta-row">
+      <a class="btn" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=om-hero">Book thirty minutes</a>
+      <a class="btn btn-ghost" href="#editions">For companies or for schools</a>
+    </p>
+    <figure class="pull-quote">
+      <blockquote><p>He got people talking about how they worked, what they were good at, and where they needed help from colleagues.</p></blockquote>
+      <figcaption><span class="q-name">Division Head</span><span class="q-role">Independent school</span></figcaption>
+    </figure>
+  </section>
+
+  <section class="band">
+    <div class="product__panel">
+      <h2 class="section-h">What is in it</h2>
+      <ul class="p-spec">
+        <li><b>A manual for each person</b>Written from their own OBD data, not a quiz on the day, so it holds up afterward.</li>
+        <li><b>The swap</b>Manuals are traded across the team, which is the part that changes how it works on Monday.</li>
+        <li><b>Built on the OBD</b>Every participant needs an <a href="../obd/">OBD</a>, invoiced separately. The manual can&rsquo;t be written without it.</li>
+        <li><b>Up to 15 people</b>For an admin, executive or product team that works together daily. Three hours on its own, or a full day with <a href="../know-thyself/">Know Thyself to Lead Others</a>.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- The arc, one OBD to a team that works. Pattern line from the LinkedIn
+       feature, 13 Oct 2026. -->
+  <section class="band">
+    <p class="eyebrow">Individual diagnostics, made legible to the whole team</p>
+    <h2 class="section-h">From one OBD to a team that works</h2>
+    <ol class="om-steps">
+      <li><span class="k">01 / Diagnose</span><h3>The OBD read</h3>
+        <p>Each person&rsquo;s CliftonStrengths&reg; and EQ-i results, read together through CREATE and VOICES.</p></li>
+      <li><span class="k">02 / Translate</span><h3>The Owner&rsquo;s Manual</h3>
+        <p>Each person writes one page: at my best, what I need, what you can expect, my flex gear, my basement tell.</p></li>
+      <li><span class="k">03 / Read together</span><h3>The swap</h3>
+        <p>The manuals are traded, and the pattern everyone has been managing around gets named out loud.</p></li>
+      <li><span class="k">04 / Agree</span><h3>Working agreements</h3>
+        <p>Up to five, written against real data instead of good intentions, and checked at day 60.</p></li>
+    </ol>
+    <p class="lede" style="margin-top:30px;">Run across a team, the manuals show the pattern it has been managing around silently: three Operators and no Visionary, a Command default in a room that needs Consultative, four people waiting on the same person to decide. Naming it turns private friction into a design problem the team can solve.</p>
+  </section>
+
+  <!-- What goes on the page: the five sections of the template (v2), each
+       with its stem and a line from the worked example. -->
+  <section class="band alt">
+    <p class="eyebrow">One page, five sections</p>
+    <h2 class="section-h">How to work with me, on one page</h2>
+    <ol class="om-sections">
+      <li><span class="n">1</span><h3>At my best</h3>
+        <p class="stem">When I&rsquo;m at my best, I ___, so you get ___.</p>
+        <p class="ex">&ldquo;When I&rsquo;m at my best, I map the path through the mess, so you get a next step, not just a meeting.&rdquo;</p></li>
+      <li><span class="n">2</span><h3>What I need</h3>
+        <p class="stem">I do my best work when ___. Help me by ___.</p>
+        <p class="ex">&ldquo;I do my best work with time to think. Send me the question the day before.&rdquo;</p></li>
+      <li><span class="n">3</span><h3>What you can expect</h3>
+        <p class="stem">Even on a bad week, you can count on me to ___.</p>
+        <p class="ex">&ldquo;Even on a bad week, I&rsquo;ll tell you whether a decision is open or already made.&rdquo;</p></li>
+      <li><span class="n">4</span><h3>My flex gear</h3>
+        <p class="stem">The gear I&rsquo;m growing into is ___. It costs me ___, and ___ has been waiting on it.</p>
+        <p class="ex">&ldquo;Operator. Closing loops costs me, so I run on lists, and my project leads have been waiting for decisions on Fridays.&rdquo;</p></li>
+      <li><span class="n">5</span><h3>My basement tell</h3>
+        <p class="stem">Under pressure, my ___ turns into ___. What helps is ___.</p>
+        <p class="ex">&ldquo;Under pressure I go quiet. Quiet means I&rsquo;m thinking, not upset. Ask what I&rsquo;m chewing on.&rdquo;</p></li>
+    </ol>
+    <p class="lede" style="margin-top:30px;">Every line has to pass three tests before it goes in.</p>
+    <div class="om-tests">
+      <div><b>Specific</b><span>It could only be about you.</span></div>
+      <div><b>Usable</b><span>It tells someone what to do on Monday.</span></div>
+      <div><b>Honest</b><span>It includes a cost or a bad day.</span></div>
+    </div>
+    <p class="lede" style="margin-top:30px;"><b>What the team leaves with:</b> a one-page manual each, a three-line version for a profile or email signature, a shared &ldquo;How we work&rdquo; page that new joiners read in their first week, and up to five working agreements written against real data rather than good intentions.</p>
+
+    <!-- Worked example. Sam is the fictional leader from the template's
+         worked example and the deck (template v2, deck v2). -->
+    <div class="book-wrap om-gap">
+      <div>
+        <h3 class="om-h3">What a finished manual looks like</h3>
+        <p>One page, five sections, each line tested. Every section notes
+          where the line came from in the writer&rsquo;s OBD, so the page is
+          built on evidence, not on a good mood.</p>
+        <p>The sample is Sam, the fictional leader from the workshop&rsquo;s
+          worked example. Yours is written by you, in your words, and you
+          decide who sees it.</p>
+        <figure class="om-cover om-wb">
+          <img src="../assets/om/om-workbook-og.jpg" width="1200" height="630" loading="lazy"
+               alt="The Owner's Manual workbook open on a table. Page 5, Where the instruments agree, is filled in by hand by Sam, a fictional leader: Intellection and low Emotional Expression both say I process inside first; Relator says close people matter most, low Assertiveness says I rarely ask them for anything; the line this gives me is quiet means I'm thinking, not upset, ask what I'm chewing on. The facing page shows ticks, stars and question marks beside lines of an OBD read.">
+          <figcaption>The workbook, open at page 5, filled in by Sam. This is where the OBD turns into lines for the manual.</figcaption>
+        </figure>
+      </div>
+      <article class="om-sample" aria-label="Sample Owner's Manual for a fictional leader">
+        <p class="om-sample-tag">Sample · fictional leader</p>
+        <h3>How to work with Sam</h3>
+        <p class="om-sample-who">One page. I&rsquo;ll revisit it in sixty days.</p>
+        <h4><span>1</span>At my best</h4>
+        <p>When I&rsquo;m at my best, I map the path through the mess, so you get a next step, not just a meeting.</p>
+        <p class="from"><b>From my OBD</b>Strategic, Ideation</p>
+        <h4><span>2</span>What I need</h4>
+        <p>I do my best work with time to think. Send me the question the day before, and give me a day before I respond to feedback.</p>
+        <p class="from"><b>From my OBD</b>Intellection; a colleague&rsquo;s view</p>
+        <h4><span>3</span>What you can expect</h4>
+        <p>Even on a bad week, I&rsquo;ll tell you whether a decision is open or already made. When I ask for input, I&rsquo;ll say what I&rsquo;ll do with it.</p>
+        <p class="from"><b>From my OBD</b>Consultative default</p>
+        <h4><span>4</span>My flex gear</h4>
+        <p>Operator. Closing loops costs me, so I run on lists, and my project leads have been waiting for decisions on Fridays. If something&rsquo;s slipping, tell me early.</p>
+        <p class="from"><b>From my OBD</b>Visionary home</p>
+        <h4><span>5</span>My basement tell</h4>
+        <p>Under pressure I go quiet. Quiet means I&rsquo;m thinking, not upset. Ask what I&rsquo;m chewing on.</p>
+        <p class="from"><b>From my OBD</b>Intellection; low Emotional Expression</p>
+        <div class="om-three">
+          <p><b>The three-line version</b>, for a profile or email signature:<br>
+          Send me the question a day early. &middot; I&rsquo;ll always say whether a decision is open or made. &middot; If I go quiet, I&rsquo;m thinking: ask what I&rsquo;m chewing on.</p>
+        </div>
+        <p class="om-sample-end">Fictional leader, written to show the shape of the page.</p>
+        <button type="button" class="om-sample-more" aria-expanded="false">See the whole page</button>
+      </article>
+    </div>
+    <script>
+      (function () {
+        var card = document.querySelector('.om-sample');
+        var btn = card && card.querySelector('.om-sample-more');
+        if (!btn) return;
+        btn.addEventListener('click', function () {
+          var open = card.classList.toggle('is-open');
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+          btn.textContent = open ? 'Show less' : 'See the whole page';
+          if (!open) card.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        });
+      })();
+    </script>
+  </section>
+
+  <!-- How it runs: before, the three hours, after (facilitator guide v2 and
+       pre-work pack v2). -->
+  <section class="band">
+    <h2 class="section-h">How it runs</h2>
+    <div class="om-arc">
+      <div>
+        <p class="when">Two weeks before</p>
+        <h3>Ready before the room</h3>
+        <ul>
+          <li><b>Every OBD done.</b> No OBD, no manual.</li>
+          <li><b>A baseline.</b> The team takes the <a href="../psychological-safety/">Psychological Safety Check</a>, so day 60 has something to compare against.</li>
+          <li><b>The lead goes first.</b> On a thirty-minute call, the lead writes their manual, bad day included, and it goes out to the team.</li>
+          <li><b>Twenty minutes of pre-work.</b> Read your OBD summary, and ask one colleague two questions: what do I look like under pressure, and what&rsquo;s the best way to give me feedback?</li>
+        </ul>
+      </div>
+      <div>
+        <p class="when">Three hours</p>
+        <h3>Write it, then swap it</h3>
+        <ul>
+          <li><b>Harvest.</b> Mark what your OBD gets right, what surprises you and what you push back on, then set it against your colleague&rsquo;s view.</li>
+          <li><b>Gears.</b> Your home gear and flex gear on the six VOICES modes, and your first move on the 6C Decision Compass.</li>
+          <li><b>Write.</b> The five sections, one at a time, each line tested.</li>
+          <li><b>Swap.</b> Pairs read each other&rsquo;s manuals, say one line back in their own words, and ask questions. No advice.</li>
+          <li><b>Team.</b> The team gearbox, and up to five agreements: &ldquo;When ___, we will ___.&rdquo;</li>
+        </ul>
+      </div>
+      <div>
+        <p class="when">Sixty days after</p>
+        <h3>Make it hold</h3>
+        <ul>
+          <li><b>Within two days,</b> the team&rsquo;s &ldquo;How we work&rdquo; page: agreements, gearbox and an owner.</li>
+          <li><b>Weeks two and three,</b> fifteen minutes in a team meeting: one line back from a colleague&rsquo;s reply, lead first.</li>
+          <li><b>Day 60,</b> everyone marks each manual line &ldquo;true&rdquo;, &ldquo;partly&rdquo; or &ldquo;not yet&rdquo;, the Safety Check runs again, and we rewrite what didn&rsquo;t hold.</li>
+          <li><b>The sponsor</b> gets a one-page summary: which agreements held and what moved. Never anyone&rsquo;s manual.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- The rules in the room (facilitator guide v2, "Your standards"). -->
+  <section class="band alt">
+    <h2 class="section-h">The rules in the room</h2>
+    <ul class="om-rules">
+      <li><b>You choose every line.</b>Nothing from your OBD reaches the room unless you write it in yourself, and you decide whether your manual goes in the team folder.</li>
+      <li><b>The lead goes first.</b>People write as honestly as the most senior person in the room, so the lead reads their basement tell aloud in the first ten minutes.</li>
+      <li><b>Curiosity, not advice.</b>In the swap, readers ask questions. Nobody fixes anyone.</li>
+      <li><b>Say it, then write it.</b>Some of us think better out loud. Talk an answer through with a partner or into your phone, and write it down after.</li>
+    </ul>
+  </section>
+
+  <section class="band" id="editions">
+    <h2 class="section-h">Editions</h2>
+    <div class="editions">
+      <article class="edition">
+        <p class="product__tier">Organizations edition</p>
+        <h3>For companies</h3>
+        <p>For an admin, executive or product team that works together daily, up to 15 people. Every participant needs an OBD, invoiced separately. Priced on a call.</p>
+        <a class="link-arrow" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=om-companies">Book thirty minutes</a>
+      </article>
+      <article class="edition">
+        <p class="product__tier">Schools edition</p>
+        <h3>For schools</h3>
+        <p>For an administrative or leadership team that works together daily, up to 15 people. $2,500 per session. Every participant needs an OBD, invoiced separately.</p>
+        <a class="link-arrow" href="../schools/rates/">Published rates</a>
+      </article>
+      <article class="edition">
+        <p class="product__tier">Full day</p>
+        <h3>With Know Thyself to Lead Others</h3>
+        <p>Book it with Know Thyself to Lead Others. Read your results first, then write the manual and swap. Schools: $4,500 for the day. Companies: priced on a call.</p>
+        <a class="link-arrow" href="../know-thyself/">About Know Thyself</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="band alt book-call">
+    <p class="eyebrow">Next step</p>
+    <h2 class="section-h big">Thirty minutes on the manual your team needs</h2>
+    <p class="cta-row center">
+      <a class="btn btn-lg" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=om-close">Book thirty minutes</a>
+    </p>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="foot-in">
+    <div>
+      <img src="../assets/gdc/gdc-mark.svg" alt="" width="34" height="34">
+      <p class="foot-name">Goode Design &amp; Consulting</p>
+      <p class="foot-meta">Washington, DC · Baltimore · New York · Boston · Available globally</p>
+    <ul class="socials" aria-label="Elsewhere">
+      <li><a href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=owners-manual-footer" title="Book a time"><img src="../assets/icon-calendly.png" alt="Book a time with Matt Goode"></a></li>
+      <li><a href="https://www.linkedin.com/in/goodematt/" title="LinkedIn"><img src="../assets/icon-linkedin.png" alt="Matt Goode on LinkedIn"></a></li>
+      <li><a href="https://thatsgoodedesign.substack.com/" title="The Leadership Lab on Substack"><img src="../assets/icon-substack.png" alt="The Leadership Lab on Substack"></a></li>
+      <li><a href="mailto:matt@thatsgoodedesign.com" title="Email"><img src="../assets/icon-email.png" alt="Email Matt Goode"></a></li>
+    </ul>
+    </div>
+    <nav aria-label="Footer">
+      <a href="../system/">The system</a>
+      <a href="../products/">Products</a>
+      <a href="../obd/">The OBD</a>
+      <a href="../schools/">Schools</a>
+      <a href="../coaching-engagement/">How it works</a>
+      <a href="../engine-check/">Free engine check</a>
+      <a href="../free/">Free tools</a>
+      <a href="../books/">Books</a>
+      <a href="../writing/">Writing</a>
+      <a href="../about/">About</a>
+      <a href="mailto:matt@thatsgoodedesign.com">Contact</a>
+      <a href="../terms/">Terms</a>
+      <a href="../privacy/">Privacy</a>
+    </nav>
+  </div>
+  <p class="foot-legal">© 2026 Goode Design &amp; Consulting. CliftonStrengths®,
+    StrengthsFinder® and the 34 theme names are trademarks of Gallup, Inc.
+    EQ-i 2.0 is a trademark of Multi-Health Systems Inc. Matt Goode is a
+    Gallup-Certified Strengths Coach.
+    <br><br>
+    The non-Gallup information you are receiving has not been approved and is not
+    sanctioned or endorsed by Gallup in any way. Opinions, views and
+    interpretations of CliftonStrengths®, Clifton Youth StrengthsExplorer or
+    BP10 results are solely the beliefs of Goode Design &amp; Consulting.</p>
+</footer>
+
+</body>
+</html>

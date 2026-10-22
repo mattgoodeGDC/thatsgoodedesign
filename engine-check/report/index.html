@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Engine check full report (run:os, 19 Oct 2026, CLUTCH-84): rebuilt from ?k=
+     the report key, same compute() and copy as the readout and the email.
+     Printable: Save as PDF uses the browser print dialog.
+     Engine check v1 (WEBSITE, 15 Oct 2026, CLUTCH-84). Copy: "CLUTCH - Engine
+     check - Block library v0.3". Logic and records: assets/flight-check/.
+     16 Oct: start screen conversion pass (Launch sign-offs, 16 Oct). -->
+<title>Your engine check report – Goode Design &amp; Consulting</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="description" content="Find out where your team loses momentum and what to fix first.">
+<meta property="og:title" content="The engine check">
+<meta property="og:description" content="Find out where your team loses momentum and what to fix first.">
+<meta property="og:url" content="https://thatsgoodedesign.com/engine-check/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://thatsgoodedesign.com/assets/flight-check/engine-check-og.png?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://thatsgoodedesign.com/assets/flight-check/engine-check-og.png?v=2">
+<!-- 19 Oct 2026 (run:os, CLUTCH-84): engine check mark (VISUALS, mark C). Favicon is the
+     chartreuse rounded avatar; link preview is the ink lockup. -->
+<link rel="icon" href="../../assets/flight-check/engine-check-favicon-32.png?v=2" type="image/png" sizes="32x32">
+<link rel="icon" href="../../assets/flight-check/engine-check-icon-512.png?v=2" type="image/png" sizes="512x512">
+<link rel="apple-touch-icon" href="../../assets/flight-check/engine-check-apple-touch-icon.png?v=2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&amp;display=swap">
+<link rel="stylesheet" href="../../assets/style.css?v=17">
+<link rel="stylesheet" href="../../assets/gdc-nav.css?v=18">
+<style>
+/* Engine check (CLUTCH flight check 1 of 4). The site is light-only, so the
+   page pins color-scheme to light: a phone in dark mode gets the same paper
+   ground and light form controls as every other page. VISUALS round 1:
+   the arc progress gauge, warning lights per cylinder, the CREATE icon. */
+:root { color-scheme: light; }
+.fc-band { padding-block: clamp(28px, 6vw, 72px) clamp(48px, 8vw, 96px); padding-inline: max(16px, var(--gut), calc((100% - 760px) / 2)); }
+#fc-root { max-width: 720px; margin: 0 auto; scroll-margin-top: 96px; }
+.fc-screen { display: grid; gap: 22px; }
+.fc-screen[hidden] { display: none; }
+.fc-hero { background: var(--ink); color: var(--paper); padding: clamp(24px, 5vw, 40px); margin-inline: calc(-1 * clamp(0px, 2vw, 16px)); }
+.fc-hero .eyebrow { color: var(--gold); margin-bottom: 12px; }
+.fc-hero h1 { color: var(--paper); font-size: clamp(34px, 7vw, 56px); font-weight: 800; line-height: 1.02; letter-spacing: -.028em; margin: 0 0 14px; }
+.fc-icon { width: 64px; height: 64px; margin: 0 0 18px; filter: drop-shadow(0 0 18px rgba(202,215,63,.45)); }
+.fc-rmark { display: block; width: 40px; height: 40px; margin: 0 0 8px; }
+.fc-lede { margin: 0; font-size: clamp(17px, 2.4vw, 20px); line-height: 1.5; color: #E7E4DC; max-width: 46ch; }
+.fc-rules { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; counter-reset: r; }
+.fc-rules li { position: relative; padding-left: 46px; font-size: 16px; line-height: 1.55; color: var(--body); counter-increment: r; }
+.fc-rules li::before { content: "0" counter(r); position: absolute; left: 0; top: 0; font-weight: 800; font-size: 14px; letter-spacing: .06em; color: var(--gold-ink); }
+/* Must fix 1 (VISUALS audit, 16 Oct): equal thirds, 14 px gap, number over word. */
+.fc-counts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 14px; border-block: 1px solid var(--rule); padding-block: 16px; }
+.fc-counts div { display: grid; align-content: start; min-width: 0; }
+.fc-counts b { font-size: 28px; font-weight: 800; letter-spacing: -.02em; line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; }
+.fc-counts .fc-w { font-size: 14px; font-weight: 800; line-height: 1.25; color: var(--ink); margin-top: 2px; }
+.fc-counts span { font-size: 12px; line-height: 1.35; color: var(--muted); margin-top: 3px; }
+@media (min-width: 561px) {
+  .fc-counts div { display: block; }
+  .fc-counts .fc-w { font-size: 28px; line-height: 1; letter-spacing: -.02em; margin: 0 0 0 .25em; }
+  .fc-counts span { display: block; }
+}
+.fc-privacy { margin: 0; font-size: 14px; line-height: 1.55; color: var(--muted); border-left: 3px solid var(--rule-2); padding-left: 14px; max-width: 60ch; }
+.fc-row { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; }
+.fc-root button { font-family: inherit; }
+#fc-root .btn { cursor: pointer; font-family: inherit; }
+.fc-link { border: 0; background: none; padding: 8px 0; font: 600 15px Montserrat, sans-serif; color: var(--body); text-decoration: underline; text-decoration-color: var(--gold-ink); text-underline-offset: 4px; cursor: pointer; }
+.fc-note { font-size: 14px; color: var(--muted); margin: 0; }
+
+/* Statement screen */
+.fc-top { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; }
+.fc-gauge { width: min(200px, 52vw); }
+.fc-arc { display: block; width: 100%; height: auto; overflow: visible; }
+.fc-arc path { fill: none; stroke: var(--rule); stroke-width: 15; transition: stroke .2s; }
+.fc-arc path.done { stroke: var(--ink); }
+.fc-arc path.now { stroke: var(--gold); }
+.fc-arc-n { font: 800 38px Montserrat, sans-serif; fill: var(--ink); text-anchor: middle; letter-spacing: -.02em; }
+.fc-arc-of { font: 600 12px Montserrat, sans-serif; fill: var(--muted); text-anchor: middle; letter-spacing: .12em; text-transform: uppercase; }
+.fc-clockbox { display: grid; justify-items: end; gap: 2px; padding-bottom: 6px; }
+.fc-k { font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+#fc-clock { font-size: 28px; font-weight: 800; letter-spacing: -.01em; color: var(--ink); font-variant-numeric: tabular-nums; }
+#fc-clock.low { color: var(--burgundy); }
+#fc-clock.paused { color: var(--muted); }
+.fc-card { background: var(--paper); border: 1px solid var(--rule); border-top: 3px solid var(--ink); padding: 22px 20px; display: grid; gap: 20px; min-height: 26rem; align-content: start; }
+.fc-card[hidden] { display: none; }
+.fc-cardtop { display: flex; justify-content: space-between; align-items: center; }
+.fc-cardtop .eyebrow { margin: 0; color: var(--gold-ink); }
+.fc-count { font-size: 34px; font-weight: 800; line-height: 1; color: var(--gold-ink); font-variant-numeric: tabular-nums; min-width: 2ch; text-align: right; }
+.fc-count.over { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+.fc-stmt { margin: 0; font-size: clamp(25px, 6.4vw, 34px); font-weight: 800; line-height: 1.15; letter-spacing: -.02em; color: var(--ink); text-wrap: balance; min-height: 2.3em; }
+.fc-nudge { height: 4px; background: var(--rule); overflow: hidden; }
+.fc-nudge i { display: block; height: 100%; background: var(--gold); transform-origin: left; }
+.fc-nudge.run i { animation: fc-drain var(--nudge, 8s) linear forwards; }
+@keyframes fc-drain { to { transform: scaleX(0); } }
+.fc-answers { display: grid; gap: 8px; }
+.fc-answers button { display: flex; justify-content: space-between; align-items: center; text-align: left; padding: 15px 16px; min-height: 52px; font: 600 16px Montserrat, sans-serif; color: var(--ink); background: var(--paper); border: 1px solid var(--rule-2); cursor: pointer; }
+.fc-answers kbd { font: 700 12px Montserrat, sans-serif; color: var(--muted); border: 1px solid var(--rule-2); padding: 1px 7px; }
+.fc-answers button.picked { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.fc-answers button.picked kbd { color: var(--paper); border-color: var(--paper); }
+@media (hover: hover) { .fc-answers button:hover { border-color: var(--gold-ink); } }
+@media (hover: none) { .fc-keys { display: none; } }
+.flash { animation: fc-in .22s ease; }
+@keyframes fc-in { from { opacity: .35; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.fc-inter { background: var(--paper-alt); border-left: 4px solid var(--gold); padding: 30px 22px; display: grid; gap: 12px; min-height: 26rem; align-content: center; }
+.fc-inter[hidden] { display: none; }
+.fc-inter .eyebrow { margin: 0; color: var(--gold-ink); }
+.fc-inter h2 { margin: 0; font-size: clamp(28px, 7vw, 40px); font-weight: 800; line-height: 1.08; letter-spacing: -.02em; color: var(--ink); }
+.fc-inter p { margin: 0; font-size: 17px; line-height: 1.6; max-width: 52ch; }
+.fc-autobar { height: 3px; background: var(--rule); overflow: hidden; }
+.fc-autobar i { display: block; height: 100%; background: var(--gold); transform-origin: left; animation: fc-drain var(--auto, 3s) linear forwards; }
+.fc-foot[hidden] { display: none; }
+
+/* Readout */
+.fc-tag { justify-self: start; margin: 0; font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; padding: 5px 10px; background: var(--paper-3); color: var(--gold-ink); }
+.fc-readhead h2 { margin: 0 0 10px; font-size: clamp(30px, 6.4vw, 46px); font-weight: 800; line-height: 1.05; letter-spacing: -.025em; color: var(--ink); text-wrap: balance; }
+.fc-readhead .eyebrow { margin-bottom: 10px; }
+.fc-patline { margin: 0 0 22px; font-size: 18px; line-height: 1.55; max-width: 56ch; }
+.fc-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.fc-stats div { border-top: 3px solid var(--ink); padding-top: 10px; display: grid; gap: 2px; }
+.fc-stats b { font-size: clamp(34px, 8vw, 46px); font-weight: 800; line-height: 1; letter-spacing: -.03em; color: var(--ink); font-variant-numeric: tabular-nums; }
+.fc-stats span { font-size: 14px; color: var(--muted); }
+.fc-panel { background: var(--paper); border: 1px solid var(--rule); padding: 22px 20px; display: grid; gap: 14px; min-width: 0; }
+.fc-panel h3, .fc-focus h3, .fc-cta h3 { margin: 0; font-size: 20px; font-weight: 800; line-height: 1.2; color: var(--ink); }
+.fc-enginepanel { background: var(--ink); border-color: var(--ink); color: #D9D6CE; }
+.fc-engine { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; align-items: end; }
+.fc-cyl { --c: #C25A68; display: grid; justify-items: center; gap: 6px; text-align: center; min-width: 0; }
+.fc-cyl.rough { --c: var(--gold); }
+.fc-cyl.clean { --c: #4FB08A; }
+.fc-light { width: 16px; height: 16px; border-radius: 50%; background: var(--c); box-shadow: 0 0 12px 2px color-mix(in srgb, var(--c) 60%, transparent); }
+.fc-cyl.clean .fc-light { box-shadow: none; opacity: .9; }
+.fc-bar { position: relative; width: 100%; max-width: 54px; height: 140px; background: #2E2E32; border: 1px solid #3A3A3F; overflow: hidden; }
+.fc-bar::before, .fc-bar::after { content: ""; position: absolute; left: 0; right: 0; border-top: 1px dashed #6A6870; z-index: 1; }
+.fc-bar::before { bottom: calc(18 / 27 * 100%); }
+.fc-bar::after { bottom: calc(10 / 27 * 100%); }
+.fc-bar i { position: absolute; left: 0; right: 0; bottom: 0; background: var(--c); transition: height .6s ease; }
+.fc-cyl b { font-size: 17px; font-weight: 800; color: var(--paper); font-variant-numeric: tabular-nums; }
+.fc-cyl small { font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--paper); }
+.fc-cyl em { font-style: normal; font-size: 10px; line-height: 1.2; font-weight: 600; color: var(--c); }
+.fc-legend { margin: 0; display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12px; color: #B7B3A9; }
+.fc-legend span::before { content: ""; display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; vertical-align: 0; background: #C25A68; }
+.fc-legend .rough::before { background: var(--gold); }
+.fc-legend .clean::before { background: #4FB08A; }
+.fc-candor { --c: #C25A68; border-top: 1px solid #3A3A3F; padding-top: 14px; display: grid; gap: 8px; }
+.fc-candor.rough { --c: var(--gold); }
+.fc-candor.clean { --c: #4FB08A; }
+.fc-candor-top { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+.fc-candor-top b { color: var(--paper); font-size: 15px; }
+.fc-candor-top span { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--c); }
+.fc-meter { height: 8px; background: #2E2E32; border: 1px solid #3A3A3F; }
+.fc-meter i { display: block; height: 100%; background: var(--c); }
+.fc-candor p { margin: 0; font-size: 15px; line-height: 1.55; }
+.fc-enginepanel .fc-book { color: #B7B3A9; }
+.fc-book { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.fc-focus { border-left: 4px solid var(--gold); background: var(--paper-alt); padding: 22px 20px; display: grid; gap: 12px; }
+.fc-focus .eyebrow, .fc-lean .eyebrow { margin: 0; }
+.fc-focus p { margin: 0; line-height: 1.6; }
+.fc-focus ol { margin: 0; padding-left: 1.3em; display: grid; gap: 8px; line-height: 1.55; }
+.fc-startq { font-size: 18px; font-weight: 700; line-height: 1.45; color: var(--ink); }
+.fc-upstream { padding: 10px 14px; background: var(--paper); border: 1px solid var(--rule-2); font-size: 15px; }
+.fc-lean { border-left: 4px solid var(--green-rule); padding: 4px 0 4px 18px; display: grid; gap: 8px; }
+.fc-lean p { margin: 0; line-height: 1.6; }
+.fc-flags { display: grid; gap: 12px; }
+.fc-flag { border: 1px dashed var(--burgundy); padding: 14px 16px; display: grid; gap: 6px; font-size: 15px; line-height: 1.55; }
+.fc-flag strong { color: var(--ink); }
+.fc-qs { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.fc-qs li { font-size: 20px; font-weight: 700; line-height: 1.35; color: var(--ink); padding-left: 16px; border-left: 3px solid var(--gold); text-wrap: balance; }
+.fc-cta { background: var(--ink); color: #D9D6CE; padding: 26px 22px; display: grid; gap: 12px; justify-items: start; }
+.fc-cta h3 { color: var(--paper); font-size: 24px; }
+.fc-cta p { margin: 0; font-size: 17px; line-height: 1.55; }
+.fc-req { display: grid; gap: 14px; }
+.fc-req[hidden] { display: none; }
+.fc-field { display: grid; gap: 5px; }
+.fc-field label { font-size: 14px; font-weight: 700; color: var(--ink); }
+.fc-field input, .fc-field select { font: 500 16px Montserrat, sans-serif; padding: 12px; border: 1px solid var(--rule-2); background: #fff; color: var(--ink); border-radius: 0; width: 100%; }
+.fc-err { margin: 0; font-size: 14px; color: var(--burgundy); }
+.fc-done { margin: 0; font-size: 16px; font-weight: 400; line-height: 1.6; color: var(--body); }
+.fc-done strong { color: var(--green); font-weight: 800; }
+.fc-done .fc-addr { overflow-wrap: break-word; font-weight: 600; color: var(--ink); }
+.fc-how { font-size: 15px; color: var(--body); }
+.fc-how summary { cursor: pointer; font-weight: 700; color: var(--ink); }
+.fc-how p { margin: 10px 0 0; line-height: 1.6; }
+/* 16 Oct revisions: rules before statement 1, button note, snapshot,
+   cta.web with cta.quote, hesitation list, confirm.next, example.end. */
+.fc-inter [hidden] { display: none; }
+.fc-inter .fc-rules li { font-size: 17px; color: var(--ink); }
+/* CLUTCH-84: "How does the timing work?" under rule 03, opens in place. */
+.fc-timing-btn { display: table; margin: 10px 0 0; padding: 4px 0; background: none; border: 0; border-radius: 0; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; font: 600 16px/1.4 Montserrat, sans-serif; color: var(--gold-ink); text-align: left; cursor: pointer; }
+.fc-timing-btn::after { content: " +"; content: " +" / ""; }
+.fc-timing-btn[aria-expanded="true"]::after { content: " \2212"; content: " \2212" / ""; }
+.fc-timing-btn:hover { color: var(--ink); }
+.fc-timing { margin-top: 10px; border-left: 3px solid var(--rule-2); padding-left: 14px; display: grid; gap: 10px; max-width: 60ch; }
+.fc-timing p { margin: 0; font-size: 16px; line-height: 1.55; color: var(--body); overflow-wrap: anywhere; }
+.fc-snapshot { margin: 18px 0 0; font-size: 15px; line-height: 1.55; color: var(--body); max-width: 60ch; }
+.fc-cta { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+.fc-cta-ask { display: grid; gap: 12px; justify-items: start; }
+.fc-quote { margin: 0; border-left: 3px solid var(--gold); padding-left: 16px; display: grid; gap: 8px; }
+.fc-quote blockquote { margin: 0; font-size: 16px; line-height: 1.55; font-style: italic; color: var(--paper); }
+.fc-quote figcaption { font-size: 13px; color: #B7B3A9; }
+@media (min-width: 640px) { .fc-cta { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); align-items: center; } }
+/* Must fix 3: the booking button (cta.web and confirm.next) on one line. */
+#fc-root .fc-cta .btn, #fc-root .fc-next .btn { display: block; width: 100%; justify-self: stretch; padding: 16px 10px; font-size: 13px; letter-spacing: .08em; white-space: nowrap; text-align: center; }
+.fc-slow { margin: 4px 0; padding-left: 1.2em; display: grid; gap: 4px; font-weight: 600; color: var(--ink); }
+.fc-next { display: grid; gap: 12px; justify-items: start; border-top: 1px solid var(--rule); padding-top: 14px; }
+.fc-next[hidden] { display: none; }
+.fc-next p, .fc-exend p { margin: 0; font-size: 17px; line-height: 1.55; color: var(--ink); }
+
+/* Start screen conversion pass (16 Oct, block library v0.3 Launch sign-offs).
+   start.cred and start.quote sit in the dark panel under the promise; the
+   one-line start.privacy links to how.method; report.privacy sits above the
+   email field. */
+.fc-cred { margin: 14px 0 0; font-size: 15px; line-height: 1.5; color: #B7B3A9; max-width: 50ch; }
+.fc-startquote { margin-top: 18px; }
+.fc-startquote blockquote { font-size: 15px; color: #E7E4DC; }
+.fc-privacy a { color: var(--body); text-decoration-color: var(--gold-ink); text-underline-offset: 3px; white-space: nowrap; }
+#fc-start > .fc-link { justify-self: start; margin-top: -14px; }
+#fc-start > .fc-privacy { margin-top: -8px; }
+.fc-rprivacy { margin: 0; max-width: 60ch; }
+.fc-preview { display: none; }
+/* Desktop: the readout preview on the right of the dark panel, from the
+   example readout only. The start screen widens to make room; every other
+   screen keeps the 720 px column. */
+@media (min-width: 1024px) {
+  .fc-band:has(#fc-start:not([hidden])) { padding-inline: max(16px, var(--gut), calc((100% - 1000px) / 2)); }
+  #fc-root:has(#fc-start:not([hidden])) { max-width: 960px; }
+  .fc-hero { display: grid; grid-template-columns: minmax(0, 1fr) 236px; gap: 44px; align-items: center; }
+  .fc-preview { display: block; width: 100%; height: auto; border: 1px solid #3A3A3F; box-shadow: 0 18px 44px rgba(0,0,0,.45); }
+}
+/* Quiet the header booking ask on /engine-check/ only: a text link, so the
+   page's one job is the start button. */
+.nav nav a.nav-quiet, .has-navtoggle > nav > a.nav-quiet { background: none; border: 0; padding: 10px 2px; color: var(--body); font-weight: 700; text-decoration: underline; text-decoration-color: var(--gold); text-decoration-thickness: 1px; text-underline-offset: 5px; }
+.nav nav a.nav-quiet:hover { background: none; color: var(--ink); }
+/* Should fix 2 (VISUALS audit), done with the conversion pass to keep the
+   start button above the fold: on phones the header is one row at 64 px. */
+@media (max-width: 1024px) { .nav.has-navtoggle { padding-block: 13px; } }
+/* Above the fold at 375 x 812 and 1280 x 900, both titles. */
+.fc-band:has(#fc-start:not([hidden])) { padding-top: clamp(16px, 2.5vw, 32px); }
+@media (min-width: 1024px) {
+  #fc-start .fc-hero { padding-block: 32px; }
+  #fc-start .fc-icon { width: 48px; height: 48px; margin-bottom: 12px; }
+  #fc-start .fc-hero h1 { font-size: 50px; margin-bottom: 12px; }
+  #fc-start .fc-lede { font-size: 18px; max-width: 52ch; }
+  #fc-start .fc-cred { margin-top: 12px; }
+  #fc-start .fc-startquote { margin-top: 14px; }
+}
+@media (max-width: 480px) {
+  #fc-start .fc-hero { padding: 22px 20px; }
+  #fc-start .fc-icon { display: none; }
+  #fc-start .fc-hero .eyebrow { margin-bottom: 10px; }
+  #fc-start .fc-hero h1 { margin-bottom: 10px; }
+  #fc-start .fc-lede { font-size: 16px; line-height: 1.5; }
+  #fc-start .fc-cred { margin-top: 10px; font-size: 14px; }
+  #fc-start .fc-startquote { margin-top: 12px; padding-left: 12px; gap: 4px; }
+  #fc-start .fc-startquote blockquote { font-size: 14px; line-height: 1.5; }
+  #fc-start .fc-startquote figcaption { font-size: 12px; }
+}
+@media (max-width: 560px) {
+  .fc-engine { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px 10px; }
+}
+@media (max-width: 480px) {
+  /* Tighter start-screen spacing on phones only, to keep the start
+     button above the fold at 375 x 812. */
+  #fc-start { gap: 16px; }
+  #fc-start .fc-icon { width: 52px; height: 52px; margin-bottom: 14px; }
+  #fc-start .fc-counts { padding-block: 12px; }
+  #fc-go { padding: 16px 24px; }
+  #fc-start > .fc-link { margin-top: -10px; }
+  .fc-bar { height: 112px; }
+  .fc-card { padding: 18px 16px; }
+}
+
+/* Full report page (19 Oct 2026). Design pass from "handover - 2026-10-19 - VISUALS -
+   Engine check report critique" (M1 to M6, S1 to S10, N1, N3 to N5). */
+#fc-root[data-mode="report"] { display: grid; gap: 22px; }
+.rp { display: grid; gap: 22px; }
+.rp-bar { display: flex; flex-wrap: wrap; gap: 12px; }
+#fc-root .rp-bar .btn { cursor: pointer; }
+.btn-ghost { background: transparent !important; color: var(--ink) !important; border: 1px solid var(--ink) !important; }
+
+/* S8: lockup in Montserrat with the navy mark. */
+.rp-lockup { display: flex; align-items: center; gap: 12px; margin: 0 0 18px; }
+.rp-lockup img { width: 44px; height: 44px; display: block; }
+.rp-lockup div { display: grid; line-height: 1.1; font-family: Montserrat, "Helvetica Neue", Arial, sans-serif; }
+.rp-lk1 { font-size: 8.5px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; color: #71706C; }
+.rp-lk2 { font-size: 20px; font-weight: 800; color: #0E1B2A; letter-spacing: -.01em; margin: 2px 0 1px; }
+.rp-lk3 { font-size: 10.5px; font-weight: 700; color: #33607F; }
+.rp-head h1 { margin: 0 0 10px; font-size: clamp(30px, 6.4vw, 46px); font-weight: 800; line-height: 1.05; letter-spacing: -.025em; color: var(--ink); text-wrap: balance; }
+.rp-head .eyebrow { margin-bottom: 10px; color: var(--gold-ink); }
+
+/* S3: score first, time second. */
+.rp-stats { grid-template-columns: 2fr 1fr; gap: 20px; align-items: start; }
+.rp-stats > div { align-content: start; }
+.rp-stats > div:first-child { border-top: 3px solid var(--ink); }
+.rp-stats > div:first-child b { font-size: 48px; font-weight: 800; }
+.rp-stats > div:last-child { border-top: 1px solid #D9D6CE; }
+.rp-stats > div:last-child b { font-size: 24px; font-weight: 700; color: #4B4B50; letter-spacing: -.01em; }
+.rp-stats > div:last-child span { font-size: 12px; color: #71706C; }
+.rp-bench { display: block; margin-top: 6px; font-size: 13px; line-height: 1.45; color: #4B4B50; max-width: 46ch; }
+@media (max-width: 520px) { .rp-stats { grid-template-columns: minmax(0, 1fr); gap: 16px; } }
+
+.rp-primer { border-top: 3px solid var(--ink); padding-top: 12px; }
+.rp-primer h2 { margin: 0 0 6px; font-size: 18px; font-weight: 800; color: var(--ink); }
+.rp-primer p { margin: 0; line-height: 1.6; max-width: 62ch; }
+
+/* Engine chart: bars read --p. M6: Misfiring text lighter on the dark panel. */
+.rp .fc-bar i { height: var(--p); }
+.rp .fc-enginepanel .fc-cyl.miss em, .rp .fc-enginepanel .fc-candor.miss .fc-candor-top span { color: #E3828E; }
+/* M5: rows on phones. */
+@media (max-width: 560px) {
+  .rp .fc-engine { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .rp .fc-cyl { display: grid; grid-template-columns: 12px minmax(0, 1fr) 40px; grid-template-areas: "light name score" "light band score" "bar bar bar"; column-gap: 10px; row-gap: 2px; justify-items: start; text-align: left; padding: 10px 0; border-bottom: 1px solid #3A3A3F; align-items: center; }
+  .rp .fc-cyl .fc-light { grid-area: light; width: 10px; height: 10px; align-self: start; margin-top: 4px; }
+  .rp .fc-cyl small { grid-area: name; font-size: 13px; font-weight: 700; letter-spacing: .06em; }
+  .rp .fc-cyl em { grid-area: band; font-size: 11px; font-weight: 600; }
+  .rp .fc-cyl b { grid-area: score; justify-self: end; font-size: 18px; font-weight: 800; }
+  .rp .fc-cyl .fc-bar { grid-area: bar; width: 100%; max-width: none; height: 8px; border-radius: 4px; border: 0; background: #3A3A3F; margin-top: 8px; }
+  .rp .fc-cyl .fc-bar i { top: 0; bottom: 0; height: auto; width: var(--p); border-radius: 4px; }
+  .rp .fc-cyl .fc-bar::before, .rp .fc-cyl .fc-bar::after { top: 0; bottom: 0; border-top: 0; border-left: 1px dashed #6A6870; right: auto; }
+  .rp .fc-cyl .fc-bar::before { left: 35.2%; }
+  .rp .fc-cyl .fc-bar::after { left: 64.8%; }
+  .rp .fc-legend { display: grid; gap: 4px; }
+}
+
+/* M4, S10: the booking box is one link; compact first instance in print. */
+.rp-cta { background: var(--ink); color: #D9D6CE; padding: 24px 22px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 20px; align-items: center; text-decoration: none; }
+a.rp-cta:hover h2 { text-decoration: underline; text-underline-offset: 4px; }
+.rp-cta h2 { margin: 0; color: var(--paper); }
+.rp-cta p { margin: 8px 0 0; line-height: 1.55; }
+.rp-url span { font-size: 13px; font-weight: 700; letter-spacing: .04em; color: #E7E4DC; overflow-wrap: anywhere; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.rp-qr { background: #fff; padding: 8px; line-height: 0; }
+.rp-qr:empty { display: none; }
+.rp-qr img, .rp-qr canvas { width: 120px; height: 120px; }
+@media (max-width: 767px) { .rp-qr { display: none; } .rp-cta { grid-template-columns: minmax(0, 1fr); } }
+
+/* S4: one label style. */
+.rp-sec { margin: 12px 0 0; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #856521; }
+.rp-label { margin: 16px 0 6px !important; font-size: 10.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #242427; }
+.rp-label.rp-gold { color: #856521; }
+
+/* Cylinder cards. */
+.rp-cyl { --c: #C25A68; --t: #A3424F; background: var(--paper); border: 1px solid var(--rule); border-left: 5px solid var(--c); padding: 20px; display: block; }
+.rp-cyl.rough { --c: #C4A26A; --t: #856521; }
+.rp-cyl.clean { --c: #4FB08A; --t: #2F7A5C; }
+.rp-cylhead { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
+.rp-cylhead h3 { margin: 0; font-size: 22px; font-weight: 800; color: var(--ink); }
+.rp-meta { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #71706C; }
+.rp-band { color: var(--t); }
+.rp-cylhead .fc-light { box-shadow: none; }
+.rp-cyl p { margin: 0; line-height: 1.6; }
+.rp-lede { margin-top: 10px !important; }
+.rp-startline { margin-top: 10px !important; font-weight: 700; color: var(--ink); }
+.rp-cyltop + .rp-label { margin-top: 12px !important; }
+.rp-cyl ol { margin: 0; padding-left: 1.3em; display: grid; gap: 6px; line-height: 1.55; }
+.rp-clean { color: var(--ink); }
+/* S5: questions as a ruled list, no bars. */
+.rp-cyl .fc-qs { gap: 0; }
+.rp-cyl .fc-qs li { border-left: 0; padding: 7px 0; font-size: 15px; font-weight: 600; line-height: 1.4; color: #242427; text-wrap: pretty; }
+.rp-cyl .fc-qs li + li { border-top: 1px solid #E7E4DC; }
+
+/* M2, S1, S6: From CLUTCH panel, two columns on wide screens. */
+.rp-book { margin-top: 16px; background: #F1EFE9; padding: 14px 16px; display: grid; gap: 4px 20px; }
+.rp-book .rp-label { margin-top: 0 !important; }
+.rp-bookc .rp-label { margin-top: 12px !important; }
+.rp-book blockquote { margin: 0; font-size: 17px; font-style: italic; line-height: 1.5; color: var(--ink); }
+.rp-bookref { margin: 8px 0 0 !important; font-size: 12px; font-weight: 700; letter-spacing: .08em; color: #5E5D59; }
+.rp-book p { line-height: 1.55; }
+.rp-booklink { margin-top: 10px !important; }
+.rp-booklink a { font-weight: 700; color: var(--ink); text-decoration-color: var(--gold-ink); text-underline-offset: 3px; }
+@media (min-width: 900px) {
+  .rp-book { grid-template-columns: 1fr 1fr; }
+  .rp-bookc .rp-label { margin-top: 0 !important; }
+}
+.rp-whole { display: grid; gap: 10px; }
+.rp-whole .rp-book { margin-top: 0; }
+.rp-block p { margin: 0; line-height: 1.6; }
+
+/* Closing. */
+.rp-close { display: grid; gap: 12px; border-top: 3px solid var(--ink); padding-top: 14px; }
+.rp-close .rp-sec { margin: 0; }
+.rp-clead { margin: 0; font-size: 18px; line-height: 1.5; color: var(--ink); max-width: 56ch; }
+.rp-crow { display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: 4px 16px; padding: 10px 0; border-bottom: 1px solid var(--rule); align-items: baseline; }
+.rp-crow .rp-label { margin: 0 !important; }
+.rp-crow p { margin: 0; line-height: 1.55; }
+.rp-crow strong { color: var(--ink); }
+.rp-signoff { margin: 4px 0 0; font-size: 17px; line-height: 1.6; color: var(--ink); }
+@media (max-width: 520px) { .rp-crow { grid-template-columns: minmax(0, 1fr); padding: 10px 0; } .rp-crow .rp-label { margin-bottom: 2px !important; } }
+.rp-foot { margin: 8px 0 0; font-size: 13px; color: var(--muted); }
+
+/* 21 Oct 2026 (VISUALS report mock-up, Matt approved): gauge, tiles, chart chips,
+   My first move page, photo and quote in the closing booking panel. */
+.rp-gaugebox { border-top: 0 !important; padding-top: 0 !important; }
+.rp-gauge { display: block; width: 100%; max-width: 340px; height: auto; overflow: visible; }
+.rp-z { fill: none; stroke-width: 18; }
+.rp-z-miss { stroke: #E9B7BD; } .rp-z-rough { stroke: #EBD8AE; } .rp-z-fire { stroke: #B9DDCB; }
+.rp-tick { stroke: #9A9890; stroke-width: 1.4; }
+.rp-gz { font: 700 8.5px Montserrat, sans-serif; letter-spacing: .12em; text-transform: uppercase; fill: #71706C; }
+.rp-needle { stroke: #242427; stroke-width: 4; stroke-linecap: round; }
+.rp-pivot { fill: #C4A26A; stroke: #242427; stroke-width: 2; }
+.rp-gnum { font: 800 46px Montserrat, sans-serif; letter-spacing: -.03em; fill: #242427; }
+.rp-gof { font: 500 12px Montserrat, sans-serif; fill: #71706C; }
+.rp-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 18px; }
+.rp-tile { --c: #C25A68; --t: #A3424F; border: 1px solid var(--rule); border-left: 5px solid var(--c); padding: 14px 16px; background: var(--paper); }
+.rp-tile.rough { --c: #C4A26A; --t: #856521; } .rp-tile.clean { --c: #4FB08A; --t: #2F7A5C; }
+.rp-tile .rp-label { margin: 0 0 4px !important; color: var(--t); }
+.rp-tile p { margin: 0; line-height: 1.5; font-size: 15px; }
+.rp-tv { margin: 0 0 6px !important; }
+.rp-tv strong { font-size: 19px; font-weight: 800; color: var(--ink); }
+.rp-tv span { font-size: 13px; color: #71706C; }
+@media (max-width: 560px) { .rp-tiles { grid-template-columns: minmax(0, 1fr); } }
+.rp-chip { display: inline-block; margin-top: 2px; padding: 2px 7px; font-size: 9px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; border-radius: 9px; }
+.rp-chip-start { background: var(--paper); color: #242427; }
+.rp-chip-lean { border: 1px solid #4FB08A; color: #4FB08A; }
+@media (max-width: 560px) { .rp .fc-cyl .rp-chip { grid-area: band; justify-self: end; } }
+.rp-move { display: grid; gap: 10px; border-top: 3px solid var(--ink); padding-top: 14px; }
+.rp-move .eyebrow { margin: 0; color: var(--gold-ink); }
+.rp-move h2 { margin: 0; font-size: clamp(26px, 5vw, 34px); font-weight: 800; line-height: 1.08; letter-spacing: -.02em; color: var(--ink); }
+.rp-mbox { border: 1.5px solid var(--ink); padding: 6px 20px 18px; }
+.rp-mstep { margin: 0; font-size: 16px; font-weight: 700; line-height: 1.45; color: var(--ink); }
+.rp-mf { padding-top: 12px; }
+.rp-mq { margin: 0; display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: var(--ink); }
+.rp-mn { display: inline-flex; width: 20px; height: 20px; border-radius: 50%; background: var(--ink); color: var(--paper); font-size: 11px; font-weight: 800; align-items: center; justify-content: center; flex: none; }
+.rp-wl { height: 28px; border-bottom: 1px solid #AEB7C0; }
+.rp-mcheck { max-width: 360px; }
+.rp-mcheck table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.rp-mcheck th { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: #71706C; text-align: left; padding: 0 0 5px; border-bottom: 1.5px solid var(--ink); }
+.rp-mcheck th + th, .rp-mcheck td + td { text-align: right; }
+.rp-mcheck td { padding: 5px 0; border-bottom: 1px solid var(--rule); }
+.rp-mcheck td.rp-blank { width: 96px; border-bottom-color: #AEB7C0; }
+.rp-mtot td { font-weight: 800; color: var(--ink); }
+.rp-who { margin-top: 16px; display: grid; gap: 14px; }
+.rp-quote { margin: 0; border-left: 3px solid var(--gold); padding-left: 14px; }
+.rp-quote blockquote { margin: 0; font-style: italic; font-size: 15px; line-height: 1.5; color: var(--paper); }
+.rp-quote figcaption { margin-top: 4px; font-size: 12px; color: #B7B3A9; }
+.rp-whorow { display: flex; gap: 12px; align-items: center; border-top: 1px solid #3A3A3F; padding-top: 14px; }
+.rp-whorow img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; flex: none; }
+.rp-whorow p { margin: 0 !important; font-size: 13px; line-height: 1.45; }
+.rp-whorow strong { color: var(--paper); font-size: 14px; }
+
+@media print {
+  /* 21 Oct additions. Page 1 in print: gauge and time on the left, tiles on the right,
+     so the chart stays on page 1. */
+  .rp-head { display: grid; grid-template-columns: 250px minmax(0, 1fr); column-gap: 22px; align-items: start; }
+  .rp-head > * { grid-column: 1 / -1; }
+  .rp-head > .rp-stats { grid-column: 1; grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .rp-head > .rp-tiles { grid-column: 2; grid-template-columns: minmax(0, 1fr); gap: 8px; margin-top: 0; }
+  .rp-head .fc-patline { margin-bottom: 10px; font-size: 15px; }
+  .rp-stats > div:last-child { border-top: 0; padding-top: 0; }
+  .rp-stats > div:last-child b { font-size: 16px; }
+  .rp-bench { font-size: 10.5px; margin-top: 2px; }
+  .rp-gauge { max-width: 250px; }
+  .rp-tile { padding: 9px 12px; }
+  .fc-enginepanel .fc-bar { height: 76px !important; }
+  .fc-enginepanel { padding: 12px 14px !important; }
+  .fc-enginepanel > * + * { margin-top: 5px !important; }
+  .rp-tiles { break-inside: avoid; margin-top: 12px; }
+  .rp-tile p { font-size: 12.5px; }
+  .rp-tv strong { font-size: 16px; }
+  .rp-chip-start { background: #242427; color: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .rp-chip-lean { color: #2F7A5C; border-color: #2F7A5C; }
+  .rp-move { break-before: page; break-inside: avoid; }
+  .rp-primer, .rp-block { break-inside: avoid; }
+  .rp-move .rp-clead { font-size: 14px; }
+  .rp-wl { height: 26px; }
+  .rp-quote blockquote, .rp-whorow strong { color: #242427 !important; }
+  .rp-quote figcaption { color: #4B4B50; }
+  .rp-whorow { border-top-color: #D9D6CE; }
+  /* S7: running footer and page numbers (Chrome 131+). */
+  @page {
+    size: letter; margin: 0.5in 0.55in 0.6in;
+    @bottom-left { content: "Engine check \00B7  Full report"; font: 500 8pt "Helvetica Neue", Helvetica, Arial, sans-serif; color: #71706C; }
+    @bottom-right { content: counter(page) " of " counter(pages); font: 500 8pt "Helvetica Neue", Helvetica, Arial, sans-serif; color: #71706C; }
+  }
+  html, body { background: #fff !important; }
+  .nav, .foot, .skip, .rp-bar { display: none !important; }
+  .fc-band { padding: 0 !important; }
+  #fc-root { max-width: none; }
+  .rp, #fc-root[data-mode="report"] { display: block; }
+  .rp > * { margin: 0 0 12px; }
+  .fc-panel { display: block; padding: 16px; }
+  .fc-panel > * + * { margin-top: 7px; }
+  .rp-head h1 { font-size: 34px; }
+  .rp-stats > div:first-child b { font-size: 40px; }
+  .rp-primer p { font-size: 13.5px; }
+  .fc-light { box-shadow: none !important; }
+  a { color: inherit; }
+  .rp-qr { display: block; }
+
+  /* M3: light chart panel. */
+  .fc-enginepanel { background: #FBFAF7 !important; border: 1px solid #D9D6CE !important; color: #242427; break-inside: avoid; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .fc-enginepanel .fc-bar { height: 110px; background: #EDEBE5; border: 1px solid #D9D6CE; }
+  .fc-enginepanel .fc-bar::before, .fc-enginepanel .fc-bar::after { border-top-color: #B7B3A9; }
+  .fc-enginepanel .fc-cyl b, .fc-enginepanel .fc-cyl small { color: #242427; }
+  .fc-enginepanel .fc-cyl.miss em { color: #A3424F; }
+  .fc-enginepanel .fc-cyl.rough em { color: #856521; }
+  .fc-enginepanel .fc-cyl.clean em { color: #2F7A5C; }
+  .fc-enginepanel .fc-legend { color: #4B4B50; }
+  .fc-enginepanel .fc-candor { border-top-color: #D9D6CE; }
+  .fc-enginepanel .fc-candor-top b, .fc-enginepanel .fc-candor p { color: #242427; }
+  .fc-enginepanel .fc-candor-top span { color: #856521 !important; }
+  .fc-enginepanel .fc-meter { background: #E7E4DC; border-color: #D9D6CE; }
+  .fc-enginepanel .fc-meter i { background: #C4A26A; }
+  .fc-enginepanel .fc-book { color: #4B4B50; }
+
+  /* M3, M4, S10: white booking box, link kept, compact first one. */
+  .rp-cta { background: #fff !important; border: 2px solid #242427; color: #242427; break-inside: avoid; }
+  .rp-cta h2, .rp-cta p, .rp-url span { color: #242427 !important; }
+  .rp-cta-compact { padding: 14px 18px; grid-template-columns: minmax(0, 1fr) 72px; gap: 16px; }
+  .rp-cta-compact h2 { font-size: 16px; font-weight: 800; }
+  .rp-cta-compact p { font-size: 12px; line-height: 1.45; margin-top: 4px; }
+  .rp-cta-compact .rp-qr { padding: 0; }
+  .rp-cta-compact .rp-qr img, .rp-cta-compact .rp-qr canvas { width: 72px; height: 72px; }
+
+  /* M1, N3: cards break between sub-blocks, never inside one. */
+  .rp-cyl { background: #fff; padding: 14px 16px; break-inside: auto; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  .rp-cyltop { break-inside: avoid; break-after: avoid; }
+  .rp-label, .rp-sec { break-after: avoid; }
+  .rp-cyl ol, .rp-cyl .fc-qs, .rp-book, .rp-crow { break-inside: avoid; }
+  p, li { orphans: 3; widows: 3; }
+  .rp-cyl p, .rp-cyl ol { font-size: 13px; line-height: 1.5; }
+  .rp-cylhead h3 { font-size: 19px; }
+  .rp-cyl .fc-qs li { font-size: 13px; padding: 5px 0; }
+  .rp-label { margin: 12px 0 4px !important; }
+  .rp-cyltop + .rp-label { margin-top: 10px !important; }
+
+  /* M2: two-column book panel. */
+  .rp-book { grid-template-columns: 1fr 1fr; padding: 12px 14px; margin-top: 12px; }
+  .rp-bookc .rp-label { margin-top: 0 !important; }
+  .rp-book blockquote { font-size: 11.5px; line-height: 1.5; }
+  .rp-book .rp-case, .rp-book .rp-booklink { font-size: 10.5px; line-height: 1.45; }
+  .rp-bookref { font-size: 10px; }
+
+  /* S9: the closing flows after the last sections and stays in one piece. */
+  .rp-close { break-before: auto; break-inside: avoid; }
+  .rp-clead { font-size: 15px; }
+  .rp-crow p { font-size: 13px; }
+  .rp-signoff { font-size: 14px; }
+  .rp-block p, .rp-block li { font-size: 13px; }
+}
+</style>
+<script src="../../assets/gdc-analytics.js?v=12"></script>
+<script src="../../assets/gdc-nav.js?v=18" defer></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <a class="brand" href="../../">
+    <picture>
+      <source media="(max-width: 370px)" srcset="../../assets/gdc/gdc-mark.svg">
+      <source media="(max-width: 519px)" srcset="../../assets/gdc/gdc-lockup-short.svg">
+      <img src="../../assets/gdc/gdc-lockup-header.svg" alt="Goode Design &amp; Consulting" width="269" height="52">
+    </picture>
+  </a>
+  <nav aria-label="Primary">
+    <a href="../../system/">The system</a>
+    <div class="navmenu">
+      <button type="button" aria-expanded="false" aria-controls="menu-who">Who I help</button>
+      <ul class="navmenu-panel" id="menu-who" hidden>
+        <li><a href="../../founders/">Founders and scaling firms<span>Coaching and fractional operations</span></a></li>
+        <li><a href="../../schools/">Independent schools<span>Coaching, cohorts, in-service, advisory</span></a></li>
+        <li><a href="../../nonprofits/">Nonprofit and public sector<span>Team development and facilitation</span></a></li>
+      </ul>
+    </div>
+    <div class="navmenu">
+      <button type="button" aria-expanded="false" aria-controls="menu-services">Services</button>
+      <ul class="navmenu-panel navmenu-wide" id="menu-services" hidden>
+        <li class="nmp-group nmp-co">
+          <p class="nmp-head">For companies</p>
+          <ul>
+            <li><a href="../../products/#services">What a company can buy<span>One list, diagnostic to retained</span></a></li>
+            <li><a href="../../lineup/">The lineup<span>Every product, side by side</span></a></li>
+            <li><a href="../../one-pagers/">One-pagers<span>Every service as a PDF</span></a></li>
+            <li><a href="../../products/#why">Why this is different<span>Five structural differences, not adjectives</span></a></li>
+          </ul>
+        </li>
+        <li class="nmp-group nmp-sc">
+          <p class="nmp-head">For schools and nonprofits</p>
+          <ul>
+            <li><a href="../../schools/#services">What a school can buy<span>Ten services, plainly named</span></a></li>
+            <li><a href="../../schools/rates/">Published rates<span>Real numbers for a budget line</span></a></li>
+            <li><a href="../../schools/#why">Why this is different<span>Twenty years inside a school</span></a></li>
+          </ul>
+        </li>
+        <li class="nmp-group nmp-products">
+          <p class="nmp-head">Products</p>
+          <ul>
+            <li><a href="../../obd/"><svg class="nmp-ic" aria-hidden="true"><use href="../../assets/icons/icons-clutch-sprite.svg#product-obd"/></svg>On-Board Diagnostic<span>Core, Leader, Leader + Team</span></a></li>
+            <li><a href="../../psychological-safety/"><svg class="nmp-ic" aria-hidden="true"><use href="../../assets/icons/icons-clutch-sprite.svg#product-psc"/></svg>Psychological Safety Check<span>Free, for one team</span></a></li>
+            <li><a href="../../goodestart/"><svg class="nmp-ic" aria-hidden="true"><use href="../../assets/icons/icons-clutch-sprite.svg#product-goodestart"/></svg>GoodeStart<span>The first ninety days, on purpose</span></a></li>
+            <li><a href="../../building-the-bench/"><svg class="nmp-ic" aria-hidden="true"><use href="../../assets/icons/icons-clutch-sprite.svg#product-bench"/></svg>Building the Bench<span>A cohort for the next seat</span></a></li>
+            <li><a href="../../know-thyself/"><svg class="nmp-ic" aria-hidden="true"><use href="../../assets/icons/icons-clutch-sprite.svg#product-know-thyself"/></svg>Know Thyself to Lead Others<span>A strengths workshop for a whole staff</span></a></li>
+            <li><a href="../../owners-manual/"><svg class="nmp-ic" aria-hidden="true"><use href="../../assets/icons/icons-clutch-sprite.svg#product-owners-manual"/></svg>Owner&rsquo;s Manual<span>How each of us works, written down</span></a></li>
+            <li><a href="../../executive-coaching/"><svg class="nmp-ic" aria-hidden="true"><use href="../../assets/icons/icons-clutch-sprite.svg#product-coaching"/></svg>Executive coaching<span>Six sessions, built on the OBD</span></a></li>
+          </ul>
+        </li>
+        <li class="nmp-foot">
+          <a href="../../coaching-engagement/">How the engagement works<span>The terms, before you have to ask</span></a>
+        </li>
+        <li class="nmp-foot">
+          <a href="../../diagnostic/">School and nonprofit diagnostics<span>About two minutes, no email needed</span></a>
+        </li>
+        <li class="nmp-foot">
+          <a href="../../engine-check/">Engine check, free<span>Your team on the lift, in two minutes</span></a>
+        </li>
+        <li class="nmp-foot">
+          <a href="../../free/">Free tools<span>Diagnostics, templates and a chapter</span></a>
+        </li>
+      </ul>
+    </div>
+    <a href="../../books/">Books</a>
+    <a href="../../writing/">Writing</a>
+    <a href="../../about/">About</a>
+    <a class="btn btn-sm nav-quiet" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=engine-check-nav">Book a call</a>
+  </nav>
+</header>
+
+
+<main id="main">
+  <section class="fc-band">
+    <div id="fc-root" data-check="engine" data-mode="report" data-lockup="../../assets/flight-check/engine-check-lockup-clear.png" data-icon="../../assets/icons/product-engine-check-lit.svg?v=4" data-mark="../../assets/icons/product-engine-check-mark-navy.svg?v=2" data-preview="../../assets/flight-check/engine-check-readout-preview.png" data-calendly="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt" data-qr="../../assets/flight-check/engine-check-booking-qr.svg">
+      <noscript><p>Your report needs JavaScript to build. Turn it on, or reply to your report email and Matt will send a PDF.</p></noscript>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="foot-in">
+    <div>
+      <img src="../../assets/gdc/gdc-mark.svg" alt="" width="34" height="34">
+      <p class="foot-name">Goode Design &amp; Consulting</p>
+      <p class="foot-meta">Washington, DC · Baltimore · New York · Boston · Available globally</p>
+    <ul class="socials" aria-label="Elsewhere">
+      <li><a href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=engine-check-footer" title="Book a time"><img src="../../assets/icon-calendly.png" alt="Book a time with Matt Goode"></a></li>
+      <li><a href="https://www.linkedin.com/in/goodematt/" title="LinkedIn"><img src="../../assets/icon-linkedin.png" alt="Matt Goode on LinkedIn"></a></li>
+      <li><a href="https://thatsgoodedesign.substack.com/" title="The Leadership Lab on Substack"><img src="../../assets/icon-substack.png" alt="The Leadership Lab on Substack"></a></li>
+      <li><a href="mailto:matt@thatsgoodedesign.com" title="Email"><img src="../../assets/icon-email.png" alt="Email Matt Goode"></a></li>
+    </ul>
+    </div>
+    <nav aria-label="Footer">
+      <a href="../../system/">The system</a>
+      <a href="../../products/">Products</a>
+      <a href="../../obd/">The OBD</a>
+      <a href="../../schools/">Schools</a>
+      <a href="../../coaching-engagement/">How it works</a>
+      <a href="../../diagnostic/">Free diagnostic</a>
+      <a href="../../free/">Free tools</a>
+      <a href="../../books/">Books</a>
+      <a href="../../writing/">Writing</a>
+      <a href="../../about/">About</a>
+      <a href="mailto:matt@thatsgoodedesign.com">Contact</a>
+      <a href="../../terms/">Terms</a>
+      <a href="../../privacy/">Privacy</a>
+    </nav>
+  </div>
+  <p class="foot-legal">© 2026 Goode Design &amp; Consulting. CliftonStrengths®,
+    StrengthsFinder® and the 34 theme names are trademarks of Gallup, Inc.
+    EQ-i 2.0 is a trademark of Multi-Health Systems Inc. Matt Goode is a
+    Gallup-Certified Strengths Coach.
+    <br><br>
+    The non-Gallup information you are receiving has not been approved and is not
+    sanctioned or endorsed by Gallup in any way. Opinions, views and
+    interpretations of CliftonStrengths®, Clifton Youth StrengthsExplorer or
+    BP10 results are solely the beliefs of Goode Design &amp; Consulting.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="../../assets/flight-check/engine.js?v=12"></script>
+<script src="../../assets/flight-check/flight-check.js?v=19"></script>
+</body>
+</html>

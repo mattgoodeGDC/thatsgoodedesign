@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The lineup – Goode Design &amp; Consulting</title>
+<meta name="description" content="Every Goode Design &amp; Consulting product on one page: the On-Board Diagnostic, the free engine check and Psychological Safety Check, GoodeStart, Building the Bench, executive coaching, Know Thyself to Lead Others and the Owner's Manual.">
+<link rel="canonical" href="https://thatsgoodedesign.com/lineup/">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" href="../assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="../assets/favicon/icon-512.png" type="image/png" sizes="512x512">
+<link rel="apple-touch-icon" href="../assets/favicon/apple-touch-icon.png">
+<meta property="og:site_name" content="Goode Design &amp; Consulting">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The lineup: everything I offer, and where to start">
+<meta property="og:description" content="Every Goode Design &amp; Consulting product on one page: the On-Board Diagnostic, the free engine check and Psychological Safety Check, GoodeStart, Building the Bench, executive coaching, Know Thyself to Lead Others and the Owner's Manual.">
+<meta property="og:url" content="https://thatsgoodedesign.com/lineup/">
+<meta property="og:image" content="https://thatsgoodedesign.com/assets/og/og-products.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The lineup: everything I offer, and where to start">
+<meta name="twitter:description" content="Every Goode Design &amp; Consulting product on one page: the On-Board Diagnostic, the free engine check and Psychological Safety Check, GoodeStart, Building the Bench, executive coaching, Know Thyself to Lead Others and the Owner's Manual.">
+<meta name="twitter:image" content="https://thatsgoodedesign.com/assets/og/og-products.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap">
+<link rel="stylesheet" href="../assets/style.css?v=17">
+<link rel="stylesheet" href="../assets/gdc-nav.css?v=18">
+<link rel="stylesheet" href="../assets/products.css?v=6">
+<style>
+/* The lineup (19 Oct 2026). Every product on one page, per STYLE GUIDE GDC
+   Product Family v1.3. Buyer-facing: colour names, not hex codes. The rule
+   holds: product colour says which, gold says press. */
+.lu-grid { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
+/* Colour band (19 Oct 2026): the product's three main colours, deep, light
+   and tint, in golden-ratio widths (each 1/phi of the one before): 50, 30.9,
+   19.1. Deep enough to read as colour, not as a rule. */
+.lu-card { --c2: var(--c); --c3: var(--c-tint);
+  display: flex; flex-direction: column; min-width: 0; box-shadow: none;
+  border: 1px solid var(--rule); border-radius: 12px; overflow: hidden;
+  padding: 0 22px 20px; background: var(--paper); }
+.lu-band { display: grid; grid-template-columns: 50fr 30.9fr 19.1fr; height: 56px; margin: 0 -22px 22px; }
+.lu-band span:nth-child(1) { background: var(--c); }
+.lu-band span:nth-child(2) { background: var(--c2); }
+.lu-band span:nth-child(3) { background: var(--c3); }
+.lu-card.product--obd { --c2: var(--obd-dark); }
+.lu-card.product--psc { --c2: var(--psc-dark); }
+.lu-card.product--gs  { --c2: var(--gs-dark); }
+.lu-card.product--bb  { --c2: var(--bb-dark); }
+.lu-card.product--kt  { --c2: var(--kt-dark); }
+.lu-card.product--ec  { --c2: var(--ec-dark); }
+.lu-card.product--own { --c2: var(--own-dark); }
+/* Engine check wears its launch campaign colours on this page (Matt, 19 Oct
+   2026): Gulf blue #A6D0EA, chartreuse #CAD73F, navy #0E1B2A. Only the
+   tested pairs: navy on paper for the tier word, ink #161717 on chartreuse
+   for the button, chartreuse on ink for its hover. */
+.lu-card.product--engine { --c: var(--engine); --c2: var(--engine-lit); --c3: var(--engine-navy); }
+.lu-card--engine .lu-go { color: var(--engine-ink); }
+.lu-card--om .lu-band span:nth-child(1) { background: var(--c2); }
+.lu-card--om .lu-band span:nth-child(2) { background: var(--c); }
+/* Framework-keyed workshops (Matt, 19 Oct 2026): no badge of their own,
+   so they wear their framework's colours. Field Tested keeps its book look. */
+.lu-card--hotk { --c: #8D3E40; --c2: #D07A7C; --c3: #F3E4E4; }
+.lu-card--hotk .product__tier { color: #8D3E40; }
+.lu-card--sixc { --c: #7B2481; --c2: #B08AD6; --c3: #EFE6F5; }
+.lu-card--sixc .product__tier { color: #7B2481; }
+.lu-card--ft { --c: #3A3835; --c2: #7A9E9F; --c3: #EDE5D6; }
+.lu-card--ft .product__tier { color: #3A3835; }
+.lu-card .lockup .lu-cover { width: 28px; height: 42px; object-fit: cover; border-radius: 2px; margin-top: 2px; flex: 0 0 auto; }
+.lu-card--core { --c: var(--ink); --c2: var(--gold); --c3: var(--rule-2); }
+.lu-card--core .lu-go { background: #9A978F; }
+.lu-card::before { content: none; display: none; }
+.band.alt .lu-card { background: #fff; }
+.lu-card .lockup { margin: 0 0 14px; align-items: flex-start; }
+.lu-card .lockup .icon { width: 40px; height: 40px; color: var(--ink); margin-top: 2px; }
+.lu-card .lockup img { width: 40px; height: 40px; flex: 0 0 auto; margin-top: 2px; }
+.lu-card .lockup-name { font-size: 20px; }
+.lu-card .product__tier { line-height: 1.35; }
+.lu-card--engine .product__tier { color: var(--engine-text); }
+.lu-card--core .product__tier { color: var(--muted); }
+.lu-desc { font-size: 15px; line-height: 1.55; margin: 0 0 14px; color: var(--body); }
+.lu-facts { list-style: none; margin: 0 0 14px; padding: 12px 0 0; border-top: 1px solid var(--rule); display: grid; gap: 6px; font-size: 14px; }
+.lu-facts li { display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 10px; background: none; border: 0; padding: 0; box-shadow: none; }
+.lu-facts li::before { content: none; display: none; }
+.lu-facts b { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); padding-top: 2px; }
+.lu-card .link-arrow { margin-top: auto; align-self: flex-start; }
+.lu-group { margin-top: 44px; scroll-margin-top: 90px; }
+.lu-group:first-of-type { margin-top: 26px; }
+.lu-group-h { font-size: clamp(22px, 2.6vw, 28px); line-height: 1.2; margin: 0 0 4px; color: var(--ink); }
+.lu-group-line { margin: 0; font-size: 16px; }
+.lu-fw { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 10px; }
+.lu-fw li { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) auto; gap: 8px 18px; align-items: center; padding: 14px 18px; background: var(--paper); border: 1px solid var(--rule); border-radius: 10px; box-shadow: none; }
+.lu-fw li::before { content: none; display: none; }
+.lu-fw .lu-fw-name { color: var(--ink); font-weight: 700; font-size: 16px; }
+.lu-fw .lu-fw-name span { display: block; font-weight: 400; font-size: 14px; color: var(--body); }
+.lu-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.lu-chip { font-size: 12px; font-weight: 700; letter-spacing: .06em; color: var(--ink); border: 1px solid var(--rule); border-top: 3px solid var(--fwc); border-radius: 6px; padding: 3px 8px; background: var(--paper); }
+.fw-c { --fwc: #3E9B75; } .fw-v { --fwc: #3766A2; } .fw-6 { --fwc: #7B2481; } .fw-d { --fwc: #8D3E40; } .fw-eq { --fwc: var(--ink); } .fw-own { --fwc: var(--own); }
+@media (max-width: 700px) { .lu-fw li { grid-template-columns: minmax(0, 1fr); } }
+.lu-own { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); }
+.lu-own a { display: flex; align-items: center; gap: 16px; height: 100%; padding: 14px 16px; border: 1px solid var(--rule); border-radius: 10px; background: var(--paper); text-decoration: none; color: var(--body); font-size: 14px; }
+.lu-own a:hover, .lu-own a:focus-visible { border-color: var(--gold-ink); }
+.lu-own strong { display: block; color: var(--ink); font-size: 17px; margin-bottom: 2px; }
+.lu-own li { background: none; border: 0; padding: 0; box-shadow: none; }
+.lu-own li::before { content: none; display: none; }
+/* Reading cards carry their cover; the Lab gets a cover-shaped tile in GDC ink. */
+.lu-thumb { width: 72px; height: 108px; flex: 0 0 72px; object-fit: cover; border-radius: 2px; box-shadow: 0 4px 10px rgba(36,36,39,.18); }
+.lu-thumb--lab { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; background: var(--ink); padding: 8px; box-sizing: border-box; }
+.lu-thumb--lab img { width: 30px; height: 30px; }
+.lu-thumb--lab em { font-style: normal; font-size: 9px; font-weight: 800; letter-spacing: .12em; line-height: 1.3; text-transform: uppercase; text-align: center; color: var(--gold); }
+/* Buyer pass (19 Oct 2026): a press in the hero, a problem picker, an action
+   on every card, proof beside each group, and the book as the low rung. */
+.lu-jump { list-style: none; margin: 30px 0 0; padding: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); }
+.lu-jump li { background: none; border: 0; padding: 0; box-shadow: none; }
+.lu-jump li::before { content: none; display: none; }
+.lu-jump a { display: flex; flex-direction: column; gap: 4px; height: 100%; padding: 16px 18px; background: var(--paper-alt); border: 1px solid var(--rule); border-top: 3px solid var(--gold); text-decoration: none; color: var(--body); font-size: 14px; transition: background .18s, transform .18s; }
+.lu-jump a:hover, .lu-jump a:focus-visible { background: var(--paper); transform: translateY(-2px); }
+.lu-jump strong { color: var(--ink); font-size: 17px; line-height: 1.3; }
+.lu-jump em { font-style: normal; font-weight: 700; font-size: 13px; color: var(--gold-ink); margin-top: auto; padding-top: 6px; }
+.lu-free { display: inline-block; margin-left: 6px; padding: 1px 7px; border-radius: 4px; background: var(--ink); color: var(--paper); font-size: 10px; font-weight: 800; letter-spacing: .14em; vertical-align: 2px; }
+/* One action per card (19 Oct 2026, Matt): a full-width block in the
+   product's secondary colour that always opens the product's own page.
+   Gold is kept for booking a call with Matt. */
+.lu-go { margin-top: auto; display: block; padding: 13px 16px; border-radius: 8px; background: var(--c2); color: var(--ink); font-size: 13px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; text-align: center; transition: background .15s, color .15s; }
+.lu-go::after { content: " \2192"; }
+.lu-go:hover, .lu-go:focus-visible { background: var(--c); color: #fff; }
+.lu-go:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.lu-card--engine .lu-go:hover, .lu-card--engine .lu-go:focus-visible { background: var(--engine-ink); color: var(--engine-lit); }
+@media (prefers-reduced-motion: reduce) { .lu-go { transition: none; } }
+.lu-card .lu-rates { font-size: 13px; margin: -6px 0 14px; }
+.lu-card .lu-rates a { color: var(--ink); text-decoration-color: var(--gold-ink); }
+.lu-proof { margin: 26px 0 0; max-width: 720px; }
+.lu-proof blockquote { font-size: 18px; }
+.lu-book { display: grid; grid-template-columns: minmax(0, 200px) minmax(0, 1fr); gap: clamp(24px, 4vw, 48px); align-items: center; margin-top: 22px; }
+.lu-book img { width: 100%; height: auto; box-shadow: 0 10px 24px rgba(36,36,39,.18); }
+.lu-book h3 { margin: 0 0 8px; font-size: clamp(22px, 2.6vw, 28px); color: var(--ink); }
+.lu-book p { margin: 0 0 14px; }
+.lu-book .cta-row { margin: 18px 0 0; }
+.lu-also { margin: 34px 0 0; }
+.lu-cq { margin: 0 0 16px; padding: 2px 0 2px 14px; border-left: 2px solid var(--gold); }
+.lu-cq blockquote { margin: 0; font-size: 14px; line-height: 1.5; font-weight: 600; color: var(--ink); }
+.lu-cq figcaption { margin: 6px 0 0; font-size: 12px; color: var(--muted); }
+/* Copy pass (19 Oct 2026, PUBLISHING): reassurance under the hero buttons,
+   schools rates line, and the which-check note inside See it clearly. */
+.lu-hero-note { margin: 14px 0 0; font-size: 14px; color: var(--muted); }
+.lu-rates-line { margin: 10px 0 0; font-size: 15px; }
+.lu-rates-line a { color: var(--ink); text-decoration-color: var(--gold-ink); }
+.lu-note { margin: 8px 0 0; font-size: 15px; color: var(--body); }
+.lu-grid--2 { grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 700px) { .lu-grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .lu-book { grid-template-columns: minmax(0, 1fr); } .lu-book img { max-width: 180px; } }
+@media (prefers-reduced-motion: reduce) { .lu-jump a { transition: none; } .lu-jump a:hover { transform: none; } }
+/* The Psychological Safety Check spans the row under the two primary free
+   checks, so it reads as the third way in. */
+@media (min-width: 980px) {
+  .lu-card--wide { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.4fr) minmax(0, 0.85fr) auto; column-gap: 28px; align-items: center; padding-bottom: 22px; }
+  .lu-card--wide .lu-band { grid-column: 1 / -1; }
+  .lu-card--wide .lockup, .lu-card--wide .lu-desc, .lu-card--wide .lu-facts { margin: 0; }
+  .lu-card--wide .lu-facts { border-top: 0; border-left: 1px solid var(--rule); padding: 0 0 0 20px; }
+  .lu-card--wide .lu-go { margin-top: 0; min-width: 220px; }
+  .lu-card--wide .lu-band { height: 28px; }
+}
+.lu-pdf { display: block; margin-top: 10px; text-align: center; font-size: 13px; font-weight: 600; color: var(--ink-2, #4B4B50); text-decoration: underline; text-decoration-color: var(--c); text-underline-offset: 3px; }
+.lu-pdf:hover { color: var(--ink); }
+.lu-fw li:has(.lu-fw-pdf) { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) auto auto; }
+@media (max-width: 700px) { .lu-fw li:has(.lu-fw-pdf) { grid-template-columns: minmax(0, 1fr); } }
+</style>
+
+
+<script src="../assets/gdc-analytics.js?v=12"></script>
+<script src="../assets/gdc-nav.js?v=18" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","@id":"https://thatsgoodedesign.com/lineup/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thatsgoodedesign.com/"},{"@type":"ListItem","position":2,"name":"Products & services","item":"https://thatsgoodedesign.com/products/"},{"@type":"ListItem","position":3,"name":"The lineup","item":"https://thatsgoodedesign.com/lineup/"}]},{"@type":"ItemList","@id":"https://thatsgoodedesign.com/lineup/#list","name":"The lineup","itemListElement":[{"@type":"ListItem","position":1,"name":"On-Board Diagnostic","url":"https://thatsgoodedesign.com/obd/"},{"@type":"ListItem","position":2,"name":"Psychological Safety Check","url":"https://thatsgoodedesign.com/psychological-safety/"},{"@type":"ListItem","position":3,"name":"Engine check","url":"https://thatsgoodedesign.com/engine-check/"},{"@type":"ListItem","position":4,"name":"GoodeStart","url":"https://thatsgoodedesign.com/goodestart/"},{"@type":"ListItem","position":5,"name":"Building the Bench","url":"https://thatsgoodedesign.com/building-the-bench/"},{"@type":"ListItem","position":6,"name":"Executive coaching","url":"https://thatsgoodedesign.com/executive-coaching/"},{"@type":"ListItem","position":7,"name":"Know Thyself to Lead Others","url":"https://thatsgoodedesign.com/know-thyself/"},{"@type":"ListItem","position":8,"name":"Owner's Manual","url":"https://thatsgoodedesign.com/owners-manual/"}]},{"@type":"WebPage","@id":"https://thatsgoodedesign.com/lineup/#webpage","url":"https://thatsgoodedesign.com/lineup/","name":"The lineup","description":"Every Goode Design & Consulting product on one page: the On-Board Diagnostic, the free engine check and Psychological Safety Check, GoodeStart, Building the Bench, executive coaching, Know Thyself to Lead Others and the Owner's Manual.","isPartOf":{"@id":"https://thatsgoodedesign.com/#website"},"about":{"@id":"https://thatsgoodedesign.com/#org"},"inLanguage":"en-US","breadcrumb":{"@id":"https://thatsgoodedesign.com/lineup/#breadcrumb"},"mainEntity":{"@id":"https://thatsgoodedesign.com/lineup/#list"}}]}</script>
+<meta name="tdm-reservation" content="1">
+<meta name="tdm-policy" content="https://thatsgoodedesign.com/terms/">
+<meta name="robots" content="noai, noimageai">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <a class="brand" href="../">
+    <picture>
+      <source media="(max-width: 370px)" srcset="../assets/gdc/gdc-mark.svg">
+      <source media="(max-width: 519px)" srcset="../assets/gdc/gdc-lockup-short.svg">
+      <img src="../assets/gdc/gdc-lockup-header.svg" alt="Goode Design &amp; Consulting" width="269" height="52">
+    </picture>
+  </a>
+  <nav aria-label="Primary">
+    <a href="../system/">The system</a>
+    <div class="navmenu">
+      <button type="button" aria-expanded="false" aria-controls="menu-who">Who I help</button>
+      <ul class="navmenu-panel" id="menu-who" hidden>
+        <li><a href="../founders/">Founders and scaling firms<span>Coaching and fractional operations</span></a></li>
+        <li><a href="../schools/">Independent schools<span>Coaching, cohorts, in-service, advisory</span></a></li>
+        <li><a href="../nonprofits/">Nonprofit and public sector<span>Team development and facilitation</span></a></li>
+      </ul>
+    </div>
+    <div class="navmenu">
+      <button type="button" aria-expanded="false" aria-controls="menu-services">Services</button>
+      <ul class="navmenu-panel navmenu-wide" id="menu-services" hidden>
+        <li class="nmp-group nmp-co">
+          <p class="nmp-head">For companies</p>
+          <ul>
+            <li><a href="../products/#services">What a company can buy<span>One list, diagnostic to retained</span></a></li>
+            <li><a href="../lineup/" aria-current="page">The lineup<span>Every product, side by side</span></a></li>
+            <li><a href="../one-pagers/">One-pagers<span>Every service as a PDF</span></a></li>
+            <li><a href="../products/#why">Why this is different<span>Five structural differences, not adjectives</span></a></li>
+          </ul>
+        </li>
+        <li class="nmp-group nmp-sc">
+          <p class="nmp-head">For schools and nonprofits</p>
+          <ul>
+            <li><a href="../schools/#services">What a school can buy<span>Ten services, plainly named</span></a></li>
+            <li><a href="../schools/rates/">Published rates<span>Real numbers for a budget line</span></a></li>
+            <li><a href="../schools/#why">Why this is different<span>Twenty years inside a school</span></a></li>
+          </ul>
+        </li>
+        <li class="nmp-group nmp-products">
+          <p class="nmp-head">Products</p>
+          <ul>
+            <li><a href="../obd/"><svg class="nmp-ic" aria-hidden="true"><use href="../assets/icons/icons-clutch-sprite.svg#product-obd"/></svg>On-Board Diagnostic<span>Core, Leader, Leader + Team</span></a></li>
+            <li><a href="../psychological-safety/"><svg class="nmp-ic" aria-hidden="true"><use href="../assets/icons/icons-clutch-sprite.svg#product-psc"/></svg>Psychological Safety Check<span>Free, for one team</span></a></li>
+            <li><a href="../goodestart/"><svg class="nmp-ic" aria-hidden="true"><use href="../assets/icons/icons-clutch-sprite.svg#product-goodestart"/></svg>GoodeStart<span>The first ninety days, on purpose</span></a></li>
+            <li><a href="../building-the-bench/"><svg class="nmp-ic" aria-hidden="true"><use href="../assets/icons/icons-clutch-sprite.svg#product-bench"/></svg>Building the Bench<span>A cohort for the next seat</span></a></li>
+            <li><a href="../know-thyself/"><svg class="nmp-ic" aria-hidden="true"><use href="../assets/icons/icons-clutch-sprite.svg#product-know-thyself"/></svg>Know Thyself to Lead Others<span>A strengths workshop for a whole staff</span></a></li>
+            <li><a href="../owners-manual/"><svg class="nmp-ic" aria-hidden="true"><use href="../assets/icons/icons-clutch-sprite.svg#product-owners-manual"/></svg>Owner&rsquo;s Manual<span>How each of us works, written down</span></a></li>
+            <li><a href="../executive-coaching/"><svg class="nmp-ic" aria-hidden="true"><use href="../assets/icons/icons-clutch-sprite.svg#product-coaching"/></svg>Executive coaching<span>Six sessions, built on the OBD</span></a></li>
+          </ul>
+        </li>
+        <li class="nmp-foot">
+          <a href="../coaching-engagement/">How the engagement works<span>The terms, before you have to ask</span></a>
+        </li>
+        <li class="nmp-foot">
+          <a href="../diagnostic/">School and nonprofit diagnostics<span>About two minutes, no email needed</span></a>
+        </li>
+        <li class="nmp-foot">
+          <a href="../engine-check/">Engine check, free<span>Your team on the lift, in two minutes</span></a>
+        </li>
+        <li class="nmp-foot">
+          <a href="../free/">Free tools<span>Diagnostics, templates and a chapter</span></a>
+        </li>
+      </ul>
+    </div>
+    <a href="../books/">Books</a>
+    <a href="../writing/">Writing</a>
+    <a href="../about/">About</a>
+    <a class="btn btn-sm" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=lineup-nav">Book a call</a>
+  </nav>
+</header>
+
+<main id="main">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="m-bb" viewBox="0 0 24 24"><path d="M6 4 L8.5 14 H16.5 Q18 14 18 15.5 V17.5 H8.2 Q7 17.5 6.7 16.3 L4.8 8 M8.5 17.5 L7.5 20.5 M16.5 17.5 L17.5 20.5 M18.5 3.5 V8.5 M16 6 H21"/></symbol><symbol id="m-ec" viewBox="0 0 24 24"><path d="M4 12 A8 8 0 1 0 20 12 A8 8 0 1 0 4 12 M8.5 12 A3.5 3.5 0 1 0 15.5 12 A3.5 3.5 0 1 0 8.5 12 M12 15.5 V20 M4.2 10.6 L8.6 11.3 M19.8 10.6 L15.4 11.3"/></symbol><symbol id="m-gs" viewBox="0 0 24 24"><path d="M12 3.5 V11 M7.2 6.5 A7.5 7.5 0 1 0 16.8 6.5"/></symbol><symbol id="m-kt" viewBox="0 0 24 24"><path d="M17.4 7 L12 4 L3 9 H15.6 M4 20 H20 M6.5 11.5 V18 M10 11.5 V18 M14 15 V18 M17.5 11.5 V18"/></symbol><symbol id="m-om" viewBox="0 0 24 24"><path d="M12 6.5 C10 5 6.5 4.5 3.5 5.5 V18.5 C6.5 17.5 10 18 12 19.5 C14 18 17.5 17.5 20.5 18.5 V5.5 C17.5 4.5 14 5 12 6.5 Z M12 6.5 V19.5"/></symbol><symbol id="m-psc" viewBox="0 0 24 24"><path d="M6.5 4.5 C4 8 4 14.5 6.5 18.5 H17.5 C20 14.5 20 8 17.5 4.5 M4.5 20.5 H19.5 M12 8 V12.5 M12 15.5 V15.6"/></symbol><symbol id="m-engine" viewBox="0 0 24 24"><path d="M3.25 10Q2.5 10 2.5 9.25V7.25L4 4Q4.35 3.25 5.25 3.25H13.9Q14.6 3.25 15.05 3.85L16.9 6.3L20.1 6.8Q21.5 7.1 21.5 8.35V9.25Q21.5 10 20.75 10M9.9 10H14.1M12 10V20.75M3.5 20.75H20.5"/><circle cx="6.5" cy="10.25" r="2.1"/><circle cx="17.5" cy="10.25" r="2.1"/></symbol><symbol id="m-obd" viewBox="0 0 24 24"><path d="M3 6.5 Q3 5 4.5 5 H19.5 Q21 5 21 6.5 L19 17.5 Q18.7 19 17.2 19 H6.8 Q5.3 19 5 17.5 Z M7 9.5 V10 M10.3 9.5 V10 M13.7 9.5 V10 M17 9.5 V10 M8.7 14 V14.5 M12 14 V14.5 M15.3 14 V14.5"/></symbol><symbol id="m-own" viewBox="0 0 24 24"><path d="M3.5 8 A3 3 0 1 1 8 10.6 C7 11.2 6.8 12 6.8 13.2 M6.8 16.8 V16.9 M20.5 8 A3 3 0 1 0 16 10.6 C17 11.2 17.2 12 17.2 13.2 M17.2 16.8 V16.9 M12 4 V20"/></symbol></svg>
+
+  <section class="hero hero-sub">
+    <p class="eyebrow">The lineup</p>
+    <h1>Everything I offer, and <span class="accent">where to start</span>.</h1>
+    <p class="lede">
+      Diagnostics, coaching, workshops and talks for leaders of growing firms,
+      schools and nonprofits. Start with your problem, not the product.
+    </p>
+    <p class="cta-row">
+      <a class="btn" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=lineup-hero">Book thirty minutes</a>
+      <a class="btn btn-ghost" href="../engine-check/?utm_source=site&amp;utm_content=lineup-hero">Not sure? Take the two-minute diagnostic</a>
+    </p>
+    <p class="lu-hero-note">Thirty minutes to work out whether it&rsquo;s a people problem or a design problem. No pitch, no follow-up sequence.</p>
+    <!-- build-lineup:picker -->
+    <ul class="lu-jump" aria-label="Start with the problem">
+      <li><a href="#see"><strong>Something&rsquo;s off, and I can&rsquo;t name it</strong>Two free checks, about two minutes each<em>See it clearly</em></a></li>
+      <li><a href="#leader"><strong>One leader needs to grow into the job</strong>The OBD, then coaching<em>Develop one leader</em></a></li>
+      <li><a href="#cohort"><strong>Several people stepping up at once</strong>A cohort for a new seat or the next one<em>Grow a cohort</em></a></li>
+      <li><a href="#team"><strong>Good people, pulling in different directions</strong>Workshops for one team or a whole staff<em>Workshops for the team</em></a></li>
+    </ul>
+<!-- /build-lineup:picker -->
+  </section>
+
+  <section class="band" id="lineup" aria-labelledby="lineup-h">
+    <p class="eyebrow">The products</p>
+    <h2 class="section-h" id="lineup-h">From a free check to a full engagement</h2>
+    <p class="lede">The free checks show you where to look. The paid work
+      fixes it. Not sure which you need? <a href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=lineup-1">Book thirty minutes</a>.</p>
+    <p class="lu-rates-line">Leading a school or nonprofit? <a href="../schools/rates/">See my published rates.</a></p>
+    <p class="lu-rates-line">Need it on paper? <a href="../one-pagers/">Download a one-pager for any of these</a>, or the whole pack.</p>
+
+    <!-- build-lineup:groups -->
+    <div class="lu-group" id="see">
+      <h3 class="lu-group-h">See it clearly</h3>
+      <p class="lu-group-line">Find out what&rsquo;s actually broken before you pay to fix it.</p>
+      <p class="lu-note">Two free checks, about two minutes each. The engine check reads the team you lead. School and nonprofit leaders have a diagnostic of their own.</p>
+      <ul class="lu-grid lu-grid--2">
+        <li class="lu-card product lu-card--core">
+          <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="lockup"><img src="../assets/gdc/gdc-mark.svg" alt="" width="40" height="40"><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Free diagnostic<span class="lu-free">FREE</span></h3><p class="product__tier">Five patterns</p></div></div>
+          <p class="lu-desc">For school and nonprofit leaders: a few short questions, about two minutes, and which of five patterns is loudest for you right now.</p>
+          <ul class="lu-facts">
+            <li><b>For</b><span>One leader</span></li>
+            <li><b>Price</b><span>Free, no email needed</span></li>
+          </ul>
+          <a class="lu-go" href="../diagnostic/">See the diagnostic</a>
+        </li>
+        <li class="lu-card product product--engine lu-card--engine">
+          <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="lockup"><svg class="icon" aria-hidden="true"><use href="#m-engine"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Engine check<span class="lu-free">FREE</span></h3><p class="product__tier">Free readout &middot; Beta</p></div></div>
+          <p class="lu-desc">Eighteen statements about the team you lead, answered on instinct in about two minutes, and a readout across the six cylinders of CREATE.</p>
+          <ul class="lu-facts">
+            <li><b>For</b><span>Anyone who leads a team</span></li>
+            <li><b>Price</b><span>Free, in beta</span></li>
+          </ul>
+          <a class="lu-go" href="../engine-check/">See the engine check</a>
+        </li>
+        <li class="lu-card product product--psc lu-card--wide">
+          <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="lockup"><svg class="icon" aria-hidden="true"><use href="#m-psc"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Psychological Safety Check<span class="lu-free">FREE</span></h3><p class="product__tier">Leader self-check &middot; Team survey</p></div></div>
+          <p class="lu-desc">Seven statements built on Amy Edmondson&rsquo;s scale. Take it yourself or send it to your team, free and with no email needed. Inside the OBD, it becomes a 360 on how safe your team feels with you.</p>
+          <ul class="lu-facts">
+            <li><b>For</b><span>Any leader, or one team</span></li>
+            <li><b>Price</b><span>Free, no email needed</span></li>
+          </ul>
+          <a class="lu-go" href="../psychological-safety/">See the Safety Check</a>
+        </li>
+      </ul>
+      <figure class="pullquote lu-proof">
+        <blockquote>I run a real dashboard for a living. I came in skeptical of the metaphor &ndash; I left with a usable distinction between what&rsquo;s actually a leading indicator and what&rsquo;s just a soft signal I&rsquo;d have noticed anyway.</blockquote>
+        <figcaption class="attrib">Technical Founder, Technology</figcaption>
+      </figure>
+    </div>
+
+    <div class="lu-group" id="leader">
+      <h3 class="lu-group-h">Develop one leader</h3>
+      <p class="lu-group-line">When one leader&rsquo;s next step would move the whole organization.</p>
+      <ul class="lu-grid lu-grid--2">
+        <li class="lu-card product product--obd">
+          <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="lockup"><svg class="icon" aria-hidden="true"><use href="#m-obd"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">On-Board Diagnostic</h3><p class="product__tier">Core &middot; Leader &middot; Leader + Team</p></div></div>
+          <p class="lu-desc">CliftonStrengths&reg; and EQ-i 2.0 read against each other, and written up as one document about how this leader works under pressure.</p>
+          <ul class="lu-facts">
+            <li><b>For</b><span>One leader</span></li>
+            <li><b>Price</b><span>From $450 a person</span></li>
+          </ul>
+          <figure class="lu-cq"><blockquote>I thought I needed better time management. Turns out I needed to get out of my own way.</blockquote><figcaption>Founder and CEO, Services business</figcaption></figure>
+          <a class="lu-go" href="../obd/">See the OBD</a>
+          <a class="lu-pdf" href="../assets/one-pagers/gdc-company-the-on-board-diagnostic.pdf" download>Download the one-pager (PDF)</a>
+        </li>
+        <li class="lu-card product product--ec">
+          <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="lockup"><svg class="icon" aria-hidden="true"><use href="#m-ec"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Executive coaching</h3><p class="product__tier">Six sessions &middot; Schools edition &middot; Renewal</p></div></div>
+          <p class="lu-desc">Six structured sessions built on your OBD, so session one starts from a read rather than an introduction. Coaching and consulting, named in the room.</p>
+          <ul class="lu-facts">
+            <li><b>For</b><span>One leader, with a completed OBD</span></li>
+            <li><b>Price</b><span>Priced on a call</span></li>
+          </ul>
+          <p class="lu-rates">Schools and nonprofits: <a href="../schools/rates/">see published rates</a></p>
+          <figure class="lu-cq"><blockquote>Matt called me on it. Not rudely, but he wasn&rsquo;t going to let me pretend the problem was my employees.</blockquote><figcaption>Founder and CEO, Services business</figcaption></figure>
+          <a class="lu-go" href="../executive-coaching/">See executive coaching</a>
+          <a class="lu-pdf" href="../assets/one-pagers/gdc-company-executive-coaching.pdf" download>Download the one-pager (PDF)</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="lu-group" id="cohort">
+      <h3 class="lu-group-h">Grow a cohort</h3>
+      <p class="lu-group-line">When several people are stepping into bigger seats at once.</p>
+      <ul class="lu-grid lu-grid--2">
+        <li class="lu-card product product--gs">
+          <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="lockup"><svg class="icon" aria-hidden="true"><use href="#m-gs"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">GoodeStart</h3><p class="product__tier">First ninety days &middot; Schools edition</p></div></div>
+          <p class="lu-desc">The first ninety days in a new seat, done on purpose: an assessment baseline, four coaching sessions and a thirteen-week cohort.</p>
+          <ul class="lu-facts">
+            <li><b>For</b><span>The newly promoted</span></li>
+            <li><b>Price</b><span>Priced on a call</span></li>
+          </ul>
+          <p class="lu-rates">Schools and nonprofits: <a href="../schools/rates/">see published rates</a></p>
+          <a class="lu-go" href="../goodestart/">See GoodeStart</a>
+          <a class="lu-pdf" href="../assets/one-pagers/gdc-company-goodestart.pdf" download>Download the one-pager (PDF)</a>
+        </li>
+        <li class="lu-card product product--bb">
+          <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="lockup"><svg class="icon" aria-hidden="true"><use href="#m-bb"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Building the Bench</h3><p class="product__tier">Emerging leaders &middot; Schools edition</p></div></div>
+          <p class="lu-desc">Six months with a cohort of leaders at the same altitude, getting ready for the next seat and becoming each other&rsquo;s first call.</p>
+          <ul class="lu-facts">
+            <li><b>For</b><span>Emerging leaders</span></li>
+            <li><b>Price</b><span>Priced on a call</span></li>
+          </ul>
+          <p class="lu-rates">Schools and nonprofits: <a href="../schools/rates/">see published rates</a></p>
+          <a class="lu-go" href="../building-the-bench/">See Building the Bench</a>
+          <a class="lu-pdf" href="../assets/one-pagers/gdc-company-building-the-bench.pdf" download>Download the one-pager (PDF)</a>
+        </li>
+      </ul>
+      <figure class="pullquote lu-proof">
+        <blockquote>His work reinforced something fundamental: a strong school isn&rsquo;t built around a handful of exceptional leaders, but around a culture where leadership can flourish at every level.</blockquote>
+        <figcaption class="attrib">Head of School, Independent education</figcaption>
+      </figure>
+    </div>
+
+    <div class="lu-group" id="team">
+      <h3 class="lu-group-h">Workshops for the team</h3>
+      <p class="lu-group-line">When everyone works hard, just not in the same direction.</p>
+      <ul class="lu-grid">
+        <li class="lu-card product product--kt">
+          <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="lockup"><svg class="icon" aria-hidden="true"><use href="#m-kt"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Know Thyself to Lead Others</h3><p class="product__tier">Team workshop &middot; Schools edition &middot; Organizations edition</p></div></div>
+          <p class="lu-desc">A three-hour strengths workshop built on everyone&rsquo;s CliftonStrengths report, so a whole staff learns how each person does their best work.</p>
+          <ul class="lu-facts">
+            <li><b>For</b><span>A department or whole staff, up to fifty</span></li>
+            <li><b>Price</b><span>Priced on a call</span></li>
+          </ul>
+          <p class="lu-rates">Schools and nonprofits: <a href="../schools/rates/">see published rates</a></p>
+          <a class="lu-go" href="../know-thyself/">See Know Thyself</a>
+        </li>
+        <li class="lu-card product product--kt lu-card--om">
+          <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="lockup"><svg class="icon" aria-hidden="true"><use href="#m-om"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Owner&rsquo;s Manual</h3><p class="product__tier">A Know Thyself to Lead Others module</p></div></div>
+          <p class="lu-desc">Each person turns their OBD into a manual for how they work, then the team swaps, so nobody has to guess how anyone else operates.</p>
+          <ul class="lu-facts">
+            <li><b>For</b><span>A small daily team, up to fifteen</span></li>
+            <li><b>Price</b><span>Priced on a call</span></li>
+          </ul>
+          <p class="lu-rates">Schools and nonprofits: <a href="../schools/rates/">see published rates</a></p>
+          <a class="lu-go" href="../owners-manual/">See the Owner&rsquo;s Manual</a>
+          <a class="lu-pdf" href="../assets/one-pagers/gdc-company-the-owners-manual-workshop.pdf" download>Download the one-pager (PDF)</a>
+        </li>
+        <li class="lu-card product product--own">
+          <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="lockup"><svg class="icon" aria-hidden="true"><use href="#m-own"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">OWN</h3><p class="product__tier">Observe &middot; Wonder &middot; Navigate</p></div></div>
+          <p class="lu-desc">Strengths-based advisory design for schools. Teachers and advisors learn to ask, so students OWN the meaning &ndash; not you.</p>
+          <ul class="lu-facts">
+            <li><b>For</b><span>Teachers and advisors</span></li>
+            <li><b>Price</b><span>Priced on a call</span></li>
+          </ul>
+          <p class="lu-rates">Schools and nonprofits: <a href="../schools/rates/">see published rates</a></p>
+          <a class="lu-go" href="../schools/#svc-advisory">See OWN</a>
+          <a class="lu-pdf" href="../assets/one-pagers/gdc-schools-strengths-based-advisory-design.pdf" download>Download the one-pager (PDF)</a>
+        </li>
+        <li class="lu-card lu-card--hotk">
+          <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="lockup"><svg class="icon" aria-hidden="true"><use href="../assets/icons/icons-clutch-sprite.svg#icon-delegate"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Hand Over the Keys</h3><p class="product__tier">DELEGATE seminar</p></div></div>
+          <p class="lu-desc">Ninety minutes on how to hand work over so it stays handed over: the eight steps of DELEGATE, and one change your team can make on Monday.</p>
+          <ul class="lu-facts">
+            <li><b>For</b><span>Up to three hundred, virtual</span></li>
+            <li><b>Price</b><span>Priced on a call</span></li>
+          </ul>
+          <p class="lu-rates">Schools and nonprofits: <a href="../schools/rates/">see published rates</a></p>
+          <a class="lu-go" href="../products/#svc-seminars">See Hand Over the Keys</a>
+          <a class="lu-pdf" href="../assets/one-pagers/gdc-company-hand-over-the-keys.pdf" download>Download the one-pager (PDF)</a>
+        </li>
+        <li class="lu-card lu-card--sixc">
+          <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="lockup"><svg class="icon" aria-hidden="true"><use href="../assets/icons/icons-clutch-sprite.svg#icon-6c"/></svg><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Decision rights</h3><p class="product__tier">6C working session</p></div></div>
+          <p class="lu-desc">A working session, then a written map of which decisions belong where. Decided before the meeting rather than during it.</p>
+          <ul class="lu-facts">
+            <li><b>For</b><span>A senior team</span></li>
+            <li><b>Price</b><span>Priced on a call</span></li>
+          </ul>
+          <p class="lu-rates">Schools and nonprofits: <a href="../schools/rates/">see published rates</a></p>
+          <a class="lu-go" href="../schools/#svc-decisions">See the 6C session</a>
+          <a class="lu-pdf" href="../assets/one-pagers/gdc-schools-decision-rights-and-governance.pdf" download>Download the one-pager (PDF)</a>
+        </li>
+        <li class="lu-card lu-card--ft">
+          <div class="lu-band" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="lockup"><img src="../assets/cover_field.jpg" alt="" width="28" height="42" class="lu-cover"><div><p class="lockup-ey">GOODE DESIGN</p><h3 class="lockup-name">Field Tested</h3><p class="product__tier">Train-the-trainer</p></div></div>
+          <p class="lu-desc">A half or full day in person with your facilitators, modelling the methods from Field Tested, with a sixty-day lead-up and follow-up at thirty and ninety days.</p>
+          <ul class="lu-facts">
+            <li><b>For</b><span>Up to twenty facilitators</span></li>
+            <li><b>Price</b><span>From $4,500, license included</span></li>
+          </ul>
+          <a class="lu-go" href="../field-tested/#team-licenses">See Field Tested</a>
+        </li>
+      </ul>
+      <figure class="pullquote lu-proof">
+        <blockquote>Most people assume you can hire fast and fire decisively. My world can&rsquo;t. What I appreciated is that the core framework still held up once I did the translation myself, and Matt&rsquo;s workshop does that translation for you.</blockquote>
+        <figcaption class="attrib">CEO, Professional Services</figcaption>
+      </figure>
+    </div>
+<!-- /build-lineup:groups -->
+  </section>
+
+  <section class="band alt" id="frameworks" aria-labelledby="fw-h">
+    <p class="eyebrow">Talks, seminars and consulting</p>
+    <h2 class="section-h" id="fw-h">For a room, a senior team or the whole system</h2>
+    <p class="lede">Each one teaches a part of CLUTCH, and runs on it too.
+      <a href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=lineup-talks">Book thirty minutes</a> to scope one for your group.</p>
+    <ul class="lu-fw">
+      <li><span class="lu-fw-name">Seminars<span>Ninety minutes, one idea. Hand Over the Keys is available now</span></span><span class="lu-chips"><span class="lu-chip fw-d">DELEGATE</span><span class="lu-chip fw-c">CREATE</span><span class="lu-chip fw-v">VOICES</span><span class="lu-chip fw-6">6C</span><span class="lu-chip fw-eq">EQ</span></span><a class="link-arrow" href="../products/#svc-seminars">Details</a></li>
+      <li><span class="lu-fw-name">Keynotes<span>Eight talks built on the book</span></span><span class="lu-chips"><span class="lu-chip fw-c">CREATE</span><span class="lu-chip fw-v">VOICES</span><span class="lu-chip fw-6">6C</span><span class="lu-chip fw-eq">EQ</span><span class="lu-chip fw-d">DELEGATE</span></span><a class="link-arrow" href="../products/#keynotes">Details</a><a class="link-arrow lu-fw-pdf" href="../assets/one-pagers/gdc-company-keynotes.pdf" download>One-pager</a></li>
+      <li><span class="lu-fw-name">Executive team consulting<span>The table that sets direction</span></span><span class="lu-chips"><span class="lu-chip fw-6">6C</span><span class="lu-chip fw-d">DELEGATE</span></span><a class="link-arrow" href="../products/#door-system">Details</a><a class="link-arrow lu-fw-pdf" href="../assets/one-pagers/gdc-company-executive-team-consulting.pdf" download>One-pager</a></li>
+      <li><span class="lu-fw-name">System-wide consulting<span>A diagnostic, then a year</span></span><span class="lu-chips"><span class="lu-chip fw-c">CREATE</span><span class="lu-chip fw-v">VOICES</span><span class="lu-chip fw-6">6C</span><span class="lu-chip fw-d">DELEGATE</span></span><a class="link-arrow" href="../products/#door-system">Details</a><a class="link-arrow lu-fw-pdf" href="../assets/one-pagers/gdc-company-system-wide-consulting.pdf" download>One-pager</a></li>
+      <li><span class="lu-fw-name">The four framework ebooks<span>One chapter each, $3.99</span></span><span class="lu-chips"><span class="lu-chip fw-c">CREATE</span><span class="lu-chip fw-v">VOICES</span><span class="lu-chip fw-6">6C</span><span class="lu-chip fw-d">DELEGATE</span></span><a class="link-arrow" href="../clutch/ebooks/">Details</a></li>
+    </ul>
+  </section>
+
+  <section class="band" id="the-book" aria-labelledby="book-h">
+    <p class="eyebrow">Not ready for a call?</p>
+    <h2 class="section-h" id="book-h">Start with the book</h2>
+    <div class="lu-book">
+      <a href="../clutch/"><img src="../assets/clutch_cover.jpg" alt="CLUTCH, the leadership operating system, front cover" width="400" height="600"></a>
+      <div>
+        <h3>CLUTCH: How Leaders Build Systems That Run Without Them</h3>
+        <p>The whole operating system in one paperback, with a diagnostic for
+          every part. Everything on this page is built on it.</p>
+        <p>Want one framework first? CREATE, VOICES, the 6C Decision Compass and
+          DELEGATE are each a $3.99 ebook.</p>
+        <p class="cta-row">
+          <a class="btn btn-ghost" href="../clutch/">Get the paperback</a>
+          <a class="btn btn-ghost" href="../clutch/ebooks/">See the $3.99 ebooks</a>
+        </p>
+      </div>
+    </div>
+    <ul class="lu-own lu-also" aria-label="More to read">
+      <li><a href="../field-tested/"><img class="lu-thumb" src="../assets/cover_field.jpg" alt="" width="72" height="108" loading="lazy"><span><strong>Field Tested</strong>Seventy-two facilitation methods, $45 ebook</span></a></li>
+      <li><a href="../no-average-brain/"><img class="lu-thumb" src="../assets/cover_noaveragebrain.jpg" alt="" width="72" height="108" loading="lazy"><span><strong>No Average Brain</strong>Neuroinclusive leadership, coming early 2027</span></a></li>
+      <li><a href="../writing/"><span class="lu-thumb lu-thumb--lab" aria-hidden="true"><img src="../assets/gdc/gdc-mark-dark.svg" alt="" width="34" height="34"><em>The Leadership Lab</em></span><span><strong>The Leadership Lab</strong>Three free pieces a week</span></a></li>
+    </ul>
+  </section>
+
+  <section class="band alt book-call" id="book">
+    <!-- Proof (12 Oct 2026): same quote and credit as the home page. -->
+    <figure class="pullquote proof-quote">
+      <blockquote>I participated in a delegation workshop sponsored by my employer, and used the framework in a 1:1 the next day. That doesn&rsquo;t happen with most workshops.</blockquote>
+      <figcaption>VP of Operations, Fintech</figcaption>
+    </figure>
+
+    <p class="eyebrow">Next step</p>
+    <h2 class="section-h big">Thirty minutes, and you&rsquo;ll know whether this is worth continuing</h2>
+    <p class="lede center">Bring the thing that keeps landing back on your desk.
+      We will work out together whether it is a people problem or a design
+      problem. It is almost always a design problem.</p>
+    <p class="cta-row center"><a class="btn btn-lg" href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=lineup-2">Book thirty minutes</a></p>
+    <p class="fineprint"><strong>If it is not a fit I will say so on the call</strong> and send you the chapter that is. No deck, no follow-up sequence, no second call you did not ask for.<br>Prefer email? <a href="mailto:matt@thatsgoodedesign.com">matt@thatsgoodedesign.com</a></p>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot-in">
+    <div>
+      <img src="../assets/gdc/gdc-mark.svg" alt="" width="34" height="34">
+      <p class="foot-name">Goode Design &amp; Consulting</p>
+      <p class="foot-meta">Washington, DC &middot; Baltimore &middot; New York &middot; Boston &middot; Available globally</p>
+    <ul class="socials" aria-label="Elsewhere">
+      <li><a href="https://calendly.com/matt-thatsgoodedesign/chatt-with-matt?utm_content=lineup-footer" title="Book a time"><img src="../assets/icon-calendly.png" alt="Book a time with Matt Goode"></a></li>
+      <li><a href="https://www.linkedin.com/in/goodematt/" title="LinkedIn"><img src="../assets/icon-linkedin.png" alt="Matt Goode on LinkedIn"></a></li>
+      <li><a href="https://thatsgoodedesign.substack.com/" title="The Leadership Lab on Substack"><img src="../assets/icon-substack.png" alt="The Leadership Lab on Substack"></a></li>
+      <li><a href="mailto:matt@thatsgoodedesign.com" title="Email"><img src="../assets/icon-email.png" alt="Email Matt Goode"></a></li>
+    </ul>
+    </div>
+    <nav aria-label="Footer">
+      <a href="../system/">The system</a>
+      <a href="../products/">Products</a>
+      <a href="../obd/">The OBD</a>
+      <a href="../schools/">Schools</a>
+      <a href="../coaching-engagement/">How it works</a>
+      <a href="../engine-check/">Free engine check</a>
+      <a href="../free/">Free tools</a>
+      <a href="../books/">Books</a>
+      <a href="../writing/">Writing</a>
+      <a href="../about/">About</a>
+      <a href="mailto:matt@thatsgoodedesign.com">Contact</a>
+      <a href="../terms/">Terms</a>
+      <a href="../privacy/">Privacy</a>
+    </nav>
+  </div>
+  <p class="foot-legal">&copy; 2026 Goode Design &amp; Consulting. CliftonStrengths&reg;,
+    StrengthsFinder&reg; and the 34 theme names are trademarks of Gallup, Inc.
+    EQ-i 2.0 is a trademark of Multi-Health Systems Inc. Matt Goode is a
+    Gallup-Certified Strengths Coach.
+    <br><br>
+    The non-Gallup information you are receiving has not been approved and is not
+    sanctioned or endorsed by Gallup in any way. Opinions, views and
+    interpretations of CliftonStrengths&reg;, Clifton Youth StrengthsExplorer or
+    BP10 results are solely the beliefs of Goode Design &amp; Consulting.</p>
+</footer>
+
+</body>
+</html>

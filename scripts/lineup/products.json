@@ -1,0 +1,363 @@
+{
+  "_readme": "Source for the product cards on /lineup/. Edit here, then run python3 scripts/build-lineup.py. Text is HTML: &rsquo; for apostrophes, &middot; between tier words, never an em dash.",
+  "groups": [
+    {
+      "id": "see",
+      "title": "See it clearly",
+      "line": "Find out what&rsquo;s actually broken before you pay to fix it.",
+      "note": "Two free checks, about two minutes each. The diagnostic names the pattern you&rsquo;re in. The engine check reads the team you lead.",
+      "layout": "two",
+      "picker": {
+        "headline": "Something&rsquo;s off, and I can&rsquo;t name it",
+        "sub": "Two free checks, about two minutes each"
+      },
+      "cards": [
+        {
+          "name": "Free diagnostic",
+          "classes": "product lu-card--core",
+          "icon": {
+            "img": "../assets/gdc/gdc-mark.svg",
+            "w": 40,
+            "h": 40
+          },
+          "tier": "Five patterns",
+          "free": true,
+          "desc": "A few short questions, about two minutes, and which of five patterns is loudest for you right now: Bottleneck, Growth Gap, Drift, Stall or New Seat.",
+          "facts": [
+            [
+              "For",
+              "One leader"
+            ],
+            [
+              "Price",
+              "Free, no email needed"
+            ]
+          ],
+          "href": "../diagnostic/",
+          "label": "See the diagnostic"
+        },
+        {
+          "name": "Engine check",
+          "classes": "product product--engine lu-card--engine",
+          "icon": {
+            "symbol": "m-engine"
+          },
+          "tier": "Free readout &middot; Beta",
+          "free": true,
+          "desc": "Eighteen statements about the team you lead, answered on instinct in about two minutes, and a readout across the six cylinders of CREATE.",
+          "facts": [
+            [
+              "For",
+              "Anyone who leads a team"
+            ],
+            [
+              "Price",
+              "Free, in beta"
+            ]
+          ],
+          "href": "../engine-check/",
+          "label": "See the engine check"
+        },
+        {
+          "name": "Psychological Safety Check",
+          "classes": "product product--psc lu-card--wide",
+          "icon": {
+            "symbol": "m-psc"
+          },
+          "tier": "Leader self-check &middot; Team survey",
+          "free": true,
+          "desc": "Seven statements built on Amy Edmondson&rsquo;s scale. Take it yourself or send it to your team, free and with no email needed. Inside the OBD, it becomes a 360 on how safe your team feels with you.",
+          "facts": [
+            [
+              "For",
+              "Any leader, or one team"
+            ],
+            [
+              "Price",
+              "Free, no email needed"
+            ]
+          ],
+          "href": "../psychological-safety/",
+          "label": "See the Safety Check"
+        }
+      ],
+      "quote": {
+        "text": "I run a real dashboard for a living. I came in skeptical of the metaphor &ndash; I left with a usable distinction between what&rsquo;s actually a leading indicator and what&rsquo;s just a soft signal I&rsquo;d have noticed anyway.",
+        "credit": "Technical Founder, Technology"
+      }
+    },
+    {
+      "id": "leader",
+      "title": "Develop one leader",
+      "line": "When one leader&rsquo;s next step would move the whole organization.",
+      "layout": "two",
+      "picker": {
+        "headline": "One leader needs to grow into the job",
+        "sub": "The OBD, then coaching"
+      },
+      "cards": [
+        {
+          "name": "On-Board Diagnostic",
+          "classes": "product product--obd",
+          "icon": {
+            "symbol": "m-obd"
+          },
+          "tier": "Core &middot; Leader &middot; Leader + Team",
+          "desc": "CliftonStrengths&reg; and EQ-i 2.0 read against each other, and written up as one document about how this leader works under pressure.",
+          "facts": [
+            [
+              "For",
+              "One leader"
+            ],
+            [
+              "Price",
+              "From $450 a person"
+            ]
+          ],
+          "quote": {
+            "text": "I thought I needed better time management. Turns out I needed to get out of my own way.",
+            "credit": "Founder and CEO, Services business"
+          },
+          "href": "../obd/",
+          "label": "See the OBD"
+        },
+        {
+          "name": "Executive coaching",
+          "classes": "product product--ec",
+          "icon": {
+            "symbol": "m-ec"
+          },
+          "tier": "Six sessions &middot; Schools edition &middot; Renewal",
+          "desc": "Six structured sessions built on your OBD, so session one starts from a read rather than an introduction. Coaching and consulting, named in the room.",
+          "facts": [
+            [
+              "For",
+              "One leader, with a completed OBD"
+            ],
+            [
+              "Price",
+              "Priced on a call"
+            ]
+          ],
+          "rates": true,
+          "quote": {
+            "text": "Matt called me on it. Not rudely, but he wasn&rsquo;t going to let me pretend the problem was my employees.",
+            "credit": "Founder and CEO, Services business"
+          },
+          "href": "../executive-coaching/",
+          "label": "See executive coaching"
+        }
+      ]
+    },
+    {
+      "id": "cohort",
+      "title": "Grow a cohort",
+      "line": "When several people are stepping into bigger seats at once.",
+      "layout": "two",
+      "picker": {
+        "headline": "Several people stepping up at once",
+        "sub": "A cohort for a new seat or the next one"
+      },
+      "cards": [
+        {
+          "name": "GoodeStart",
+          "classes": "product product--gs",
+          "icon": {
+            "symbol": "m-gs"
+          },
+          "tier": "First ninety days &middot; Schools edition",
+          "desc": "The first ninety days in a new seat, done on purpose: an assessment baseline, four coaching sessions and a thirteen-week cohort.",
+          "facts": [
+            [
+              "For",
+              "The newly promoted"
+            ],
+            [
+              "Price",
+              "Priced on a call"
+            ]
+          ],
+          "rates": true,
+          "href": "../goodestart/",
+          "label": "See GoodeStart"
+        },
+        {
+          "name": "Building the Bench",
+          "classes": "product product--bb",
+          "icon": {
+            "symbol": "m-bb"
+          },
+          "tier": "Emerging leaders &middot; Schools edition",
+          "desc": "Six months with a cohort of leaders at the same altitude, getting ready for the next seat and becoming each other&rsquo;s first call.",
+          "facts": [
+            [
+              "For",
+              "Emerging leaders"
+            ],
+            [
+              "Price",
+              "Priced on a call"
+            ]
+          ],
+          "rates": true,
+          "href": "../building-the-bench/",
+          "label": "See Building the Bench"
+        }
+      ],
+      "quote": {
+        "text": "His work reinforced something fundamental: a strong school isn&rsquo;t built around a handful of exceptional leaders, but around a culture where leadership can flourish at every level.",
+        "credit": "Head of School, Independent education"
+      }
+    },
+    {
+      "id": "team",
+      "title": "Workshops for the team",
+      "line": "When everyone works hard, just not in the same direction.",
+      "layout": "three",
+      "picker": {
+        "headline": "Good people, pulling in different directions",
+        "sub": "Workshops for one team or a whole staff"
+      },
+      "cards": [
+        {
+          "name": "Know Thyself to Lead Others",
+          "classes": "product product--kt",
+          "icon": {
+            "symbol": "m-kt"
+          },
+          "tier": "Team workshop &middot; Schools edition &middot; Organizations edition",
+          "desc": "A three-hour strengths workshop built on everyone&rsquo;s CliftonStrengths report, so a whole staff learns how each person does their best work.",
+          "facts": [
+            [
+              "For",
+              "A department or whole staff, up to fifty"
+            ],
+            [
+              "Price",
+              "Priced on a call"
+            ]
+          ],
+          "rates": true,
+          "href": "../know-thyself/",
+          "label": "See Know Thyself"
+        },
+        {
+          "name": "Owner&rsquo;s Manual",
+          "classes": "product product--kt lu-card--om",
+          "icon": {
+            "symbol": "m-om"
+          },
+          "tier": "A Know Thyself to Lead Others module",
+          "desc": "Each person turns their OBD into a manual for how they work, then the team swaps, so nobody has to guess how anyone else operates.",
+          "facts": [
+            [
+              "For",
+              "A small daily team, up to fifteen"
+            ],
+            [
+              "Price",
+              "Priced on a call"
+            ]
+          ],
+          "rates": true,
+          "href": "../owners-manual/",
+          "label": "See the Owner&rsquo;s Manual"
+        },
+        {
+          "name": "OWN",
+          "classes": "product product--own",
+          "icon": {
+            "symbol": "m-own"
+          },
+          "tier": "Observe &middot; Wonder &middot; Navigate",
+          "desc": "Strengths-based advisory design for schools. Teachers and advisors learn to ask, so students OWN the meaning &ndash; not you.",
+          "facts": [
+            [
+              "For",
+              "Teachers and advisors"
+            ],
+            [
+              "Price",
+              "Priced on a call"
+            ]
+          ],
+          "rates": true,
+          "href": "../schools/#svc-advisory",
+          "label": "See OWN"
+        },
+        {
+          "name": "Hand Over the Keys",
+          "classes": "lu-card--hotk",
+          "icon": {
+            "sprite": "icon-delegate"
+          },
+          "tier": "DELEGATE seminar",
+          "desc": "Ninety minutes on how to hand work over so it stays handed over: the eight steps of DELEGATE, and one change your team can make on Monday.",
+          "facts": [
+            [
+              "For",
+              "Up to three hundred, virtual"
+            ],
+            [
+              "Price",
+              "Priced on a call"
+            ]
+          ],
+          "rates": true,
+          "href": "../products/#svc-seminars",
+          "label": "See Hand Over the Keys"
+        },
+        {
+          "name": "Decision rights",
+          "classes": "lu-card--sixc",
+          "icon": {
+            "sprite": "icon-6c"
+          },
+          "tier": "6C working session",
+          "desc": "A working session, then a written map of which decisions belong where. Decided before the meeting rather than during it.",
+          "facts": [
+            [
+              "For",
+              "A senior team"
+            ],
+            [
+              "Price",
+              "Priced on a call"
+            ]
+          ],
+          "rates": true,
+          "href": "../schools/#svc-decisions",
+          "label": "See the 6C session"
+        },
+        {
+          "name": "Field Tested",
+          "classes": "lu-card--ft",
+          "icon": {
+            "img": "../assets/cover_field.jpg",
+            "w": 28,
+            "h": 42,
+            "class": "lu-cover"
+          },
+          "tier": "Train-the-trainer",
+          "desc": "A half or full day in person with your facilitators, modelling the methods from Field Tested, with a sixty-day lead-up and follow-up at thirty and ninety days.",
+          "facts": [
+            [
+              "For",
+              "Up to twenty facilitators"
+            ],
+            [
+              "Price",
+              "From $4,500, license included"
+            ]
+          ],
+          "href": "../field-tested/#team-licenses",
+          "label": "See Field Tested"
+        }
+      ],
+      "quote": {
+        "text": "Most people assume you can hire fast and fire decisively. My world can&rsquo;t. What I appreciated is that the core framework still held up once I did the translation myself, and Matt&rsquo;s workshop does that translation for you.",
+        "credit": "CEO, Professional Services"
+      }
+    }
+  ]
+}

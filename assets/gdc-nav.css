@@ -1,0 +1,248 @@
+/* ---------------------------------------------------------------------------
+   Primary nav menus. Deliberately self-contained: the three ported book pages
+   (clutch, field-tested, no-average-brain) load their own stylesheet and not
+   style.css, so this file is linked by every page and owes nothing to either
+   design system. The panel is always on paper, light or dark chrome above it.
+   Click to open rather than hover: hover menus are unusable on touch and
+   unpredictable on trackpads.
+--------------------------------------------------------------------------- */
+.navmenu{position:relative;display:inline-block}
+.navmenu > button{
+  font-family:inherit;background:none;border:0;padding:0;margin:0;cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px;color:inherit;
+}
+/* Match the siblings in each chrome rather than inventing a third size. */
+.nav nav .navmenu > button{
+  font-size:14px;font-weight:600;letter-spacing:.04em;color:#4B4B50;
+}
+.nav nav .navmenu > button:hover{color:#242427}
+.bp-links .navmenu > button{
+  font-size:13px;font-weight:600;letter-spacing:.04em;color:rgba(237,229,214,.72);
+}
+.bp-links .navmenu > button:hover{color:#EDE5D6}
+@media (max-width:1024px){
+  .bp-links .navmenu > button{font-size:12px}
+}
+/* The bar is full at laptop width. Tighten before it wraps to two rows. */
+@media (max-width:1200px){
+  .nav nav{gap:20px}
+  .bp-links{gap:18px}
+}
+/* Writing joined the bar (13 Oct 2026). Tighten again so it stays on one row down to 1025px. */
+@media (min-width:1025px) and (max-width:1120px){
+  .nav nav{gap:14px}
+  .bp-links{gap:14px}
+}
+.navmenu > button::after{
+  content:"";width:7px;height:7px;flex:0 0 auto;margin-top:-2px;
+  border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+  transform:rotate(45deg);transition:transform .16s ease;
+}
+.navmenu > button[aria-expanded="true"]::after{transform:rotate(-135deg);margin-top:2px}
+.navmenu > button:focus-visible{outline:2px solid #C4A26A;outline-offset:4px}
+
+.navmenu-panel{
+  position:absolute;top:calc(100% + 14px);left:50%;transform:translateX(-50%);
+  min-width:232px;z-index:60;
+  background:#FBFAF7;border:1px solid #DDDAD1;border-radius:4px;
+  box-shadow:0 14px 34px rgba(36,36,39,.14);
+  padding:8px;margin:0;list-style:none;
+}
+.navmenu-panel[hidden]{display:none}
+.navmenu-panel li{margin:0}
+/* Specificity is deliberate. The three book pages colour every link inside
+   .bp-links for a dark bar, and the panel sits inside that nav, so these need
+   to outrank `.real-clutch .bp-links a` without resorting to !important. */
+.navmenu ul.navmenu-panel li a{
+  display:block;padding:9px 12px;border-radius:3px;border-bottom:0;
+  font-size:14px;font-weight:500;line-height:1.35;letter-spacing:0;
+  color:#242427;text-decoration:none;white-space:nowrap;text-transform:none;
+}
+.navmenu ul.navmenu-panel li a span{
+  display:block;font-size:12px;font-weight:400;color:#71706C;
+  margin-top:2px;letter-spacing:0;
+}
+.navmenu ul.navmenu-panel li a:hover,
+.navmenu ul.navmenu-panel li a:focus-visible{background:#F1EFE9;color:#856521;outline:none}
+.navmenu ul.navmenu-panel li a:hover span,
+.navmenu ul.navmenu-panel li a:focus-visible span{color:#71706C}
+/* The bar marks the current page with a gold underline. Inside the panel that
+   reads as a stray rule, so it is colour only. */
+.navmenu ul.navmenu-panel li a[aria-current="page"]{
+  color:#856521;border-bottom:0;padding-bottom:9px;
+}
+
+/* Narrow: the bar already wraps, so let the panel sit in the flow instead of
+   floating off the side of a 390px screen. */
+@media (max-width:1024px){
+  .navmenu{display:block;width:100%}
+  .navmenu > button{width:100%;justify-content:flex-start}
+  .navmenu-panel{
+    position:static;transform:none;min-width:0;width:100%;
+    box-shadow:none;margin:8px 0 4px;
+  }
+  .navmenu-panel a{white-space:normal}
+}
+
+/* ─── the services panel, as a map of the practice ───
+   Five ungrouped links mixed a product, a category, a format and a free tool,
+   and said nothing about the fact that this practice sells into two different
+   markets on two different buying cycles. Two columns say it in one glance,
+   with the one no-commitment entry point across the foot. */
+
+/* :not([hidden]) is load-bearing. `.navmenu-panel[hidden]{display:none}` and
+   `.navmenu-panel.navmenu-wide{display:grid}` are both (0,2,0), and this file
+   is appended later, so a bare display:grid here wins over display:none and
+   the panel never closes. Scoped, the hidden state keeps its own rule. */
+.navmenu-panel.navmenu-wide:not([hidden]){
+  min-width:0;width:max-content;max-width:min(92vw,620px);
+  display:grid;grid-template-columns:1fr 1fr;gap:4px 10px;padding:12px;
+}
+/* Three groups on desktop: companies, schools, flagship programs. The wider
+   panel is anchored to the right edge of the Services button instead of
+   centred on it, so it grows leftward and never runs off the right of the
+   viewport, where Books, About and Book a call already sit. */
+@media (min-width:1025px){
+  .navmenu-panel.navmenu-wide:not([hidden]){
+    width:min(96vw,980px);max-width:min(96vw,980px);
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    left:auto;right:0;transform:none;
+  }
+  /* 19 Oct 2026: the seven product badges take two columns, so the panel
+     reads companies | schools | products, with the four no-commitment
+     entries in one row across the foot. */
+  .navmenu-panel.navmenu-wide .nmp-products{grid-column:3 / span 2}
+  .navmenu-panel.navmenu-wide .nmp-products > ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:4px}
+}
+.navmenu-panel.navmenu-wide{min-width:0}
+.navmenu-panel.navmenu-wide .nmp-group{min-width:0}
+.navmenu-panel.navmenu-wide .nmp-group > ul{
+  list-style:none;margin:0;padding:0;
+}
+.navmenu-panel.navmenu-wide .nmp-head{
+  margin:2px 0 6px;padding:0 12px;
+  font-size:10.5px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+  color:#856521;
+}
+/* Full width across the foot, above a hairline: it belongs to neither column
+   because it is what you send someone who is not ready to buy either. */
+.navmenu-panel.navmenu-wide .nmp-foot{
+  grid-column:1 / -1;margin-top:8px;padding-top:8px;
+  border-top:1px solid #DDDAD1;
+}
+.navmenu ul.navmenu-panel.navmenu-wide .nmp-foot a{font-weight:700}
+/* Desktop, four columns: the four foot entries sit side by side in one row. */
+@media (min-width:1025px){.navmenu-panel.navmenu-wide .nmp-foot{grid-column:auto}}
+
+/* Product glyphs (19 Oct 2026, product family v1.3). Muted at rest, gold ink
+   with the label on hover: the product colour never goes on anything you
+   press. Glyphs come from the shared sprite, 18 px on the 24 grid. */
+.navmenu ul.navmenu-panel .nmp-products li a{position:relative;padding-left:40px}
+.navmenu-panel .nmp-ic{position:absolute;left:12px;top:10px;width:18px;height:18px;color:#71706C}
+.navmenu ul.navmenu-panel .nmp-products li a:hover .nmp-ic,
+.navmenu ul.navmenu-panel .nmp-products li a:focus-visible .nmp-ic,
+.navmenu ul.navmenu-panel .nmp-products li a[aria-current="page"] .nmp-ic{color:#856521}
+
+/* The nowrap that keeps single-column items on one line would force this panel
+   wider than the viewport, so inside the wide panel labels may wrap. */
+.navmenu ul.navmenu-panel.navmenu-wide li a{white-space:normal}
+
+@media (max-width:1024px){
+  .navmenu-panel.navmenu-wide:not([hidden]){
+    width:100%;max-width:none;grid-template-columns:1fr;gap:0;
+  }
+  .navmenu-panel.navmenu-wide .nmp-head{margin-top:10px}
+  .navmenu-panel.navmenu-wide .nmp-foot{grid-column:auto}
+}
+
+
+/* ─── the hidden state, asserted last ───
+   Five times on this build a later rule has out-specified an earlier one and
+   broken something quietly. A panel that will not close is the worst of those,
+   so the hidden state is restated here at (0,3,0), after everything, where no
+   component rule can reach past it. */
+.navmenu .navmenu-panel[hidden]{display:none}
+
+/* ---------------------------------------------------------------------------
+   Mobile menu toggle (added by gdc-nav.js). Under 1024px the bar holds the
+   brand, "Book a call" and a menu button on one row; the rest opens below.
+--------------------------------------------------------------------------- */
+.navtoggle{display:none}
+@media (max-width:1024px){
+  .has-navtoggle{flex-wrap:wrap;gap:10px;row-gap:0;align-items:center}
+  .has-navtoggle > nav{order:1;margin-left:auto}
+  .has-navtoggle .navtoggle{
+    order:2;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    background:none;border:1px solid currentColor;border-radius:4px;
+    min-width:40px;height:38px;padding:0 10px;cursor:pointer;
+    font-family:inherit;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  }
+  .nav .navtoggle{color:#242427}
+  .bp-nav .navtoggle{color:#EDE5D6}
+  .navtoggle:focus-visible{outline:2px solid #C4A26A;outline-offset:3px}
+  .navtoggle-label{display:none}
+  .navtoggle-bars,.navtoggle-bars::before,.navtoggle-bars::after{
+    display:block;width:16px;height:2px;background:currentColor;position:relative;
+    transition:transform .16s ease;
+  }
+  .navtoggle-bars::before,.navtoggle-bars::after{content:"";position:absolute;left:0}
+  .navtoggle-bars::before{top:-5px}
+  .navtoggle-bars::after{top:5px}
+  .nav-open .navtoggle-bars{background:transparent}
+  .nav-open .navtoggle-bars::before{transform:translateY(5px) rotate(45deg)}
+  .nav-open .navtoggle-bars::after{transform:translateY(-5px) rotate(-45deg)}
+  /* Compact brand and button so the three fit one row at phone width. */
+  .has-navtoggle .brand,.has-navtoggle .bp-brand{font-size:13px}
+  .has-navtoggle .bp-brand img{width:32px;height:auto}
+  .has-navtoggle .brand em,.has-navtoggle .bp-brand em{display:none}
+  .has-navtoggle > nav > .btn,.has-navtoggle > nav > .bp-cta{padding:10px 12px;font-size:11px;white-space:nowrap}
+  /* Collapsed: only the booking button shows. */
+  .has-navtoggle > nav > :not(.btn):not(.bp-cta){display:none}
+  /* Open: the full list drops below the bar. */
+  .has-navtoggle.nav-open > nav{
+    order:3;flex-basis:100%;margin-left:0;flex-direction:column;align-items:flex-start;
+    gap:16px;padding:16px 0 10px;
+  }
+  .has-navtoggle.nav-open > nav > :not(.btn):not(.bp-cta){display:block}
+  .has-navtoggle.nav-open > nav > .navmenu{width:100%}
+}
+@media (max-width:370px){
+  .has-navtoggle .brand span,.has-navtoggle .bp-brand span{display:none}
+}
+
+/* Footer links: two columns so the twelve links do not run down the page. */
+footer nav[aria-label="Footer"]{
+  display:grid !important;grid-template-columns:repeat(2,max-content);
+  column-gap:40px !important;row-gap:12px !important;align-content:start;
+}
+
+
+/* ---------- line breaks: no orphans (12 Oct 2026) ----------
+   House rule, applies to every page. It lives here because gdc-nav.css is
+   the one stylesheet every page loads, book pages included:
+   1. Headings balance their lines, so no line is left holding one word.
+   2. Running text wraps "pretty", so a paragraph, list item or quote never
+      ends on a lone word.
+   3. A heading made of two sentences puts each sentence on its own line:
+      wrap each sentence in <span class="hl">. A colour change (.accent)
+      never starts mid-line on its own; if the accent is a whole sentence,
+      give it .hl too. */
+h1, h2, h3, h4 { text-wrap: balance; }
+p, li, blockquote, figcaption, dd { text-wrap: pretty; }
+h1 .hl, h2 .hl { display: block; }
+
+/* ---------- mobile action bar (12 Oct 2026) ----------
+   Injected by gdc-nav.js on most pages; /system/ carries its own. */
+.m-cta-auto { display: none; }
+@media (max-width: 760px) {
+  .m-cta-auto {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+    background: #242427; color: #FBFAF7; font: 500 14px/1.3 Montserrat, system-ui, sans-serif;
+    transform: translateY(110%); transition: transform .25s ease;
+  }
+  .m-cta-auto.show { transform: none; }
+  .m-cta-auto .btn { flex: none; padding: 10px 16px; font-size: 14px; }
+}
+@media (prefers-reduced-motion: reduce) { .m-cta-auto { transition: none; } }

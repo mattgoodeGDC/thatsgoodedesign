@@ -1,0 +1,22 @@
+{
+  "bottleneck": {
+    "pattern": "The Bottleneck",
+    "icon": "icon-delegate"
+  },
+  "growth-gap": {
+    "pattern": "The Growth Gap",
+    "icon": "icon-6c"
+  },
+  "drift": {
+    "pattern": "The Drift",
+    "icon": "icon-create"
+  },
+  "stall": {
+    "pattern": "The Stall",
+    "icon": "icon-results"
+  },
+  "new-seat": {
+    "pattern": "The New Seat",
+    "icon": "product-goodestart"
+  }
+}
