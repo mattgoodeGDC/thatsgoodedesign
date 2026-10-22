@@ -156,6 +156,7 @@ textarea.copy{width:100%;min-height:160px;font:inherit;font-size:15px;background
 <script>
 const LOCS=[["fridge","Fridge"],["freezer","Freezer"],["pantry","Pantry"],["counter","Counter"]];
 const SECTIONS=["Produce","Meat & Fish","Dairy & Eggs","Frozen","Bakery","Pantry","Drinks","Household"];
+const OPEN_KEEPS={cstock:5,tbsauce:7,blush:7,tikka:7,pesto:7,pineapple:5,mexcheese:5,sourcream:10,springmix:5,thaipeanut:30,kbbq:30,ranch:30,bouillon:90,pjuice:7,tomatoes:6,blackberries:3};
 const GROUPS=["Chicken","Beef and pork bowls","Fish and shrimp","Soups and noodles","Potatoes and backups"];
 const GROUP_NOTE={
   "Chicken":"Cooked chicken from the freezer. Move the bag to the fridge the night before.",
@@ -627,6 +628,7 @@ function kitchenView(){
         h+=`<div class="step"><button data-act="qminus" data-id="${id}" aria-label="One less" ${readOnly||have(it)<=0?"disabled":""}>−</button><output>${qtyText(have(it))}${Number(it.pack)>1?`<small class="of">of ${it.pack}</small>`:""}</output><button data-act="qplus" data-id="${id}" aria-label="One more" ${readOnly?"disabled":""}>+</button></div>`;
       }
       if(it.kind!=="prep") h+=`<button class="toggle ${it.low?"low":""}" data-act="low" data-id="${id}" ${readOnly?"disabled":""}>Low</button>`;
+      if(OPEN_KEEPS[id]&&have(it)>0) h+=it.since?`<button class="toggle on" data-act="newone" data-id="${id}" ${readOnly?"disabled":""} aria-label="Mark as a new, unopened one">Opened ${esc(weekday(it.since))}</button>`:`<button class="toggle" data-act="opened" data-id="${id}" ${readOnly?"disabled":""}>Opened</button>`;
       h+=`</div>${howBlock(id)}`;
     }
     h+=`</div>`;
@@ -670,6 +672,8 @@ document.addEventListener("click",e=>{
   else if(a==="qminus") setQty(id,have(state.items[id])-1);
   else if(a==="have") setField(id,{qty:have(state.items[id])>0?0:1,low:false});
   else if(a==="low") setField(id,{low:!state.items[id].low});
+  else if(a==="opened"){ const k=OPEN_KEEPS[id]; setField(id,{loc:"fridge",since:today(),keeps:k}); toast(`${state.items[id].name} is in the fridge now. Use within ${k} days.`); }
+  else if(a==="newone"){ setField(id,{since:""}); delete state.items[id].since; render(); toast(`${state.items[id].name} is marked as not opened.`); }
   else if(a==="export"){
     const data=JSON.stringify({exported:new Date().toISOString(),meals:state.meals,items:state.items,plan:state.plan},null,2);
     const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([data],{type:"application/json"})); a.download="evans-kitchen.json"; document.body.appendChild(a); a.click(); a.remove(); toast("Saved.");
