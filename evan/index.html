@@ -347,7 +347,7 @@ async function load(){
   try{
     const s=await api("/state");
     state.items=s.items||{}; state.meals=s.meals||{}; state.plan=Array.isArray(s.plan)?s.plan:[];
-    state.ready.items=state.ready.meals=true; render();
+    state.ready.items=state.ready.meals=true; render(); usePastNights();
   }catch(e){ if(e.auth) signOut(); else { document.getElementById("view").innerHTML=`<div class="empty">Can't reach the kitchen list right now. Check your connection and reload.</div>`; } }
 }
 
@@ -581,6 +581,26 @@ function setField(id,patch){
   state.items[id]={...state.items[id],...patch}; render();
   queueOp({t:"item",id,patch});
 }
+// Nights that have passed count as made: take their servings out of the kitchen.
+function usePastNights(){
+  if(readOnly) return;
+  const t=today(), past=state.plan.filter(p=>p.night<t);
+  if(!past.length) return;
+  const names=[];
+  for(const p of past){
+    const m=state.meals[p.meal]; if(!m) continue;
+    for(const u of usesFor(p.meal,p.base)){
+      const it=state.items[u.id]; if(!it||it.kind==="staple") continue;
+      const qty=Math.max(0,Math.round((have(it)-(u.n||1))*10)/10);
+      const patch={qty}; if(it.keeps&&it.kind==="prep"&&qty<=0) patch.since="";
+      state.items[u.id]={...it,...patch}; if(patch.since==="") delete state.items[u.id].since;
+      queueOp({t:"item",id:u.id,patch});
+    }
+    names.push(m.name);
+  }
+  savePlan(state.plan.filter(p=>p.night>=t));
+  if(names.length){ toast("Taken out of the kitchen for past nights: "+names.join(", ")+"."); clearTimeout(toast._t); toast._t=setTimeout(()=>document.getElementById("toast").classList.remove("show"),7000); }
+}
 function ateIt(mid){
   const m=state.meals[mid]; if(!m||readOnly) return;
   const plan=planNow(), entry=plan.filter(p=>p.meal===mid).sort((a,b)=>a.night<b.night?-1:1)[0];
@@ -654,7 +674,7 @@ function mealCard(id,m){
       ${(m.steps||[]).length?`<ol>${m.steps.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>`:""}
       ${m.note?`<p class="why">${esc(m.note)}</p>`:""}
       <button class="btn primary" data-act="ate" data-id="${id}" ${readOnly?"disabled":""}>I made this</button>
-      <span class="why"> takes the servings out of the kitchen list</span></div>`;
+      <span class="why"> takes the servings out of the kitchen list now. If you forget, it happens the next day.</span></div>`;
   }
   return h+`</div>`;
 }
