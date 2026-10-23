@@ -178,6 +178,11 @@ textarea.copy{width:100%;min-height:160px;font:inherit;font-size:15px;background
 .light{width:14px;height:14px;border-radius:50%;flex:none;box-shadow:0 0 0 2px rgba(0,0,0,.15)}
 .light.g{background:#2e7d32}.light.a{background:#f9a825}.light.r{background:#c62828;box-shadow:0 0 6px 2px rgba(198,40,40,.6)}
 .useit{font-size:15px;margin-top:2px}
+.dash{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;margin-bottom:18px}
+.tile{background:var(--card);border:2px solid var(--line);border-radius:14px;padding:10px 12px}
+.tile.a{border-color:#f9a825}.tile.r{border-color:#c62828}
+.tilehead{display:flex;align-items:center;gap:8px;line-height:1.25}
+.tilehead .thumb{width:40px;height:40px;font-size:24px}
 .macros{font-size:15px;color:var(--muted);margin-top:2px}
 .combo-label{font-size:16px;font-weight:700;color:var(--accent);margin-top:2px}
 .mname{font-weight:700;font-size:19px}
@@ -377,12 +382,17 @@ function nightName(k){ return k===today()?"tonight":weekday(k,true); }
 function have(it){return (it&&Number(it.qty))||0;}
 function daysLeft(it){ if(!it||!it.keeps||!it.since||have(it)<=0) return null; return it.keeps-daysBetween(it.since,today()); }
 function mealsUsing(id){ return Object.entries(state.meals).filter(([,m])=>(m.uses||[]).concat(...(m.bases||[]).map(b=>b.uses||[])).some(u=>u.id===id)).map(([,m])=>m.name); }
+function freshInfo(it){
+  const day=Math.max(1,daysBetween(it.since,today())+1), r=it.keeps-day;
+  const cls=r>=2?"g":r===1?"a":"r";
+  const word=r<0?"May be past its best":r===0?"Last day, use today":r===1?"1 day left":`${r} days left`;
+  return {day,r,cls,word};
+}
 function freshLine(id,it){
-  const left=daysLeft(it); if(left==null) return "";
-  const day=daysBetween(it.since,today())+1, cls=left>=3?"g":left>=1?"a":"r";
-  const word=left<0?"May be past its best":left===0?"Use today":left<=2?`Use soon, ${left} day${left>1?"s":""} left`:"Fresh";
-  let h=`<div class="fresh"><span class="light ${cls}" aria-hidden="true"></span>Day ${Math.max(1,day)} of ${it.keeps} · ${word}</div>`;
-  if(left<=2){ const ms=mealsUsing(id); if(ms.length) h+=`<div class="useit">Use it in: ${ms.map(esc).join(", ")}</div>`; }
+  if(daysLeft(it)==null) return "";
+  const {day,r,cls,word}=freshInfo(it);
+  let h=`<div class="fresh"><span class="light ${cls}" aria-hidden="true"></span>Day ${day} of ${it.keeps} · ${word}</div>`;
+  if(r<=1){ const ms=mealsUsing(id); if(ms.length) h+=`<div class="useit">Use it in: ${ms.map(esc).join(", ")}</div>`; }
   return h;
 }
 function isOff(it){ const l=daysLeft(it); return l!=null&&l<0; }
@@ -447,6 +457,23 @@ function statusLines(s,mid,b){
     if(best) lines.push(`<button class="swap" data-act="base" data-id="${mid}" data-b="${best.j}">Or swap to ${esc(best.x.label.toLowerCase())}: ready in ${best.t.total} minutes</button>`);
   }
   return lines;
+}
+function useSoonDash(meals){
+  const rows=[];
+  for(const [id,it] of Object.entries(state.items)){ const l=daysLeft(it); if(l!=null) rows.push({id,it,l}); }
+  rows.sort((a,b)=>a.l-b.l||a.it.name.localeCompare(b.it.name));
+  const urgent=rows.filter(r=>freshInfo(r.it).r<=1).length;
+  let h=`<h2>Use soon <small>${rows.length?(urgent?`${urgent} need using`:"all fresh"):""}</small></h2>`;
+  if(!rows.length) return h+`<div class="card"><p class="why" style="margin:0">Nothing fresh or opened to watch right now.</p></div>`;
+  h+=`<div class="dash">`;
+  for(const r of rows){
+    const {day,r:rem,cls,word}=freshInfo(r.it);
+    const opts=rem<=1?meals.filter(([id,m])=>!m.hold&&usesItem(id,r.id)).slice(0,3):[];
+    h+=`<div class="tile ${cls}"><div class="tilehead">${thumb(r.id,r.it)}<b>${esc(r.it.name)}</b></div>
+      <div class="fresh"><span class="light ${cls}" aria-hidden="true"></span>${word}</div><div class="why">Day ${day} of ${r.it.keeps}</div>
+      ${opts.length?`<div class="useit">Try ${opts.map(([id,m])=>`<button class="swap" data-act="pick" data-id="${id}">${esc(m.name)}</button>`).join(", ")}</div>`:""}</div>`;
+  }
+  return h+`</div>`;
 }
 function useSoon(){
   const rows=[];
@@ -700,18 +727,9 @@ function weekView(c){
     <div class="stat"><b>${planned} of 7</b><span>nights planned</span></div>
     <div class="stat"><b>${c.prep.length}</b><span>things to prep</span></div>
     <div class="stat"><b>${c.shop.length}</b><span>things to buy</span></div></div>`;
+  h+=useSoonDash(meals);
   h+=nightsView();
   if(planned) h+=`<button class="btn" data-act="clear">Clear the week</button>`;
-  const soon=useSoon();
-  if(soon.length){
-    h+=`<h2>Use these first</h2><div class="card usefirst">`;
-    for(const r of soon){
-      const when=r.l<0?"may be past its best":r.l===0?"use today":r.l===1?"use by tomorrow":"use by "+weekday(iso(new Date(Date.now()+r.l*864e5)),true);
-      const opts=meals.filter(([id,m])=>!m.hold&&usesItem(id,r.id)).slice(0,4);
-      h+=`<div class="sooner"><b>${esc(r.it.name)}</b>: ${when}.${opts.length?` Try ${opts.map(([id,m])=>`<button class="swap" data-act="pick" data-id="${id}">${esc(m.name)}</button>`).join(", ")}.`:""}</div>`;
-    }
-    h+=`</div>`;
-  }
   if(c.prep.length){
     h+=`<h2>Prep first <small>for the meals you picked</small></h2><div class="card list">`;
     for(const p of c.prep){
