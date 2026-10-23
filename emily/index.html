@@ -182,6 +182,7 @@ textarea.copy{width:100%;min-height:160px;font:inherit;font-size:15px;background
 .combo.dim{opacity:.6}
 nav button{padding:10px 4px}
 .thumb{width:56px;height:56px;object-fit:cover;border-radius:10px;flex:none;background:var(--chip)}
+.ticon{display:flex;align-items:center;justify-content:center;font-size:32px;line-height:1}
 .drops{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
 .inglist{list-style:none;margin:10px 0 4px;padding:0;display:grid;gap:6px}
 .inglist li{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:6px 10px;border-radius:10px;background:var(--chip);font-size:16px}
@@ -229,7 +230,10 @@ const SECTIONS=["Produce","Meat & Fish","Dairy & Eggs","Frozen","Bakery","Pantry
 const VIEWS=[["fridge","Fridge"],["freezer","Freezer"],["pantry","Pantry"],["jars","Jars"],["spices","Spices"],["counter","Supplies"]];
 const inView=(it,k)=>k==="spices"?it.loc==="pantry"&&it.section==="Spices":k==="jars"?it.loc==="pantry"&&it.section==="Jars":k==="pantry"?it.loc==="pantry"&&it.section!=="Spices"&&it.section!=="Jars":it.loc===k;
 const OPEN_KEEPS={cstock:5,tstock:5,tbsauce:7,blush:7,tikka:7,pesto:7,pineapple:5,mexcheese:5,sourcream:10,springmix:5,thaipeanut:30,kbbq:30,ranch:30,bouillon:90,pjuice:7,tomatoes:6,blackberries:3};
-const PHOTOS=new Set(["blackberries","blush","carrotchips","celery","cuttingboard","dumplings","kbeef","marinaracup","ramen","redonion","ricevinegar","sausagecup","shrimp","steamer","thermometer"]);
+const PHOTOS=new Set(["rawtender","cbreast","eggs","tender","thin","beef","sausage","blackberries","blush","carrotchips","celery","cuttingboard","dumplings","kbeef","marinaracup","ramen","redonion","ricevinegar","sausagecup","shrimp","steamer","thermometer","onionp","pepflakes","chives","oregano","oldbay","ginger","tarragon","thyme","salt","pepper","mio","tbsauce","jrice","croutons","oyster","tstock","cstock","rotini","penne","rnoodles","progresso","pineapple","dtom","soy","cornstarch","oil","vinegar","oliveoil","sourdough","naan","butter","meatballs","broc","gbeans","rawtilapia","digiorno","mexcheese","scallion","sourcream","carrots","tomatoes","springmix","kbbq","thaipeanut","ranch","tikka"]);
+const ICONS={"bacon": "🥓", "beef": "🥩", "pbeef": "🥩", "kbeef": "🥩", "bouillon": "🫙", "broc": "🥦", "butter": "🧈", "cajun": "🌶️", "carrots": "🥕", "cbreast": "🍗", "rawtender": "🍗", "tender": "🍗", "thin": "🍗", "shred": "🍗", "chives": "🌿", "cornstarch": "🌽", "croutons": "🍞", "csoup": "🍲", "tsoup": "🍲", "soupbase": "🍲", "progresso": "🥫", "cstock": "🥫", "tstock": "🥫", "digiorno": "🍕", "dtom": "🥫", "eggs": "🥚", "foil": "🧻", "fruit": "🍎", "garlicp": "🧄", "gbags": "🛍️", "qbags": "🛍️", "gbeans": "🫛", "ginger": "🫚", "jrice": "🍚", "rice": "🍚", "kbbq": "🫙", "lacroix": "🥤", "meatballs": "🧆", "mexcheese": "🧀", "mio": "🍋", "naan": "🫓", "oil": "🫗", "oliveoil": "🫒", "vinegar": "🫗", "prime": "🫗", "oldbay": "🧂", "onionp": "🧅", "oregano": "🌿", "thyme": "🌿", "tarragon": "🌿", "oyster": "🍘", "saltines": "🍘", "pastap": "🍝", "rotinip": "🍝", "penne": "🍝", "rotini": "🍝", "rnoodles": "🍜", "pepflakes": "🌶️", "pepper": "🧂", "salt": "🧂", "pesto": "🫙", "pestobake": "🍝", "pineapple": "🍍", "pinetin": "🍍", "pjuice": "🧃", "potato": "🥔", "ranch": "🥗", "springmix": "🥬", "rawtilapia": "🐟", "tilapia": "🐟", "tpack": "🐟", "sausage": "🌭", "sourcream": "🥛", "sourdough": "🍞", "soy": "🫙", "tbsauce": "🍅", "tomatoes": "🍅", "thaipeanut": "🥜", "tpeanuttin": "🥜", "tikka": "🫙", "tikkatin": "🍛", "scallion": "🧅", "lentils": "🫘", "chopsticks": "🥢", "seaweed": "🌿", "cupcaketins": "🧁", "looftins": "🍞"};
+const LOC_ICON={fridge:"🧊",freezer:"❄️",pantry:"🥫",counter:"🧺"};
+function thumb(id,it){if(PHOTOS.has(id))return `<img class="thumb" src="img/items/${id}.jpg" alt="" loading="lazy">`;return `<span class="thumb ticon" aria-hidden="true">${ICONS[id]||LOC_ICON[it.loc]||"🍽️"}</span>`;}
 const GROUPS=["Chicken","Beef and pork bowls","Fish and shrimp","Soups and noodles","Potatoes and backups","Eating out"];
 const GROUP_NOTE={
   "Chicken":"Cooked chicken from the freezer. Move the bag to the fridge the night before.",
@@ -791,7 +795,7 @@ function kitchenView(){
       const sub=[it.kind==="prep"?"Made at home":esc(it.section||""), it.kind!=="staple"&&it.unit?esc(it.unit):"", held&&it.kind!=="staple"?`${fmt(held)} held for meals picked`:"", left!=null?(left<0?"may be past its best":left===0?"use today":`use within ${left} day${left>1?"s":""}`):""].filter(Boolean).join(" · ");
       const made=it.kind!=="prep"&&have(it)<=0?Object.values(state.items).filter(x=>x.kind==="prep"&&have(x)>0&&(x.prep&&x.prep.uses||[]).some(u=>u.id===id)):[];
       const madeLine=made.length?`<div class="cooked">All cooked: ${made.map(x=>`${fmt(have(x))} ${esc(x.name)} in the ${esc(x.loc)}`).join(", ")}</div>`:"";
-      h+=`<div class="item">${PHOTOS.has(id)?`<img class="thumb" src="img/items/${id}.jpg" alt="" loading="lazy">`:""}<div class="grow"><b>${esc(it.name)}</b><div class="why">${sub}</div>${madeLine}${it.note?`<div class="why">${esc(it.note)}</div>`:""}${howBtn(id)}</div>`;
+      h+=`<div class="item">${thumb(id,it)}<div class="grow"><b>${esc(it.name)}</b><div class="why">${sub}</div>${madeLine}${it.note?`<div class="why">${esc(it.note)}</div>`:""}${howBtn(id)}</div>`;
       if(it.kind==="staple"){
         h+=`<button class="toggle ${have(it)>0?"on":"out"}" data-act="have" data-id="${id}" ${readOnly?"disabled":""}>${have(it)>0?"Have":"Out"}</button>`;
       }else{
