@@ -186,6 +186,7 @@ textarea.copy{width:100%;min-height:160px;font:inherit;font-size:15px;background
 .chev{font-size:14px;opacity:.6}
 .usein{display:flex;flex-direction:column;align-items:flex-start;gap:6px;margin-top:8px}
 .usein .swap{font-size:16px}
+.freeze{font-size:15px;margin-top:4px;padding:8px 10px;border-radius:10px;background:var(--chip)}
 .shelftop b{font-size:17px}
 .left{font-size:15px;font-weight:700;white-space:nowrap}.left.a{color:#b26a00}.left.r{color:#c62828}
 .bar{height:8px;border-radius:4px;background:var(--line);margin-top:6px;overflow:hidden}
@@ -467,6 +468,23 @@ function statusLines(s,mid,b){
   }
   return lines;
 }
+const FREEZE={
+  celery:"Spread it flat in a quart ziplock, press out the air, write the date on it and freeze. Keeps 2 months. Use it frozen in soup or stir-fry.",
+  redonion:"Spread it flat in a quart ziplock, press out the air, write the date on it and freeze. Keeps 2 months. Use it frozen in soup or stir-fry.",
+  carrots:"Spread them flat in a quart ziplock, press out the air, write the date on it and freeze. Keeps 2 months. Use them frozen in soup or stir-fry.",
+  cstock:"Pour 1 cup into each quart ziplock, lay flat, write the date on it and freeze. Keeps 3 months.",
+  tstock:"Pour 1 cup into each quart ziplock, lay flat, write the date on it and freeze. Keeps 3 months.",
+  blush:"Spoon 1/4 cup into each cupcake tin cup, or a quart ziplock, and freeze. Keeps 3 months.",
+  tbsauce:"Spoon 1/4 cup into each cupcake tin cup, or a quart ziplock, and freeze. Keeps 3 months.",
+  tikka:"Spoon 1/2 cup into each cupcake tin cup, or a quart ziplock, and freeze. Keeps 3 months.",
+  pesto:"Spoon 1 tbsp into each cupcake tin cup, freeze, then pop them into a quart ziplock. Keeps 3 months.",
+  blackberries:"Lay them on a plate in the freezer for 1 hour, then move them to a quart ziplock. Keeps 6 months.",
+  pineapple:"Put the slices in a quart ziplock with a little juice, write the date on it and freeze. Keeps 2 months.",
+  pjuice:"Pour 1 cup into each quart ziplock, lay flat and freeze. Keeps 3 months.",
+  mexcheese:"Freeze it in its own bag, sealed tight. Keeps 2 months. Best melted, not cold.",
+  bacon:"Freeze it in a quart ziplock. Keeps 1 month."
+};
+function freezeTip(id){ return FREEZE[id]?`<div class="freeze"><b>Or freeze it:</b> ${esc(FREEZE[id])}</div>`:""; }
 function shortName(n){ return String(n).replace(/^(Wegmans|Driscoll's|McCormick)\s+/,"").replace(/^(Organic|Amore)\s+/,"").replace(/\s*\([^)]*\)/g,"").replace(/,\s*pre-cut/,"").replace(/^Better Than Bouillon\s+/,"").trim(); }
 function useSoonDash(meals){
   const rows=[];
@@ -486,7 +504,7 @@ function useSoonDash(meals){
     h+=`<div class="shelfrow ${cls}">${thumb(r.id,r.it)}<div class="grow"><button class="shelftop" data-act="shelf" data-id="${r.id}" aria-expanded="${open}"><b>${esc(shortName(r.it.name))} <span class="chev" aria-hidden="true">${open?"▾":"▸"}</span></b><span class="left ${cls}">${word}</span></button>
       <div class="bar" aria-hidden="true"><span class="${cls}" style="width:${pct}%"></span></div>
       ${opts.length?`<div class="useit">Try ${opts.map(([id,m])=>`<button class="swap" data-act="pick" data-id="${id}">${esc(m.name)}</button>`).join(" or ")}</div>`:""}
-      ${open?`<div class="usein">${all.length?`<div class="why">Used in ${all.length} meal${all.length>1?"s":""}${preps.length?` (through ${preps.map(p=>esc(state.items[p].name)).join(", ")})`:""}. Tap one to pick it:</div>`+all.map(([id,m])=>`<button class="swap" data-act="pick" data-id="${id}">${esc(m.name)}</button>`).join(""):`<div class="why">Not used in any meal yet.</div>`}</div>`:""}</div></div>`;
+      ${open?`<div class="usein">${all.length?`<div class="why">Used in ${all.length} meal${all.length>1?"s":""}${preps.length?` (through ${preps.map(p=>esc(state.items[p].name)).join(", ")})`:""}. Tap one to pick it:</div>`+all.map(([id,m])=>`<button class="swap" data-act="pick" data-id="${id}">${esc(m.name)}</button>`).join(""):`<div class="why">Not used in any meal yet.${FREEZE[r.id]?"":" It doesn't freeze well, so use it or toss it by the date."}</div>`}${freezeTip(r.id)}</div>`:""}</div></div>`;
   }
   if(later) h+=`<div class="why shelfmore">${later} more keep${later>1?"":"s"} for over a week</div>`;
   return h+`</div>`;
