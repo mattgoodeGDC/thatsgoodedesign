@@ -480,12 +480,13 @@ function useSoonDash(meals){
   for(const r of show){
     const {r:rem,cls,word}=r.f, pct=Math.max(4,Math.min(100,Math.round(100*Math.max(0,rem+1)/r.it.keeps)));
     const open=!!state.open["shelf:"+r.id];
-    const all=meals.filter(([id,m])=>!m.hold&&usesItem(id,r.id));
+    const preps=Object.entries(state.items).filter(([,x])=>(x.prep&&x.prep.uses||[]).some(u=>u.id===r.id)).map(([k])=>k);
+    const all=meals.filter(([id,m])=>!m.hold&&(usesItem(id,r.id)||preps.some(p=>usesItem(id,p))));
     const opts=!open&&rem<=1?all.slice(0,2):[];
     h+=`<div class="shelfrow ${cls}">${thumb(r.id,r.it)}<div class="grow"><button class="shelftop" data-act="shelf" data-id="${r.id}" aria-expanded="${open}"><b>${esc(shortName(r.it.name))} <span class="chev" aria-hidden="true">${open?"▾":"▸"}</span></b><span class="left ${cls}">${word}</span></button>
       <div class="bar" aria-hidden="true"><span class="${cls}" style="width:${pct}%"></span></div>
       ${opts.length?`<div class="useit">Try ${opts.map(([id,m])=>`<button class="swap" data-act="pick" data-id="${id}">${esc(m.name)}</button>`).join(" or ")}</div>`:""}
-      ${open?`<div class="usein">${all.length?`<div class="why">Used in ${all.length} meal${all.length>1?"s":""}. Tap one to pick it:</div>`+all.map(([id,m])=>`<button class="swap" data-act="pick" data-id="${id}">${esc(m.name)}</button>`).join(""):`<div class="why">Not used in any meal yet.</div>`}</div>`:""}</div></div>`;
+      ${open?`<div class="usein">${all.length?`<div class="why">Used in ${all.length} meal${all.length>1?"s":""}${preps.length?` (through ${preps.map(p=>esc(state.items[p].name)).join(", ")})`:""}. Tap one to pick it:</div>`+all.map(([id,m])=>`<button class="swap" data-act="pick" data-id="${id}">${esc(m.name)}</button>`).join(""):`<div class="why">Not used in any meal yet.</div>`}</div>`:""}</div></div>`;
   }
   if(later) h+=`<div class="why shelfmore">${later} more keep${later>1?"":"s"} for over a week</div>`;
   return h+`</div>`;
