@@ -178,11 +178,17 @@ textarea.copy{width:100%;min-height:160px;font:inherit;font-size:15px;background
 .light{width:14px;height:14px;border-radius:50%;flex:none;box-shadow:0 0 0 2px rgba(0,0,0,.15)}
 .light.g{background:#2e7d32}.light.a{background:#f9a825}.light.r{background:#c62828;box-shadow:0 0 6px 2px rgba(198,40,40,.6)}
 .useit{font-size:15px;margin-top:2px}
-.dash{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;margin-bottom:18px}
-.tile{background:var(--card);border:2px solid var(--line);border-radius:14px;padding:10px 12px}
-.tile.a{border-color:#f9a825}.tile.r{border-color:#c62828}
-.tilehead{display:flex;align-items:center;gap:8px;line-height:1.25}
-.tilehead .thumb{width:40px;height:40px;font-size:24px}
+.shelf{padding:6px 14px;margin-bottom:18px}
+.shelfrow{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.shelfrow:last-of-type{border-bottom:0}
+.shelfrow .thumb{width:40px;height:40px;font-size:24px}
+.shelftop{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.shelftop b{font-size:17px}
+.left{font-size:15px;font-weight:700;white-space:nowrap}.left.a{color:#b26a00}.left.r{color:#c62828}
+.bar{height:8px;border-radius:4px;background:var(--line);margin-top:6px;overflow:hidden}
+.bar span{display:block;height:100%;border-radius:4px}
+.bar .g{background:#2e7d32}.bar .a{background:#f9a825}.bar .r{background:#c62828}
+.shelfmore{padding:8px 0 4px}
 .macros{font-size:15px;color:var(--muted);margin-top:2px}
 .combo-label{font-size:16px;font-weight:700;color:var(--accent);margin-top:2px}
 .mname{font-weight:700;font-size:19px}
@@ -458,21 +464,24 @@ function statusLines(s,mid,b){
   }
   return lines;
 }
+function shortName(n){ return String(n).replace(/^(Wegmans|Driscoll's|McCormick)\s+/,"").replace(/^(Organic|Amore)\s+/,"").replace(/\s*\([^)]*\)/g,"").replace(/,\s*pre-cut/,"").replace(/^Better Than Bouillon\s+/,"").trim(); }
 function useSoonDash(meals){
   const rows=[];
-  for(const [id,it] of Object.entries(state.items)){ const l=daysLeft(it); if(l!=null) rows.push({id,it,l}); }
-  rows.sort((a,b)=>a.l-b.l||a.it.name.localeCompare(b.it.name));
-  const urgent=rows.filter(r=>freshInfo(r.it).r<=1).length;
+  for(const [id,it] of Object.entries(state.items)){ if(daysLeft(it)!=null) rows.push({id,it,f:freshInfo(it)}); }
+  rows.sort((a,b)=>a.f.r-b.f.r||a.it.name.localeCompare(b.it.name));
+  const show=rows.filter(r=>r.f.r<=7), later=rows.length-show.length;
+  const urgent=rows.filter(r=>r.f.r<=1).length;
   let h=`<h2>Use soon <small>${rows.length?(urgent?`${urgent} need using`:"all fresh"):""}</small></h2>`;
-  if(!rows.length) return h+`<div class="card"><p class="why" style="margin:0">Nothing fresh or opened to watch right now.</p></div>`;
-  h+=`<div class="dash">`;
-  for(const r of rows){
-    const {day,r:rem,cls,word}=freshInfo(r.it);
-    const opts=rem<=1?meals.filter(([id,m])=>!m.hold&&usesItem(id,r.id)).slice(0,3):[];
-    h+=`<div class="tile ${cls}"><div class="tilehead">${thumb(r.id,r.it)}<b>${esc(r.it.name)}</b></div>
-      <div class="fresh"><span class="light ${cls}" aria-hidden="true"></span>${word}</div><div class="why">Day ${day} of ${r.it.keeps}</div>
-      ${opts.length?`<div class="useit">Try ${opts.map(([id,m])=>`<button class="swap" data-act="pick" data-id="${id}">${esc(m.name)}</button>`).join(", ")}</div>`:""}</div>`;
+  if(!show.length) return rows.length?h+`<div class="card"><p class="why" style="margin:0">Everything open keeps for more than a week.</p></div>`:"";
+  h+=`<div class="card shelf">`;
+  for(const r of show){
+    const {r:rem,cls,word}=r.f, pct=Math.max(4,Math.min(100,Math.round(100*Math.max(0,rem+1)/r.it.keeps)));
+    const opts=rem<=1?meals.filter(([id,m])=>!m.hold&&usesItem(id,r.id)).slice(0,2):[];
+    h+=`<div class="shelfrow ${cls}">${thumb(r.id,r.it)}<div class="grow"><div class="shelftop"><b>${esc(shortName(r.it.name))}</b><span class="left ${cls}">${word}</span></div>
+      <div class="bar" aria-hidden="true"><span class="${cls}" style="width:${pct}%"></span></div>
+      ${opts.length?`<div class="useit">Try ${opts.map(([id,m])=>`<button class="swap" data-act="pick" data-id="${id}">${esc(m.name)}</button>`).join(" or ")}</div>`:""}</div></div>`;
   }
+  if(later) h+=`<div class="why shelfmore">${later} more keep${later>1?"":"s"} for over a week</div>`;
   return h+`</div>`;
 }
 function useSoon(){
